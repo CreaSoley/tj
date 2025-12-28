@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UV1 – Kihon</title>
+
+  <!-- Fonts & icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- Bannière commune -->
+  <link rel="stylesheet" href="banner.css">
+
+  <!-- 👉 réutilisation de TON style existant (copié tel quel si commun) -->
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body data-title="UV1 – Kihon">
+
+<!-- ==================== -->
+<!-- barre bannière noire -->
+<!-- ==================== -->
+<div id="bannerContainer"></div>
+
+<script>
+fetch("banner.html")
+  .then(r => r.text())
+  .then(html => {
+    document.getElementById("bannerContainer").innerHTML = html;
+
+    const target = document.querySelector(".header-text .title");
+    if (target) target.textContent = document.body.dataset.title || "UV1 – Kihon";
+  });
+</script>
+
+<main class="main-wrapper">
+
+  <div class="grid">
+
+    <!-- ============================= -->
+    <!-- CARD 1: Kihon simples -->
+    <!-- ============================= -->
+    <section class="card-kawaii">
+      <h2 class="module-title">🌸 Kihon simples 🌸</h2>
+
+      <div class="sub-section">
+
+        <div class="controls-row">
+          <label>Qté:</label>
+          <input type="number" id="ks-count" class="input-small" value="3" min="1">
+        </div>
+
+        <div class="controls-row">
+          <label>Intervalle:</label>
+          <input type="range" id="ks-interval" min="2" max="60" value="5">
+          <span id="ks-interval-display" class="muted">5s</span>
+          <i class="fas fa-bell beep-icon" id="ks-beep"></i>
+        </div>
+
+        <div class="controls-row">
+          <label>Vitesse voix:</label>
+          <input type="range" id="ks-speed" min="0.5" max="1.5" step="0.1" value="1">
+          <span id="ks-speed-display" class="muted">1x</span>
+        </div>
+
+        <div id="ks-result" class="result-display">Attente…</div>
+
+        <div class="button-row">
+          <button id="ks-generate" class="btn-kawaii">🎲 Changer</button>
+          <button id="ks-read" class="btn-kawaii">🔊 Lire</button>
+          <button id="ks-stop" class="btn-kawaii btn-stop">🛑 Stop</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- CARD 2: Kihon enchaînements -->
+    <!-- ============================= -->
+    <section class="card-kawaii">
+      <h2 class="module-title">🎀 Kihon enchaînements 🎀</h2>
+
+      <div class="sub-section">
+
+        <div class="controls-row">
+          <label>Qté:</label>
+          <input type="number" id="kc-count" class="input-small" value="3" min="1">
+        </div>
+
+        <div class="controls-row">
+          <label>Intervalle:</label>
+          <input type="range" id="kc-interval" min="2" max="60" value="7">
+          <span id="kc-interval-display" class="muted">7s</span>
+          <i class="fas fa-bell beep-icon" id="kc-beep"></i>
+        </div>
+
+        <div class="controls-row">
+          <label>Vitesse voix:</label>
+          <input type="range" id="kc-speed" min="0.5" max="1.5" step="0.1" value="1">
+          <span id="kc-speed-display" class="muted">1x</span>
+        </div>
+
+        <div id="kc-result" class="result-display">Attente…</div>
+
+        <div class="button-row">
+          <button id="kc-generate" class="btn-kawaii">🎲 Changer</button>
+          <button id="kc-read" class="btn-kawaii">🔊 Lire</button>
+          <button id="kc-stop" class="btn-kawaii btn-stop">🛑 Stop</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================= -->
+    <!-- CARD 3: Kihon combat -->
+    <!-- ============================= -->
+    <section class="card-kawaii">
+      <h2 class="module-title">🥊 Kihon combat 🥊</h2>
+
+      <div class="sub-section">
+
+        <div class="controls-row">
+          <label>Qté:</label>
+          <input type="number" id="kcb-count" class="input-small" value="3" min="1">
+        </div>
+
+        <div class="controls-row">
+          <label>Intervalle:</label>
+          <input type="range" id="kcb-interval" min="2" max="60" value="5">
+          <span id="kcb-interval-display" class="muted">5s</span>
+          <i class="fas fa-bell beep-icon" id="kcb-beep"></i>
+        </div>
+
+        <div id="kcb-result" class="result-display">Prêt ?</div>
+
+        <div class="button-row">
+          <button id="kcb-generate" class="btn-kawaii">🎲 Changer</button>
+          <button id="kcb-read" class="btn-kawaii">🔊 Lire</button>
+          <button id="kcb-stop" class="btn-kawaii btn-stop">🛑 Stop</button>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<!-- ============================= -->
+<!-- Scripts utilisés par UV1 -->
+<!-- ============================= -->
+
+<!-- ⚠️ seulement scripts utiles -->
+<script src="encart1.js"></script>
+<script src="encart2.js"></script>
+
+<!-- ❌ pas de script kihon combat si non utilisé -->
+<!-- <script src="encart3_kihoncombat.js"></script> -->
+
+</body>
+</html>
