@@ -657,7 +657,7 @@ async function unlockSpeechSynthesis() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    loadEnchainementData();
+// lancer le module 2 après chargement
+await loadEnchainementData();
 
-});
+}); // ✅ fermeture du GROS document.addEventListener du début
