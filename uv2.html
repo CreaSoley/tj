@@ -107,26 +107,13 @@
   </style>
 </head>
 
-<body data-title="UV2 – Ippon Kumite">
-
-<!-- 🟣 bannière chargée dynamiquement -->
-<div id="bannerContainer"></div>
-
-<script>
-fetch("banner.html")
-  .then(r => r.text())
-  .then(html => {
-    document.getElementById("bannerContainer").innerHTML = html;
-
-    const pageTitle =
-      document.body.dataset.title ||
-      document.title ||
-      "UV2";
-
-    const target = document.querySelector(".subtitle, .banner-uv, #uv-title");
-    if (target) target.textContent = pageTitle;
-  });
-</script>
+<body data-subtitle="UV2 – Ippon Kumite">
+  <div id="bannerContainer"></div>
+  <script>
+    fetch("banner.html")
+      .then(r => r.text())
+      .then(html => document.getElementById("bannerContainer").innerHTML = html);
+  </script>
 
 <main class="main-wrapper">
 
