@@ -1,86 +1,88 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Accueil Tai-Jitsu</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tai-Jitsu – Accueil</title>
 
-  <!-- Google Fonts & Icones -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Manifest PWA -->
+  <link rel="manifest" href="manifest.json">
 
+  <!-- Icone de favicon -->
+  <link rel="icon" href="logopwa.png" type="image/png">
+
+  <!-- Fonts et styles -->
+  <link rel="stylesheet" href="banner.css">
   <style>
-    @font-face { font-family: "Spicy"; src: url("Spicy Sale.ttf"); }
-    
-    body{
-      margin:0;
-      font-family:'Fredoka', Arial, sans-serif;
-      background:black;
-      color:white;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      min-height:100vh;
-      text-align:center;
+    body {
+      margin: 0;
+      font-family: 'Fredoka', Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
     }
-
-    .logo-pwa{
-      width:180px;
-      margin-bottom:20px;
+    .logo-pwa {
+      width: 200px;
+      height: auto;
+      margin-bottom: 30px;
     }
-
-    h1{
-      font-family:"Spicy";
-      font-size:2.5rem;
-      color:#ff5fc1;
-      margin-bottom:15px;
+    .home-text {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      max-width: 500px;
     }
-
-    p{
-      font-size:1.2rem;
-      line-height:1.6;
-      color:#ffd6ec;
-      margin:10px 0;
-      max-width:400px;
-    }
-
-    .btn-start{
-      margin-top:30px;
-      padding:12px 25px;
-      background:#ff1493;
-      color:white;
-      border:none;
-      border-radius:50px;
-      font-family:"Spicy";
-      font-size:1.1rem;
-      cursor:pointer;
-      box-shadow:0 4px 0 #d6459b;
+    .btn-home {
+      font-family: 'Spicy', cursive;
+      background: #ff5fc1;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      box-shadow: 0 5px 0 #d6459b;
       transition: transform 0.2s;
     }
-
-    .btn-start:hover{
-      transform:scale(1.05);
-      background:#ff5fc1;
+    .btn-home:hover {
+      transform: scale(1.05);
+      background: #ff1493;
     }
-
-    .btn-start:active{
-      transform:translateY(3px);
-      box-shadow:none;
+    .btn-home:active {
+      transform: translateY(3px);
+      box-shadow: none;
+    }
+    @media (max-width:600px) {
+      .home-text { font-size: 1rem; }
+      .logo-pwa { width: 150px; margin-bottom: 20px; }
+      .btn-home { font-size: 1rem; padding: 12px 25px; }
     }
   </style>
 </head>
-
 <body>
-  <img src="logopwa.png" alt="Logo Tai-Jitsu" class="logo-pwa">
-  
-  <p>La ceinture marque un moment.<br>
-     L’apprentissage, lui, ne s’arrête jamais.<br>
-     Entraîne-toi avec justesse.<br>
-     Avance avec humilité.</p>
+  <img src="logopwa.png" alt="Logo PWA" class="logo-pwa">
+  <div class="home-text">
+    La ceinture marque un moment.<br>
+    L’apprentissage, lui, ne s’arrête jamais.<br>
+    Entraîne-toi avec justesse.<br>
+    Avance avec humilité.
+  </div>
+  <button class="btn-home" onclick="location.href='index.html'">Commencer l'entraînement</button>
 
-  <button class="btn-start" onclick="location.href='index.html'">Commencer l'entraînement</button>
+  <script>
+    // Enregistrement du service worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('Service Worker enregistré', reg))
+          .catch(err => console.error('Erreur SW:', err));
+      });
+    }
+  </script>
 </body>
 </html>
