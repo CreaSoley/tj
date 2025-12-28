@@ -1,0 +1,295 @@
+[
+ {
+   "nom": "GEDAN BARAI",
+   "categorie": "uke waza",
+   "description": "Défense basse\npar un mouvement de balayage avec le bras",
+   "photo": "https://i.pinimg.com/736x/c3/36/bc/c336bc52910352b01ef57617c705729c.jpg",
+   "video": "https://www.youtube.com/embed/efqiHKGIBzc"
+ },
+ {
+   "nom": "JODAN AGE UKE",
+   "categorie": "uke waza",
+   "description": "Défense haute\npar un mouvement remontant avec le bras",
+   "photo": "https://i.pinimg.com/736x/63/1d/e4/631de4feb21c7cf928c3a9ecf8f45b4d.jpg",
+   "video": "https://www.youtube.com/embed/9buSskyzxGk"
+ },
+ {
+   "nom": "SOTO UDE UKE",
+   "categorie": "uke waza",
+   "description": "Défense avec le bras\ndans un mouvement de l’extérieur vers l’intérieur",
+   "photo": "https://i.pinimg.com/736x/38/ea/22/38ea2289a4de830415b65f9c218e4799.jpg",
+   "video": "https://www.youtube.com/embed/CQX9OJ2NTdk"
+ },
+ {
+   "nom": "UCHI UDE UKE",
+   "categorie": "uke waza",
+   "description": "Défense avec le bras\ndans un mouvement de l’intérieur vers l’extérieur",
+   "photo": "https://i.pinimg.com/736x/a9/f0/74/a9f07476e73f2d567044759059cae276.jpg",
+   "video": "https://www.youtube.com/embed/Cyf64k5fHOE"
+ },
+ {
+   "nom": "SHUTO UKE",
+   "categorie": "uke waza",
+   "description": "Défense avec le tranchant de la main",
+   "photo": "https://i.pinimg.com/736x/0e/9d/b9/0e9db97a5fa8127d3e2f3a83437be79e.jpg",
+   "video": "https://www.youtube.com/embed/oKMrSvDCzkc"
+ },
+ {
+   "nom": "OSAE UKE",
+   "categorie": "uke waza",
+   "description": "Défense par pression ou immobilisation avec la main",
+   "photo": "image manquante",
+   "video": "https://www.youtube.com/embed/S5A5DRHl6NU"
+ },
+ {
+   "nom": "TEISHO UKE",
+   "categorie": "uke waza",
+   "description": "Défense avec la paume",
+   "photo": "image menquante",
+   "video": "https://www.youtube.com/embed/Wnp8YTduX1A"
+ },
+ {
+   "nom": "JUJI UKE",
+   "categorie": "uke waza",
+   "description": "Défense double avec les deux bras croisés",
+   "photo": "https://i.pinimg.com/736x/76/4b/61/764b61ba69fa2032966d6bbba611f74a.jpg",
+   "video": "https://www.youtube.com/embed/Rp1drfqOMKY"
+ },
+ {
+   "nom": "KAKIWAKE UKE",
+   "categorie": "uke waza",
+   "description": "Défense double en écartant",
+   "photo": "https://i.pinimg.com/736x/fb/46/a6/fb46a69f07357c493bce14a69baf109d.jpg",
+   "video": "https://www.youtube.com/embed/gELHJSZyHU4"
+ },
+ {
+   "nom": "MOROTE UKE",
+   "categorie": "uke waza",
+   "description": "\tDéfense double, bras arrière en protection",
+   "photo": "https://i.pinimg.com/736x/67/61/c0/6761c0bb4f897e1560133b7b5a54bdf9.jpg",
+   "video": "https://www.youtube.com/embed/kI9cGlELKDc"
+ },
+ {
+   "nom": "HEIKO UKE",
+   "categorie": "uke waza",
+   "description": "Défense double avec les deux bras parallèles",
+   "photo": "manquante,png",
+   "video": "https://www.youtube.com/embed/"
+ },
+ {
+   "nom": "EMPI UKE",
+   "categorie": "uke waza",
+   "description": "",
+   "photo": "empi_uchi.png",
+   "video": "https://www.youtube.com/embed/HyEckTyJxuI"
+ },
+ {
+   "nom": "SUKUI UKE",
+   "categorie": "uke waza",
+   "description": "Défense en puisant",
+   "photo": "manquante,png",
+   "video": "https://www.youtube.com/embed/kX9Cw7fHDK0"
+ },
+ {
+   "nom": "NAGASHI UKE",
+   "categorie": "uke waza",
+   "description": "Défense brossée\nen accompagnant l’attaque avec la main ou le bras",
+   "photo": "https://i.pinimg.com/736x/18/0e/9d/180e9d09f38da198f8f32f817cdd9689.jpg",
+   "video": "https://www.youtube.com/embed/7j-CcKSi2vs"
+ },
+ {
+   "nom": "OTOSHI UKE",
+   "categorie": "uke waza",
+   "description": "Défense en frappant avec l’avant bras vers le bas",
+   "photo": "https://i.pinimg.com/736x/a3/4b/29/a34b29221fbf998c7d85e26f2d9d317a.jpg",
+   "video": "https://www.youtube.com/embed/9ibbZhhmzoU"
+ },
+ {
+   "nom": "KOKEN UKE",
+   "categorie": "uke waza",
+   "description": "\tDéfense avec le poignet",
+   "photo": "manquante,png",
+   "video": "https://www.youtube.com/embed/VqC2C0VyBcY"
+ },
+ {
+   "nom": "URAKEN UCHI",
+   "categorie": "uchi wasa",
+   "description": "Attaque circulaire avec le dos du poing",
+   "photo": "https://i.pinimg.com/736x/b0/25/ae/b025ae3f07a78d77773cadc71911cd0f.jpg",
+   "video": "https://www.youtube.com/embed/yW4JpRxjLiI"
+ },
+ {
+   "nom": "SHUTO UCHI",
+   "categorie": "uchi wasa",
+   "description": "Attaque circulaire avec le tranchant de la main",
+   "photo": "https://i.pinimg.com/736x/19/a0/1e/19a01ee670a5e2c8d846a0cf6def48a4.jpg",
+   "video": "https://www.youtube.com/embed/2IiaM-3s0To"
+ },
+ {
+   "nom": "TETSUI UCHI",
+   "categorie": "uchi wasa",
+   "description": "Attaque circulaire avec la main en marteau",
+   "photo": "https://i.pinimg.com/736x/ee/34/c2/ee34c293ead9a612989f36a55be88039.jpg",
+   "video": "https://www.youtube.com/embed/yKAUWX8M4Kc"
+ },
+ {
+   "nom": "EMPI UCHI",
+   "categorie": "uchi wasa",
+   "description": "\tAttaque avec le coude",
+   "photo": "manquante,png",
+   "video": "https://www.youtube.com/embed/atYY3APkv2o"
+ },
+ {
+   "nom": "HAITO UCHI",
+   "categorie": "uchi wasa",
+   "description": "Attaque avec le tranchant interne de la main\ncôté pouce",
+   "photo": "https://i.pinimg.com/736x/48/00/76/48007683c280bcc485a0337a35ab441e.jpg",
+   "video": "https://www.youtube.com/embed/kvgeWXAEcoQ"
+ },
+ {
+   "nom": "TEISHO UCHI",
+   "categorie": "uchi wasa",
+   "description": "\tAttaque avec la paume",
+   "photo": "https://i.pinimg.com/736x/74/b5/52/74b55270148b35cb1d87a50a6a579ee8.jpg",
+   "video": "https://www.youtube.com/embed/tqf92CTip4s"
+ },
+ {
+   "nom": "KOKEN UCHI",
+   "categorie": "uchi wasa",
+   "description": "\tAttaque avec le dessus poignet",
+   "photo": "manquante,png",
+   "video": "https://www.youtube.com/embed/ZHE24mMI0Pk"
+ },
+ {
+   "nom": "HIRAKEN UCHI",
+   "categorie": "uchi wasa",
+   "description": "Frappe avec les phalanges.",
+   "photo": "https://i.pinimg.com/1200x/8a/b1/3f/8ab13fb2a5d50268cfc979840dec80d9.jpg",
+   "video": ""
+ },
+ {
+   "nom": "GYAKU TSUKI",
+   "categorie": "tsuki wasa",
+   "description": "Coup de poing avec le bras inverse à la jambe avant",
+   "photo": "https://i.pinimg.com/736x/f5/04/46/f504463c89c895abd08252fc118a833d.jpg",
+   "video": "https://www.youtube.com/embed/zNPkHIb0a9A"
+ },
+ {
+   "nom": "OÏ TSUKI",
+   "categorie": "tsuki wasa",
+   "description": "Coup de poing en poursuite avec un pas",
+   "photo": "https://i.pinimg.com/736x/e1/ce/33/e1ce33636c5c75636c54aab811d8e119.jpg",
+   "video": "https://www.youtube.com/embed/iyZS_OpfRSo"
+ },
+ {
+   "nom": "MAETE TSUKI",
+   "categorie": "tsuki wasa",
+   "description": "Coup de poing avec le poing avant",
+   "photo": "https://i.pinimg.com/736x/36/1a/6a/361a6a1bafdf319b4e59777f19c4cf53.jpg",
+   "video": "https://www.youtube.com/embed/b0kWD4rA2Rc"
+ },
+ {
+   "nom": "KIZAMI TSUKI",
+   "categorie": "tsuki wasa",
+   "description": "Coup de poing avec le poing avant en effaçant le buste",
+   "photo": "https://i.pinimg.com/736x/1a/8b/ad/1a8bad4f29ae0bc56a936e1a2e440a72.jpg",
+   "video": "https://www.youtube.com/embed/FdkFYoBwBg8"
+ },
+ {
+   "nom": "TATE TSUKI",
+   "categorie": "tsuki wasa",
+   "description": "Coup de poing avec le poing vertical",
+   "photo": "https://i.pinimg.com/736x/af/6f/bf/af6fbf7e76f15b5b5c52afd8b3f89ec6.jpg",
+   "video": "https://www.youtube.com/embed/Nv-WY_FKIGY"
+ },
+ {
+   "nom": "KAGI TSUKI",
+   "categorie": "tsuki wasa",
+   "description": "Coup de poing en crochet",
+   "photo": "https://i.pinimg.com/736x/4b/3c/c2/4b3cc2e068b940657b2d658dd704c1a5.jpg",
+   "video": "https://www.youtube.com/embed/s3UbYvAe1ME"
+ },
+ {
+   "nom": "MAWASHI TSUKI",
+   "categorie": "tsuki wasa",
+   "description": "\tCoup de poing circulaire",
+   "photo": "manquante,png",
+   "video": "https://www.youtube.com/embed/FhsGGiM0"
+ },
+ {
+   "nom": "YAMA TSUKI",
+   "categorie": "tsuki wasa",
+   "description": "Coup de poing double\nsimultanément jodan et gedan",
+   "photo": "https://i.pinimg.com/736x/93/db/59/93db59e6d6860eb5b33f2b9a85ada0a5.jpg",
+   "video": "https://www.youtube.com/embed/a_d77wEBbJo"
+ },
+ {
+   "nom": "MOROTE TSUKI",
+   "categorie": "tsuki wasa",
+   "description": "Coup de poing double au même niveau",
+   "photo": "https://i.pinimg.com/736x/27/24/ac/2724ac50bc71d32a6071d3636032b064.jpg",
+   "video": "https://www.youtube.com/embed/X4vTCbu24RM"
+ },
+ {
+   "nom": "NUKITE",
+   "categorie": "tsuki wasa",
+   "description": "Attaque directe en pique de main",
+   "photo": "https://i.pinimg.com/736x/fc/9d/95/fc9d955f391daa5c68d585127b148b14.jpg",
+   "video": "https://www.youtube.com/embed/jicp3vS1fZ4"
+ },
+ {
+   "nom": "OTOSHI TSUKI",
+   "categorie": "tsuki wasa",
+   "description": "",
+   "photo": "manquante,png",
+   "video": "https://www.youtube.com/embed/F8rMvcrezvw"
+ },
+ {
+   "nom": "AGE TSUKI",
+   "categorie": "tsuki wasa",
+   "description": "Coup de poing remontant",
+   "photo": "manquante,png",
+   "video": "https://www.youtube.com/embed/XzpKDPYEW9Q"
+ },
+ {
+   "nom": "MAE GERI",
+   "categorie": "geri waza",
+   "description": "Coup de pied de face",
+   "photo": "https://i.pinimg.com/1200x/6b/6d/41/6b6d4133679a2b8081cb8375d1f9f6d7.jpg",
+   "video": "https://www.youtube.com/embed/6cEkbAJW1Hs"
+ },
+ {
+   "nom": "MAWASHI GERI",
+   "categorie": "geri waza",
+   "description": "Coup de pied circulaire (fouetté)",
+   "photo": "https://i.pinimg.com/736x/2d/35/12/2d35122cd17a1e67e61a3a8195fea46d.jpg",
+   "video": "https://www.youtube.com/embed/QVK3rco5A0c"
+ },
+ {
+   "nom": "YOKO GERI KEKOMI",
+   "categorie": "geri waza",
+   "description": "Coup de pied latéral défonçant (chassé)",
+   "photo": "https://i.pinimg.com/736x/3a/f5/bc/3af5bce99d94b4cb47e1978a03d8ea0f.jpg",
+   "video": "https://www.youtube.com/embed/xqqfYgIFqDY"
+ },
+ {
+   "nom": "YOKO GERI KEAGE",
+   "categorie": "geri waza",
+   "description": "Coup de pied latéral remontant",
+   "photo": "https://i.pinimg.com/736x/3a/f5/bc/3af5bce99d94b4cb47e1978a03d8ea0f.jpg",
+   "video": "https://www.youtube.com/embed/xqqfYgIFqDY"
+ },
+ {
+   "nom": "HIZA GERI",
+   "categorie": "geri waza",
+   "description": "Coup de genou",
+   "photo": "https://i.pinimg.com/736x/4d/c4/6f/4dc46fd2174f8abb87e14a17e9e27c9c.jpg",
+   "video": "https://www.youtube.com/embed/JA8uIeC5prQ"
+ }
+]
+
+
+
+
+
+

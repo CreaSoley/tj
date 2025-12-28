@@ -1,0 +1,222 @@
+[
+  {
+    "specialite": ["Uke waza", "multi-directionnel"],
+    "fr": "Gedan Barai, Gyaku Tsuki",
+    "jp": "ゲダンバライ、ギャクヅキ"
+  },
+  {
+    "specialite": ["Uke waza"],
+    "fr": "Soto Uke, Gyaku Tsuki",
+    "jp": "ソトウケ、ギャクヅキ"
+  },
+  {
+    "specialite": ["Uke waza"],
+    "fr": "Uchi Uke, Oi Tsuki",
+    "jp": "ウチウケ、オイヅキ"
+  },
+  {
+    "specialite": ["Uke waza"],
+    "fr": "Shuto Uke, Gyaku Tsuki",
+    "jp": "シュトウウケ、ギャクヅキ"
+  },
+  {
+    "specialite": ["Uke waza", "multi-directionnel"],
+    "fr": "Age Uke, Gyaku Tsuki",
+    "jp": "アゲウケ、ギャクヅキ"
+  },
+  {
+    "specialite": ["Geri waza", "multi-directionnel", "Yoko waza"],
+    "fr": "Gedan Barai, Mae Geri",
+    "jp": "ゲダンバライ、マエゲリ"
+  },
+  {
+    "specialite": ["Geri waza", "multi-directionnel"],
+    "fr": "Soto Uke, Mae Geri",
+    "jp": "ソトウケ、マエゲリ"
+  },
+  {
+    "specialite": ["Geri waza", "multi-directionnel"],
+    "fr": "Uchi Uke, Hiza Geri",
+    "jp": "ウチウケ、ヒザゲリ"
+  },
+  {
+    "specialite": ["Geri waza", "multi-directionnel"],
+    "fr": "Gedan Barai, Kin Geri",
+    "jp": "ゲダンバライ、キンゲリ"
+  },
+  {
+    "specialite": ["Geri waza", "multi-directionnel"],
+    "fr": "Age Uke, Mae Geri",
+    "jp": "アゲウケ、マエゲリ"
+  },
+  {
+    "specialite": ["3 techniques"],
+    "fr": "Gedan Barai, Gyaku Tsuki, Mae Geri",
+    "jp": "ゲダンバライ、ギャクヅキ、マエゲリ"
+  },
+  {
+    "specialite": ["3 techniques"],
+    "fr": "Soto Uke, Gyaku Tsuki, Mae Geri",
+    "jp": "ソトウケ、ギャクヅキ、マエゲリ"
+  },
+  {
+    "specialite": ["3 techniques"],
+    "fr": "Age Uke, Gyaku Tsuki, Gyaku Tsuki",
+    "jp": "アゲウケ、ギャクヅキ、ギャクヅキ"
+  },
+  {
+    "specialite": ["3 techniques", "multi-directionnel"],
+    "fr": "Gedan Barai, Oi Tsuki, Gyaku Tsuki",
+    "jp": "ゲダンバライ、オイヅキ、ギャクヅキ"
+  },
+  {
+    "specialite": ["3 techniques"],
+    "fr": "Uchi Uke, Gyaku Tsuki, Mae Geri",
+    "jp": "ウチウケ、ギャクヅキ、マエゲリ"
+  },
+  {
+    "specialite": ["Yoko waza", "multi-directionnel"],
+    "fr": "Gedan Barai, Tsuki Chudan",
+    "jp": "ゲダンバライ、チュウダンヅキ"
+  },
+  {
+    "specialite": ["Yoko waza"],
+    "fr": "Shuto Uke, Gyaku Tsuki",
+    "jp": "シュトウウケ、ギャクヅキ"
+  },
+  {
+    "specialite": ["Yoko waza"],
+    "fr": "Shuto Uke, Mae Geri",
+    "jp": "シュトウウケ、マエゲリ"
+  },
+  {
+    "specialite": ["Yoko waza"],
+    "fr": "Soto Uke, Uraken",
+    "jp": "ソトウケ、ウラケン"
+  },
+  {
+    "specialite": ["Tai-jitsu"],
+    "fr": "Gedan Barai, Teisho",
+    "jp": "ゲダンバライ、テイショウ"
+  },
+  {
+    "specialite": ["Tai-jitsu"],
+    "fr": "Soto Uke, Empi",
+    "jp": "ソトウケ、エンピウチ"
+  },
+  {
+    "specialite": ["Tai-jitsu", "multi-directionnel"],
+    "fr": "Age Uke, Empi",
+    "jp": "アゲウケ、エンピウチ"
+  },
+  {
+    "specialite": ["Tai-jitsu"],
+    "fr": "Uchi Uke, Tsuki Chudan",
+    "jp": "ウチウケ、チュウダンヅキ"
+  },
+  {
+    "specialite": ["Tai-jitsu"],
+    "fr": "Gedan Barai, Hiza Geri",
+    "jp": "ゲダンバライ、ヒザゲリ"
+  },
+  {
+    "specialite": ["multi-directionnel"],
+    "fr": "Shuto Uke, Gyaku Tsuki",
+    "jp": "シュトウウケ、ギャクヅキ"
+  },
+  {
+    "specialite": ["multi-directionnel"],
+    "fr": "Soto Uke, Mae Geri, Tsuki",
+    "jp": "ソトウケ、マエゲリ、ツキ"
+  },
+  {
+    "specialite": ["multi-directionnel"],
+    "fr": "Age Uke, Gyaku Tsuki, Mae Geri",
+    "jp": "アゲウケ、ギャクヅキ、マエゲリ"
+  },
+  {
+    "specialite": ["multi-directionnel"],
+    "fr": "Gedan Barai, Tsuki Chudan, Tsuki Jodan",
+    "jp": "ゲダンバライ、チュウダンヅキ、ジョウダンヅキ"
+  },
+  {
+    "specialite": ["multi-directionnel", "Tai-jitsu"],
+    "fr": "Uchi Uke, Gyaku Tsuki",
+    "jp": "ウチウケ、ギャクヅキ"
+  },
+  {
+    "specialite": ["Tai-jitsu"],
+    "fr": "Shuto Uke, Gyaku Tsuki",
+    "jp": "シュトウウケ、ギャクヅキ"
+  },
+  {
+    "specialite": ["multi-directionnel", "3 techniques"],
+    "fr": "Shuto Uke, Gyaku Tsuki, Mae Geri",
+    "jp": "シュトウウケ、ギャクヅキ、マエゲリ"
+  },
+  {
+    "specialite": ["multi-directionnel", "Uke waza"],
+    "fr": "Gedan Barai, Oi Tsuki",
+    "jp": "ゲダンバライ、オイヅキ"
+  },
+  {
+    "specialite": ["sonoba"],
+    "fr": "Gedan Barai, Gyaku Tsuki",
+    "jp": "ゲダンバライ、ギャクヅキ"
+  },
+  {
+    "specialite": ["sonoba"],
+    "fr": "Soto Uke, Gyaku Tsuki",
+    "jp": "ソトウケ、ギャクヅキ"
+  },
+  {
+    "specialite": ["sonoba"],
+    "fr": "Uchi Uke, Oi Tsuki",
+    "jp": "ウチウケ、オイヅキ"
+  },
+  {
+    "specialite": ["sonoba"],
+    "fr": "Age Uke, Gyaku Tsuki",
+    "jp": "ジョウダンウケ、ギャクヅキ"
+  },
+  {
+    "specialite": ["sonoba"],
+    "fr": "Gedan Barai, Oi Tsuki",
+    "jp": "ゲダンバライ、オイヅキ"
+  },
+  {
+    "specialite": ["sonoba"],
+    "fr": "Soto Uke, Uraken",
+    "jp": "ソトウケ、ウラケン"
+  },
+  {
+    "specialite": ["sonoba"],
+    "fr": "Uchi Uke, Empi Uchi",
+    "jp": "ウチウケ、エンピウチ"
+  },
+  {
+    "specialite": ["sonoba"],
+    "fr": "Age Uke, Mae Geri",
+    "jp": "ジョウダンウケ、マエゲリ"
+  },
+  {
+    "specialite": ["sonoba"],
+    "fr": "Soto Uke, Tai Sabaki, Gyaku Tsuki",
+    "jp": "ソトウケ、タイサバキ、ギャクヅキ"
+  },
+  {
+    "specialite": ["sonoba"],
+    "fr": "Gedan Barai, Shuto Uchi",
+    "jp": "ゲダンバライ、シュトウウチ"
+  },
+  {
+    "specialite": ["sonoba"],
+    "fr": "Uchi Uke, Hiza Geri",
+    "jp": "ウチウケ、ヒザゲリ"
+  },
+  {
+    "specialite": ["sonoba"],
+    "fr": "Gedan Barai, Soto Uke, Gyaku Tsuki",
+    "jp": "ゲダンバライ、ソトウケ、ギャクヅキ"
+  }
+]
