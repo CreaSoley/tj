@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UV5 – Assauts imposés</title>
+
+  <!-- Google Font Fredoka -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- bannière -->
+  <link rel="stylesheet" href="banner.css">
+
+  <style>
+    @font-face { font-family: "Spicy"; src: url("Spicy Sale.ttf"); }
+
+    :root{
+      --pink-1:#fff0f6;
+      --pink-2:#ffd6ec;
+      --accent:#ff5fc1;
+      --hot-pink:#ff1493;
+      --bg-gradient: linear-gradient(180deg,#fff6fb 0%, #ffeef6 100%);
+      --text:#222;
+      --radius:20px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      color:var(--text);
+      background:var(--bg-gradient);
+      font-family:'Fredoka', Arial, sans-serif;
+    }
+
+    main{
+      max-width:1100px;
+      margin:20px auto 40px;
+      padding:0 15px;
+    }
+
+    .card-kawaii{
+      background:white;
+      border:3px solid var(--pink-2);
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow:0 8px 15px rgba(255, 182, 193, 0.4);
+    }
+
+    .module-title{
+      font-family:"Spicy", sans-serif;
+      text-align:center;
+      color:var(--hot-pink);
+      font-size:2.2rem;
+      margin-top:0;
+      text-shadow:2px 2px 0 var(--pink-2);
+    }
+
+    .sub-section{
+      background:var(--pink-1);
+      border-radius:15px;
+      padding:15px;
+      border:1px dashed var(--accent);
+    }
+
+    .controls-row{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+      flex-wrap:wrap;
+      font-size:0.95rem;
+    }
+    .controls-row label{ font-weight:600; }
+
+    .result-display{
+      background:white;
+      border:2px solid var(--pink-2);
+      border-radius:12px;
+      padding:15px;
+      min-height:60px;
+      text-align:center;
+      font-weight:bold;
+      font-size:1.2rem;
+      color:#c9184a;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:10px;
+    }
+
+    .input-small{
+      width:70px;
+      padding:6px;
+      border-radius:8px;
+      border:1px solid var(--pink-2);
+      text-align:center;
+    }
+
+    .btn-kawaii{
+      flex:1;
+      font-family:"Spicy", sans-serif;
+      background:var(--accent);
+      color:white;
+      border:none;
+      padding:8px 15px;
+      border-radius:50px;
+      cursor:pointer;
+      transition: transform 0.2s;
+      box-shadow:0 4px 0px #d6459b;
+      font-size:0.9rem;
+      font-weight:normal;
+    }
+    .btn-kawaii:hover{ transform:scale(1.03); background:var(--hot-pink);}
+    .btn-kawaii:active{ transform:translateY(3px); box-shadow:none; }
+    .btn-stop{ background:#ff4d6d; box-shadow:0 4px 0px #c9184a; }
+    .btn-small{ padding:6px 10px; font-size:0.8rem; }
+
+    .muted{ color:#777; font-size:0.9rem; }
+
+    input[type=range]{ accent-color:var(--accent); cursor:pointer; flex-grow:1; }
+  </style>
+</head>
+
+<body data-title="UV5 – Assauts imposés">
+
+<!-- Bannière -->
+<div id="bannerContainer"></div>
+<script>
+fetch("banner.html")
+  .then(r => r.text())
+  .then(html => {
+    document.getElementById("bannerContainer").innerHTML = html;
+    const pageTitle = document.body.dataset.title || document.title;
+    const target = document.querySelector(".header-text .title");
+    if(target) target.textContent = pageTitle;
+  });
+</script>
+
+<main>
+  <section class="card-kawaii">
+    <h2 class="module-title">🐵 UV5 – Assauts imposés 🐵</h2>
+
+    <div class="sub-section">
+      <div id="uv5-result" class="result-display">Technique à travailler...</div>
+
+      <div class="controls-row">
+        <label>Catégorie:</label>
+        <select id="uv5-filter" class="input-small" style="width:auto;">
+          <option value="all">Toutes</option>
+          <option value="A">Étranglements & Saisies</option>
+          <option value="B">Armes & Atemi</option>
+        </select>
+
+        <label><input id="uv5-duplicates" type="checkbox"> Doublons</label>
+
+        <label>Qté:
+          <input id="uv5-count" class="input-small" type="number" value="5" min="1" style="width:50px;">
+        </label>
+      </div>
+
+      <div class="controls-row">
+        <label>Intervalle lecture (s):</label>
+        <input id="uv5-read-interval" type="range" min="3" max="60" value="15">
+        <span class="muted" id="uv5-read-interval-display">15s</span>
+      </div>
+
+      <hr style="border:1px dashed var(--pink-2); margin:15px 0;">
+
+      <h3>Beeper (pour l'entraînement)</h3>
+      <div class="controls-row">
+        <label>Bip toutes les:</label>
+        <input id="uv5-beep-interval" type="range" min="2" max="30" value="10">
+        <span class="muted" id="uv5-beep-display">10s</span>
+        <i class="fas fa-bell beep-icon" id="uv5-beep-icon"></i>
+      </div>
+
+      <div class="button-row">
+        <button id="uv5-beep-start" class="btn-kawaii btn-small">Démarrer Bip</button>
+        <button id="uv5-beep-stop" class="btn-kawaii btn-small btn-stop">Stop Bip</button>
+      </div>
+
+      <hr style="border:1px dashed var(--pink-2); margin:15px 0;">
+
+      <div class="button-row">
+        <button id="uv5-generate" class="btn-kawaii">Changer</button>
+        <button id="uv5-read" class="btn-kawaii">Lecture FR</button>
+        <button id="uv5-stop" class="btn-kawaii btn-stop">Stop</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Scripts -->
+<script src="encart56.js"></script>
+
+</body>
+</html>
