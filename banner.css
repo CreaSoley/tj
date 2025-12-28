@@ -78,3 +78,37 @@
     line-height: 1.2;
   }
 }
+/* ---------- Utilitaires ---------- */
+.muted { 
+  color:#999; 
+  font-size:0.9rem; 
+}
+.banner{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:10px 15px;
+}
+
+.banner-logo{
+  height:90px;          /* ← agrandi */
+}
+
+.banner-titles{
+  display:flex;
+  flex-direction:column;
+  line-height:1.1;
+}
+
+.banner-taiso{
+  font-family:"Spicy";
+  font-size:1.4rem;     /* ← PLUS PETIT qu'avant */
+  color:#ff5fc1;
+  opacity:0.8;
+}
+
+.banner-uv{
+  font-family:"Spicy";
+  font-size:2.4rem;     /* ← PLUS GRAND que Taiso */
+  color:#ff1493;
+}
