@@ -51,6 +51,7 @@ const FILES_TO_CACHE = [
   "/icon-512.png",
   "/logo-192.png",
   "/logopwa2.png",
+  "/load.png",
 
   // Fonts
   "/Spicy Sale.ttf",
