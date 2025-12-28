@@ -1,0 +1,247 @@
+/* ---------- Fonts & palette ---------- */
+@font-face { 
+  font-family: "Spicy"; 
+  src: url("Spicy Sale.ttf"); 
+}
+
+:root{
+  --pink-1:#fff0f6; /* Rose très clair (fond sub-section) */
+  --pink-2:#ffd6ec; /* Rose clair (bordures) */
+  --accent:#ff5fc1; /* Rose flashy/vif */
+  --card-shadow: 0 10px 24px rgba(255,120,180,0.12);
+  --hot-pink:#ff1493; /* Rose très foncé */
+  --bg-gradient: linear-gradient(180deg,#fff6fb 0%, #ffeef6 100%);
+  --text:#222;
+  --radius:20px; /* Augmenté pour l'effet Kawaii */
+}
+
+/* ---------- Base ---------- */
+*{ 
+  box-sizing:border-box; 
+}
+
+body{
+  margin:0;
+  font-family: 'Fredoka', Arial, sans-serif;
+  color:var(--text);
+  background: var(--bg-gradient);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+a{ 
+  color:inherit; 
+}
+
+/* ---------- Layout ---------- */
+.main-wrapper{ 
+  max-width:1400px; 
+  margin:20px auto; 
+  padding:0 18px 40px; 
+}
+
+.grid{
+  display:grid;
+  gap:20px;
+  grid-template-columns: repeat(3,1fr);
+  align-items:stretch;
+}
+
+@media (max-width:1100px){
+  .grid{ grid-template-columns: repeat(2,1fr); }
+}
+
+@media (max-width:700px){
+  .grid{ grid-template-columns: 1fr; }
+}
+
+/* ---------- Card Kawaii ---------- */
+.card-kawaii {
+  background: white;
+  border: 3px solid var(--pink-2);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 8px 15px rgba(255, 182, 193, 0.4);
+  display: flex;
+  flex-direction: column;
+}
+
+.module-title {
+  font-family: "Spicy", sans-serif;
+  color: var(--hot-pink);
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 0px var(--pink-2);
+  flex-shrink: 0;
+}
+
+.sub-section {
+  background: var(--pink-1);
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px dashed var(--accent);
+  flex-grow: 1;
+}
+
+/* ---------- Section titres ---------- */
+.sub-section h3, 
+.sub-section summary {
+  font-family: 'Fredoka', sans-serif;
+  color: var(--hot-pink);
+  margin-top: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-bottom: 5px;
+}
+
+/* ---------- Controls et Affichage ---------- */
+.controls-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+.controls-row label {
+  font-weight: 600;
+}
+
+.result-display {
+  background: #fff;
+  border: 2px solid var(--pink-2);
+  border-radius: 12px;
+  padding: 15px;
+  min-height: 60px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #c9184a;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input-small {
+  width: 70px;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid var(--pink-2);
+  text-align: center;
+  font-family: 'Fredoka', sans-serif;
+}
+
+/* ---------- Boutons ---------- */
+.button-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-kawaii {
+  flex: 1;
+  font-family: "Spicy", sans-serif;
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 0px #d6459b;
+  font-size: 0.9rem;
+}
+
+.btn-kawaii:hover {
+  transform: scale(1.03);
+  background: var(--hot-pink);
+}
+
+.btn-kawaii:active {
+  transform: translateY(3px);
+  box-shadow: none;
+}
+
+.btn-stop {
+  background: #ff4d6d;
+  box-shadow: 0 4px 0px #c9184a;
+}
+
+.btn-small {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+}
+
+/* ---------- Icône Beep ---------- */
+.beep-icon {
+  font-size: 1.3rem;
+  color: var(--accent);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.beep-icon.off {
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+
+/* ---------- Inputs ---------- */
+input[type=range] {
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-grow: 1;
+}
+
+/* ---------- Accordion ---------- */
+details { 
+  margin-bottom: 10px; 
+}
+
+summary { 
+  background: var(--pink-2); 
+  padding: 10px; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  color: var(--hot-pink); 
+  font-weight: 700;
+}
+
+details .inner { 
+  padding: 12px; 
+  background: #fff; 
+  border-radius: 8px; 
+  margin-top: 8px; 
+  border: 1px solid var(--pink-2);
+}
+
+details iframe {
+  width: 100%;
+  height: 180px;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* ---------- Listes ---------- */
+.content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.content ul li {
+  background: #fff;
+  padding: 8px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  border-left: 5px solid var(--accent);
+}
+
+/* ---------- Utilitaires ---------- */
+.muted { 
+  color:#999; 
+  font-size:0.9rem; 
+}
