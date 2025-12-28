@@ -4,28 +4,103 @@
 <meta charset="UTF-8">
 <title>PWA Taiso – Accueil</title>
 
-<link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.webmanifest">
+<!-- Manifest -->
+<link rel="manifest" href="manifest.json">
+
+<!-- Bannière & style global -->
+<link rel="stylesheet" href="banner.css">
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Fredoka', Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Conteneur principal */
+  main {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    font-family: 'Fredoka', sans-serif;
+    color: #ff1493;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  /* Boutons UV style kawai */
+  .uv-button {
+    font-family: 'Fredoka', sans-serif;
+    background: #ff5fc1;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 18px 25px;
+    margin: 10px 0;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    box-shadow: 0 0 15px rgba(255,95,193,0.6);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .uv-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255,20,147,0.8);
+  }
+
+  .uv-button:active {
+    transform: translateY(3px);
+    box-shadow: 0 0 10px rgba(255,20,147,0.6);
+  }
+
+  @media (max-width:500px) {
+    .uv-button { font-size: 1rem; padding: 15px 20px; }
+  }
+</style>
 
 <script>
 if ('serviceWorker' in navigator){
-  navigator.serviceWorker.register('sw.js');
+  navigator.serviceWorker.register('sw.js')
+    .then(() => console.log("SW enregistré"))
+    .catch(err => console.error("SW erreur", err));
 }
 </script>
 
 </head>
-
 <body>
 
-<h1>Choisis une UV</h1>
+<!-- Bannière noire -->
+<div id="bannerContainer"></div>
+<script>
+fetch("banner.html")
+  .then(r => r.text())
+  .then(html => {
+    document.getElementById("bannerContainer").innerHTML = html;
+  });
+</script>
 
-<div class="grid">
-  <a class="card-kawaii" href="uv1.html">UV1 : Kihon</a>
-  <a class="card-kawaii" href="uv2.html">UV2 : Ippon kumite</a>
-  <a class="card-kawaii" href="uv3.html">UV3 : Kata </a>
-  <a class="card-kawaii" href="uv4.html">UV4 : Epreuve technique</a>
-  <a class="card-kawaii" href="uv5.html">UV5&6 :  Assauts imposés et randori</a>
-</div>
+<main>
+  <h1>Choisis une UV</h1>
+
+  <button class="uv-button" onclick="location.href='uv1.html'">UV1 : Kihon</button>
+  <button class="uv-button" onclick="location.href='uv2.html'">UV2 : Ippon Kumite</button>
+  <button class="uv-button" onclick="location.href='uv3.html'">UV3 : Kata</button>
+  <button class="uv-button" onclick="location.href='uv4.html'">UV4 : Épreuve technique</button>
+  <button class="uv-button" onclick="location.href='uv5.html'">UV5 Assauts imposés </button>
+  <button class="uv-button" onclick="location.href='uv5.html'">UV6 Randori</button>
+</main>
 
 </body>
 </html>
