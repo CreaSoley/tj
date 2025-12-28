@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // KC = ***PLUS UTILISÉ → remplacé par ton module 2 avancé***
   // mais on ne casse rien si JSON existe
-  const kcJson = await loadJSON("kihon_enchainements_simples.json");
+  const kcJson = await loadJSON("kihon_maj2025.json");
   const KC_DATA = kcJson ? kcJson["enchaînements"] : [];
 
   // KCB EN DUR FR
