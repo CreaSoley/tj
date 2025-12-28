@@ -75,19 +75,25 @@ document.addEventListener("DOMContentLoaded", async () => {
   ];
 
   /********************************************************************
-   * CHARGEMENT JSON (avec les vraies clés)
-   ********************************************************************/
-  const ksJson = await loadJSON("kihon_simples.json");
-  const KS_DATA = ksJson ? ksJson.kihon : [];
+ * CHARGEMENT JSON (avec les vraies clés) — sans kihon_combat.json
+ ********************************************************************/
 
-  const kcJson = await loadJSON("kihon_enchainements_simples.json");
-  const KC_DATA = kcJson ? kcJson["enchaînements"] : [];
+// KS
+const ksJson = await loadJSON("kihon_simples.json");
+const KS_DATA = ksJson ? ksJson.kihon : [];
 
-  const kcbJson = await loadJSON("kihon_combat.json");
-  let KCB_DATA = kcbJson ? (kcbJson.kihon || kcbJson.combat || []) : [];
-  if (!KCB_DATA.length) KCB_DATA = KCB_FALLBACK;
+// KC
+const kcJson = await loadJSON("kihon_enchainements_simples.json");
+const KC_DATA = kcJson ? kcJson["enchaînements"] : [];
 
-  console.log("KS:", KS_DATA.length, "KC:", KC_DATA.length, "KCB:", KCB_DATA.length);
+// KCB → uniquement fallback (plus aucun fetch, plus d’erreur 404)
+let KCB_DATA = [...KCB_FALLBACK];
+
+console.log(
+  "KS:", KS_DATA.length,
+  "KC:", KC_DATA.length,
+  "KCB:", KCB_DATA.length, "(fallback only)"
+);
 
   /********************************************************************
    * MODULE GÉNÉRIQUE
