@@ -3,78 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PWA Taiso – Menu UV</title>
+<title>PWA Taiso – Accueil</title>
 
-<!-- Bannière -->
-<link rel="stylesheet" href="banner.css">
+<!-- Google Fredoka pour cohérence -->
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
 
-<!-- Styles UV Kawaii -->
 <style>
-/* Fonts Google */
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');
+  /* ========================= */
+  /* RESET & BASE              */
+  /* ========================= */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: 'Fredoka', sans-serif; background:black; color:white; overflow-x:hidden; }
 
-/* Grid principal : colonne unique */
-.main-wrapper {
-  max-width: 600px;
-  margin: 30px auto;
-  padding: 0 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
+  a { text-decoration:none; color:inherit; }
 
-/* Boutons UV kawaii */
-.uv-button {
-  display: block;
-  width: 100%;
-  padding: 15px 0;
-  font-family: 'Fredoka', sans-serif;
-  font-size: 1.3rem;
-  text-align: center;
-  color: white;
-  background: #ff1493;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  position: relative;
-  box-shadow: 0 0 10px rgba(255,20,147,0.6), 0 4px 0px #d6459b;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
+  /* ========================= */
+  /* BANNIÈRE FIXE             */
+  /* ========================= */
+  header.appbar {
+    position: fixed;
+    top:0; left:0;
+    width:100%;
+    background:black;
+    color:white;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    z-index:1000;
+  }
 
-.uv-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(255,20,147,0.8), 0 4px 0px #d6459b;
-}
+  .logo-big { width:100px; margin-bottom:10px; }
 
-.uv-button:active {
-  transform: translateY(3px);
-  box-shadow: 0 0 10px rgba(255,20,147,0.6), 0 0 0px #d6459b;
-}
+  .header-text .title {
+    font-family: 'Shanghai', cursive;
+    font-size: 1.3rem;
+  }
+
+  .header-text .subtitle {
+    font-family: 'Spicy', cursive;
+    font-size: 1.8rem;
+    color:#ff1493;
+  }
+
+  /* ========================= */
+  /* CONTENU PRINCIPAL         */
+  /* ========================= */
+  main {
+    margin-top: 180px; /* laisse de la place pour la bannière */
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:25px;
+    padding: 0 15px 50px;
+    text-align:center;
+  }
+
+  main p {
+    max-width:400px;
+    line-height:1.5;
+    color:#ffb6d4;
+    font-size:1.2rem;
+  }
+
+  /* ========================= */
+  /* BOUTONS KAWAII            */
+  /* ========================= */
+  .btn-kawaii {
+    background:#ff5fc1;
+    color:white;
+    font-family:'Fredoka', sans-serif;
+    font-weight:600;
+    padding:15px 25px;
+    border-radius:50px;
+    cursor:pointer;
+    box-shadow: 0 0 15px rgba(255,95,193,0.6);
+    transition: transform 0.2s, box-shadow 0.2s;
+    width:250px;
+    text-align:center;
+  }
+
+  .btn-kawaii:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255,20,147,0.8);
+  }
+
+  .btn-kawaii:active {
+    transform: translateY(3px);
+    box-shadow:none;
+  }
+
+  /* ========================= */
+  /* MOBILE ADAPTATION         */
+  /* ========================= */
+  @media (max-width:500px){
+    .btn-kawaii { width:200px; padding:12px 20px; font-size:1rem; }
+    main p { font-size:1rem; }
+    .logo-big { width:80px; }
+  }
 </style>
+
 </head>
 <body>
 
-<!-- Bannière noire -->
-<div id="bannerContainer">
-  <header class="appbar">
-    <a href="index.html" class="logo-link">
-      <img src="assets/logo-pwa.png" class="logo-big" alt="logo">
-    </a>
-    <div class="header-text">
-      <div class="title shanghai" style="font-size:1.3rem;">Taï-jitsu</div>
-      <div class="subtitle spicy" style="font-size:1.8rem;">Programme officiel</div>
-    </div>
-  </header>
-</div>
+<header class="appbar">
+  <a href="index.html">
+    <img src="assets/logo-pwa.png" class="logo-big" alt="Logo PWA">
+  </a>
+  <div class="header-text">
+    <div class="title">TAISO</div>
+    <div class="subtitle">Choisis ton UV</div>
+  </div>
+</header>
 
-<!-- Contenu principal : boutons UV -->
-<main class="main-wrapper">
-  <button class="uv-button" onclick="window.location.href='uv1.html'">UV1 – Kihon</button>
-  <button class="uv-button" onclick="window.location.href='uv2.html'">UV2 – Ippon Kumite</button>
-  <button class="uv-button" onclick="window.location.href='uv3.html'">UV3 – Kata</button>
-  <button class="uv-button" onclick="window.location.href='uv4.html'">UV4 – Épreuve Technique</button>
-  <button class="uv-button" onclick="window.location.href='uv5.html'">UV5 – Assauts imposés</button>
-   <button class="uv-button" onclick="window.location.href='uv5.html'">UV6 – Randori</button>
+<main>
+  <p>La ceinture marque un moment.<br>
+     L’apprentissage, lui, ne s’arrête jamais.<br>
+     Entraîne-toi avec justesse.<br>
+     Avance avec humilité.</p>
+
+  <a href="index.html" class="btn-kawaii">Commencer l'entraînement</a>
 </main>
 
 </body>
