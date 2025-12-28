@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UV2 – Ippon Kumite</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- ta bannière -->
+  <link rel="stylesheet" href="banner.css">
+
+  <style>
+    /* ---------- Fonts & palette ---------- */
+    @font-face { font-family: "Spicy"; src: url("Spicy Sale.ttf"); }
+
+    :root{
+      --pink-1:#fff0f6;
+      --pink-2:#ffd6ec;
+      --accent:#ff5fc1;
+      --card-shadow: 0 10px 24px rgba(255,120,180,0.12);
+      --hot-pink:#ff1493;
+      --bg-gradient: linear-gradient(180deg,#fff6fb 0%, #ffeef6 100%);
+      --text:#222;
+      --radius:20px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family: 'Fredoka', Arial, sans-serif;
+      color:var(--text);
+      background: var(--bg-gradient);
+    }
+
+    .main-wrapper{ max-width:1100px; margin:20px auto; padding:0 18px 40px; }
+
+    .card-kawaii {
+      background: white;
+      border: 3px solid var(--pink-2);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: 0 8px 15px rgba(255, 182, 193, 0.4);
+    }
+
+    .module-title {
+      font-family: "Spicy", sans-serif;
+      color: var(--hot-pink);
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 0px var(--pink-2);
+    }
+
+    .sub-section {
+      background: var(--pink-1);
+      border-radius: 15px;
+      padding: 15px;
+      border: 1px dashed var(--accent);
+    }
+
+    .controls-row {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+      font-size:0.95rem;
+    }
+
+    .result-display {
+      background:#fff;
+      border:2px solid var(--pink-2);
+      border-radius:12px;
+      padding:15px;
+      min-height:60px;
+      text-align:center;
+      font-weight:bold;
+      font-size:1.2rem;
+      color:#c9184a;
+      margin: 10px 0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .btn-kawaii {
+      flex:1;
+      font-family:"Spicy", sans-serif;
+      background:var(--accent);
+      color:white;
+      border:none;
+      padding:8px 15px;
+      border-radius:50px;
+      cursor:pointer;
+      box-shadow:0 4px 0px #d6459b;
+    }
+
+    .btn-stop { background:#ff4d6d; box-shadow:0 4px 0px #c9184a; }
+
+    .muted{ color:#999; }
+  </style>
+</head>
+
+<body data-title="UV2 – Ippon Kumite">
+
+<!-- 🟣 bannière chargée dynamiquement -->
+<div id="bannerContainer"></div>
+
+<script>
+fetch("banner.html")
+  .then(r => r.text())
+  .then(html => {
+    document.getElementById("bannerContainer").innerHTML = html;
+
+    const pageTitle =
+      document.body.dataset.title ||
+      document.title ||
+      "UV2";
+
+    const target = document.querySelector(".subtitle, .banner-uv, #uv-title");
+    if (target) target.textContent = pageTitle;
+  });
+</script>
+
+<main class="main-wrapper">
+
+  <!-- ============================= -->
+  <!-- UV2 – Ippon Kumite uniquement -->
+  <!-- ============================= -->
+  <section class="card-kawaii">
+    <h2 class="module-title">🐯 UV2 – Ippon Kumite 🐯</h2>
+
+    <div class="sub-section">
+
+      <div class="controls-row">
+        <label>Intervalle:</label>
+        <input type="range" id="uv2-interval" min="3" max="30" value="10">
+        <span id="uv2-interval-display" class="muted">10s</span>
+        <i class="fas fa-bell beep-icon" id="uv2-beep"></i>
+      </div>
+
+      <div id="uv2-content" class="result-display">
+        En attente…
+      </div>
+
+      <div class="button-row">
+        <button id="uv2-generate" class="btn-kawaii">🔀 Mélanger</button>
+        <button id="uv2-read" class="btn-kawaii">▶️ Lancer l'examen</button>
+        <button id="uv2-stop" class="btn-kawaii btn-stop">🛑 Stop</button>
+      </div>
+
+      <p class="muted" style="text-align:center;margin-top:10px;">
+        L’ordre des techniques est aléatoire.
+      </p>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- scripts spécifiques -->
+<script src="encart2.js"></script>
+
+</body>
+</html>
