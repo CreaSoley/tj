@@ -37,7 +37,7 @@
       margin-bottom: 40px;
       max-width: 500px;
     }
-    .btn-home {
+    .btn-home, .btn-install {
       font-family: 'Spicy', cursive;
       background: #ff5fc1;
       color: white;
@@ -48,19 +48,20 @@
       font-size: 1.2rem;
       box-shadow: 0 5px 0 #d6459b;
       transition: transform 0.2s;
+      margin: 10px 0;
     }
-    .btn-home:hover {
+    .btn-home:hover, .btn-install:hover {
       transform: scale(1.05);
       background: #ff1493;
     }
-    .btn-home:active {
+    .btn-home:active, .btn-install:active {
       transform: translateY(3px);
       box-shadow: none;
     }
     @media (max-width:600px) {
       .home-text { font-size: 1rem; }
       .logo-pwa { width: 150px; margin-bottom: 20px; }
-      .btn-home { font-size: 1rem; padding: 12px 25px; }
+      .btn-home, .btn-install { font-size: 1rem; padding: 12px 25px; }
     }
   </style>
 </head>
@@ -72,7 +73,14 @@
     Entraîne-toi avec justesse.<br>
     Avance avec humilité.
   </div>
-  <button class="btn-home" onclick="location.href='index.html'">Commencer l'entrainement</button>
+
+  <!-- Boutons -->
+  <button class="btn-home" onclick="location.href='index.html'">
+    Commencer l'entrainement
+  </button>
+  <button class="btn-install" id="installBtn" style="display:none;">
+    Installer l'application
+  </button>
 
   <script>
     // Enregistrement du service worker
@@ -83,6 +91,29 @@
           .catch(err => console.error('Erreur SW:', err));
       });
     }
+
+    // Gestion du bouton installer PWA
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'inline-block';
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const choice = await deferredPrompt.userChoice;
+      if (choice.outcome === 'accepted') {
+        console.log('Installation acceptée');
+      } else {
+        console.log('Installation refusée');
+      }
+      deferredPrompt = null;
+      installBtn.style.display = 'none';
+    });
   </script>
 </body>
 </html>
