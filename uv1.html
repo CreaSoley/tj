@@ -19,23 +19,13 @@
 
 </head>
 
-<body data-title="TaÏ-jitsu">
-
-<!-- ==================== -->
-<!-- barre bannière noire -->
-<!-- ==================== -->
-<div id="bannerContainer"></div>
-
-<script>
-fetch("banner.html")
-  .then(r => r.text())
-  .then(html => {
-    document.getElementById("bannerContainer").innerHTML = html;
-
-    const target = document.querySelector(".header-text .title");
-    if (target) target.textContent = document.body.dataset.title || "UV1 – Kihon";
-  });
-</script>
+<body data-subtitle="UV1 – Kihon">
+  <div id="bannerContainer"></div>
+  <script>
+    fetch("banner.html")
+      .then(r => r.text())
+      .then(html => document.getElementById("bannerContainer").innerHTML = html);
+  </script>
 
 <main class="main-wrapper">
 
