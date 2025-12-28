@@ -236,7 +236,7 @@ async function loadEnchainementData() {
     // ✅ JSON des enchaînements
     const res = await fetch("kihon_maj2025.json", { cache: "no-store" });
     const json = await res.json();
-    enchainementsData = json["enchaînements"] || [];
+    enchainementsData = Array.isArray(json) ? json : [];
 
     // ✅ JSON descriptions techniques
     const res2 = await fetch("tjkihon.json", { cache: "no-store" });
