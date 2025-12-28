@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>PWA Taiso – Accueil</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.webmanifest">
+
+<script>
+if ('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js');
+}
+</script>
+
+</head>
+
+<body>
+
+<h1>Choisis une UV</h1>
+
+<div class="grid">
+  <a class="card-kawaii" href="uv1.html">UV1</a>
+  <a class="card-kawaii" href="uv2.html">UV2</a>
+  <a class="card-kawaii" href="uv3.html">UV3</a>
+  <a class="card-kawaii" href="uv4.html">UV4</a>
+</div>
+
+</body>
+</html>
