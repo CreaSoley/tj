@@ -73,34 +73,49 @@ fetch("banner.html")
     <section class="card-kawaii">
       <h2 class="module-title">🎀 Kihon enchaînements 🎀</h2>
 
-      <div class="sub-section">
-
-        <div class="controls-row">
-          <label>Qté:</label>
-          <input type="number" id="kc-count" class="input-small" value="3" min="1">
+     <div class="sub-section">
+            <h3>🔗 Générateur d'Enchaînement</h3>
+            <div>
+                <label style="font-weight: bold; color: var(--accent);">Filtrer par spécialité :</label>
+                <select id="filterSpecialite">
+                    <option value="">Toutes les spécialités</option>
+                </select>
+            </div>
+            
+            <button id="btnNouveauEnchainement" class="btn-kawaii">🎲 Nouveau tirage</button>
+            
+            <div id="categorieAnnonce" style="text-align: center; font-size: 1.1rem; color: var(--accent); font-weight: bold; margin-top: 10px; min-height: 25px;"></div>
+            
+            <div id="enchainementResult" class="result-display" style="min-height: 100px; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+                <p style="color: #999;">Cliquez pour commencer</p>
+            </div>
         </div>
 
-        <div class="controls-row">
-          <label>Intervalle:</label>
-          <input type="range" id="kc-interval" min="2" max="60" value="7">
-          <span id="kc-interval-display" class="muted">7s</span>
-          <i class="fas fa-bell beep-icon" id="kc-beep"></i>
+        <div class="sub-section">
+            <h3>🔊 Contrôles Audio <span id="audioStatus"></span></h3>
+            
+            <div>
+                <label style="font-weight: bold; color: var(--accent);">
+                    Vitesse lecture JP : <span id="enchainementSpeedValue">×0.7</span>
+                </label>
+                <input type="range" id="enchainementSpeedSlider" min="0.3" max="2" step="0.1" value="0.7">
+            </div>
+            
+            <button id="btnLectureJP" class="btn-kawaii btn-read">▶️ Lire en japonais (2 fois)</button>
+            <p style="font-size: 0.8rem; color: #666; margin: 5px 0;">⚡ Le beeper démarre auto 5s après la 2ème lecture</p>
+            
+            <div style="margin-top: 10px;">
+                <label style="font-weight: bold; color: var(--accent);">
+                    Beeper : <span id="beeperFreqValue">3s</span>
+                </label>
+                <input type="range" id="beeperFreqSlider" min="1" max="10" step="1" value="3">
+            </div>
+            
+            <div style="display: flex; gap: 10px; margin-top: 5px;">
+                <button id="btnStartBeeper" class="btn-kawaii btn-start" style="flex:1;">🔔 Démarrer</button>
+                <button id="btnStopBeeper" class="btn-kawaii btn-stop" style="flex:1;">⏹ Stop</button>
+            </div>
         </div>
-
-        <div class="controls-row">
-          <label>Vitesse voix:</label>
-          <input type="range" id="kc-speed" min="0.5" max="1.5" step="0.1" value="1">
-          <span id="kc-speed-display" class="muted">1x</span>
-        </div>
-
-        <div id="kc-result" class="result-display">Attente…</div>
-
-        <div class="button-row">
-          <button id="kc-generate" class="btn-kawaii">🎲 Changer</button>
-          <button id="kc-read" class="btn-kawaii">🔊 Lire</button>
-          <button id="kc-stop" class="btn-kawaii btn-stop">🛑 Stop</button>
-        </div>
-
       </div>
     </section>
 
