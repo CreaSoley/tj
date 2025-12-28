@@ -13,34 +13,25 @@
 <body>
 
 <header class="appbar">
-
-  <!-- logo taille corrigée -->
-  <header class="appbar">
   <a href="index.html" class="logo-link">
-    <img src="assets/logopwa.png" class="logo-big" alt="logo">
+    <img src="assets/logo-pwa.png" class="logo-big" alt="logo">
   </a>
   <div class="header-text">
+    <!-- Titre fixe -->
     <div class="title shanghai" style="font-size:1.3rem;">TAISO</div>
-    <div class="subtitle spicy" id="uv-title" style="font-size:1.8rem;">Titre de l’UV</div>
+    <!-- Sous-titre dynamique -->
+    <div class="subtitle spicy" id="uv-subtitle" style="font-size:1.8rem;">Sous-titre</div>
   </div>
 </header>
 
 <script>
-  const p = new URLSearchParams(window.location.search);
-  const uv = p.get("uv");
-
-  // récupère data-title ou le titre UV
-  let pageTitle =
-    document.body.dataset.title || 
-    document.querySelector("h1")?.textContent || 
-    document.querySelector("title")?.textContent || "";
-
-  // applique au sous-titre
-  const uvTarget = document.getElementById("uv-title");
-  if (uvTarget) {
-    uvTarget.textContent = uv || pageTitle || "Titre de l’UV";
+  // Récupère le sous-titre depuis data-subtitle du <body>
+  const subtitle = document.body.dataset.subtitle;
+  if(subtitle){
+    document.getElementById("uv-subtitle").textContent = subtitle;
   }
 </script>
+
 
 </body>
 </html>
