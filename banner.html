@@ -1,37 +1,29 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-
-  <!-- ton CSS -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Google Fredoka pour cohérence -->
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
-</head>
-
-<body>
-
 <header class="appbar">
+  <!-- Logo cliquable vers l'accueil -->
   <a href="index.html" class="logo-link">
-    <img src="assets/logopwa.png" class="logo-big" alt="logo">
+    <img src="assets/logo-pwa.png" class="logo-big" alt="logo">
   </a>
+
   <div class="header-text">
     <!-- Titre fixe -->
-    <div class="title shanghai" style="font-size:1.3rem;">Taï-jitsu</div>
+    <div class="title shanghai" style="font-size:1.3rem;">
+      TAISO
+    </div>
+
     <!-- Sous-titre dynamique -->
-    <div class="subtitle spicy" id="uv-subtitle" style="font-size:1.8rem;">Sous-titre</div>
+    <div class="subtitle spicy" id="uv-title" style="font-size:1.8rem;">
+      Sous-titre
+    </div>
   </div>
 </header>
 
 <script>
-  // Récupère le sous-titre depuis data-subtitle du <body>
-  const subtitle = document.body.dataset.subtitle;
-  if(subtitle){
-    document.getElementById("uv-subtitle").textContent = subtitle;
-  }
+  // Remplacement automatique du sous-titre via data-subtitle dans <body>
+  document.addEventListener("DOMContentLoaded", function() {
+    const subtitle = document.body.dataset.subtitle;
+    if(subtitle) {
+      const target = document.getElementById("uv-title");
+      if(target) target.textContent = subtitle;
+    }
+  });
 </script>
-
-
-</body>
-</html>
