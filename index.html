@@ -2,104 +2,79 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>PWA Taiso – Accueil</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PWA Taiso – Menu UV</title>
 
-<!-- Manifest -->
-<link rel="manifest" href="manifest.json">
-
-<!-- Bannière & style global -->
+<!-- Bannière -->
 <link rel="stylesheet" href="banner.css">
 
+<!-- Styles UV Kawaii -->
 <style>
-  body {
-    margin: 0;
-    font-family: 'Fredoka', Arial, sans-serif;
-    background-color: #000;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+/* Fonts Google */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');
 
-  /* Conteneur principal */
-  main {
-    width: 100%;
-    max-width: 400px;
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  h1 {
-    font-family: 'Fredoka', sans-serif;
-    color: #ff1493;
-    margin-bottom: 30px;
-    text-align: center;
-  }
-
-  /* Boutons UV style kawai */
-  .uv-button {
-    font-family: 'Fredoka', sans-serif;
-    background: #ff5fc1;
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 18px 25px;
-    margin: 10px 0;
-    width: 100%;
-    text-align: center;
-    font-size: 1.2rem;
-    box-shadow: 0 0 15px rgba(255,95,193,0.6);
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .uv-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255,20,147,0.8);
-  }
-
-  .uv-button:active {
-    transform: translateY(3px);
-    box-shadow: 0 0 10px rgba(255,20,147,0.6);
-  }
-
-  @media (max-width:500px) {
-    .uv-button { font-size: 1rem; padding: 15px 20px; }
-  }
-</style>
-
-<script>
-if ('serviceWorker' in navigator){
-  navigator.serviceWorker.register('sw.js')
-    .then(() => console.log("SW enregistré"))
-    .catch(err => console.error("SW erreur", err));
+/* Grid principal : colonne unique */
+.main-wrapper {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
-</script>
 
+/* Boutons UV kawaii */
+.uv-button {
+  display: block;
+  width: 100%;
+  padding: 15px 0;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.3rem;
+  text-align: center;
+  color: white;
+  background: #ff1493;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 0 10px rgba(255,20,147,0.6), 0 4px 0px #d6459b;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.uv-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255,20,147,0.8), 0 4px 0px #d6459b;
+}
+
+.uv-button:active {
+  transform: translateY(3px);
+  box-shadow: 0 0 10px rgba(255,20,147,0.6), 0 0 0px #d6459b;
+}
+</style>
 </head>
 <body>
 
 <!-- Bannière noire -->
-<div id="bannerContainer"></div>
-<script>
-fetch("banner.html")
-  .then(r => r.text())
-  .then(html => {
-    document.getElementById("bannerContainer").innerHTML = html;
-  });
-</script>
+<div id="bannerContainer">
+  <header class="appbar">
+    <a href="index.html" class="logo-link">
+      <img src="assets/logo-pwa.png" class="logo-big" alt="logo">
+    </a>
+    <div class="header-text">
+      <div class="title shanghai" style="font-size:1.3rem;">Taï-jitsu</div>
+      <div class="subtitle spicy" style="font-size:1.8rem;">Programme officiel</div>
+    </div>
+  </header>
+</div>
 
-<main>
-  <h1>Choisis une UV</h1>
-
-  <button class="uv-button" onclick="location.href='uv1.html'">UV1 : Kihon</button>
-  <button class="uv-button" onclick="location.href='uv2.html'">UV2 : Ippon Kumite</button>
-  <button class="uv-button" onclick="location.href='uv3.html'">UV3 : Kata</button>
-  <button class="uv-button" onclick="location.href='uv4.html'">UV4 : Épreuve technique</button>
-  <button class="uv-button" onclick="location.href='uv5.html'">UV5 Assauts imposés </button>
-  <button class="uv-button" onclick="location.href='uv5.html'">UV6 Randori</button>
+<!-- Contenu principal : boutons UV -->
+<main class="main-wrapper">
+  <button class="uv-button" onclick="window.location.href='uv1.html'">UV1 – Kihon</button>
+  <button class="uv-button" onclick="window.location.href='uv2.html'">UV2 – Ippon Kumite</button>
+  <button class="uv-button" onclick="window.location.href='uv3.html'">UV3 – Kata</button>
+  <button class="uv-button" onclick="window.location.href='uv4.html'">UV4 – Épreuve Technique</button>
+  <button class="uv-button" onclick="window.location.href='uv5.html'">UV5 – Assauts imposés</button>
+   <button class="uv-button" onclick="window.location.href='uv5.html'">UV6 – Randori</button>
 </main>
 
 </body>
