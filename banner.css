@@ -1,0 +1,80 @@
+/* ========================= */
+/* POLICES PERSONNALISÉES    */
+/* ========================= */
+
+@font-face {
+  font-family: "Spicy";
+  src: url("Spicy Sale.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "SuperMeatball";
+  src: url("SuperMeatball.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "shanghai";
+  src: url("shanghai.ttf") format("truetype");
+}
+
+/* ========================= */
+/* CLASSES DE POLICE         */
+/* ========================= */
+
+.spicy{
+  font-family: "Spicy", cursive;
+}
+
+.meatball{
+  font-family: "SuperMeatball", sans-serif;
+}
+
+.shanghai{
+  font-family: "shanghai", cursive;
+}
+
+.fredoka{
+  font-family: "Fredoka", Arial, sans-serif;
+}
+
+/* ========================= */
+/* BANNIÈRE / HEADER         */
+/* ========================= */
+
+.appbar {
+  background: black;
+  color: white;
+  padding: 25px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+.logo-big {
+  width: 110px;
+  margin-bottom: 15px;
+}
+
+.header-text .title {
+  font-size: 4.5rem;
+  letter-spacing: 2px;
+  color: #ffd6ec;
+}
+
+.header-text .subtitle {
+  font-size: 2.5rem;
+  margin-top: 18px;
+  letter-spacing: 2px;
+  color: #ffd0ea;
+}
+
+/* mobile */
+@media (max-width: 600px) {
+  .header-text .title {
+    font-size: 1.4rem;
+    line-height: 1.2;
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "kihon": [
+    { "romaji": "Gedan Barai", "jp": "ゲダンバライ" },
+    { "romaji": "Jodan Age Uke", "jp": "ジョウダンアゲウケ" },
+    { "romaji": "Soto Ude Uke", "jp": "ソトウデウケ" },
+    { "romaji": "Uchi Ude Uke", "jp": "ウチウデウケ" },
+    { "romaji": "Shuto Uke", "jp": "シュトウウケ" },
+    { "romaji": "Osae Uke", "jp": "オサエウケ" },
+    { "romaji": "Teisho Uke", "jp": "テイショウウケ" },
+    { "romaji": "Juji Uke", "jp": "ジュウジウケ" },
+    { "romaji": "Kakiwake Uke", "jp": "カキワケウケ" },
+    { "romaji": "Morote Uke", "jp": "モロテウケ" },
+    { "romaji": "Heiko Uke", "jp": "ヘイコウウケ" },
+    { "romaji": "Empi Uke", "jp": "エンピウケ" },
+    { "romaji": "Sukui Uke", "jp": "スクイウケ" },
+    { "romaji": "Nagashi Uke", "jp": "ナガシウケ" },
+    { "romaji": "Otoshi Uke", "jp": "オトシウケ" },
+    { "romaji": "Koken Uke", "jp": "コケンウケ" },
+
+    { "romaji": "Uraken Uchi", "jp": "ウラケンウチ" },
+    { "romaji": "Shuto Uchi", "jp": "シュトウウチ" },
+    { "romaji": "Tetsui Uchi", "jp": "テッツイウチ" },
+    { "romaji": "Empi Uchi", "jp": "エンピウチ" },
+    { "romaji": "Haito Uchi", "jp": "ハイトウウチ" },
+    { "romaji": "Teisho Uchi", "jp": "テイショウウチ" },
+    { "romaji": "Koken Uchi", "jp": "コケンウチ" },
+    { "romaji": "Hiraken Uchi", "jp": "ヒラケンウチ" },
+
+    { "romaji": "Gyaku Tsuki", "jp": "ギャクヅキ" },
+    { "romaji": "Oi Tsuki", "jp": "オイヅキ" },
+    { "romaji": "Maete Tsuki", "jp": "マエテヅキ" },
+    { "romaji": "Kizami Tsuki", "jp": "キザミヅキ" },
+    { "romaji": "Tate Tsuki", "jp": "タテヅキ" },
+    { "romaji": "Kagi Tsuki", "jp": "カギヅキ" },
+    { "romaji": "Mawashi Tsuki", "jp": "マワシヅキ" },
+    { "romaji": "Yama Tsuki", "jp": "ヤマヅキ" },
+    { "romaji": "Morote Tsuki", "jp": "モロテヅキ" },
+    { "romaji": "Nukite", "jp": "ヌキテ" },
+    { "romaji": "Otoshi Tsuki", "jp": "オトシヅキ" },
+    { "romaji": "Age Tsuki", "jp": "アゲヅキ" },
+
+    { "romaji": "Mae Geri", "jp": "マエゲリ" },
+    { "romaji": "Mawashi Geri", "jp": "マワシゲリ" },
+    { "romaji": "Yoko Geri Kekomi", "jp": "ヨコゲリ ケコミ" },
+    { "romaji": "Yoko Geri Keage", "jp": "ヨコゲリ ケアゲ" },
+    { "romaji": "Hiza Geri", "jp": "ヒザゲリ" }
+  ]
+}
