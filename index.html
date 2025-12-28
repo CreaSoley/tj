@@ -5,128 +5,145 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PWA Taiso – Accueil</title>
 
-<!-- Google Fredoka pour cohérence -->
+<!-- CSS principal -->
+<link rel="stylesheet" href="style.css">
+
+<!-- Google Fredoka pour les boutons -->
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
 
 <style>
-  /* ========================= */
-  /* RESET & BASE              */
-  /* ========================= */
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: 'Fredoka', sans-serif; background:black; color:white; overflow-x:hidden; }
+/* ========================= */
+/* Bannière fixe en haut      */
+/* ========================= */
+.appbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #000;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 10px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
 
-  a { text-decoration:none; color:inherit; }
+.logo-link img.logo-big {
+  height: 80px;
+  margin-right: 15px;
+}
 
-  /* ========================= */
-  /* BANNIÈRE FIXE             */
-  /* ========================= */
-  header.appbar {
-    position: fixed;
-    top:0; left:0;
-    width:100%;
-    background:black;
-    color:white;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 10px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-    z-index:1000;
-  }
+.header-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
-  .logo-big { width:100px; margin-bottom:10px; }
+.header-text .title {
+  font-family: 'Shanghai', cursive;
+  font-size: 1.3rem;
+}
 
-  .header-text .title {
-    font-family: 'Shanghai', cursive;
-    font-size: 1.3rem;
-  }
+.header-text .subtitle {
+  font-family: 'Spicy', cursive;
+  font-size: 1.8rem;
+  color: #ff1493;
+}
 
+/* ========================= */
+/* Contenu principal          */
+/* ========================= */
+body {
+  margin: 0;
+  padding-top: 120px; /* Pour laisser la place à la bannière fixe */
+  font-family: 'Fredoka', Arial, sans-serif;
+  background: linear-gradient(180deg,#fff6fb 0%, #ffeef6 100%);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #ff1493;
+}
+
+/* ========================= */
+/* Boutons UV empilés        */
+/* ========================= */
+.uv-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.uv-buttons a {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 15px 20px;
+  font-size: 1.3rem;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  color: white;
+  background: #ff5fc1;
+  border-radius: 30px;
+  box-shadow: 0 0 20px rgba(255,95,193,0.6);
+  transition: all 0.2s ease-in-out;
+}
+
+.uv-buttons a:hover {
+  background: #ff1493;
+  box-shadow: 0 0 25px rgba(255,20,147,0.7);
+  transform: translateY(-2px);
+}
+
+.uv-buttons a:active {
+  transform: translateY(2px);
+  box-shadow: 0 0 15px rgba(255,20,147,0.5);
+}
+
+/* Responsive */
+@media(max-width:500px){
   .header-text .subtitle {
-    font-family: 'Spicy', cursive;
-    font-size: 1.8rem;
-    color:#ff1493;
+    font-size: 1.5rem;
   }
-
-  /* ========================= */
-  /* CONTENU PRINCIPAL         */
-  /* ========================= */
-  main {
-    margin-top: 180px; /* laisse de la place pour la bannière */
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:25px;
-    padding: 0 15px 50px;
-    text-align:center;
+  .uv-buttons a {
+    font-size: 1.1rem;
+    padding: 12px 16px;
   }
-
-  main p {
-    max-width:400px;
-    line-height:1.5;
-    color:#ffb6d4;
-    font-size:1.2rem;
-  }
-
-  /* ========================= */
-  /* BOUTONS KAWAII            */
-  /* ========================= */
-  .btn-kawaii {
-    background:#ff5fc1;
-    color:white;
-    font-family:'Fredoka', sans-serif;
-    font-weight:600;
-    padding:15px 25px;
-    border-radius:50px;
-    cursor:pointer;
-    box-shadow: 0 0 15px rgba(255,95,193,0.6);
-    transition: transform 0.2s, box-shadow 0.2s;
-    width:250px;
-    text-align:center;
-  }
-
-  .btn-kawaii:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(255,20,147,0.8);
-  }
-
-  .btn-kawaii:active {
-    transform: translateY(3px);
-    box-shadow:none;
-  }
-
-  /* ========================= */
-  /* MOBILE ADAPTATION         */
-  /* ========================= */
-  @media (max-width:500px){
-    .btn-kawaii { width:200px; padding:12px 20px; font-size:1rem; }
-    main p { font-size:1rem; }
-    .logo-big { width:80px; }
-  }
+}
 </style>
 
 </head>
 <body>
 
+<!-- Bannière fixe -->
 <header class="appbar">
-  <a href="index.html">
+  <a href="index.html" class="logo-link">
     <img src="assets/logo-pwa.png" class="logo-big" alt="Logo PWA">
   </a>
   <div class="header-text">
-    <div class="title">TAISO</div>
-    <div class="subtitle">Choisis ton UV</div>
+    <div class="title shanghai">TAISO</div>
+    <div class="subtitle spicy">Choisis une UV</div>
   </div>
 </header>
 
-<main>
-  <p>La ceinture marque un moment.<br>
-     L’apprentissage, lui, ne s’arrête jamais.<br>
-     Entraîne-toi avec justesse.<br>
-     Avance avec humilité.</p>
+<!-- Contenu principal -->
+<h1>Bienvenue sur la PWA Taiso</h1>
 
-  <a href="index.html" class="btn-kawaii">Commencer l'entraînement</a>
-</main>
+<div class="uv-buttons">
+  <a href="uv1.html">UV1 : Kihon</a>
+  <a href="uv2.html">UV2 : Ippon kumite</a>
+  <a href="uv3.html">UV3 : Kata</a>
+  <a href="uv4.html">UV4 : Épreuve technique</a>
+  <a href="uv5.html">UV5 : Assauts imposés</a>
+  <a href="uv6.html">UV6 : Randori</a>
+</div>
 
 </body>
 </html>
