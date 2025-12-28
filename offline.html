@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hors ligne - Tai-Jitsu</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    @font-face { font-family: "Spicy"; src: url("Spicy Sale.ttf"); }
+
+    body{
+      margin:0;
+      font-family:'Fredoka', Arial, sans-serif;
+      background:black;
+      color:white;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      min-height:100vh;
+      padding:20px;
+    }
+
+    .logo-offline{
+      width:200px;
+      margin-bottom:25px;
+    }
+
+    h1{
+      font-family:"Spicy";
+      font-size:2.5rem;
+      color:#ff5fc1;
+      margin-bottom:15px;
+    }
+
+    p{
+      font-size:1.2rem;
+      line-height:1.6;
+      color:#ffd6ec;
+      max-width:400px;
+      margin-bottom:20px;
+    }
+
+    .btn-home{
+      padding:10px 20px;
+      background:#ff1493;
+      color:white;
+      border:none;
+      border-radius:50px;
+      font-family:"Spicy";
+      cursor:pointer;
+      box-shadow:0 4px 0 #d6459b;
+      transition: transform 0.2s;
+    }
+
+    .btn-home:hover{ transform:scale(1.05); background:#ff5fc1; }
+    .btn-home:active{ transform:translateY(3px); box-shadow:none; }
+  </style>
+</head>
+
+<body>
+  <img src="offline.png" alt="Offline Tai-Jitsu" class="logo-offline">
+  
+  <h1>Vous êtes hors ligne</h1>
+  
+  <p>Impossible de charger les contenus pour le moment.<br>
+     Reviens dès que tu as une connexion internet.<br>
+     L’entraînement continue dès que tu es de retour !</p>
+
+  <button class="btn-home" onclick="location.href='home.html'">Retour à l'accueil</button>
+</body>
+</html>
