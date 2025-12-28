@@ -232,12 +232,19 @@ document.addEventListener("DOMContentLoaded", async () => {
       const response1 = await fetch("kihon_maj2025.json");
       enchainementsData = await response1.json();
 
-      if (typeof techniques !== 'undefined' && techniques.length > 0) {
-        techniquesDescriptions = techniques;
-      } else {
-        const response2 = await fetch("tjkihon.json");
-        techniquesDescriptions = await response2.json();
-      }
+      try {
+  if (Array.isArray(window.techniques) && window.techniques.length > 0) {
+    techniquesDescriptions = window.techniques;
+  } else {
+    const response2 = await fetch("tjkihon.json");
+    techniquesDescriptions = await response2.json();
+  }
+        
+} catch {
+  const response2 = await fetch("tjkihon.json");
+  techniquesDescriptions = await response2.json();
+}
+
 
       initEnchainementUI();
       populateSpecialites();
