@@ -1,72 +1,103 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Tai-Jitsu – Accueil</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tai-Jitsu – Accueil</title>
 
-  <!-- Manifest PWA -->
-  <link rel="manifest" href="manifest.json">
+<!-- Manifest PWA -->
+<link rel="manifest" href="manifest.json">
 
-  <!-- Icone de favicon -->
-  <link rel="icon" href="logopwa.png" type="image/png">
+<!-- Favicon -->
+<link rel="icon" href="logopwa.png" type="image/png">
 
-  <!-- Fonts et styles -->
-  <link rel="stylesheet" href="banner.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Fredoka', Arial, sans-serif;
-      background-color: #000;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      text-align: center;
-    }
-    .logo-pwa {
-      width: 200px;
-      height: auto;
-      margin-bottom: 30px;
-    }
-    .home-text {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      margin-bottom: 40px;
-      max-width: 500px;
-    }
-    .btn-home, .btn-install {
-      font-family: 'Spicy', cursive;
-      background: #ff5fc1;
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 1.2rem;
-      box-shadow: 0 5px 0 #d6459b;
-      transition: transform 0.2s;
-      margin: 10px 0;
-    }
-    .btn-home:hover, .btn-install:hover {
-      transform: scale(1.05);
-      background: #ff1493;
-    }
-    .btn-home:active, .btn-install:active {
-      transform: translateY(3px);
-      box-shadow: none;
-    }
-    @media (max-width:600px) {
-      .home-text { font-size: 1rem; }
-      .logo-pwa { width: 150px; margin-bottom: 20px; }
-      .btn-home, .btn-install { font-size: 1rem; padding: 12px 25px; }
-    }
-  </style>
+<!-- Banner CSS -->
+<link rel="stylesheet" href="banner.css">
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Fredoka', Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+  }
+
+  .logo-pwa {
+    width: 200px;
+    margin-bottom: 30px;
+  }
+
+  .home-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 50px;
+    max-width: 500px;
+  }
+
+  /* Boutons kawaii avec aura animée */
+  .btn-home, .btn-install {
+    font-family: 'Spicy', cursive;
+    background: #ff5fc1;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin: 12px 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 5px 0 #d6459b;
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  .btn-home::before,
+  .btn-install::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,95,193,0.5) 0%, rgba(255,20,147,0) 70%);
+    transform: scale(0);
+    transition: transform 0.5s ease-out;
+    border-radius: 50%;
+    z-index: -1;
+  }
+
+  .btn-home:hover::before,
+  .btn-install:hover::before {
+    transform: scale(1);
+  }
+
+  .btn-home:hover, .btn-install:hover {
+    background: #ff1493;
+    transform: scale(1.05);
+  }
+
+  .btn-home:active, .btn-install:active {
+    transform: translateY(3px);
+    box-shadow: none;
+  }
+
+  @media (max-width:600px) {
+    .logo-pwa { width: 150px; margin-bottom: 20px; }
+    .home-text { font-size: 1rem; }
+    .btn-home, .btn-install { font-size: 1rem; padding: 12px 25px; }
+  }
+</style>
 </head>
 <body>
   <img src="load.png" alt="Logo PWA" class="logo-pwa">
+
   <div class="home-text">
     La ceinture marque un moment.<br>
     L’apprentissage, lui, ne s’arrête jamais.<br>
@@ -74,46 +105,39 @@
     Avance avec humilité.
   </div>
 
-  <!-- Boutons -->
-  <button class="btn-home" onclick="location.href='index.html'">
-    Commencer l'entrainement
-  </button>
-  <button class="btn-install" id="installBtn" style="display:none;">
-    Installer l'application
-  </button>
+  <!-- Boutons empilés -->
+  <button class="btn-home" onclick="location.href='index.html'">Commencer l'entraînement</button>
+  <button class="btn-install" id="installBtn" style="display:none;">Installer l'application</button>
 
-  <script>
-    // Enregistrement du service worker
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('sw.js')
-          .then(reg => console.log('Service Worker enregistré', reg))
-          .catch(err => console.error('Erreur SW:', err));
-      });
-    }
-
-    // Gestion du bouton installer PWA
-    let deferredPrompt;
-    const installBtn = document.getElementById('installBtn');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installBtn.style.display = 'inline-block';
+<script>
+  // Enregistrement service worker
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('Service Worker enregistré', reg))
+        .catch(err => console.error('Erreur SW:', err));
     });
+  }
 
-    installBtn.addEventListener('click', async () => {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      const choice = await deferredPrompt.userChoice;
-      if (choice.outcome === 'accepted') {
-        console.log('Installation acceptée');
-      } else {
-        console.log('Installation refusée');
-      }
-      deferredPrompt = null;
-      installBtn.style.display = 'none';
-    });
-  </script>
+  // Gestion du bouton installer PWA
+  let deferredPrompt;
+  const installBtn = document.getElementById('installBtn');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = 'inline-block';
+  });
+
+  installBtn.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const choice = await deferredPrompt.userChoice;
+    if (choice.outcome === 'accepted') console.log('Installation acceptée');
+    else console.log('Installation refusée');
+    deferredPrompt = null;
+    installBtn.style.display = 'none';
+  });
+</script>
 </body>
 </html>
