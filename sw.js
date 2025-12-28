@@ -1,4 +1,4 @@
-const CACHE_NAME = 'taijitsu-cache-v2';
+const CACHE_NAME = 'taijitsu-cache-v8';
 
 const urlsToCache = [
   // HTML
