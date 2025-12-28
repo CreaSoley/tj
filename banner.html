@@ -26,10 +26,20 @@
 </header>
 
 <script>
-  // optionnel : titre automatique via ?uv=...
   const p = new URLSearchParams(window.location.search);
   const uv = p.get("uv");
-  if (uv) document.getElementById("uv-title").textContent = uv;
+
+  // récupère data-title ou le titre UV
+  let pageTitle =
+    document.body.dataset.title || 
+    document.querySelector("h1")?.textContent || 
+    document.querySelector("title")?.textContent || "";
+
+  // applique au sous-titre
+  const uvTarget = document.getElementById("uv-title");
+  if (uvTarget) {
+    uvTarget.textContent = uv || pageTitle || "Titre de l’UV";
+  }
 </script>
 
 </body>
