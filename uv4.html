@@ -1,1 +1,178 @@
 
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UV4 – Technique de base</title>
+
+  <!-- Google Font Fredoka -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- bannière -->
+  <link rel="stylesheet" href="banner.css">
+
+  <style>
+    /* ---------- FONT SPICY ---------- */
+    @font-face {
+      font-family: "Spicy";
+      src: url("Spicy Sale.ttf");
+    }
+
+    :root{
+      --pink-1:#fff0f6;
+      --pink-2:#ffd6ec;
+      --accent:#ff5fc1;
+      --hot-pink:#ff1493;
+      --bg-gradient: linear-gradient(180deg,#fff6fb 0%, #ffeef6 100%);
+      --text:#222;
+      --radius:20px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      color:var(--text);
+      background:var(--bg-gradient);
+      font-family:'Fredoka', Arial, sans-serif;
+    }
+
+    main{
+      max-width:1100px;
+      margin:20px auto 40px;
+      padding:0 15px;
+    }
+
+    .card-kawaii{
+      background:white;
+      border:3px solid var(--pink-2);
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow:0 8px 15px rgba(255, 182, 193, 0.4);
+    }
+
+    .module-title{
+      font-family:"Spicy", sans-serif;
+      text-align:center;
+      color:var(--hot-pink);
+      font-size:2.2rem;
+      margin-top:0;
+      text-shadow:2px 2px 0 var(--pink-2);
+    }
+
+    .sub-section{
+      background:var(--pink-1);
+      border-radius:15px;
+      padding:15px;
+      border:1px dashed var(--accent);
+    }
+
+    h3{
+      color:var(--hot-pink);
+      margin-top:0;
+      font-size:1.3rem;
+    }
+
+    ul{
+      padding-left:0;
+      list-style:none;
+    }
+
+    li{
+      background:white;
+      margin-bottom:8px;
+      padding:10px;
+      border-radius:10px;
+      border-left:6px solid var(--accent);
+    }
+
+    details{ margin-bottom:10px; }
+    summary{
+      background:var(--pink-2);
+      padding:10px;
+      border-radius:8px;
+      cursor:pointer;
+      color:var(--hot-pink);
+      font-weight:700;
+    }
+    details .inner{
+      padding:12px;
+      background:#fff;
+      border-radius:8px;
+      margin-top:8px;
+      border:1px solid var(--pink-2);
+    }
+    details img{
+      width:100%;
+      border-radius:10px;
+      margin-top:10px;
+    }
+
+    .muted{ color:#777; font-size:0.9rem; }
+  </style>
+</head>
+
+<body data-title="UV4 – Technique de base">
+
+<!-- Bannière -->
+<div id="bannerContainer"></div>
+
+<script>
+fetch("banner.html")
+  .then(r => r.text())
+  .then(html => {
+    document.getElementById("bannerContainer").innerHTML = html;
+
+    const pageTitle =
+      document.body.dataset.title ||
+      document.title;
+
+    const target = document.querySelector(".header-text .title");
+    if(target) target.textContent = pageTitle;
+  });
+</script>
+
+<main>
+
+  <section class="card-kawaii">
+    <h2 class="module-title">🦊 UV4 – Technique de base 🦊</h2>
+
+    <div class="sub-section">
+
+      <details>
+        <summary>Application par atemi</summary>
+        <div class="inner">
+          <p>Saisie poignet croisé — Shuto niveau tête — explication courte.</p>
+          <img src="atemi1.gif" alt="Atemi 1">
+        </div>
+      </details>
+
+      <details>
+        <summary>Application par clé</summary>
+        <div class="inner">
+          <p>Saisie arrière poignet — clé en Z — pas en avant.</p>
+          <img src="cle1.gif" alt="Clé 1">
+        </div>
+      </details>
+
+      <details>
+        <summary>Application par projection</summary>
+        <div class="inner">
+          <p>Saisie cheveux — projection courte et rapide.</p>
+          <img src="projection1.gif" alt="Projection 1">
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
