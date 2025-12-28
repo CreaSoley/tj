@@ -1,4 +1,4 @@
-const CACHE_NAME = "sensei-v3";
+const CACHE_NAME = "sensei-v4";
 
 const FILES_TO_CACHE = [
   "/",
@@ -50,7 +50,7 @@ const FILES_TO_CACHE = [
   "/icon-192.png",
   "/icon-512.png",
   "/logo-192.png",
-  "/logopwa.png",
+  "/logopwa2.png",
 
   // Fonts
   "/Spicy Sale.ttf",
