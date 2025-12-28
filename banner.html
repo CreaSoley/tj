@@ -3,32 +3,42 @@
 <head>
   <meta charset="UTF-8">
 
-  <!-- 🔗 ton fichier CSS existant -->
+  <!-- ton CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Google Fredoka pour cohérence -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<header class="banner">
+<header class="appbar">
 
-  <!-- 📌 logo agrandi -->
-  <img src="assets/logo-pwa.png" class="banner-logo" alt="logo">
+  <!-- logo taille corrigée -->
+  <img src="assets/logo-pwa.png" class="logo-big" alt="logo">
 
-  <div class="banner-titles">
+  <div class="header-text">
 
-    <!-- 🔽 plus petit -->
-    <div class="banner-taiso">
+    <!-- TAISO → plus petit -->
+    <div class="title spicy" style="font-size: 1.8rem;">
       TAISO
     </div>
 
-    <!-- 🔼 plus grand -->
-    <div class="banner-uv" id="uv-title">
+    <!-- UV → plus grand -->
+    <div class="subtitle spicy" id="uv-title" style="font-size: 2.8rem;">
       Titre de l’UV
     </div>
 
   </div>
 
 </header>
+
+<script>
+  // optionnel : titre automatique via ?uv=...
+  const p = new URLSearchParams(window.location.search);
+  const uv = p.get("uv");
+  if (uv) document.getElementById("uv-title").textContent = uv;
+</script>
 
 </body>
 </html>
