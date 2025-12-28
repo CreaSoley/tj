@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-subtitle="🌸 Kihon">
+<html lang="fr" data-subtitle="🌸 Kihon 🌸">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="banner.css">
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
-<head>
-<body data-subtitle="🌸 Kihon Simples 🌸">
+</head>
+<body>
 
 <div id="bannerContainer"></div>
 <script>
@@ -17,12 +17,8 @@ fetch("banner.html")
   .then(r => r.text())
   .then(html => {
     document.getElementById("bannerContainer").innerHTML = html;
-    // Récupère le sous-titre dans data-subtitle
     const subtitle = document.body.dataset.subtitle;
-    if(subtitle){
-      const target = document.getElementById("uv-title");
-      if(target) target.textContent = subtitle;
-    }
+    if(subtitle) document.getElementById("uv-title").textContent = subtitle;
   });
 </script>
 
