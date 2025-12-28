@@ -1,0 +1,22 @@
+{
+  "name": "Tai-Jitsu – Entraînement",
+  "short_name": "Tai-Jitsu",
+  "description": "La ceinture marque un moment. L’apprentissage, lui, ne s’arrête jamais. Entraîne-toi avec justesse. Avance avec humilité.",
+  "start_url": "home.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ff5fc1",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
