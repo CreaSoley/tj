@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UV3 – Kata</title>
+
+  <!-- Google Font Fredoka -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- bannière -->
+  <link rel="stylesheet" href="banner.css">
+
+  <style>
+    /* ---------- FONT SPICY ---------- */
+    @font-face {
+      font-family: "Spicy";
+      src: url("Spicy Sale.ttf");
+    }
+
+    :root{
+      --pink-1:#fff0f6;
+      --pink-2:#ffd6ec;
+      --accent:#ff5fc1;
+      --hot-pink:#ff1493;
+      --bg-gradient: linear-gradient(180deg,#fff6fb 0%, #ffeef6 100%);
+      --text:#222;
+      --radius:20px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      color:var(--text);
+      background:var(--bg-gradient);
+      font-family:'Fredoka', Arial, sans-serif;
+    }
+
+    main{
+      max-width:1100px;
+      margin:20px auto 40px;
+      padding:0 15px;
+    }
+
+    .card-kawaii{
+      background:white;
+      border:3px solid var(--pink-2);
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow:0 8px 15px rgba(255, 182, 193, 0.4);
+    }
+
+    .module-title{
+      font-family:"Spicy", sans-serif;
+      text-align:center;
+      color:var(--hot-pink);
+      font-size:2.2rem;
+      margin-top:0;
+      text-shadow:2px 2px 0 var(--pink-2);
+    }
+
+    .sub-section{
+      background:var(--pink-1);
+      border-radius:15px;
+      padding:15px;
+      border:1px dashed var(--accent);
+    }
+
+    h3{
+      color:var(--hot-pink);
+      margin-top:0;
+      font-size:1.3rem;
+    }
+
+    ul{
+      padding-left:0;
+      list-style:none;
+    }
+
+    li{
+      background:white;
+      margin-bottom:8px;
+      padding:10px;
+      border-radius:10px;
+      border-left:6px solid var(--accent);
+    }
+
+    .muted{
+      color:#777;
+      font-size:0.9rem;
+    }
+  </style>
+</head>
+
+<body data-title="UV3 – Kata">
+
+<!-- Bannière -->
+<div id="bannerContainer"></div>
+
+<script>
+fetch("banner.html")
+  .then(r => r.text())
+  .then(html => {
+    document.getElementById("bannerContainer").innerHTML = html;
+
+    const pageTitle =
+      document.body.dataset.title ||
+      document.title;
+
+    const target = document.querySelector(".header-text .title");
+    if(target) target.textContent = pageTitle;
+  });
+</script>
+
+<main>
+
+  <section class="card-kawaii">
+    <h2 class="module-title">🐼 UV3 — Kata 🐼</h2>
+
+    <div class="sub-section">
+
+      <h3>Kata</h3>
+
+      <!-- Remplace le nom du GIF par le tien -->
+      <img src="kata2.gif"
+           style="width:100%;border-radius:15px;display:block;margin-bottom:12px"
+           alt="GIF du kata">
+
+      <p class="muted">GIF kata en boucle – fonctionne hors ligne 👍</p>
+
+      <hr style="border:1px dashed var(--pink-2);margin:15px 0">
+
+      <h3>Bunkai</h3>
+
+      <ul>
+        <li><strong>Bunkai 1 :</strong> description courte ici.</li>
+        <li><strong>Bunkai 2 :</strong> description courte ici.</li>
+        <li><strong>Bunkai 3 :</strong> description courte ici.</li>
+      </ul>
+
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>
