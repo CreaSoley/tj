@@ -37,46 +37,50 @@
   font-family: "Fredoka", Arial, sans-serif;
 }
 
-/* ========================= */
-/* BANNIÈRE / HEADER         */
-/* ========================= */
-
+/* Bannière noire globale */
 .appbar {
-  background: black;
-  color: white;
-  padding: 25px 10px;
+  background-color: #000;
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  width: 100%;
+  padding: 20px 10px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  text-align: center;
+}
+
+/* Logo cliquable */
+.logo-link {
+  display: inline-block;
+  margin-bottom: 15px;
 }
 
 .logo-big {
   width: 110px;
-  margin-bottom: 15px;
+  height: auto;
 }
 
+/* Titres */
 .header-text .title {
-  font-size: 4.5rem;
-  letter-spacing: 2px;
+  font-family: "shanghai", cursive;
   color: #ffd6ec;
+  font-size: 1.3rem; /* TAISO plus petit */
 }
 
 .header-text .subtitle {
-  font-size: 2.5rem;
-  margin-top: 18px;
-  letter-spacing: 2px;
-  color: #ffd0ea;
+  font-family: "Spicy", cursive;
+  color: #ff1493;
+  font-size: 1.8rem; /* UV plus grand */
+  margin-top: 5px;
 }
 
-/* mobile */
+/* Mobile responsive */
 @media (max-width: 600px) {
-  .header-text .title {
-    font-size: 1.4rem;
-    line-height: 1.2;
-  }
+  .logo-big { width: 80px; }
+  .header-text .title { font-size: 1rem; }
+  .header-text .subtitle { font-size: 1.3rem; }
 }
 /* ---------- Utilitaires ---------- */
 .muted { 
