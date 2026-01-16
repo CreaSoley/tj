@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr" data-subtitle="🌸 Kihon 🌸">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UV1 – Kihon</title>
+
+<link rel="stylesheet" href="banner.css">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+<style>
+/* Force 1 seule colonne — mobile + tablette + desktop */
+.grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+  width: 100%;
+}
+</style>
+
+
+</head>
+  
+<body data-subtitle="🌸 Kihon Simples 🌸">
+
+
+<div id="bannerContainer"></div>
+<script>
+fetch("banner.html")
+  .then(r => r.text())
+  .then(html => {
+    document.getElementById("bannerContainer").innerHTML = html;
+    const subtitle = document.body.dataset.subtitle;
+    if(subtitle) document.getElementById("uv-title").textContent = subtitle;
+  });
+</script>
+
+
+<main class="main-wrapper">
+
+  <div class="grid">
+
+    <section class="card-kawaii">
+
+      <h2 class="module-title">🥋 Kihon Trainer 🌸</h2>
+
+      <!-- ===================== -->
+      <!-- PARAMÈTRES -->
+      <!-- ===================== -->
+      <div class="sub-section">
+        <h3>⚙️ Paramètres</h3>
+
+        <div class="controls-row">
+          <label>Mode :</label>
+          <select id="mode" class="input-small">
+            <option value="1">🎲 Aléatoire global</option>
+            <option value="2">🎯 Par catégorie</option>
+            <option value="3">📂 Catégorie choisie</option>
+            <option value="4">🎼 Gammes</option>
+            <option value="exam">📝 Examen blanc</option>
+          </select>
+        </div>
+
+        <div class="controls-row">
+          <label>Catégorie :</label>
+          <select id="categorie" class="input-small">
+            <option value="3pas">3 pas</option>
+            <option value="surplace">Sur place</option>
+            <option value="multi">Multidirectionnel</option>
+            <option value="cibles">Cibles</option>
+          </select>
+        </div>
+
+        <div class="controls-row">
+          <label>Qté :</label>
+          <input type="number" id="count" class="input-small" min="1" value="3">
+        </div>
+
+        <div class="controls-row">
+          <label>Intervalle :</label>
+          <input type="range" id="interval" min="30" max="240" value="60">
+          <span id="intervalVal" class="muted">1m 00s</span>
+        </div>
+
+        <div class="controls-row">
+          <label>Rythme :</label>
+          <select id="speedMode" class="input-small">
+            <option value="slow">Lent</option>
+            <option value="fast">Rapide</option>
+          </select>
+        </div>
+
+        <div id="shortText" class="muted"></div>
+      </div>
+
+      <!-- ===================== -->
+      <!-- BOUTONS -->
+      <!-- ===================== -->
+      <div class="sub-section">
+        <h3>🎮 Commandes</h3>
+
+        <div class="button-row">
+          <button id="start" class="btn-kawaii">▶️ Lancer</button>
+          <button id="pause" class="btn-kawaii">⏸ Pause</button>
+          <button id="stop" class="btn-kawaii btn-stop">⏹ Stop</button>
+        </div>
+
+        <div class="button-row">
+          <button id="criteria" class="btn-kawaii">📋 Critères</button>
+          <button id="presentationExam" class="btn-kawaii hidden">📢 Présentation</button>
+          <button id="startExam" class="btn-kawaii hidden">📝 Examen</button>
+          <button id="reset" class="btn-kawaii">🔄 Reset</button>
+        </div>
+      </div>
+
+      <!-- ===================== -->
+      <!-- AFFICHAGE -->
+      <!-- ===================== -->
+      <div class="sub-section">
+        <h3>👀 Exercice en cours</h3>
+
+        <div id="visual" class="result-display">
+          <div id="text">Prêt 🌸</div>
+          <div id="countdown"></div>
+        </div>
+      </div>
+
+      <!-- ===================== -->
+      <!-- RÉCAP -->
+      <!-- ===================== -->
+      <div id="recap" class="sub-section hidden"></div>
+
+    </section>
+
+  </div>
+</main>
+
+
+<!-- ============================= -->
+<!-- Scripts utilisés par UV1 -->
+<!-- ============================= -->
+
+<!-- ⚠️ seulement scripts utiles -->
+<script src="encart12.js"></script>
+
+</body>
+</html>
