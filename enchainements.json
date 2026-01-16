@@ -1,0 +1,133 @@
+{
+  "Sur trois pas": [
+    {
+      "display": "Avancer en Soto Uke en Zenkutsu Dachi, Gyaku Tsuki Chudan, Mae Geri",
+      "spoken": "Avancer en soto ouké en zen koutssou datchi, guiakou tsouki tchoudane, maï guéri"
+    },
+    {
+      "display": "Avancer en Shuto Uke Kokutsu Dachi, Nukite Chudan en Zenkutsu Dachi",
+      "spoken": "Avancer en chouto ouké kokoutssou datchi, noukitè tchoudane en zen koutssou datchi"
+    },
+    {
+      "display": "Avancer en Shuto Uke Kokutsu Dachi, Gyaku Tsuki Zenkutsu Dachi",
+      "spoken": "Avancer en chouto ouké kokoutssou datchi, guiakou tsouki zen koutssou datchi"
+    },
+    {
+      "display": "Reculer Gedan Baraï en Zenkutsu Dachi, Oï Tsuki, Mae Geri",
+      "spoken": "Reculer guédane baraï en zen koutssou datchi, oï tsouki, maï guéri"
+    },
+    {
+      "display": "Avancer Mae Geri, poser AgeUke suivi de Gyaku Tsuki",
+      "spoken": "Avancer maï guéri, poser agué ouké suivi de guiakou tsouki"
+    },
+    {
+      "display": "Avancer Kiba Dachi Uraken Uchi, Zenkutsu Dachi Gyaku Tsuki",
+      "spoken": "Avancer kiba datchi ourakène outchi, zen koutssou datchi guiakou tsouki"
+    },
+    {
+      "display": "Avancer sur 3 pas en Zenkutsu Dachi, Jodan Age Uke, Haïto Uchi, Tate Empi Uchi",
+      "spoken": "Avancer sur trois pas en zen koutssou datchi, jodane agué ouké, haïto outchi, taté empi outchi"
+    },
+    {
+      "display": "Avancer Uchi Uke Zenkutsu Dachi, Yoko Geri repose Kiba Dachi, Yoko Empi Uchi",
+      "spoken": "Avancer outchi ouké zen koutssou datchi, yoko guéri repose kiba datchi, yoko empi outchi"
+    },
+    {
+      "display": "Avancer Kiba dachi, Yoko Geri, Zenkutsu dachi, Gyaku teïsho Uchi",
+      "spoken": "Avancer kiba datchi, yoko guéri, zen koutssou datchi, guiakou téïcho outchi"
+    },
+    {
+      "display": "Avancer Zenkutsu dachi, Gedan Baraï, Gyaku tsuki, Jodan Age Uke",
+      "spoken": "Avancer zen koutssou datchi, guédane baraï, guiakou tsouki, jodane agué ouké"
+    },
+    {
+      "display": "Avancer Zenkutsu dachi, Mawashi Geri, Uraken Uchi, Gyaku tsuki",
+      "spoken": "Avancer zen koutssou datchi, maouachi guéri, ourakène outchi, guiakou tsouki"
+    },
+    {
+      "display": "Avancer Kiba dachi, Tsugi ashi, Heïko Uke, Zenkutsu dachi, Gyaku Tsuki",
+      "spoken": "Avancer kiba datchi, tsougui achi, héïko ouké, zen koutssou datchi, guiakou tsouki"
+    }
+  ],
+
+  "Sur place": [
+    {
+      "display": "Mae Geri jambe arrière, Kizami Tsuki, Gyaku Tsuki",
+      "spoken": "Maï guéri jambe arrière, kizami tsouki, guiakou tsouki"
+    },
+    {
+      "display": "Sursaut arrière Soto Uke, Gyaku Tsuki, Mae Geri",
+      "spoken": "Sursaut arrière soto ouké, guiakou tsouki, maï guéri"
+    },
+    {
+      "display": "Sursaut arrière Jodan Age Uke, Gyaku Tsuki, Mae Geri",
+      "spoken": "Sursaut arrière jodane agué ouké, guiakou tsouki, maï guéri"
+    },
+    {
+      "display": "Sursaut Mae Geri jambe avant, Gedan Baraï, Gyaku Tsuki",
+      "spoken": "Sursaut maï guéri jambe avant, guédane baraï, guiakou tsouki"
+    },
+    {
+      "display": "Sursaut Mae Geri jambe avant, Oï Tsuki, Gyaku Tsuki",
+      "spoken": "Sursaut maï guéri jambe avant, oï tsouki, guiakou tsouki"
+    }
+  ],
+
+  "Multidirectionnel": [
+    {
+      "display": "Mae Geri jambe arrière, Gyaku Tsuki Chudan",
+      "spoken": "Maï guéri jambe arrière, guiakou tsouki tchoudane"
+    },
+    {
+      "display": "Oï tsuki, Gyaku tsuki",
+      "spoken": "Oï tsouki, guiakou tsouki"
+    },
+    {
+      "display": "Avancer Mae Geri, reculer Gedan baraï, Gyaku Tsuki",
+      "spoken": "Avancer maï guéri, reculer guédane baraï, guiakou tsouki"
+    },
+    {
+      "display": "Oï Tsuki, reculer Jodan Age Uke, Gyaku tsuki",
+      "spoken": "Oï tsouki, reculer jodane agué ouké, guiakou tsouki"
+    },
+    {
+      "display": "Pas chassé Gyaku Tsuki chudan, ressort pas chassé",
+      "spoken": "Pas chassé guiakou tsouki tchoudane, ressort pas chassé"
+    },
+    {
+      "display": "Sursaut arrière soto Uke, Gyaku Tsuki, Mae Geri jambe arrière repose devant",
+      "spoken": "Sursaut arrière soto ouké, guiakou tsouki, maï guéri jambe arrière repose devant"
+    },
+    {
+      "display": "Avancer Mae Geri, poser Age Uke suivi de Gyaku Tsuki",
+      "spoken": "Avancer maï guéri, poser agué ouké suivi de guiakou tsouki"
+    }
+  ],
+
+  "Cibles": [
+    {
+      "display": "Mae Geri, de la jambe arrière posée derrière, niveau chudan",
+      "spoken": "Maï guéri, de la jambe arrière posée derrière, niveau tchoudane"
+    },
+    {
+      "display": "Mawashi Geri, de la jambe arrière posée derrière, niveau jodan ou chudan",
+      "spoken": "Maouachi guéri, de la jambe arrière posée derrière, niveau jodane ou tchoudane"
+    },
+    {
+      "display": "Mae Geri de la jambe avant avec sursaut, niveau chudan",
+      "spoken": "Maï guéri de la jambe avant avec sursaut, niveau tchoudane"
+    },
+    {
+      "display": "Mawashi Geri, de la jambe avant avec sursaut, niveau jodan ou chudan",
+      "spoken": "Maouachi guéri, de la jambe avant avec sursaut, niveau jodane ou tchoudane"
+    },
+    {
+      "display": "Gyaku Tsuki chudan, Kizami Tsuki niveau jodan, suivi de Gyaku Tsuki niveau chudan",
+      "spoken": "Guiakou tsouki tchoudane, kizami tsouki niveau jodane, suivi de guiakou tsouki niveau tchoudane"
+    },
+    {
+      "display": "Oï Tsuki niveau jodan, retour à l’arrière",
+      "spoken": "Oï tsouki niveau jodane, retour à l’arrière"
+    }
+  ]
+}
