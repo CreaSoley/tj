@@ -298,3 +298,15 @@ details iframe {
 html, body{
   overflow-x: hidden;
 }
+.card-kawaii{
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.button-row{
+  flex-wrap: wrap;
+}
+
+.btn-kawaii{
+  min-width: 0;
+}
+
