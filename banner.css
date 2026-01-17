@@ -82,6 +82,11 @@
   .header-text .title { font-size: 1rem; }
   .header-text .subtitle { font-size: 1.3rem; }
 }
+#bannerContainer{
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+}
+
 /* ---------- Utilitaires ---------- */
 .muted { 
   color:#999; 
