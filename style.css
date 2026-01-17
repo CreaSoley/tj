@@ -274,3 +274,13 @@ details iframe {
   padding: 10px;
   font-size: 0.95rem;
 }
+@media (max-width: 700px){
+  .grid{
+    justify-items: center;
+  }
+
+  .card-kawaii{
+    width: 100%;
+    max-width: 420px;
+  }
+}
