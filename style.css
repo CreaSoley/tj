@@ -261,3 +261,10 @@ details iframe {
   color: #c9184a;
   font-weight: 700;
 }
+#visual{
+  border-radius: 18px;
+  border: 3px solid var(--pink-2);
+  box-shadow: var(--card-shadow);
+  padding: 20px;
+  min-height: 120px;
+}
