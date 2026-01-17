@@ -268,3 +268,9 @@ details iframe {
   padding: 20px;
   min-height: 120px;
 }
+.input-wide{
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  font-size: 0.95rem;
+}
