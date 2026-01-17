@@ -239,3 +239,25 @@ details iframe {
   border-radius: 5px;
   border-left: 5px solid var(--accent);
 }
+/* ===== BACKGROUNDS KAWAI ===== */
+.bg-3pas{
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+}
+
+.bg-surplace{
+  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+}
+
+.bg-multi{
+  background: linear-gradient(135deg, #fddb92, #d1fdff);
+}
+
+.bg-cibles{
+  background: linear-gradient(135deg, #fad0c4, #ffd1ff);
+}
+
+/* lisibilité texte */
+#visual{
+  color: #c9184a;
+  font-weight: 700;
+}
