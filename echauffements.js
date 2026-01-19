@@ -1,11 +1,6 @@
 /* =========================================================
-   APP ÉCHAUFFEMENTS – VERSION STABLE
-   JSON séparé : echauffements.json
+   APP ÉCHAUFFEMENTS – VERSION AVANCÉE
 ========================================================= */
-
-/* ===========================
-   ÉTAT GLOBAL
-=========================== */
 
 let echauffements = [];
 let currentExercise = null;
@@ -18,6 +13,7 @@ let phaseTimeLeft = 0;
 
 let timer = null;
 let isPaused = false;
+let utterance = null;
 
 
 /* ===========================
@@ -32,166 +28,210 @@ const timerEl = document.getElementById("timer-display");
 const btnStart = document.getElementById("btn-start");
 const btnStop = document.getElementById("btn-stop");
 
+const selectEl = document.getElementById("exercise-select");
+const descEl = document.getElementById("exercise-description");
+const progressBar = document.getElementById("progress-bar");
+
+
+/* ===========================
+   DESCRIPTIONS
+=========================== */
+
+const descriptions = {
+  "E01": "Choisis cet échauffement si tu veux réveiller tout le corps rapidement et entrer progressivement dans une dynamique martiale complète.",
+  "E02": "Choisis cet échauffement si tu te sens raide ou dispersé et que tu veux retrouver coordination, continuité et fluidité.",
+  "E03": "Choisis cet échauffement si tu veux relâcher les tensions, gagner en amplitude et préparer un travail fluide sans impact.",
+  "E04": "Choisis cet échauffement si tu veux calmer le mental, améliorer ton souffle et installer une présence stable.",
+  "E05": "Choisis cet échauffement si tu manques d’énergie et que tu veux activer rapidement vitesse, réactivité et vigilance.",
+  "E06": "Choisis cet échauffement si tu veux te placer mentalement comme le jour du passage, sérieux, concentré et prêt.",
+  "E07": "Choisis cet échauffement si tu es fatigué ou limité physiquement mais que tu veux malgré tout travailler le centrage.",
+  "E08": "Choisis cet échauffement si tu as besoin d’une remise en route douce, articulaire et respiratoire, sans stress physique.",
+  "E09": "Choisis cet échauffement si tu veux activer l’intention et le zanshin sans bouger, uniquement par le mental.",
+  "E10": "Choisis cet échauffement si tu ressens des épaules hautes ou une respiration inefficace et que tu veux redescendre dans le centre.",
+  "E11": "Choisis cet échauffement si tu veux renforcer l’alignement, la stabilité et la connexion entre le sol et le hara.",
+  "E12": "Choisis cet échauffement si tu veux développer une présence calme, immobile et immédiatement perceptible.",
+  "E13": "Choisis cet échauffement si tu veux apprendre à conserver la présence même après la fin d’une technique.",
+  "E14": "Choisis cet échauffement si tu veux entrer dans ton kata avec un centre stable, un mental calme et une continuité totale.",
+  "E15": "Choisis cet échauffement si tu veux marquer le jury en montrant que ton engagement continue après la dernière technique."
+};
+
 
 /* ===========================
    CHARGEMENT JSON
 =========================== */
 
 fetch("echauffements.json")
-  .then(res => {
-    if (!res.ok) throw new Error("JSON introuvable");
-    return res.json();
-  })
+  .then(res => res.json())
   .then(data => {
     echauffements = data.echauffements;
-    if (!echauffements || echauffements.length === 0) {
-      throw new Error("Aucun échauffement trouvé");
-    }
-    initExercise(echauffements[0]); // E01 par défaut
-  })
-  .catch(err => {
-    console.error(err);
-    visualEl.textContent = "Erreur de chargement des échauffements";
+    populateSelect();
+    initExercise(echauffements[0]);
   });
 
 
 /* ===========================
-   INITIALISATION
+   SÉLECTEUR
 =========================== */
 
-function initExercise(exercise) {
-  stopTimer(true);
+function populateSelect() {
+  echauffements.forEach(ex => {
+    const opt = document.createElement("option");
+    opt.value = ex.id;
+    opt.textContent = `${ex.id} – ${ex.nom}`;
+    selectEl.appendChild(opt);
+  });
+}
 
-  currentExercise = exercise;
+selectEl.addEventListener("change", () => {
+  const ex = echauffements.find(e => e.id === selectEl.value);
+  if (ex) initExercise(ex);
+});
+
+
+/* ===========================
+   INIT
+=========================== */
+
+function initExercise(ex) {
+  stopAll();
+  currentExercise = ex;
+
+  titleEl.textContent = ex.nom;
+  descEl.textContent = descriptions[ex.id] || "";
+
   phaseIndex = 0;
   scriptIndex = 0;
+  totalTimeLeft = ex.duree_totale_sec;
 
-  totalTimeLeft = exercise.duree_totale_sec;
+  progressBar.max = ex.duree_totale_sec;
+  progressBar.value = 0;
+
   loadPhase();
-
-  titleEl.textContent = exercise.nom;
-  updateTimerDisplay();
+  updateTimer();
 }
 
 
 /* ===========================
-   GESTION DES PHASES
+   PHASE
 =========================== */
 
 function loadPhase() {
   const phase = currentExercise.phases[phaseIndex];
-  if (!phase) return;
-
   phaseTimeLeft = phase.duree;
   scriptIndex = 0;
 
   phaseTitleEl.textContent = phase.nom;
-  visualEl.textContent = phase.script[0] || "";
+  speak(phase.script[0], "grave");
+  visualEl.textContent = phase.script[0];
 }
 
 function nextPhase() {
   phaseIndex++;
-
   if (phaseIndex >= currentExercise.phases.length) {
-    finishExercise();
+    finish();
     return;
   }
-
   loadPhase();
 }
 
 
 /* ===========================
-   TIMER PRINCIPAL
+   TIMER
 =========================== */
 
-function startTimer() {
+function start() {
   if (timer) return;
-
-  isPaused = false;
 
   timer = setInterval(() => {
     if (isPaused) return;
 
     totalTimeLeft--;
     phaseTimeLeft--;
+    progressBar.value++;
 
     advanceScript();
 
-    if (phaseTimeLeft <= 0) {
-      nextPhase();
-    }
+    if (phaseTimeLeft <= 0) nextPhase();
+    if (totalTimeLeft <= 0) finish();
 
-    if (totalTimeLeft <= 0) {
-      finishExercise();
-    }
-
-    updateTimerDisplay();
+    updateTimer();
   }, 1000);
 }
 
-function pauseTimer() {
-  isPaused = true;
+function pause() {
+  isPaused = !isPaused;
+  speechSynthesis.cancel();
 }
 
-function stopTimer(reset = false) {
+function stopAll() {
   clearInterval(timer);
   timer = null;
   isPaused = false;
-
-  if (reset && currentExercise) {
-    initExercise(currentExercise);
-  }
+  speechSynthesis.cancel();
 }
 
-function finishExercise() {
-  stopTimer();
-  phaseTitleEl.textContent = "Terminé";
+function finish() {
+  stopAll();
   visualEl.textContent = "Échauffement terminé 🌸";
+  phaseTitleEl.textContent = "Terminé";
   timerEl.textContent = "00:00";
 }
 
 
 /* ===========================
-   SCRIPT PROGRESSIF
+   SCRIPT + VOIX
 =========================== */
 
 function advanceScript() {
   const phase = currentExercise.phases[phaseIndex];
-  if (!phase) return;
-
-  const steps = phase.script.length;
-  if (steps <= 1) return;
-
-  const stepDuration = Math.floor(phase.duree / steps);
+  const stepTime = Math.floor(phase.duree / phase.script.length);
 
   if (
-    phaseTimeLeft > 0 &&
-    phaseTimeLeft % stepDuration === 0 &&
-    scriptIndex < steps - 1
+    phaseTimeLeft % stepTime === 0 &&
+    scriptIndex < phase.script.length - 1
   ) {
     scriptIndex++;
-    visualEl.textContent = phase.script[scriptIndex];
+    const text = phase.script[scriptIndex];
+    visualEl.textContent = text;
+    speak(text, scriptIndex % 3 === 0 ? "rapide" : "normal");
   }
+}
+
+function speak(text, mode = "normal") {
+  if (!window.speechSynthesis) return;
+
+  speechSynthesis.cancel();
+
+  utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "fr-FR";
+
+  if (mode === "grave") {
+    utterance.rate = 0.85;
+    utterance.pitch = 0.7;
+  } else if (mode === "rapide") {
+    utterance.rate = 1.1;
+    utterance.pitch = 1;
+  } else {
+    utterance.rate = 1;
+    utterance.pitch = 1;
+  }
+
+  speechSynthesis.speak(utterance);
 }
 
 
 /* ===========================
-   AFFICHAGE
+   UI
 =========================== */
 
-function updateTimerDisplay() {
+function updateTimer() {
   timerEl.textContent = formatTime(totalTimeLeft);
 }
 
-function formatTime(seconds) {
-  const m = Math.floor(seconds / 60)
-    .toString()
-    .padStart(2, "0");
-  const s = (seconds % 60)
-    .toString()
-    .padStart(2, "0");
-  return `${m}:${s}`;
+function formatTime(s) {
+  const m = String(Math.floor(s / 60)).padStart(2, "0");
+  const sec = String(s % 60).padStart(2, "0");
+  return `${m}:${sec}`;
 }
 
 
@@ -201,14 +241,16 @@ function formatTime(seconds) {
 
 btnStart.addEventListener("click", () => {
   if (!timer) {
-    startTimer();
+    start();
+    btnStart.textContent = "⏸ Pause";
   } else {
-    isPaused = !isPaused;
+    pause();
     btnStart.textContent = isPaused ? "▶ Reprendre" : "⏸ Pause";
   }
 });
 
 btnStop.addEventListener("click", () => {
-  stopTimer(true);
+  stopAll();
+  initExercise(currentExercise);
   btnStart.textContent = "▶ Démarrer";
 });
