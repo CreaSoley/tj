@@ -1,4 +1,4 @@
-
+document.addEventListener("DOMContentLoaded", () => {
 let data = [];
 let currentExercise = null;
 let currentIndex = 0;
@@ -205,3 +205,4 @@ function formatTime(sec) {
   const s = sec % 60;
   return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 }
+});
