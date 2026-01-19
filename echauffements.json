@@ -2,7 +2,7 @@
   "echauffements": [
     {
       "id": "E01",
-      "nom": "Réveil du Guerrier",
+      "nom": "Réveil du Guerrier-ok",
       "categorie": "debout",
       "duree_totale": "≈10 min",
       "duree_totale_sec": 600,
@@ -542,7 +542,7 @@
 
     {
       "id": "E07",
-      "nom": "Ancrage du Guerrier Assis",
+      "nom": "Ancrage du Guerrier Assis - ok",
       "categorie": "assis",
       "duree_totale": "≈10 min",
       "duree_totale_sec": 600,
@@ -569,47 +569,65 @@
         { "text": "Respiration profonde.", "mode": "grave" },
         { "pause": 10 },
 
-        { "text": "Inspire par le nez.", "mode": "normal" },
-        { "pause": 8 },
+        { "text": "Inspire par le nez. Expire lentement.", "mode": "normal" },
+        { "pause": 20 },
 
-        { "text": "Expire lentement.", "mode": "normal" },
+        { "text": "Mobilise la nuque de haut en bas.", "mode": "normal" },
         { "pause": 12 },
 
-        { "text": "Mobilise la nuque.", "mode": "normal" },
+        { "text": "Mobilise la nuque de gauche à droite.", "mode": "normal" },
         { "pause": 10 },
 
-        { "text": "Lentement.", "mode": "normal" },
+        { "text": "Lentement, cercles dans un sens.", "mode": "normal" },
         { "pause": 5 },
 
-        { "text": "Sans tension.", "mode": "grave" },
+        { "text": "Sans tension.cercles dans l'autre sens", "mode": "grave" },
         { "pause": 8 },
 
         { "text": "Épaules maintenant.", "mode": "normal" },
-        { "pause": 10 },
+        { "pause": 2 },
 
-        { "text": "Cercles amples.", "mode": "normal" },
+        { "text": "Cercles amples vers l'avant, mains sur les épaules", "mode": "normal" },
+        { "pause": 12 },
+        
+       { "text": "Cercles amples vers l'arrière, mains sur les épaules", "mode": "normal" },
         { "pause": 12 },
 
-        { "text": "Poids relâché.", "mode": "normal" },
+        { "text": "Poids relâché.Petits mouvements alternés des épaules vers l'arrière", "mode": "normal" },
         { "pause": 8 },
+        { "text": "Poids relâché.Petits mouvements alternés des épaules vers l'avant", "mode": "normal" },
+        { "pause": 8 },
+         { "text": "Rotation hanches, à droite et à gauche alternativement", "mode": "normal" },
+        { "pause": 10 },
+        { "text": "Toucher des jambres sur les côtés, à droite et à gauche alternativement", "mode": "normal" },
+        { "pause": 10 },
+        { "text": "Ondulations, à droite et à gauche alternativement", "mode": "normal" },
+        { "pause": 10 },
 
         { "text": "Poignets et doigts.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Ouvre.", "mode": "normal" },
-        { "pause": 6 },
-
-        { "text": "Ferme.", "mode": "normal" },
-        { "pause": 6 },
-
-        { "text": "Énergie dans les mains.", "mode": "normal" },
+        { "pause": 3 },
+        { "text": "Clés articulaires et extension de doigts, main droite.", "mode": "normal" },
+        { "pause": 10 },
+        { "text": "Clés articulaires et extension de doigts, main gauche.", "mode": "normal" },
+        { "pause": 10 },
+        { "text": "Bras tendus vers l'avant ouvre et ferme les mains.", "mode": "normal" },
+        { "pause": 10 },
+        { "text": "Bras tendus vers le haut ouvre et ferme les mains.", "mode": "normal" },
+        { "pause": 10 },
+        { "text": "Bras tendus sur les côtés ouvre et ferme les mains.", "mode": "normal" },
         { "pause": 10 },
 
-        { "text": "Visualise ton corps debout.", "mode": "grave" },
+        { "text": "Ferme les yeux, image ton corps debout", "mode": "grave" },
+        { "pause": 6 },
+
+        { "text": "Énergie dans les mains.alterne les coups de poings, épaules détendues", "mode": "normal" },
         { "pause": 10 },
 
-        { "text": "Stable.", "mode": "grave" },
-        { "pause": 6 },
+        { "text": "Énergie dans les jambes. alterne les levers de genoux, épaules détendues", "mode": "normal" },
+        { "pause": 10 },
+
+        { "text": "Stable. pieds ancrés dans le sol, respire calmement", "mode": "grave" },
+        { "pause": 10 },
 
         { "text": "Prêt.", "mode": "grave" },
         { "pause": 6 },
