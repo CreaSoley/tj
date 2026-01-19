@@ -558,7 +558,18 @@ const speedMode = document.getElementById("speedMode")?.value || "slow";
   await speak("Si ça bouge, recommence plus lentement.", 0.8);
   await speak("C’est parti", 0.8);
 
+  let remaining = 120;
+countdown.textContent = fmt(remaining);
+
+const localTimer = setInterval(() => {
+  if (paused || stopped) return;
+  remaining--;
+  countdown.textContent = fmt(remaining);
+  if (remaining <= 0) clearInterval(localTimer);
+}, 1000);
+
   if (!(await waitIfNotStopped(120000))) return;
+clearInterval(localTimer);
 
   /* ========= EXERCICE B ========= */
   show("<strong>Exercice B</strong><br>Hara lourd – ancrage au sol");
@@ -569,7 +580,18 @@ const speedMode = document.getElementById("speedMode")?.value || "slow";
   await speak("Sens le bas-ventre devenir lourd et stable.", 0.8);
   await speak("C’est parti", 0.8);
 
+  let remaining = 120;
+countdown.textContent = fmt(remaining);
+
+const localTimer = setInterval(() => {
+  if (paused || stopped) return;
+  remaining--;
+  countdown.textContent = fmt(remaining);
+  if (remaining <= 0) clearInterval(localTimer);
+}, 1000);
+
   if (!(await waitIfNotStopped(120000))) return;
+clearInterval(localTimer);
 
   /* ========= EXERCICE C ========= */
   show("<strong>Exercice C</strong><br>Lien hara – poings lents");
@@ -578,7 +600,18 @@ const speedMode = document.getElementById("speedMode")?.value || "slow";
   await speak("Expire depuis le bas ventre à chaque extension.", 0.8);
   await speak("C’est parti", 0.8);
 
+  let remaining = 120;
+countdown.textContent = fmt(remaining);
+
+const localTimer = setInterval(() => {
+  if (paused || stopped) return;
+  remaining--;
+  countdown.textContent = fmt(remaining);
+  if (remaining <= 0) clearInterval(localTimer);
+}, 1000);
+
   if (!(await waitIfNotStopped(120000))) return;
+clearInterval(localTimer);
 
   /* ========= EXERCICE D ========= */
   show("<strong>Exercice D</strong><br>Pivots – hara");
@@ -587,7 +620,18 @@ const speedMode = document.getElementById("speedMode")?.value || "slow";
   await speak("Le mouvement doit partir du hara.", 0.8);
   await speak("C’est parti", 0.8);
 
+  let remaining = 120;
+countdown.textContent = fmt(remaining);
+
+const localTimer = setInterval(() => {
+  if (paused || stopped) return;
+  remaining--;
+  countdown.textContent = fmt(remaining);
+  if (remaining <= 0) clearInterval(localTimer);
+}, 1000);
+
   if (!(await waitIfNotStopped(120000))) return;
+clearInterval(localTimer);
 
  /* ========= EXERCICE E ========= */
 show("<strong>Exercice E</strong><br>Kihon et hara");
@@ -629,9 +673,20 @@ for (const tech of HARA_TECHNIQUES) {
   await speak("La séquence est terminée. Travaillons le zanchin.", 0.8);
   await speak("Respiration basse, posture stable, regard long.", 0.8);
 
+  let remaining = 20;
+countdown.textContent = fmt(remaining);
+
+const localTimer = setInterval(() => {
+  if (paused || stopped) return;
+  remaining--;
+  countdown.textContent = fmt(remaining);
+  if (remaining <= 0) clearInterval(localTimer);
+}, 1000);
+
   await waitIfNotStopped(20000);
  text.classList.remove("hara");
-  
+  clearInterval(localTimer);
+
   await speak("Entraînement terminé", 0.8);
   text.textContent = "Fin de l’entraînement 🥋";
 }
