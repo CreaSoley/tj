@@ -641,29 +641,25 @@ const COUNT_DELAY = SPEED.countDelay;
 
 for (const tech of HARA_TECHNIQUES) {
 
+  show(`<strong>${tech.fr}</strong>`);
+  await speakJP(tech.jp, 0.6);
+  await wait(1000);
+
+  await speakCommand("構え");
+  await speakCommand("始め");
+
   for (let round = 0; round < 2; round++) {
-    if (stopped) return;
-
-    show(`<strong>${tech.fr}</strong>`);
-    await speakJP(tech.jp, 0.6);
-    await wait(1000);
-
-    await speakCommand("構え");
-    await speakCommand("始め");
 
     // Aller
     for (const n of ["一","二","三","四","五"]) {
-      await speakJP(n);
+      await speakJP(n, 0.6);
       await wait(COUNT_DELAY);
     }
 
-    // Retour
-    await speakJP("回って", 0.6);
-    await wait(1000);
-
-    for (const n of ["一","二","三","四","五"]) {
-      await speakJP(n);
-      await wait(COUNT_DELAY);
+    // Retour (pas après le dernier)
+    if (round === 0) {
+      await speakJP("マワッテ", 0.6);
+      await wait(1000);
     }
   }
 }
