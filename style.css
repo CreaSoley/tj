@@ -186,24 +186,23 @@ a{
   padding: 6px 10px;
   font-size: 0.8rem;
 }
-/* ===== BOUTONS MOBILE ===== */
 @media (max-width: 600px) {
 
-  .controls-row.buttons {
+  /* Ligne principale inchangée */
+  .button-row:first-of-type {
+    flex-wrap: nowrap;
+  }
+
+  /* Autres boutons : 2 par ligne */
+  .button-row:nth-of-type(2) {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
   }
 
-  /* Ligne principale : inchangée */
-  .controls-row.buttons .btn-primary {
-    flex: 1 1 auto;
-  }
-
-  /* Autres boutons : 2 par ligne */
-  .controls-row.buttons .btn:not(.btn-primary) {
+  .button-row:nth-of-type(2) .btn-kawaii {
     flex: 0 0 48%;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     padding: 12px;
   }
 }
@@ -376,4 +375,23 @@ html, body{
     padding: 12px;
   }
 }
+.btn-stop {
+  background: #ff4d6d !important;
+  box-shadow: 0 4px 0px #c9184a !important;
+}
 
+/* ===== ZONE D'AFFICHAGE - TOUTES SEANCES ===== */
+.result-display {
+  font-size: 1.6rem;     /* plus gros */
+  line-height: 1.2;
+}
+
+#text {
+  font-size: 2.2rem;     /* gros titre */
+}
+
+#countdown {
+  font-size: 2.4rem;     /* très gros */
+  font-weight: 800;
+  margin-top: 8px;
+}
