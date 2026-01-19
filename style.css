@@ -186,6 +186,27 @@ a{
   padding: 6px 10px;
   font-size: 0.8rem;
 }
+/* ===== BOUTONS MOBILE ===== */
+@media (max-width: 600px) {
+
+  .controls-row.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* Ligne principale : inchangée */
+  .controls-row.buttons .btn-primary {
+    flex: 1 1 auto;
+  }
+
+  /* Autres boutons : 2 par ligne */
+  .controls-row.buttons .btn:not(.btn-primary) {
+    flex: 0 0 48%;
+    font-size: 1.1rem;
+    padding: 12px;
+  }
+}
 
 /* ---------- Icône Beep ---------- */
 .beep-icon {
