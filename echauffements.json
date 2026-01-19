@@ -45,8 +45,8 @@
         { "text": "Puis vers l’arrière.", "mode": "normal" },
         { "pause": 15 },
 
-        { "text": "Poignets relâchés.", "mode": "normal" },
-        { "pause": 2 },
+        { "text": "Poignets relâchés. Tourne les poignets dans un sens, puis dans l'autre", "mode": "normal" },
+        { "pause": 20 },
         { "text": "Descends maintenant.", "mode": "normal" },
         { "pause": 1 },
         { "text": "Hanches mobiles.", "mode": "normal" },
