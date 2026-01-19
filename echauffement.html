@@ -2,58 +2,59 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Échauffements</title>
 
-  <!-- CSS EXISTANT -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="banner.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+
+<body data-subtitle="Échauffement">
+
+  <!-- BANNIERE -->
+  <header class="appbar">
+    <a href="index.html" class="logo-link">
+      <img src="assets/logopwa.png" class="logo-big" alt="logo">
+    </a>
+
+    <div class="header-text">
+      <div class="title shanghai" style="font-size:1.3rem;">Taï-jitsu</div>
+      <div class="subtitle spicy" id="uv-title" style="font-size:1.8rem;">Sous-titre</div>
+    </div>
+  </header>
 
   <div class="main-wrapper">
-    <div class="grid">
+    <div class="card-kawaii">
+      <div class="module-title">Échauffements assistés</div>
 
-      <div class="card-kawaii bg-surplace">
-
-        <div class="module-title" id="exercise-title">
-          Échauffement
-        </div>
-
-        <div class="sub-section">
-          <h3 id="phase-title">Phase</h3>
-<!-- Sélecteur échauffement -->
-<div class="sub-section">
-  <h3>Choix de l’échauffement</h3>
-
-  <select id="exercise-select" class="input-wide"></select>
-
-  <div id="exercise-description" class="result-display">
-    Sélectionne un échauffement pour voir sa description.
-  </div>
-</div>
-
-<!-- Barre de progression -->
-<div class="sub-section">
-  <h3>Progression</h3>
-  <progress id="progress-bar" value="0" max="600" style="width:100%; height:20px;"></progress>
-</div>
-
-          <div id="visual" class="result-display">
-            Appuie sur ▶ pour commencer
-          </div>
-
-          <div class="result-display" id="timer-display">
-            10:00
-          </div>
-
-          <div class="button-row">
-            <button class="btn-kawaii" id="btn-start">▶ Démarrer</button>
-            <button class="btn-kawaii btn-stop" id="btn-stop">■ Stop</button>
-          </div>
-        </div>
-
+      <div class="sub-section">
+        <h3>Choisir un échauffement</h3>
+        <select id="selectEchauffement"></select>
+        <p id="presentation"></p>
       </div>
 
+      <div class="sub-section">
+        <h3>Contrôles</h3>
+        <div class="button-row">
+          <button id="btnPlay" class="btn-kawaii">Lecture</button>
+          <button id="btnPause" class="btn-kawaii btn-small">Pause</button>
+          <button id="btnStop" class="btn-kawaii btn-stop btn-small">Stop</button>
+        </div>
+        <div class="progress-wrapper" style="margin-top: 12px;">
+          <div id="progressBar" style="height: 12px; width:100%; border-radius: 12px; background:#ffd6ec; overflow:hidden;">
+            <div id="progressFill" style="height:100%; width:0%; background:linear-gradient(90deg, #ff5fc1, #ff1493);"></div>
+          </div>
+          <div style="margin-top:8px; display:flex; justify-content:space-between;">
+            <span id="timeLeft">10:00</span>
+            <span id="timeTotal">10:00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-section">
+        <h3>Script (aperçu)</h3>
+        <div id="scriptPreview" class="content"></div>
+      </div>
     </div>
   </div>
 
