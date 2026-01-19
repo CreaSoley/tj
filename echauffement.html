@@ -1,32 +1,46 @@
-<div class="main-wrapper">
-  <div class="grid">
-    <div class="card-kawaii bg-surplace">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Échauffements</title>
 
-      <h2 class="module-title">Échauffements guidés</h2>
+  <!-- CSS EXISTANT -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-      <div class="sub-section">
-        <label for="selectWarmup">Choisir un échauffement :</label>
-        <select id="selectWarmup" class="input-wide"></select>
-      </div>
+  <div class="main-wrapper">
+    <div class="grid">
 
-      <div class="sub-section" id="warmupInfo">
-        <p class="muted">Objectifs et infos ici</p>
-      </div>
-<div class="sub-section">
-  <div id="timerDisplay" class="result-display">
-    10:00
-  </div>
-  <div class="muted" id="phaseName">Prêt</div>
-</div>
+      <div class="card-kawaii bg-surplace">
 
-      <div class="button-row">
-        <button class="btn-kawaii" id="btnPlay">▶ Lecture</button>
-        <button class="btn-kawaii btn-small" id="btnPause">⏸ Pause</button>
-        <button class="btn-kawaii btn-stop btn-small" id="btnStop">⏹ Stop</button>
+        <div class="module-title" id="exercise-title">
+          Échauffement
+        </div>
+
+        <div class="sub-section">
+          <h3 id="phase-title">Phase</h3>
+
+          <div id="visual" class="result-display">
+            Appuie sur ▶ pour commencer
+          </div>
+
+          <div class="result-display" id="timer-display">
+            10:00
+          </div>
+
+          <div class="button-row">
+            <button class="btn-kawaii" id="btn-start">▶ Démarrer</button>
+            <button class="btn-kawaii btn-stop" id="btn-stop">■ Stop</button>
+          </div>
+        </div>
+
       </div>
 
     </div>
   </div>
-</div>
 
-<script src="echauffements.js"></script>
+  <script src="echauffements.js"></script>
+</body>
+</html>
