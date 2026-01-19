@@ -99,33 +99,33 @@
         { "text": "Respiration naturelle.", "mode": "rapide" },
         { "pause": 10 },
         { "text": "Coup de poing souple poing gauche, position yoï", "mode": "normal" },
-        { "pause": 10 }
+        { "pause": 10 },
        { "text": "Coup de poing souple poing droit, position yoï", "mode": "normal" },
-        { "pause": 10 }
+        { "pause": 10 },
         { "text": "Respiration naturelle.", "mode": "rapide" },
         { "pause": 10 },
        { "text": "Blocage haut gauche, position yoï", "mode": "normal" },
-        { "pause": 10 }
+        { "pause": 10 },
        { "text": "Blocage haut droit, position yoï", "mode": "normal" },
-        { "pause": 10 }
+        { "pause": 10 },
         { "text": "Respiration naturelle.", "mode": "rapide" },
         { "pause": 10 },
         { "text": "Blocage bas gauche, position yoï", "mode": "normal" },
-        { "pause": 10 }
+        { "pause": 10 },
        { "text": "Blocage bas droit, position yoï", "mode": "normal" },
-        { "pause": 10 }
+        { "pause": 10 },
         { "text": "Respiration naturelle.", "mode": "rapide" },
         { "pause": 10 },
            { "text": "Blocage extérieur- intérieur gauche, position yoï", "mode": "normal" },
-        { "pause": 10 }
+        { "pause": 10 },
        { "text": "Blocage extérieur- intérieur droite", "mode": "normal" },
-        { "pause": 10 }
+        { "pause": 10 },
         { "text": "Respiration naturelle.", "mode": "rapide" },
         { "pause": 10 },
   { "text": "Blocage intérieur-extérieur gauche, position yoï", "mode": "normal" },
-        { "pause": 10 }
+        { "pause": 10 },
        { "text": "Blocage intérieur-extérieur droite", "mode": "normal" },
-        { "pause": 10 }
+        { "pause": 10 },
         { "text": "Respiration naturelle.", "mode": "rapide" },
         { "pause": 10 },
 
