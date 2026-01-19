@@ -45,6 +45,22 @@ select.addEventListener("change", () => {
   const ex = data.find(e => e.id === select.value);
   if (ex) loadExercise(ex);
 });
+function estimateSpeechDuration(text) {
+  // estimation 160 mots/min => 2.67 mots/sec
+  const words = text.split(/\s+/).length;
+  return words / 2.67;
+}
+
+function computeRealDuration(script) {
+  let total = 0;
+
+  script.forEach(item => {
+    if (item.pause) total += item.pause;
+    if (item.text) total += estimateSpeechDuration(item.text);
+  });
+
+  return Math.ceil(total);
+}
 
 // -----------------------
 // Charger un échauffement
@@ -61,17 +77,30 @@ function loadExercise(ex) {
   document.getElementById("uv-title").textContent = `${ex.id} – ${ex.nom}`;
 
   // preview du script
-  scriptPreview.innerHTML = "";
-  ex.script.forEach(item => {
-    const p = document.createElement("p");
-    if (item.text) p.textContent = item.text;
-    if (item.pause) p.textContent = `Pause : ${item.pause}s`;
-    scriptPreview.appendChild(p);
-  });
+  scriptPreview.innerHTML = `
+  <details>
+    <summary>Voir le script</summary>
+    <div class="script-accordion"></div>
+  </details>
+`;
+
+const acc = scriptPreview.querySelector(".script-accordion");
+
+ex.script.forEach(item => {
+  const p = document.createElement("p");
+  p.style.margin = "8px 0";
+  if (item.text) p.textContent = item.text;
+  if (item.pause) p.textContent = `⏱ Pause : ${item.pause}s`;
+  acc.appendChild(p);
+});
 
   // temps
-  timeTotal.textContent = formatTime(ex.duree_totale_sec);
-  timeLeft.textContent = formatTime(ex.duree_totale_sec);
+  const realDuration = computeRealDuration(ex.script);
+ex.duree_totale_sec = realDuration;
+
+timeTotal.textContent = formatTime(realDuration);
+timeLeft.textContent = formatTime(realDuration);
+
   progressFill.style.width = "0%";
 }
 
