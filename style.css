@@ -344,4 +344,36 @@ html, body{
 #text.hara * {
   color: #ffffff !important;
 }
+/* ===== TEXTE BLANC POUR HARA (y compris compte à rebours) ===== */
+.bg-hara,
+.bg-hara *,
+#visual.bg-hara,
+#visual.bg-hara * {
+  color: #ffffff !important;
+}
+/* ===== BOUTONS MOBILE : ORGANISATION ===== */
+@media (max-width: 600px) {
+
+  .button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* Lancer / Pause / Stop = pleine largeur */
+  .button-row .btn-kawaii.start,
+  .button-row .btn-kawaii.pause,
+  .button-row .btn-kawaii.stop {
+    flex: 1 1 100%;
+    font-size: 1.1rem;
+    padding: 14px;
+  }
+
+  /* Tous les autres boutons : 2 par ligne */
+  .button-row .btn-kawaii:not(.start):not(.pause):not(.stop) {
+    flex: 0 0 48%;
+    font-size: 1rem;
+    padding: 12px;
+  }
+}
 
