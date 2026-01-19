@@ -1,596 +1,88 @@
 {
-  "echauffements": [
-    {
-      "id": "E01",
-      "nom": "Réveil du Guerrier",
-      "categorie": "debout",
-      "duree_totale_sec": 600,
-      "phases": [
-        {
-          "nom": "Réveil articulaire haut",
-          "duree": 120,
-          "script": [
-            "Posture droite.",
-            "Respiration calme.",
-            "Mobilise doucement la tête.",
-            "Droite. Gauche.",
-            "Cercle lent.",
-            "Épaules souples.",
-            "Cercles vers l’avant.",
-            "Puis vers l’arrière.",
-            "Relâche le cou.",
-            "Le corps s’éveille."
-          ]
-        },
-        {
-          "nom": "Réveil articulaire bas",
-          "duree": 120,
-          "script": [
-            "Descends l’attention dans le bassin.",
-            "Hanches mobiles.",
-            "Genoux souples.",
-            "Chevilles actives.",
-            "Petits cercles.",
-            "Poids réparti.",
-            "Respiration naturelle.",
-            "Stabilité.",
-            "Fluidité."
-          ]
-        },
-        {
-          "nom": "Activation dynamique",
-          "duree": 150,
-          "script": [
-            "Monte les genoux.",
-            "Rythme modéré.",
-            "Ajoute des esquives.",
-            "Droite.",
-            "Gauche.",
-            "Laisse les hanches tourner.",
-            "Le corps se coordonne."
-          ]
-        },
-        {
-          "nom": "Shadow fluide",
-          "duree": 210,
-          "script": [
-            "Déplacements légers.",
-            "Garde haute.",
-            "Frappes souples.",
-            "Sans force.",
-            "Coordination bras jambes.",
-            "Respiration libre.",
-            "Le guerrier est réveillé.",
-            "Corps prêt.",
-            "Esprit présent."
-          ]
-        }
-      ]
-    },
+  "id": "E01",
+  "nom": "Réveil du Guerrier",
+  "categorie": "debout",
+  "duree_totale": "10 min",
+  "duree_totale_sec": 600,
+  "objectifs": [
+    "Mobilité générale",
+    "Fluidité",
+    "Montée progressive en intensité"
+  ],
+  "pre_requis": {
+    "position": "debout",
+    "materiel": "aucun"
+  },
+  "presentation": "Choisis cet échauffement si tu veux réveiller tout le corps rapidement et entrer progressivement dans une dynamique martiale complète.",
+  "script": [
+    { "text": "On commence.", "mode": "grave" },
+    { "pause": 2 },
+    { "text": "Posture droite.", "mode": "grave" },
+    { "pause": 1 },
+    { "text": "Respire lentement.", "mode": "grave" },
+    { "pause": 2 },
+    { "text": "Ancre-toi dans le sol.", "mode": "grave" },
+    { "pause": 3 },
 
-    {
-      "id": "E02",
-      "nom": "Corps en Mouvement",
-      "categorie": "debout",
-      "duree_totale_sec": 600,
-      "phases": [
-        {
-          "nom": "Mobilité globale",
-          "duree": 150,
-          "script": [
-            "Posture stable.",
-            "Cercles amples de bras.",
-            "Lents.",
-            "Contrôlés.",
-            "Le souffle accompagne.",
-            "Aucune tension."
-          ]
-        },
-        {
-          "nom": "Bas du corps",
-          "duree": 150,
-          "script": [
-            "Flexions légères.",
-            "Genoux souples.",
-            "Chevilles mobiles.",
-            "Sens le sol.",
-            "Ancrage."
-          ]
-        },
-        {
-          "nom": "Coordination",
-          "duree": 150,
-          "script": [
-            "Pas chassés.",
-            "Pivots.",
-            "Tourne le buste.",
-            "Haut et bas connectés."
-          ]
-        },
-        {
-          "nom": "Shadow continu",
-          "duree": 150,
-          "script": [
-            "Shadow box fluide.",
-            "Aucune puissance.",
-            "Continuité.",
-            "Déplace-toi.",
-            "Le mouvement ne s’arrête pas."
-          ]
-        }
-      ]
-    },
+    { "text": "Mobilise la tête.", "mode": "normal" },
+    { "pause": 1 },
+    { "text": "Droite.", "mode": "normal" },
+    { "pause": 0.8 },
+    { "text": "Gauche.", "mode": "normal" },
+    { "pause": 0.8 },
+    { "text": "Cercle lent.", "mode": "normal" },
+    { "pause": 1 },
 
-    {
-      "id": "E03",
-      "nom": "Souplesse du Tigre",
-      "categorie": "debout",
-      "duree_totale_sec": 600,
-      "phases": [
-        {
-          "nom": "Ouverture haute",
-          "duree": 150,
-          "script": [
-            "Respire profondément.",
-            "Étire les bras.",
-            "Ouvre la poitrine.",
-            "Le dos s’allonge.",
-            "Aucune douleur."
-          ]
-        },
-        {
-          "nom": "Hanches et bassin",
-          "duree": 150,
-          "script": [
-            "Travail des hanches.",
-            "Ouverture progressive.",
-            "Amplitude douce.",
-            "Relâchement."
-          ]
-        },
-        {
-          "nom": "Dynamique légère",
-          "duree": 150,
-          "script": [
-            "Montées de genoux.",
-            "Talons-fesses.",
-            "Rythme souple.",
-            "Respiration fluide."
-          ]
-        },
-        {
-          "nom": "Shadow détendu",
-          "duree": 150,
-          "script": [
-            "Déplacements légers.",
-            "Frappes détendues.",
-            "Comme un tigre.",
-            "Souple.",
-            "Prêt à bondir."
-          ]
-        }
-      ]
-    },
+    { "text": "Épaules souples.", "mode": "normal" },
+    { "pause": 1 },
+    { "text": "Cercles vers l’avant.", "mode": "normal" },
+    { "pause": 1 },
+    { "text": "Puis vers l’arrière.", "mode": "normal" },
+    { "pause": 2 },
 
-    {
-      "id": "E04",
-      "nom": "Respiration Martiale",
-      "categorie": "mixte",
-      "duree_totale_sec": 600,
-      "phases": [
-        {
-          "nom": "Respiration statique",
-          "duree": 150,
-          "script": [
-            "Debout.",
-            "Immobile.",
-            "Inspire profondément.",
-            "Expire lentement.",
-            "Calme actif."
-          ]
-        },
-        {
-          "nom": "Respiration en mouvement",
-          "duree": 150,
-          "script": [
-            "Cercles d’épaules.",
-            "Synchronisés au souffle.",
-            "Chaque mouvement respire."
-          ]
-        },
-        {
-          "nom": "Flexions contrôlées",
-          "duree": 150,
-          "script": [
-            "Inspire en montant.",
-            "Expire en descendant.",
-            "Le corps s’ancre."
-          ]
-        },
-        {
-          "nom": "Shadow lent",
-          "duree": 150,
-          "script": [
-            "Shadow lent.",
-            "Précis.",
-            "Chaque technique a une intention.",
-            "Respire.",
-            "Présence."
-          ]
-        }
-      ]
-    },
+    { "text": "Poignets relâchés.", "mode": "normal" },
+    { "pause": 1 },
+    { "text": "Descends maintenant.", "mode": "normal" },
+    { "pause": 1 },
+    { "text": "Hanches mobiles.", "mode": "normal" },
+    { "pause": 1 },
+    { "text": "Genoux souples.", "mode": "normal" },
+    { "pause": 1 },
+    { "text": "Chevilles actives.", "mode": "normal" },
+    { "pause": 2 },
 
-    {
-      "id": "E05",
-      "nom": "Activation Express",
-      "categorie": "debout",
-      "duree_totale_sec": 600,
-      "phases": [
-        {
-          "nom": "Activation nerveuse",
-          "duree": 150,
-          "script": [
-            "Cercles rapides des poignets.",
-            "Coudes.",
-            "Épaules.",
-            "Le système nerveux s’éveille."
-          ]
-        },
-        {
-          "nom": "Pieds et chevilles",
-          "duree": 150,
-          "script": [
-            "Petits sauts.",
-            "Rebonds.",
-            "Légèreté.",
-            "Réactivité."
-          ]
-        },
-        {
-          "nom": "Jeu de jambes",
-          "duree": 150,
-          "script": [
-            "Avant.",
-            "Arrière.",
-            "Change de direction.",
-            "Reste équilibré."
-          ]
-        },
-        {
-          "nom": "Shadow explosif",
-          "duree": 150,
-          "script": [
-            "Shadow rapide.",
-            "Cinquante pour cent.",
-            "Vitesse.",
-            "Contrôle.",
-            "Tu es vif."
-          ]
-        }
-      ]
-    },
+    { "text": "Monte les genoux.", "mode": "rapide" },
+    { "pause": 1 },
+    { "text": "Respiration naturelle.", "mode": "rapide" },
+    { "pause": 1 },
+    { "text": "Ajoute des esquives latérales.", "mode": "rapide" },
+    { "pause": 1 },
+    { "text": "Droite.", "mode": "rapide" },
+    { "pause": 0.6 },
+    { "text": "Gauche.", "mode": "rapide" },
+    { "pause": 1 },
+    { "text": "Fluide.", "mode": "rapide" },
+    { "pause": 2 },
 
-    {
-      "id": "E06",
-      "nom": "Mise en Condition Examen",
-      "categorie": "zanshin",
-      "duree_totale_sec": 600,
-      "phases": [
-        {
-          "nom": "Posture mentale",
-          "duree": 200,
-          "script": [
-            "Posture d’examen.",
-            "Respiration calme.",
-            "Regard droit.",
-            "Aucune tension."
-          ]
-        },
-        {
-          "nom": "Mobilité contrôlée",
-          "duree": 200,
-          "script": [
-            "Hanches mobiles.",
-            "Déplacements lents.",
-            "Chaque pas est posé."
-          ]
-        },
-        {
-          "nom": "Shadow engagé",
-          "duree": 200,
-          "script": [
-            "Shadow sérieux.",
-            "Présence martiale.",
-            "Confiant.",
-            "Maîtrisé."
-          ]
-        }
-      ]
-    },
+    { "text": "Shadow tai-jitsu.", "mode": "rapide" },
+    { "pause": 1 },
+    { "text": "Déplacements légers.", "mode": "rapide" },
+    { "pause": 1 },
+    { "text": "Garde haute.", "mode": "rapide" },
+    { "pause": 1 },
+    { "text": "Frappes souples.", "mode": "rapide" },
+    { "pause": 1 },
+    { "text": "Sans force.", "mode": "rapide" },
+    { "pause": 1 },
+    { "text": "Bras, jambes, coordination.", "mode": "rapide" },
+    { "pause": 2 },
 
-    {
-      "id": "E07",
-      "nom": "Ancrage du Guerrier Assis",
-      "categorie": "assis",
-      "duree_totale_sec": 600,
-      "phases": [
-        {
-          "nom": "Respiration basse",
-          "duree": 200,
-          "script": [
-            "Assieds-toi.",
-            "Pieds au sol.",
-            "Dos droit.",
-            "Respire profondément."
-          ]
-        },
-        {
-          "nom": "Mobilité douce",
-          "duree": 200,
-          "script": [
-            "Nuque.",
-            "Épaules.",
-            "Poignets.",
-            "Relâche."
-          ]
-        },
-        {
-          "nom": "Visualisation",
-          "duree": 200,
-          "script": [
-            "Visualise-toi debout.",
-            "Stable.",
-            "Prêt.",
-            "Présent."
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "E08",
-      "nom": "Souffle et Articulations",
-      "categorie": "assis",
-      "duree_totale_sec": 600,
-      "phases": [
-        {
-          "nom": "Souffle",
-          "duree": 200,
-          "script": [
-            "Inspire.",
-            "Expire.",
-            "Calme.",
-            "Régulier."
-          ]
-        },
-        {
-          "nom": "Articulations",
-          "duree": 200,
-          "script": [
-            "Épaules.",
-            "Bras.",
-            "Bassin.",
-            "Douceur."
-          ]
-        },
-        {
-          "nom": "Préparation mentale",
-          "duree": 200,
-          "script": [
-            "Ferme les yeux.",
-            "Le corps se prépare.",
-            "L’esprit s’éveille."
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "E09",
-      "nom": "Visualisation Martiale",
-      "categorie": "zanshin",
-      "duree_totale_sec": 600,
-      "phases": [
-        {
-          "nom": "Calme",
-          "duree": 200,
-          "script": [
-            "Assis.",
-            "Immobile.",
-            "Respiration calme."
-          ]
-        },
-        {
-          "nom": "Activation neuronale",
-          "duree": 200,
-          "script": [
-            "Visualise la garde.",
-            "Le déplacement.",
-            "La défense."
-          ]
-        },
-        {
-          "nom": "Intégration",
-          "duree": 200,
-          "script": [
-            "Le corps apprend.",
-            "Sans bouger.",
-            "Prêt à agir."
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "E10",
-      "nom": "Réveil du Hara",
-      "categorie": "hara",
-      "duree_totale_sec": 600,
-      "phases": [
-        {
-          "nom": "Respiration abdominale",
-          "duree": 300,
-          "script": [
-            "Main sur le bas-ventre.",
-            "Inspire.",
-            "Le ventre se gonfle.",
-            "Expire.",
-            "Les épaules descendent."
-          ]
-        },
-        {
-          "nom": "Stabilité",
-          "duree": 300,
-          "script": [
-            "Fléchis légèrement.",
-            "Sens le poids descendre.",
-            "Le centre s’active.",
-            "Unité du corps."
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "E11",
-      "nom": "Centre Stable",
-      "categorie": "hara",
-      "duree_totale_sec": 600,
-      "phases": [
-        {
-          "nom": "Connexion sol",
-          "duree": 300,
-          "script": [
-            "Position naturelle.",
-            "Respiration lente.",
-            "Poids dans le bassin."
-          ]
-        },
-        {
-          "nom": "Déplacements courts",
-          "duree": 300,
-          "script": [
-            "Un pas.",
-            "Puis l’autre.",
-            "Le hara guide.",
-            "Alignement."
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "E12",
-      "nom": "Zanshin Silencieux",
-      "categorie": "zanshin",
-      "duree_totale_sec": 600,
-      "phases": [
-        {
-          "nom": "Immobilité",
-          "duree": 300,
-          "script": [
-            "Tiens-toi droit.",
-            "Respiration naturelle.",
-            "Sans bruit."
-          ]
-        },
-        {
-          "nom": "Vigilance",
-          "duree": 300,
-          "script": [
-            "Regard large.",
-            "Présence continue.",
-            "Prêt sans bouger."
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "E13",
-      "nom": "Hara en Mouvement, Zanshin Constant",
-      "categorie": "mixte",
-      "duree_totale_sec": 600,
-      "phases": [
-        {
-          "nom": "Marche consciente",
-          "duree": 300,
-          "script": [
-            "Marche lentement.",
-            "Chaque pas part du centre.",
-            "Respiration basse."
-          ]
-        },
-        {
-          "nom": "Technique lente",
-          "duree": 300,
-          "script": [
-            "Ajoute une frappe.",
-            "Elle part du hara.",
-            "Elle revient au hara.",
-            "Le zanshin reste."
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "E14",
-      "nom": "Hara et Zanshin avant Kata",
-      "categorie": "mixte",
-      "duree_totale_sec": 600,
-      "phases": [
-        {
-          "nom": "Installation",
-          "duree": 300,
-          "script": [
-            "Pieds ancrés.",
-            "Genoux souples.",
-            "Respiration basse.",
-            "Stable."
-          ]
-        },
-        {
-          "nom": "Pré-kata",
-          "duree": 300,
-          "script": [
-            "Gestes lents.",
-            "Sans force.",
-            "Chaque technique naît du centre.",
-            "Présence continue."
-          ]
-        }
-      ]
-    },
-
-    {
-      "id": "E15",
-      "nom": "Zanshin après Kata",
-      "categorie": "zanshin",
-      "duree_totale_sec": 600,
-      "phases": [
-        {
-          "nom": "Maintien",
-          "duree": 400,
-          "script": [
-            "Reste immobile.",
-            "Respiration calme.",
-            "Regard vivant.",
-            "Présent."
-          ]
-        },
-        {
-          "nom": "Clôture",
-          "duree": 200,
-          "script": [
-            "Ne relâche pas encore.",
-            "Le centre est plein.",
-            "Puis seulement.",
-            "Relâche doucement."
-          ]
-        }
-      ]
-    }
+    { "text": "Tu réveilles le guerrier.", "mode": "grave" },
+    { "pause": 2 },
+    { "text": "Ton corps est prêt.", "mode": "grave" },
+    { "pause": 2 },
+    { "text": "Ton esprit aussi.", "mode": "grave" },
+    { "pause": 3 },
+    { "text": "Fin.", "mode": "grave" }
   ]
 }
