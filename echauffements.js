@@ -18,7 +18,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const timeTotal = document.getElementById("totalTime");
 
   const btnStart = document.getElementById("startBtn");
+  const btnPause = document.createElement("button");
   const btnStop = document.getElementById("stopBtn");
+
+  btnPause.id = "pauseBtn";
+  btnPause.className = "btn-kawaii";
+  btnPause.textContent = "Pause";
+  btnPause.disabled = true;
+  document.querySelector(".button-row").insertBefore(btnPause, btnStop);
 
   // -----------------------
   // Charger le JSON
@@ -72,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // accordéon script
     scriptAccordion.innerHTML = "";
-    ex.script.forEach((item, idx) => {
+    ex.script.forEach(item => {
       const line = document.createElement("div");
       line.style.marginBottom = "8px";
       line.textContent = item.text ? item.text : `Pause : ${item.pause}s`;
@@ -100,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return Math.max(1, Math.floor(total));
   }
 
-  // estimation simple de durée de parole (approx)
   function estimateSpeechDuration(text) {
     const words = text.split(" ").length;
     const wordsPerSec = 2.5; // voix lente à moyenne
@@ -146,6 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     btnStart.disabled = true;
+    btnPause.disabled = false;
     btnStop.disabled = false;
 
     while (currentIndex < currentExercise.script.length) {
@@ -157,12 +164,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     btnStart.disabled = false;
+    btnPause.disabled = true;
   }
 
   // -----------------------
-  // Stop
+  // Pause / Stop
   // -----------------------
   btnStart.addEventListener("click", () => play());
+
+  btnPause.addEventListener("click", () => {
+    isPaused = true;
+    pausedAt = Date.now() - startTime;
+    speechSynthesis.cancel();
+    btnPause.disabled = true;
+    btnStart.disabled = false;
+  });
 
   btnStop.addEventListener("click", () => {
     isPaused = false;
@@ -171,6 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
     startTime = null;
     speechSynthesis.cancel();
     btnStart.disabled = false;
+    btnPause.disabled = true;
     btnStop.disabled = true;
   });
 
@@ -178,7 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Progression
   // -----------------------
   function updateProgress() {
-    if (!currentExercise || !startTime) return;
+    if (!currentExercise || !startTime || isPaused) return;
 
     const elapsed = Math.floor((Date.now() - startTime) / 1000);
     const remaining = Math.max(0, currentExercise.duree_totale_sec - elapsed);
@@ -189,6 +206,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (remaining <= 0) {
       clearInterval(timer);
+      btnStart.disabled = false;
+      btnPause.disabled = true;
     }
   }
 
