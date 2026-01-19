@@ -19,6 +19,23 @@ const btnPause = document.getElementById("btnPause");
 const btnStop = document.getElementById("btnStop");
 
 // -----------------------
+// Estimation durée réelle
+// -----------------------
+function estimateSpeechDuration(text) {
+  const words = text.split(/\s+/).length;
+  return words / 2.67; // 160 mots/min
+}
+
+function computeRealDuration(script) {
+  let total = 0;
+  script.forEach(item => {
+    if (item.pause) total += item.pause;
+    if (item.text) total += estimateSpeechDuration(item.text);
+  });
+  return Math.ceil(total);
+}
+
+// -----------------------
 // Charger le JSON
 // -----------------------
 fetch("echauffements.json")
@@ -55,17 +72,30 @@ function loadExercise(ex) {
   pausedAt = 0;
   isPaused = false;
 
+  // calcul durée réelle
+  const realDuration = computeRealDuration(ex.script);
+  ex.duree_totale_sec = realDuration;
+
   // affichage
   presentation.textContent = ex.presentation;
   document.getElementById("uv-title").textContent = `${ex.id} – ${ex.nom}`;
 
-  // preview du script
-  scriptPreview.innerHTML = "";
+  // preview du script (accordéon)
+  scriptPreview.innerHTML = `
+    <details>
+      <summary>Voir le script</summary>
+      <div class="script-accordion"></div>
+    </details>
+  `;
+
+  const acc = scriptPreview.querySelector(".script-accordion");
+
   ex.script.forEach(item => {
     const p = document.createElement("p");
+    p.style.margin = "8px 0";
     if (item.text) p.textContent = item.text;
-    if (item.pause) p.textContent = `Pause : ${item.pause}s`;
-    scriptPreview.appendChild(p);
+    if (item.pause) p.textContent = `⏱ Pause : ${item.pause}s`;
+    acc.appendChild(p);
   });
 
   // temps
@@ -86,10 +116,9 @@ function speakItem(item) {
 
     const utt = new SpeechSynthesisUtterance(item.text);
 
-    // dramatic = grave + lent
     if (item.mode === "grave") {
-      utt.rate = 0.8;     // lent
-      utt.pitch = 0.7;    // grave
+      utt.rate = 0.8;
+      utt.pitch = 0.7;
     } else if (item.mode === "rapide") {
       utt.rate = 1.1;
       utt.pitch = 1.0;
