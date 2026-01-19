@@ -1,57 +1,34 @@
+let data = [];
+let currentExercise = null;
+let currentIndex = 0;
+let startTime = null;
+let pausedAt = 0;
+let isPaused = false;
+let timer = null;
+
 const select = document.getElementById("selectEchauffement");
 const presentation = document.getElementById("presentation");
-const btnPlay = document.getElementById("btnPlay");
-const btnPause = document.getElementById("btnPause");
-const btnStop = document.getElementById("btnStop");
+const scriptPreview = document.getElementById("scriptPreview");
+
 const progressFill = document.getElementById("progressFill");
 const timeLeft = document.getElementById("timeLeft");
 const timeTotal = document.getElementById("timeTotal");
-const scriptPreview = document.getElementById("scriptPreview");
 
-let data = [];
-let current = null;
-let currentIndex = 0;
-let synth = window.speechSynthesis;
-let utterance = null;
-let isPaused = false;
-let startTime = null;
-let elapsed = 0;
+const btnPlay = document.getElementById("btnPlay");
+const btnPause = document.getElementById("btnPause");
+const btnStop = document.getElementById("btnStop");
 
-function formatTime(sec) {
-  const m = Math.floor(sec / 60);
-  const s = Math.floor(sec % 60);
-  return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
-}
-
-function updateProgress() {
-  if (!current) return;
-  const total = current.duree_totale_sec;
-  const elapsedSec = elapsed;
-  const pct = Math.min(100, (elapsedSec / total) * 100);
-  progressFill.style.width = `${pct}%`;
-  timeLeft.textContent = formatTime(total - elapsedSec);
-  timeTotal.textContent = formatTime(total);
-}
-
-function renderPreview(ex) {
-  scriptPreview.innerHTML = "";
-  ex.script.forEach(item => {
-    if (item.text) {
-      const p = document.createElement("p");
-      p.textContent = item.text;
-      scriptPreview.appendChild(p);
-    }
-  });
-}
-
-function loadExercise(ex) {
-  current = ex;
-  currentIndex = 0;
-  elapsed = 0;
-  updateProgress();
-  presentation.textContent = ex.presentation || "";
-  renderPreview(ex);
-}
+// -----------------------
+// Charger le JSON
+// -----------------------
+fetch("echauffements.json")
+  .then(res => res.json())
+  .then(json => {
+    data = json.echauffements;
+    populateSelect();
+    loadExercise(data[0]);
+  })
+  .catch(err => console.error(err));
 
 function populateSelect() {
   select.innerHTML = "";
@@ -63,120 +40,138 @@ function populateSelect() {
   });
 }
 
-function findById(id) {
-  return data.find(x => x.id === id);
+select.addEventListener("change", () => {
+  const ex = data.find(e => e.id === select.value);
+  if (ex) loadExercise(ex);
+});
+
+// -----------------------
+// Charger un échauffement
+// -----------------------
+function loadExercise(ex) {
+  currentExercise = ex;
+  currentIndex = 0;
+  startTime = null;
+  pausedAt = 0;
+  isPaused = false;
+
+  // affichage
+  presentation.textContent = ex.presentation;
+  document.getElementById("uv-title").textContent = `${ex.id} – ${ex.nom}`;
+
+  // preview du script
+  scriptPreview.innerHTML = "";
+  ex.script.forEach(item => {
+    const p = document.createElement("p");
+    if (item.text) p.textContent = item.text;
+    if (item.pause) p.textContent = `Pause : ${item.pause}s`;
+    scriptPreview.appendChild(p);
+  });
+
+  // temps
+  timeTotal.textContent = formatTime(ex.duree_totale_sec);
+  timeLeft.textContent = formatTime(ex.duree_totale_sec);
+  progressFill.style.width = "0%";
 }
 
+// -----------------------
+// Lecture vocale
+// -----------------------
 function speakItem(item) {
-  return new Promise(resolve => {
-    if (item.pause !== undefined) {
-      setTimeout(() => {
-        elapsed += item.pause;
-        updateProgress();
-        resolve();
-      }, item.pause * 1000);
+  return new Promise((resolve) => {
+    if (item.pause) {
+      setTimeout(resolve, item.pause * 1000);
       return;
     }
 
-    const ut = new SpeechSynthesisUtterance(item.text);
-    const voices = synth.getVoices();
-    const voice = voices.find(v => v.lang.startsWith("fr")) || voices[0];
+    const utt = new SpeechSynthesisUtterance(item.text);
 
-    ut.voice = voice;
-
-    // Mode = grave / normal / rapide
+    // dramatic = grave + lent
     if (item.mode === "grave") {
-      ut.rate = 0.85;
-      ut.pitch = 0.7;
+      utt.rate = 0.8;     // lent
+      utt.pitch = 0.7;    // grave
     } else if (item.mode === "rapide") {
-      ut.rate = 1.25;
-      ut.pitch = 1.1;
+      utt.rate = 1.1;
+      utt.pitch = 1.0;
     } else {
-      ut.rate = 1.0;
-      ut.pitch = 1.0;
+      utt.rate = 0.95;
+      utt.pitch = 0.9;
     }
 
-    ut.onend = () => {
-      elapsed += Math.max(1.2, item.text.split(" ").length * 0.18);
-      updateProgress();
-      resolve();
-    };
-
-    utterance = ut;
-    synth.speak(ut);
+    utt.onend = () => resolve();
+    speechSynthesis.speak(utt);
   });
 }
 
-async function playFrom(index) {
-  if (!current) return;
-  for (let i = index; i < current.script.length; i++) {
-    currentIndex = i;
-    const item = current.script[i];
+async function play() {
+  if (!currentExercise) return;
 
-    if (isPaused) {
-      await new Promise(resolve => {
-        const interval = setInterval(() => {
-          if (!isPaused) {
-            clearInterval(interval);
-            resolve();
-          }
-        }, 100);
-      });
-    }
-
-    if (!synth.speaking) {
-      await speakItem(item);
-    }
-
-    if (!current || !synth.speaking) {
-      // continue
-    }
-
-    if (elapsed >= current.duree_totale_sec) break;
+  if (isPaused) {
+    isPaused = false;
+    startTime = Date.now() - pausedAt;
+  } else {
+    startTime = Date.now();
   }
+
+  btnPlay.disabled = true;
+  btnPause.disabled = false;
+
+  while (currentIndex < currentExercise.script.length) {
+    if (isPaused) return;
+
+    const item = currentExercise.script[currentIndex];
+    await speakItem(item);
+    currentIndex++;
+  }
+
+  // fin
+  btnPlay.disabled = false;
+  btnPause.disabled = true;
 }
 
-btnPlay.addEventListener("click", async () => {
-  if (!current) return;
-  if (synth.speaking && isPaused) {
-    isPaused = false;
-    synth.resume();
-    return;
-  }
-  if (synth.speaking) return;
-
-  isPaused = false;
-  await playFrom(currentIndex);
-});
+// -----------------------
+// Pause / Stop
+// -----------------------
+btnPlay.addEventListener("click", () => play());
 
 btnPause.addEventListener("click", () => {
-  if (!synth.speaking) return;
   isPaused = true;
-  synth.pause();
+  pausedAt = Date.now() - startTime;
+  speechSynthesis.cancel();
 });
 
 btnStop.addEventListener("click", () => {
-  synth.cancel();
   isPaused = false;
   currentIndex = 0;
-  elapsed = 0;
-  updateProgress();
+  pausedAt = 0;
+  startTime = null;
+  speechSynthesis.cancel();
+  btnPlay.disabled = false;
+  btnPause.disabled = true;
 });
 
-select.addEventListener("change", () => {
-  const ex = findById(select.value);
-  loadExercise(ex);
-});
+// -----------------------
+// Progression
+// -----------------------
+function updateProgress() {
+  if (!currentExercise || !startTime) return;
 
-fetch("echauffements.json")
-  .then(res => res.json())
-  .then(json => {
-    data = json.echauffements || [];
-    if (!data.length) throw new Error("Aucun échauffement trouvé.");
-    populateSelect();
-    loadExercise(data[0]);
-  })
-  .catch(err => {
-    console.error(err);
-  });
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const remaining = Math.max(0, currentExercise.duree_totale_sec - elapsed);
 
+  timeLeft.textContent = formatTime(remaining);
+  const pct = Math.min(100, (elapsed / currentExercise.duree_totale_sec) * 100);
+  progressFill.style.width = pct + "%";
+
+  if (remaining <= 0) {
+    clearInterval(timer);
+  }
+}
+
+timer = setInterval(updateProgress, 500);
+
+function formatTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+}
