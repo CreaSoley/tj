@@ -27,19 +27,30 @@
     <div class="card-kawaii">
       <div class="module-title">Échauffements assistés</div>
 
-      <div class="sub-section">
-        <h3>Choisir un échauffement</h3>
-        <select id="selectEchauffement"></select>
-        <p id="presentation"></p>
-      </div>
+      <div class="controls-row">
+  <label for="selectEchauff">Choisir un échauffement :</label>
+  <select id="selectEchauff"></select>
+</div>
 
-      <div class="sub-section">
-        <h3>Contrôles</h3>
-        <div class="button-row">
-          <button id="btnPlay" class="btn-kawaii">Lecture</button>
-          <button id="btnPause" class="btn-kawaii btn-small">Pause</button>
-          <button id="btnStop" class="btn-kawaii btn-stop btn-small">Stop</button>
-        </div>
+<div id="presentation" class="result-display"></div>
+
+<div id="visual" class="sub-section">
+  <details>
+    <summary>Script vocal (accroche)</summary>
+    <div id="scriptAccordion"></div>
+  </details>
+</div>
+
+<div class="result-display">
+  <div>Temps total estimé : <span id="totalTime"></span></div>
+  <div>Temps restant : <span id="countdown"></span></div>
+</div>
+
+<div class="button-row">
+  <button id="startBtn" class="btn-kawaii">Start</button>
+  <button id="stopBtn" class="btn-kawaii btn-stop">Stop</button>
+</div>
+
         <div class="progress-wrapper" style="margin-top: 12px;">
           <div id="progressBar" style="height: 12px; width:100%; border-radius: 12px; background:#ffd6ec; overflow:hidden;">
             <div id="progressFill" style="height:100%; width:0%; background:linear-gradient(90deg, #ff5fc1, #ff1493);"></div>
