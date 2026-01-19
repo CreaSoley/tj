@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
   btnPause.disabled = true;
   document.querySelector(".button-row").insertBefore(btnPause, btnStop);
 
+  const WORDS_PER_MINUTE = 130; // débit lent et dramatique
+
   // -----------------------
   // Charger le JSON
   // -----------------------
@@ -64,8 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
     pausedAt = 0;
     isPaused = false;
 
-    // affichage
     presentation.textContent = ex.presentation;
+    presentation.classList.add("fredoka");
+
     document.getElementById("uv-title").textContent = `${ex.id} – ${ex.nom}`;
 
     // preview du script
@@ -87,30 +90,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // calcul automatique du temps total
-    const totalSec = calculateTotalSeconds(ex.script);
-    ex.duree_totale_sec = totalSec;
+    currentExercise.duree_totale_sec = calculateDuration(currentExercise.script);
+    timeTotal.textContent = formatTime(currentExercise.duree_totale_sec);
+    timeLeft.textContent = formatTime(currentExercise.duree_totale_sec);
 
-    timeTotal.textContent = formatTime(totalSec);
-    timeLeft.textContent = formatTime(totalSec);
     progressFill.style.width = "0%";
   }
 
   // -----------------------
-  // Calcul du temps total
+  // Calcul durée totale
   // -----------------------
-  function calculateTotalSeconds(script) {
-    let total = 0;
-    script.forEach(item => {
-      if (item.pause) total += item.pause;
-      else total += estimateSpeechDuration(item.text);
-    });
-    return Math.max(1, Math.floor(total));
-  }
+  function calculateDuration(script) {
+    let totalPause = 0;
+    let totalWords = 0;
 
-  function estimateSpeechDuration(text) {
-    const words = text.split(" ").length;
-    const wordsPerSec = 2.5; // voix lente à moyenne
-    return words / wordsPerSec;
+    script.forEach(item => {
+      if (item.pause) totalPause += item.pause;
+      if (item.text) totalWords += item.text.split(" ").length;
+    });
+
+    const speechTimeSec = (totalWords / WORDS_PER_MINUTE) * 60;
+    return Math.round(totalPause + speechTimeSec);
   }
 
   // -----------------------
