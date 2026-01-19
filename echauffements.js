@@ -1,1108 +1,177 @@
-{
-  "echauffements": [
-    {
-      "id": "E01",
-      "nom": "Réveil du Guerrier",
-      "categorie": "debout",
-      "duree_totale": "≈10 min",
-      "duree_totale_sec": 600,
-      "objectifs": [
-        "Mobilité générale",
-        "Fluidité",
-        "Montée progressive en intensité"
-      ],
-      "pre_requis": {
-        "position": "debout",
-        "materiel": "aucun"
-      },
-      "presentation": "Choisis cet échauffement si tu veux réveiller tout le corps rapidement et entrer progressivement dans une dynamique martiale complète.",
-      "script": [
-        { "text": "On commence.", "mode": "grave" },
-        { "pause": 2 },
-
-        { "text": "Posture droite.", "mode": "grave" },
-        { "pause": 1 },
-        { "text": "Respire lentement.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Ancre-toi dans le sol.", "mode": "grave" },
-        { "pause": 3 },
-
-        { "text": "Mobilise la tête.", "mode": "normal" },
-        { "pause": 1 },
-        { "text": "Droite.", "mode": "normal" },
-        { "pause": 1 },
-        { "text": "Gauche.", "mode": "normal" },
-        { "pause": 1 },
-        { "text": "Cercle lent.", "mode": "normal" },
-        { "pause": 2 },
-
-        { "text": "Épaules souples.", "mode": "normal" },
-        { "pause": 1 },
-        { "text": "Cercles vers l’avant.", "mode": "normal" },
-        { "pause": 15 },
-
-        { "text": "Puis vers l’arrière.", "mode": "normal" },
-        { "pause": 15 },
-
-        { "text": "Poignets relâchés.", "mode": "normal" },
-        { "pause": 2 },
-        { "text": "Descends maintenant.", "mode": "normal" },
-        { "pause": 1 },
-        { "text": "Hanches mobiles.", "mode": "normal" },
-        { "pause": 1 },
-        { "text": "Genoux souples.", "mode": "normal" },
-        { "pause": 1 },
-        { "text": "Chevilles actives.", "mode": "normal" },
-        { "pause": 3 },
-
-        { "text": "Monte les genoux.", "mode": "rapide" },
-        { "pause": 1 },
-        { "text": "Respiration naturelle.", "mode": "rapide" },
-        { "pause": 1 },
-
-        { "text": "Ajoute des esquives latérales.", "mode": "rapide" },
-        { "pause": 1 },
-        { "text": "Droite.", "mode": "rapide" },
-        { "pause": 1 },
-        { "text": "Gauche.", "mode": "rapide" },
-        { "pause": 1 },
-        { "text": "Fluide.", "mode": "rapide" },
-        { "pause": 2 },
-
-        { "text": "Shadow tai-jitsu.", "mode": "rapide" },
-        { "pause": 1 },
-        { "text": "Déplacements légers.", "mode": "rapide" },
-        { "pause": 1 },
-        { "text": "Garde haute.", "mode": "rapide" },
-        { "pause": 1 },
-        { "text": "Frappes souples.", "mode": "rapide" },
-        { "pause": 1 },
-        { "text": "Sans force.", "mode": "rapide" },
-        { "pause": 2 },
-        { "text": "Bras, jambes, coordination.", "mode": "rapide" },
-        { "pause": 3 },
-
-        { "text": "Tu réveilles le guerrier.", "mode": "grave" },
-        { "pause": 2 },
-        { "text": "Ton corps est prêt.", "mode": "grave" },
-        { "pause": 2 },
-        { "text": "Ton esprit aussi.", "mode": "grave" },
-        { "pause": 3 },
-        { "text": "Fin.", "mode": "grave" }
-      ]
-    },
-
-    {
-      "id": "E02",
-      "nom": "Corps en Mouvement",
-      "categorie": "debout",
-      "duree_totale": "≈10 min",
-      "duree_totale_sec": 600,
-      "objectifs": [
-        "Coordination",
-        "Déverrouillage articulaire",
-        "Continuité du mouvement"
-      ],
-      "pre_requis": {
-        "position": "debout",
-        "materiel": "aucun"
-      },
-      "presentation": "Choisis cet échauffement si tu te sens raide ou dispersé et que tu veux retrouver coordination, continuité et fluidité.",
-      "script": [
-        { "text": "On y va.", "mode": "grave" },
-        { "pause": 2 },
-
-        { "text": "Posture stable.", "mode": "grave" },
-        { "pause": 1 },
-        { "text": "Respire calmement.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Grands cercles de bras.", "mode": "normal" },
-        { "pause": 15 },
-        { "text": "Lents, amples, contrôlés.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Le souffle accompagne le mouvement.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Genoux maintenant.", "mode": "normal" },
-        { "pause": 1 },
-        { "text": "Flexions légères.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Chevilles mobiles.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Sens le sol sous tes pieds.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Pas chassés.", "mode": "rapide" },
-        { "pause": 6 },
-        { "text": "Pivots.", "mode": "rapide" },
-        { "pause": 6 },
-
-        { "text": "Tourne le buste.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Coordonne haut et bas du corps.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Shadow box fluide.", "mode": "rapide" },
-        { "pause": 8 },
-
-        { "text": "Aucune puissance.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Juste la continuité.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Déplace-toi.", "mode": "rapide" },
-        { "pause": 8 },
-
-        { "text": "Enchaîne naturellement.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Ton corps apprend à bouger sans rupture.", "mode": "grave" },
-        { "pause": 5 },
-        { "text": "Fin.", "mode": "grave" }
-      ]
-    },
-
-    {
-      "id": "E03",
-      "nom": "Souplesse du Tigre",
-      "categorie": "debout",
-      "duree_totale": "≈10 min",
-      "duree_totale_sec": 600,
-      "objectifs": [
-        "Relâchement musculaire",
-        "Amplitude",
-        "Souplesse dynamique"
-      ],
-      "pre_requis": {
-        "position": "debout",
-        "materiel": "aucun"
-      },
-      "presentation": "Choisis cet échauffement si tu veux relâcher les tensions, gagner en amplitude et préparer un travail fluide sans impact.",
-      "script": [
-        { "text": "On commence doucement.", "mode": "grave" },
-        { "pause": 3 },
-
-        { "text": "Respire profondément.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Étire les bras.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Ouvre la poitrine.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Le dos s’allonge.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Travail des hanches.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Ouverture progressive.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Aucune douleur.", "mode": "grave" },
-        { "pause": 6 },
-
-        { "text": "Juste de l’amplitude.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Montées de genoux.", "mode": "rapide" },
-        { "pause": 8 },
-
-        { "text": "Puis talons-fesses.", "mode": "rapide" },
-        { "pause": 8 },
-
-        { "text": "Rythme souple.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Respiration fluide.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Déplacements légers.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Frappes détendues.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Comme un tigre qui s’étire.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Souple.", "mode": "grave" },
-        { "pause": 5 },
-
-        { "text": "Présent.", "mode": "grave" },
-        { "pause": 5 },
-
-        { "text": "Prêt à bondir.", "mode": "grave" },
-        { "pause": 5 },
-
-        { "text": "Fin.", "mode": "grave" }
-      ]
-    },
-
-    {
-      "id": "E04",
-      "nom": "Respiration Martiale",
-      "categorie": "mixte",
-      "duree_totale": "≈10 min",
-      "duree_totale_sec": 600,
-      "objectifs": [
-        "Respiration efficace",
-        "Calme actif",
-        "Présence"
-      ],
-      "pre_requis": {
-        "position": "debout",
-        "materiel": "aucun"
-      },
-      "presentation": "Choisis cet échauffement si tu veux calmer le mental, améliorer ton souffle et installer une présence stable.",
-      "script": [
-        { "text": "Debout. Immobile.", "mode": "grave" },
-        { "pause": 3 },
-
-        { "text": "Inspire profondément.", "mode": "grave" },
-        { "pause": 10 },
-        { "text": "Expire lentement.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Cercles d’épaules synchronisés au souffle.", "mode": "normal" },
-        { "pause": 15 },
-
-        { "text": "Chaque mouvement suit la respiration.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Flexions des jambes.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Inspire en montant.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Expire en descendant.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Le corps s’ancre.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Déplacements lents.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Chaque pas est contrôlé.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Le regard est stable.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Shadow tai-jitsu lent.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Précis.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Chaque technique a une intention.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Respire.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Présence.", "mode": "grave" },
-        { "pause": 5 },
-
-        { "text": "Maîtrise.", "mode": "grave" },
-        { "pause": 5 },
-
-        { "text": "Fin.", "mode": "grave" }
-      ]
-    },
-
-    {
-      "id": "E05",
-      "nom": "Activation Express",
-      "categorie": "debout",
-      "duree_totale": "≈10 min",
-      "duree_totale_sec": 600,
-      "objectifs": [
-        "Réveil nerveux",
-        "Réactivité",
-        "Coordination"
-      ],
-      "pre_requis": {
-        "position": "debout",
-        "materiel": "aucun"
-      },
-      "presentation": "Choisis cet échauffement si tu manques d’énergie et que tu veux activer rapidement vitesse, réactivité et vigilance.",
-      "script": [
-        { "text": "On active.", "mode": "grave" },
-        { "pause": 2 },
-
-        { "text": "Cercles rapides des poignets.", "mode": "rapide" },
-        { "pause": 8 },
-        { "text": "Des coudes.", "mode": "rapide" },
-        { "pause": 8 },
-        { "text": "Des épaules.", "mode": "rapide" },
-        { "pause": 8 },
-
-        { "text": "Le système nerveux se réveille.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Petits sauts.", "mode": "rapide" },
-        { "pause": 8 },
-
-        { "text": "Rebonds sur les chevilles.", "mode": "rapide" },
-        { "pause": 8 },
-
-        { "text": "Légèreté.", "mode": "normal" },
-        { "pause": 6 },
-
-        { "text": "Réactivité.", "mode": "normal" },
-        { "pause": 6 },
-
-        { "text": "Jeu de jambes rapide.", "mode": "rapide" },
-        { "pause": 10 },
-
-        { "text": "Avant, arrière.", "mode": "rapide" },
-        { "pause": 8 },
-
-        { "text": "Change de direction.", "mode": "rapide" },
-        { "pause": 8 },
-
-        { "text": "Reste équilibré.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Shadow explosif.", "mode": "rapide" },
-        { "pause": 12 },
-
-        { "text": "Cinquante pour cent de puissance.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Vitesse.", "mode": "rapide" },
-        { "pause": 6 },
-
-        { "text": "Contrôle.", "mode": "normal" },
-        { "pause": 6 },
-
-        { "text": "Précision.", "mode": "normal" },
-        { "pause": 6 },
-
-        { "text": "Tu es vif.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Tu es prêt.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Fin.", "mode": "grave" }
-      ]
-    },
-
-    {
-      "id": "E06",
-      "nom": "Mise en Condition Examen",
-      "categorie": "zanshin",
-      "duree_totale": "≈10 min",
-      "duree_totale_sec": 600,
-      "objectifs": [
-        "Concentration",
-        "Présence martiale",
-        "Gestion du stress"
-      ],
-      "pre_requis": {
-        "position": "debout",
-        "materiel": "aucun"
-      },
-      "presentation": "Choisis cet échauffement si tu veux te placer mentalement comme le jour du passage, sérieux, concentré et prêt.",
-      "script": [
-        { "text": "Posture d’examen.", "mode": "grave" },
-        { "pause": 3 },
-
-        { "text": "Respiration calme.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Regard droit.", "mode": "grave" },
-        { "pause": 6 },
-
-        { "text": "Mobilité lente des hanches.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Le dos se libère.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Aucune tension parasite.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Déplacements contrôlés.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Chaque pas est posé.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Le regard anticipe.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Shadow tai-jitsu engagé.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Sérieux.", "mode": "grave" },
-        { "pause": 6 },
-
-        { "text": "Présence martiale.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Tu n’es plus à l’entraînement.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Tu es déjà à l’examen.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Confiant.", "mode": "grave" },
-        { "pause": 6 },
-
-        { "text": "Stable.", "mode": "grave" },
-        { "pause": 6 },
-
-        { "text": "Maîtrisé.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Fin.", "mode": "grave" }
-      ]
-    },
-
-    {
-      "id": "E07",
-      "nom": "Ancrage du Guerrier Assis",
-      "categorie": "assis",
-      "duree_totale": "≈10 min",
-      "duree_totale_sec": 600,
-      "objectifs": [
-        "Centrage",
-        "Respiration basse",
-        "Calme mental"
-      ],
-      "pre_requis": {
-        "position": "assis",
-        "materiel": "chaise"
-      },
-      "presentation": "Choisis cet échauffement si tu es fatigué ou limité physiquement mais que tu veux malgré tout travailler le centrage.",
-      "script": [
-        { "text": "Assieds-toi.", "mode": "grave" },
-        { "pause": 2 },
-
-        { "text": "Pieds bien au sol.", "mode": "normal" },
-        { "pause": 5 },
-
-        { "text": "Dos droit.", "mode": "normal" },
-        { "pause": 5 },
-
-        { "text": "Respiration profonde.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Inspire par le nez.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Expire lentement.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Mobilise la nuque.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Lentement.", "mode": "normal" },
-        { "pause": 5 },
-
-        { "text": "Sans tension.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Épaules maintenant.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Cercles amples.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Poids relâché.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Poignets et doigts.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Ouvre.", "mode": "normal" },
-        { "pause": 6 },
-
-        { "text": "Ferme.", "mode": "normal" },
-        { "pause": 6 },
-
-        { "text": "Énergie dans les mains.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Visualise ton corps debout.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Stable.", "mode": "grave" },
-        { "pause": 6 },
-
-        { "text": "Prêt.", "mode": "grave" },
-        { "pause": 6 },
-
-        { "text": "Même assis, le guerrier est présent.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Fin.", "mode": "grave" }
-      ]
-    },
-
-    {
-      "id": "E08",
-      "nom": "Souffle et Articulations",
-      "categorie": "assis",
-      "duree_totale": "≈10 min",
-      "duree_totale_sec": 600,
-      "objectifs": [
-        "Décontraction",
-        "Mobilité douce",
-        "Préparation mentale"
-      ],
-      "pre_requis": {
-        "position": "assis",
-        "materiel": "chaise"
-      },
-      "presentation": "Choisis cet échauffement si tu as besoin d’une remise en route douce, articulaire et respiratoire, sans stress physique.",
-      "script": [
-        { "text": "Inspire.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Expire.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Cercles des épaules synchronisés au souffle.", "mode": "normal" },
-        { "pause": 15 },
-
-        { "text": "Relâche.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Bras qui montent à l’inspiration.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Qui descendent à l’expiration.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Mobilise doucement le bassin.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Bascule avant.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Puis arrière.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Genoux et chevilles.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Petits mouvements.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Réveil articulaire.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Ferme les yeux un instant.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Le corps se prépare.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "L’esprit s’éveille.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Fin.", "mode": "grave" }
-      ]
-    },
-
-    {
-      "id": "E09",
-      "nom": "Visualisation Martiale",
-      "categorie": "zanshin",
-      "duree_totale": "≈10 min",
-      "duree_totale_sec": 600,
-      "objectifs": [
-        "Activation neuronale",
-        "Intention",
-        "Zanshin"
-      ],
-      "pre_requis": {
-        "position": "assis",
-        "materiel": "chaise"
-      },
-      "presentation": "Choisis cet échauffement si tu veux activer l’intention et le zanshin sans bouger, uniquement par le mental.",
-      "script": [
-        { "text": "Assis. Immobile.", "mode": "grave" },
-        { "pause": 3 },
-
-        { "text": "Respiration calme.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Les mains se ferment.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Se rouvrent.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Contrôle.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Visualise une garde parfaite.", "mode": "normal" },
-        { "pause": 15 },
-
-        { "text": "Les épaules détendues.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Le regard clair.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Imagine un déplacement.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Une défense.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Un contre.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Même sans bouger, le système nerveux travaille.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Le corps apprend.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Quand tu te lèveras, tu seras prêt.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Fin.", "mode": "grave" }
-      ]
-    },
-
-    {
-      "id": "E10",
-      "nom": "Réveil du Hara",
-      "categorie": "hara",
-      "duree_totale": "≈10 min",
-      "duree_totale_sec": 600,
-      "objectifs": [
-        "Respiration abdominale",
-        "Diminution des tensions hautes",
-        "Stabilité centrale"
-      ],
-      "pre_requis": {
-        "position": "debout",
-        "materiel": "aucun"
-      },
-      "presentation": "Choisis cet échauffement si tu ressens des épaules hautes ou une respiration inefficace et que tu veux redescendre dans le centre.",
-      "script": [
-        { "text": "Installe-toi debout.", "mode": "grave" },
-        { "pause": 3 },
-
-        { "text": "Pieds ancrés.", "mode": "normal" },
-        { "pause": 5 },
-
-        { "text": "Pose une main sur le bas-ventre.", "mode": "normal" },
-        { "pause": 5 },
-
-        { "text": "Inspire lentement.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Le ventre se gonfle.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "La poitrine reste calme.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Expire.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Les épaules descendent.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Continue.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Respiration basse.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Silencieuse.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Ajoute de légers mouvements de bras.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Sans tension.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Fléchis légèrement les jambes.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Sens le poids descendre.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Le hara est actif.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Le corps est unifié.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Fin.", "mode": "grave" }
-      ]
-    },
-
-    {
-      "id": "E11",
-      "nom": "Centre Stable",
-      "categorie": "hara",
-      "duree_totale": "≈10 min",
-      "duree_totale_sec": 600,
-      "objectifs": [
-        "Connexion sol-hara",
-        "Alignement",
-        "Contrôle postural"
-      ],
-      "pre_requis": {
-        "position": "debout",
-        "materiel": "aucun"
-      },
-      "presentation": "Choisis cet échauffement si tu veux renforcer l’alignement, la stabilité et la connexion entre le sol et le hara.",
-      "script": [
-        { "text": "Position naturelle.", "mode": "grave" },
-        { "pause": 2 },
-
-        { "text": "Inspire par le nez.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Expire longuement.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "À l’expiration, sens le poids descendre dans le bassin.", "mode": "normal" },
-        { "pause": 15 },
-
-        { "text": "Cercles très lents du bassin.", "mode": "normal" },
-        { "pause": 15 },
-
-        { "text": "Petits. Contrôlés.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Ajoute les bras.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Ils suivent le centre.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Déplacements courts.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Un pas, puis l’autre.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Le hara guide.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Le reste du corps suit.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Fin.", "mode": "grave" }
-      ]
-    },
-
-    {
-      "id": "E12",
-      "nom": "Zanshin Silencieux",
-      "categorie": "zanshin",
-      "duree_totale": "≈10 min",
-      "duree_totale_sec": 600,
-      "objectifs": [
-        "Présence continue",
-        "Calme interne",
-        "Vigilance"
-      ],
-      "pre_requis": {
-        "position": "debout",
-        "materiel": "aucun"
-      },
-      "presentation": "Choisis cet échauffement si tu veux développer une présence calme, immobile et immédiatement perceptible.",
-      "script": [
-        { "text": "Tiens-toi droit.", "mode": "grave" },
-        { "pause": 2 },
-
-        { "text": "Immobile.", "mode": "grave" },
-        { "pause": 5 },
-
-        { "text": "Respiration naturelle.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Sans bruit.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Regard loin devant.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Vision large.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Inspire.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Expire.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Ne cherche rien.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Observe.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Le corps est prêt sans bouger.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Même immobile, tu es en vigilance totale.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "C’est le zanshin.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Fin.", "mode": "grave" }
-      ]
-    },
-
-    {
-      "id": "E13",
-      "nom": "Hara en Mouvement, Zanshin Constant",
-      "categorie": "mixte",
-      "duree_totale": "≈10 min",
-      "duree_totale_sec": 600,
-      "objectifs": [
-        "Centre actif en mouvement",
-        "Zanshin après la technique",
-        "Maîtrise émotionnelle"
-      ],
-      "pre_requis": {
-        "position": "debout",
-        "materiel": "aucun"
-      },
-      "presentation": "Choisis cet échauffement si tu veux apprendre à conserver la présence même après la fin d’une technique.",
-      "script": [
-        { "text": "Commence à marcher lentement.", "mode": "grave" },
-        { "pause": 5 },
-
-        { "text": "Chaque pas part du centre.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Le buste reste calme.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Respire bas.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Les épaules ne montent pas.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Change de direction sans prévenir.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Ajoute une frappe lente.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Elle part du hara.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Elle revient au hara.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Après la technique, ne relâche pas la présence.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Ne coupe rien.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Le mouvement finit.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Le zanshin reste.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Fin.", "mode": "grave" }
-      ]
-    },
-
-    {
-      "id": "E14",
-      "nom": "Hara et Zanshin avant Kata",
-      "categorie": "mixte",
-      "duree_totale": "≈10 min",
-      "duree_totale_sec": 600,
-      "objectifs": [
-        "Installer une respiration basse stable",
-        "Ancrer le centre avant l’exécution du kata",
-        "Entrer dans un état de zanshin continu"
-      ],
-      "pre_requis": {
-        "position": "debout",
-        "materiel": "aucun"
-      },
-      "presentation": "Choisis cet échauffement si tu veux entrer dans ton kata avec un centre stable, un mental calme et une continuité totale.",
-      "script": [
-        { "text": "Place-toi debout.", "mode": "grave" },
-        { "pause": 3 },
-
-        { "text": "Pieds ancrés dans le sol.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Genoux souples.", "mode": "normal" },
-        { "pause": 8 },
-
-        { "text": "Redresse la colonne sans tension.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Pose l’attention dans le bas-ventre.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Inspire lentement par le nez.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Le ventre se gonfle.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Les épaules restent lourdes.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Expire calmement.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Sens le poids descendre dans le bassin.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Continue cette respiration basse.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Stable. Silencieuse.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Commence de très légers déplacements.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Un pas. Puis l’autre.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Le mouvement part du centre.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Le buste reste calme.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Ajoute des gestes lents de kata.", "mode": "normal" },
-        { "pause": 15 },
-
-        { "text": "Sans force. Sans vitesse.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Chaque technique naît du hara.", "mode": "normal" },
-        { "pause": 12 },
-
-        { "text": "Après chaque mouvement, garde la présence.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Ne coupe rien.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Le corps est prêt.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "L’esprit est déjà dans le kata.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Fin.", "mode": "grave" }
-      ]
-    },
-
-    {
-      "id": "E15",
-      "nom": "Zanshin après Kata",
-      "categorie": "zanshin",
-      "duree_totale": "≈10 min",
-      "duree_totale_sec": 600,
-      "objectifs": [
-        "Maintenir la présence après la dernière technique",
-        "Éviter toute rupture mentale ou posturale",
-        "Imposer une impression de maîtrise au jury"
-      ],
-      "pre_requis": {
-        "position": "debout",
-        "materiel": "aucun"
-      },
-      "presentation": "Choisis cet échauffement si tu veux marquer le jury en montrant que ton engagement continue après la dernière technique.",
-      "script": [
-        { "text": "Le kata est terminé.", "mode": "grave" },
-        { "pause": 3 },
-
-        { "text": "Mais tu ne t’arrêtes pas.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Reste immobile.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Respiration calme.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Basse.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Les épaules relâchées.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Le regard reste vivant.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Large.", "mode": "normal" },
-        { "pause": 10 },
-
-        { "text": "Présent.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Ne pense pas au résultat.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Ne pense pas au jury.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Tu es encore en situation.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Inspire.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Expire.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Le corps est stable.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Le centre est plein.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Même sans bouger, tu es prêt à agir.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Garde cette présence quelques instants de plus.", "mode": "grave" },
-        { "pause": 12 },
-
-        { "text": "Puis seulement, relâche doucement.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Le kata est fini.", "mode": "grave" },
-        { "pause": 8 },
-
-        { "text": "Le zanshin, lui, est resté.", "mode": "grave" },
-        { "pause": 10 },
-
-        { "text": "Fin.", "mode": "grave" }
-      ]
+let data = [];
+let currentExercise = null;
+let currentIndex = 0;
+let startTime = null;
+let pausedAt = 0;
+let isPaused = false;
+let timer = null;
+
+const select = document.getElementById("selectEchauffement");
+const presentation = document.getElementById("presentation");
+const scriptPreview = document.getElementById("scriptPreview");
+
+const progressFill = document.getElementById("progressFill");
+const timeLeft = document.getElementById("timeLeft");
+const timeTotal = document.getElementById("timeTotal");
+
+const btnPlay = document.getElementById("btnPlay");
+const btnPause = document.getElementById("btnPause");
+const btnStop = document.getElementById("btnStop");
+
+// -----------------------
+// Charger le JSON
+// -----------------------
+fetch("echauffements.json")
+  .then(res => res.json())
+  .then(json => {
+    data = json.echauffements;
+    populateSelect();
+    loadExercise(data[0]);
+  })
+  .catch(err => console.error(err));
+
+function populateSelect() {
+  select.innerHTML = "";
+  data.forEach(ex => {
+    const opt = document.createElement("option");
+    opt.value = ex.id;
+    opt.textContent = `${ex.id} – ${ex.nom}`;
+    select.appendChild(opt);
+  });
+}
+
+select.addEventListener("change", () => {
+  const ex = data.find(e => e.id === select.value);
+  if (ex) loadExercise(ex);
+});
+
+// -----------------------
+// Charger un échauffement
+// -----------------------
+function loadExercise(ex) {
+  currentExercise = ex;
+  currentIndex = 0;
+  startTime = null;
+  pausedAt = 0;
+  isPaused = false;
+
+  // affichage
+  presentation.textContent = ex.presentation;
+  document.getElementById("uv-title").textContent = `${ex.id} – ${ex.nom}`;
+
+  // preview du script
+  scriptPreview.innerHTML = "";
+  ex.script.forEach(item => {
+    const p = document.createElement("p");
+    if (item.text) p.textContent = item.text;
+    if (item.pause) p.textContent = `Pause : ${item.pause}s`;
+    scriptPreview.appendChild(p);
+  });
+
+  // temps
+  timeTotal.textContent = formatTime(ex.duree_totale_sec);
+  timeLeft.textContent = formatTime(ex.duree_totale_sec);
+  progressFill.style.width = "0%";
+}
+
+// -----------------------
+// Lecture vocale
+// -----------------------
+function speakItem(item) {
+  return new Promise((resolve) => {
+    if (item.pause) {
+      setTimeout(resolve, item.pause * 1000);
+      return;
     }
-  ]
+
+    const utt = new SpeechSynthesisUtterance(item.text);
+
+    // dramatic = grave + lent
+    if (item.mode === "grave") {
+      utt.rate = 0.8;     // lent
+      utt.pitch = 0.7;    // grave
+    } else if (item.mode === "rapide") {
+      utt.rate = 1.1;
+      utt.pitch = 1.0;
+    } else {
+      utt.rate = 0.95;
+      utt.pitch = 0.9;
+    }
+
+    utt.onend = () => resolve();
+    speechSynthesis.speak(utt);
+  });
+}
+
+async function play() {
+  if (!currentExercise) return;
+
+  if (isPaused) {
+    isPaused = false;
+    startTime = Date.now() - pausedAt;
+  } else {
+    startTime = Date.now();
+  }
+
+  btnPlay.disabled = true;
+  btnPause.disabled = false;
+
+  while (currentIndex < currentExercise.script.length) {
+    if (isPaused) return;
+
+    const item = currentExercise.script[currentIndex];
+    await speakItem(item);
+    currentIndex++;
+  }
+
+  // fin
+  btnPlay.disabled = false;
+  btnPause.disabled = true;
+}
+
+// -----------------------
+// Pause / Stop
+// -----------------------
+btnPlay.addEventListener("click", () => play());
+
+btnPause.addEventListener("click", () => {
+  isPaused = true;
+  pausedAt = Date.now() - startTime;
+  speechSynthesis.cancel();
+});
+
+btnStop.addEventListener("click", () => {
+  isPaused = false;
+  currentIndex = 0;
+  pausedAt = 0;
+  startTime = null;
+  speechSynthesis.cancel();
+  btnPlay.disabled = false;
+  btnPause.disabled = true;
+});
+
+// -----------------------
+// Progression
+// -----------------------
+function updateProgress() {
+  if (!currentExercise || !startTime) return;
+
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const remaining = Math.max(0, currentExercise.duree_totale_sec - elapsed);
+
+  timeLeft.textContent = formatTime(remaining);
+  const pct = Math.min(100, (elapsed / currentExercise.duree_totale_sec) * 100);
+  progressFill.style.width = pct + "%";
+
+  if (remaining <= 0) {
+    clearInterval(timer);
+  }
+}
+
+timer = setInterval(updateProgress, 500);
+
+function formatTime(sec) {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 }
