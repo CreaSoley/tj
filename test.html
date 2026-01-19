@@ -300,6 +300,10 @@ function setActive(btn){
 }
 
 intervalInput.oninput = () => { intervalVal.textContent = fmt(+intervalInput.value); };
+async function speakCommand(text) {
+  await speak(text, 0.6, "ja-JP");
+  await wait(1000);
+}
 
 /* ===================== PICK RANDOM ===================== */
 function pickRandom(cat, n = 1){
@@ -518,7 +522,7 @@ await wait(5000);
 }
 /* ===================== RUNHARALIGNES===================== */
 async function runHaraLigne() {
-displayZone.classList.add("hara");
+text.classList.add("hara");
   stopped = false;
   paused = false;
   visual.className = "bg-hara";
@@ -585,11 +589,13 @@ const speedMode = document.getElementById("speedMode")?.value || "slow";
 
   if (!(await waitIfNotStopped(120000))) return;
 
-  /* ========= EXERCICE E ========= */
-  show("<strong>Exercice E</strong><br>Kihon et hara");
-  await speak("Exercice suivant. Exercice E. Kihon et hara.", 0.8);
+ /* ========= EXERCICE E ========= */
+show("<strong>Exercice E</strong><br>Kihon et hara");
+await speak("Exercice suivant. Exercice E. Kihon et hara.", 0.8);
 
-  for (const tech of techniques) {
+const COUNT_DELAY = SPEED.countDelay;
+
+for (const tech of HARA_TECHNIQUES) {
 
   for (let round = 0; round < 2; round++) {
     if (stopped) return;
@@ -617,14 +623,15 @@ const speedMode = document.getElementById("speedMode")?.value || "slow";
     }
   }
 }
+
   /* ========= EXERCICE F ========= */
   show("<strong>Zanchin</strong>");
   await speak("La séquence est terminée. Travaillons le zanchin.", 0.8);
   await speak("Respiration basse, posture stable, regard long.", 0.8);
 
   await waitIfNotStopped(20000);
- displayZone.classList.remove("hara");
-
+ text.classList.remove("hara");
+  
   await speak("Entraînement terminé", 0.8);
   text.textContent = "Fin de l’entraînement 🥋";
 }
