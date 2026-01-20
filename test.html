@@ -662,29 +662,33 @@ show("<strong>Exercice E</strong><br>Kihon et hara");
 await speak("Exercice suivant. Exercice E. Kihon et hara.", 0.8);
 
 const COUNT_DELAY = SPEED.countDelay;
+const COUNT_JP = ["イチ", "ニ", "サン", "シ", "ゴ"];
 
 for (const tech of HARA_TECHNIQUES) {
 
+  /* Nom de la technique : 1 seule fois */
   show(`<strong>${tech.fr}</strong>`);
   await speakJP(tech.jp, 0.6);
   await wait(1000);
 
+  /* Commandes initiales : 1 seule fois */
   await speakCommand("構え");
+  await wait(500);
   await speakCommand("始め");
+  await wait(500);
 
+  /* Deux allers-retours complets */
   for (let round = 0; round < 2; round++) {
 
-    // Aller
-    for (const n of ["一","二","三","四","五"]) {
+    /* Aller */
+    for (const n of COUNT_JP) {
       await speakJP(n, 0.6);
       await wait(COUNT_DELAY);
     }
 
-    // Retour (pas après le dernier)
-    if (round === 0) {
-      await speakJP("マワッテ", 0.6);
-      await wait(1000);
-    }
+    /* Mawate après CHAQUE aller */
+    await speakJP("マワテー", 0.6);
+    await wait(1000);
   }
 }
 
