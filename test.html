@@ -102,13 +102,13 @@ fetch("banner.html")
         <h3>🎮 Commandes</h3>
 
         <div class="button-row">
-          <button id="start" class=btn-kawaii start">▶️ Lancer</button>
+         <button id="start" class="btn-kawaii start">▶️ Lancer</button>
           <button id="pause" class="btn-kawaii pause">⏸ Pause</button>
           <button id="stop" class="btn-kawaii stop">⏹ Stop</button>
         </div>
 
         <div class="button-row">
-         <button class="btn-kawaii criteria" onclick="openCriteria()">📋 Criteres</button>
+         <button id="criteria" class="btn-kawaii criteria">📋 Critères</button>
           <button id="presentationExam" class="btn-kawaii hidden">📢 Presentation</button>
           <button id="startExam" class="btn-kawaii hidden">📝 Examen</button>
           <button id="reset" class="btn-kawaii reset">🔄 Reset</button>
@@ -134,7 +134,7 @@ fetch("banner.html")
       <li>Précision</li>
     </ul>
 
-    <button class="btn-kawaii btn-stop" onclick="closeCriteria()">Fermer</button>
+    <button id="closeCriteriaBtn" class="btn-kawaii btn-stop">Fermer</button>
   </div>
 </div>
 
@@ -247,23 +247,25 @@ const HARA_TECHNIQUES = [
   { fr: "Age uke", jp: "アゲウケ" }
 ];
 
-  /* ===================== FENETRE CRITERE ===================== */
+/* ===================== MODALE CRITÈRES ===================== */
+
 const criteriaBtn = document.getElementById("criteria");
 const criteriaModal = document.getElementById("criteriaModal");
-const closeCriteria = document.getElementById("closeCriteria");
+const closeCriteriaBtn = document.getElementById("closeCriteriaBtn");
 
 /* sécurité */
-if(criteriaBtn && criteriaModal && closeCriteria){
+if (criteriaBtn && criteriaModal && closeCriteriaBtn) {
 
   criteriaBtn.addEventListener("click", () => {
-    criteriaModal.classList.add("show");
+    criteriaModal.classList.remove("hidden");
   });
 
-  closeCriteria.addEventListener("click", () => {
-    criteriaModal.classList.remove("show");
+  closeCriteriaBtn.addEventListener("click", () => {
+    criteriaModal.classList.add("hidden");
   });
 
 }
+
 /* ===================== ÉTAT ===================== */
 let sequence = [];
 let index = 0;
@@ -1023,10 +1025,6 @@ mode.dispatchEvent(new Event("change"));
 /* ===================== MODALE CRITERES ===================== */
 function openCriteria() {
   document.getElementById("criteriaModal").classList.remove("hidden");
-}
-
-function closeCriteria() {
-  document.getElementById("criteriaModal").classList.add("hidden");
 }
 
 /* ===== RESET ===== */
