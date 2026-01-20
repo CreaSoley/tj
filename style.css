@@ -415,3 +415,22 @@ html, body{
   font-weight: 800;
   margin-top: 8px;
 }
+/* ===============================
+   TAILLE UNIFIÉE BOUTONS MOBILE
+   =============================== */
+@media (max-width: 600px) {
+
+  /* Tous les boutons sauf Lancer */
+  .btn-kawaii:not(.start) {
+    font-size: 0.75rem;
+    line-height: 1.1;
+    padding: 8px 10px;
+  }
+
+  /* Boutons secondaires (critères, reset, présentation, examen…) */
+  .btn-kawaii.secondary,
+  .btn-kawaii.reset,
+  .btn-kawaii.criteria {
+    font-size: 0.75rem;
+  }
+}
