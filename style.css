@@ -434,3 +434,34 @@ html, body{
     font-size: 0.75rem;
   }
 }
+/* ===============================
+   MODAL CRITÈRES
+   =============================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  max-width: 320px;
+  width: 90%;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.modal-content h3 {
+  text-align: center;
+  color: var(--hot-pink);
+}
