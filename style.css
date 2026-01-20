@@ -350,35 +350,55 @@ html, body{
 #visual.bg-hara * {
   color: #ffffff !important;
 }
-/* ===== BOUTONS MOBILE : ORGANISATION ===== */
+/* ============================
+   BOUTONS – MOBILE FIX FINAL
+   ============================ */
 @media (max-width: 600px) {
 
+  /* Police plus petite UNIQUEMENT pour les boutons */
+  .btn-kawaii {
+    font-size: 0.75rem;     /* 🔽 réduit */
+    line-height: 1.1;
+    padding: 8px 10px;
+  }
+
+  /* Ligne Lancer / Pause / Stop */
   .button-row {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     gap: 10px;
   }
 
-  /* Lancer / Pause / Stop = pleine largeur */
-  .button-row .btn-kawaii.start,
-  .button-row .btn-kawaii.pause,
-  .button-row .btn-kawaii.stop {
-    flex: 1 1 100%;
-    font-size: 1.1rem;
-    padding: 14px;
+  /* ===== LANCER : gros bouton ===== */
+  .btn-kawaii.start {
+    flex: 1 1 auto;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    padding: 10px 14px;
   }
 
-  /* Tous les autres boutons : 2 par ligne */
-  .button-row .btn-kawaii:not(.start):not(.pause):not(.stop) {
-    flex: 0 0 48%;
-    font-size: 1rem;
-    padding: 12px;
+  /* ===== PAUSE & STOP : boutons ronds ===== */
+  .btn-kawaii.pause,
+  .btn-kawaii.stop {
+    flex: 0 0 44px;      /* taille fixe */
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ===== STOP : forcer le rouge ===== */
+  .btn-kawaii.stop,
+  .btn-kawaii.btn-stop {
+    background: #ff4d6d !important;
+    box-shadow: 0 4px 0px #c9184a !important;
   }
 }
-.btn-stop {
-  background: #ff4d6d !important;
-  box-shadow: 0 4px 0px #c9184a !important;
-}
+
 
 /* ===== ZONE D'AFFICHAGE - TOUTES SEANCES ===== */
 .result-display {
