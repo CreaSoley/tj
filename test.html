@@ -892,13 +892,17 @@ startExamBtn.onclick = async () => {
 
 /* ===== LANCER ENTRAÎNEMENT LIBRE ===== */
 startBtn.onclick = async () => {
+
+  /* 🛑 sécurité : bloqué en mode examen */
+  if (mode.value === "exam") return;
+
   examMode = false;
   stopped = false;
   paused = false;
   workedSeconds = 0;
   index = 0;
   sequence = [];
-enableWakeLock();
+  enableWakeLock();
 
   recap.classList.add("hidden");
   setActive(startBtn);
