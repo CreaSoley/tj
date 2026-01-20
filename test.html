@@ -108,7 +108,7 @@ fetch("banner.html")
         </div>
 
         <div class="button-row">
-          <button id="criteria"  class="btn-kawaii criteria">>📋 Criteres</button>
+         <button class="btn-kawaii criteria" onclick="openCriteria()">📋 Criteres</button>
           <button id="presentationExam" class="btn-kawaii hidden">📢 Presentation</button>
           <button id="startExam" class="btn-kawaii hidden">📝 Examen</button>
           <button id="reset" class="btn-kawaii reset">🔄 Reset</button>
@@ -556,6 +556,23 @@ await wait(5000);
 
   return timerId;
 }
+/* ===================== DESACTIVATION CHAMPS ===================== */
+function lockForHara() {
+  categorie.disabled = true;
+  countInput.disabled = true;
+  intervalInput.disabled = true;
+  speedMode.disabled = false; // 👈 autorisé
+}
+function lockForGammes() {
+  categorie.disabled = true;
+  countInput.disabled = false;
+  intervalInput.disabled = false;
+  speedMode.disabled = false;
+}
+function toggleStartButton(disabled) {
+  startBtn.disabled = disabled;
+  startBtn.classList.toggle("disabled", disabled);
+}
 
 /* ===================== RUNHARALIGNES===================== */
 async function runHaraLigne() {
@@ -564,6 +581,8 @@ text.classList.add("hara");
   paused = false;
   visual.className = "bg-hara";
   setActive(startBtn);
+  lockForHara();
+  lockForGammes();
 
 const speedMode = document.getElementById("speedMode")?.value || "slow";
 
@@ -997,6 +1016,14 @@ stopBtn.onclick = () => {
   setActive(stopBtn);
 };
 mode.dispatchEvent(new Event("change"));
+/* ===================== MODALE CRITERES ===================== */
+function openCriteria() {
+  document.getElementById("criteriaModal").classList.remove("hidden");
+}
+
+function closeCriteria() {
+  document.getElementById("criteriaModal").classList.add("hidden");
+}
 
 /* ===== RESET ===== */
 resetBtn.onclick = () => {
@@ -1046,10 +1073,14 @@ mode.onchange = () => {
   startExamBtn.classList.toggle("hidden", !exam);
   startBtn.classList.toggle("hidden", exam);
 
+  /* 🔒 BLOQUER LANCER EN MODE EXAMEN */
+  toggleStartButton(exam);
+
   /* ===== DÉSACTIVATION DES CHAMPS ===== */
   categorie.disabled = exam;
   countInput.disabled = exam;
   intervalInput.disabled = exam;
+  speedMode.disabled = exam;
 
   /* ===== TEXTE COURT ===== */
   shortText.textContent = EXPLANATIONS[mode.value] || "";
