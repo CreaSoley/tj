@@ -658,7 +658,7 @@ const timerD = startLocalCountdown(120);
 if (!(await waitIfNotStopped(120000))) return;
 clearInterval(timerD);
 
- /* ========= EXERCICE E ========= */
+/* ========= EXERCICE E ========= */
 show("<strong>Exercice E</strong><br>Kihon et hara");
 await speak("Exercice suivant. Exercice E. Kihon et hara.", 0.8);
 
@@ -667,29 +667,31 @@ const COUNT_JP = ["イチ", "ニ", "サン", "シ", "ゴ"];
 
 for (const tech of HARA_TECHNIQUES) {
 
-  /* Nom de la technique : 1 seule fois */
+  /* Technique : 1 seule fois */
   show(`<strong>${tech.fr}</strong>`);
   await speakJP(tech.jp, 0.6);
-  await wait(1000);
+  await wait(800);
 
-  /* Commandes initiales : 1 seule fois */
+  /* Commandes : 1 seule fois */
   await speakCommand("構え");
-  await wait(500);
+  await wait(400);
   await speakCommand("始め");
-  await wait(500);
+  await wait(400);
 
-  /* Deux allers-retours complets */
-  for (let round = 0; round < 2; round++) {
+  /* 4 passages = 2 allers-retours */
+  for (let pass = 0; pass < 4; pass++) {
 
-    /* Aller */
+    // Comptage
     for (const n of COUNT_JP) {
       await speakJP(n, 0.6);
       await wait(COUNT_DELAY);
     }
 
-    /* Mawate après CHAQUE aller */
-    await speakJP("マワテー", 0.6);
-    await wait(1000);
+    // Mawate sauf après le dernier passage
+    if (pass < 3) {
+      await speakJP("マワテ", 0.5); // bref et sec
+      await wait(600);
+    }
   }
 }
 
