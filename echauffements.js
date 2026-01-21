@@ -221,13 +221,14 @@ async function play() {
 
   // fin
   isPlaying = false;
-pausedAt = 0;
+  pausedAt = 0;
 
-btnStart.disabled = false;
-btnPause.disabled = true;
-btnStop.disabled  = true;
+  btnStart.disabled = false;
+  btnPause.disabled = true;
+  btnStop.disabled  = true;
 
-currentLine.textContent = "Échauffement terminé.";
+  currentLine.textContent = "Échauffement terminé.";
+}   // ← ici on ferme correctement play()
 
   // -----------------------
   // Pause / Stop
@@ -237,34 +238,30 @@ btnStart.addEventListener("click", () => {
   play();
 });
 
-
 btnPause.addEventListener("click", () => {
   if (!isPlaying) return;
 
   isPaused = true;
   pausedAt = Date.now() - startTime;
 
-  // stoppe la voix ET le décompte
   speechSynthesis.cancel();
   if (pauseInterval) {
     clearInterval(pauseInterval);
     pauseInterval = null;
   }
 
-  btnStart.disabled = false;   // permet REPRISE
+  btnStart.disabled = false;
   btnPause.disabled = true;
-
   currentLine.textContent = "⏸ En pause";
 });
 
-
-  btnStop.addEventListener("click", () => {
+btnStop.addEventListener("click", () => {
   speechSynthesis.cancel();
 
-    if (pauseInterval) {
-  clearInterval(pauseInterval);
-  pauseInterval = null;
-}
+  if (pauseInterval) {
+    clearInterval(pauseInterval);
+    pauseInterval = null;
+  }
 
   isPlaying = false;
   isPaused = false;
@@ -278,10 +275,8 @@ btnPause.addEventListener("click", () => {
 
   btnStart.disabled = false;
   btnPause.disabled = true;
-  btnStop.disabled  = true;
+  btnStop.disabled = true;
 });
-
-currentLine.textContent = "Arrêt.";
 
   // -----------------------
   // Progression
