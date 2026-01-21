@@ -281,9 +281,15 @@ async function runUV(uv) {
     await runUV4();
     return;
   }
-  if (uv === "UV5" || uv === "UV6") {
-    // ton code existant
-  }
+ if (uv === "UV5") {
+  Encart56.startUV5();
+  return;
+}
+if (uv === "UV6") {
+  Encart56.startUV6();
+  return;
+}
+
 }
 
 // ---------- UV3 : KATA ----------
@@ -322,6 +328,11 @@ function stopExam() {
   clearInterval(timerInterval);
   if (uv3Timeout) clearTimeout(uv3Timeout);
   if (uv4Timeout) clearTimeout(uv4Timeout);
+  if (window.Encart56) {
+  Encart56.stopUV5();
+  Encart56.stopUV6();
+}
+
   speechSynthesis.cancel();
   document.getElementById("currentUV").textContent = "Arrêté";
   document.getElementById("timer").textContent = "00:00";
