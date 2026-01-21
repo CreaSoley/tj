@@ -18,8 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const timeTotal = document.getElementById("totalTime");
 
   const btnStart = document.getElementById("startBtn");
-  const btnPause = document.createElement("button");
-  const btnStop = document.getElementById("stopBtn");
+  const btnPause = document.getElementById("pauseBtn");
+  const btnStop  = document.getElementById("stopBtn");
+
 
   btnPause.id = "pauseBtn";
   btnPause.className = "btn-kawaii";
@@ -59,55 +60,49 @@ document.addEventListener("DOMContentLoaded", () => {
   // -----------------------
   // Charger un échauffement
   // -----------------------
-  function loadExercise(ex) {
-    currentExercise = ex;
-    currentIndex = 0;
-    startTime = null;
-    pausedAt = 0;
-    isPaused = false;
+ function loadExercise(ex) {
+  currentExercise = ex;
+  currentIndex = 0;
+  isPaused = false;
+  isPlaying = false;
+  startTime = null;
+  pausedAt = 0;
 
-    presentation.textContent = ex.presentation;
-    presentation.classList.add("fredoka");
+  // Présentation
+  presentation.textContent = ex.presentation;
+  presentation.classList.add("fredoka");
 
-    document.getElementById("uv-title").textContent = `${ex.id} – ${ex.nom}`;
+  document.getElementById("uv-title").textContent = `${ex.id} – ${ex.nom}`;
 
-    // preview du script
-    scriptPreview.innerHTML = "";
-    ex.script.forEach(item => {
-      const p = document.createElement("p");
-      if (item.text) p.textContent = item.text;
-      if (item.pause) p.textContent = `Pause : ${item.pause}s`;
-      scriptPreview.appendChild(p);
-    });
+  // Accordéon
+  scriptAccordion.innerHTML = "";
+  ex.script.forEach(item => {
+    const line = document.createElement("div");
+    line.style.marginBottom = "6px";
 
-    // accordéon script
-    scriptAccordion.innerHTML = "";
+    if (item.text) {
+      line.textContent = "🗣 " + item.text;
+    } else {
+      line.textContent = `⏸ Pause ${item.pause}s`;
+      line.style.opacity = "0.6";
+      line.style.fontStyle = "italic";
+    }
 
-ex.script.forEach(item => {
-  const line = document.createElement("div");
-  line.style.marginBottom = "6px";
-  line.style.fontSize = "0.9rem";
-  line.style.opacity = "0.85";
+    scriptAccordion.appendChild(line);
+  });
 
-  if (item.text) {
-    line.textContent = "🗣 " + item.text;
-  } else if (item.pause) {
-    line.textContent = "⏸ Pause " + item.pause + "s";
-    line.style.fontStyle = "italic";
-    line.style.opacity = "0.6";
-  }
+  // Durée auto
+  currentExercise.duree_totale_sec = calculateDuration(ex.script);
+  timeTotal.textContent = formatTime(currentExercise.duree_totale_sec);
+  timeLeft.textContent  = formatTime(currentExercise.duree_totale_sec);
 
-  scriptAccordion.appendChild(line);
-});
+  progressFill.style.width = "0%";
 
-
-    // calcul automatique du temps total
-    currentExercise.duree_totale_sec = calculateDuration(currentExercise.script);
-    timeTotal.textContent = formatTime(currentExercise.duree_totale_sec);
-    timeLeft.textContent = formatTime(currentExercise.duree_totale_sec);
-
-    progressFill.style.width = "0%";
-  }
+  // Boutons
+  btnStart.disabled = false;
+  btnPause.disabled = true;
+  btnStop.disabled  = true;
+}
 
   // -----------------------
   // Calcul durée totale
@@ -169,9 +164,10 @@ ex.script.forEach(item => {
     currentIndex = 0;
   }
 
-  btnStart.disabled = true;
-  btnPause.disabled = false;
-  btnStop.disabled = false;
+  btnStart.disabled = false;
+  btnPause.disabled = true;
+  btnStop.disabled  = true;
+
 
   while (currentIndex < currentExercise.script.length) {
     if (isPaused) {
@@ -200,25 +196,34 @@ ex.script.forEach(item => {
 
 
   btnPause.addEventListener("click", () => {
-    isPaused = true;
-    pausedAt = Date.now() - startTime;
-    speechSynthesis.cancel();
-    btnPause.disabled = true;
-    btnStart.disabled = false;
-  });
+  if (!isPlaying) return;
 
-  btnStop.addEventListener("click", () => {
-  isPaused = false;
+  isPaused = true;
   isPlaying = false;
-  currentIndex = 0;
-  pausedAt = 0;
-  startTime = null;
+  pausedAt = Date.now() - startTime;
 
   speechSynthesis.cancel();
 
   btnStart.disabled = false;
   btnPause.disabled = true;
-  btnStop.disabled = true;
+});
+
+
+  btnStop.addEventListener("click", () => {
+  speechSynthesis.cancel();
+
+  isPaused = false;
+  isPlaying = false;
+  currentIndex = 0;
+  startTime = null;
+  pausedAt = 0;
+
+  progressFill.style.width = "0%";
+  timeLeft.textContent = formatTime(currentExercise.duree_totale_sec);
+
+  btnStart.disabled = false;
+  btnPause.disabled = true;
+  btnStop.disabled  = true;
 });
 
 
