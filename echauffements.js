@@ -167,26 +167,23 @@ currentLine.textContent = "Prêt…";
   });
 }
 
-  async function play() {
+ async function play() {
   if (!currentExercise || isPlaying) return;
 
-  // sécurité : stoppe toute synthèse en cours
   speechSynthesis.cancel();
-
   isPlaying = true;
+  isPaused = false;
 
-  if (isPaused) {
-    isPaused = false;
+  if (pausedAt > 0) {
     startTime = Date.now() - pausedAt;
   } else {
     startTime = Date.now();
     currentIndex = 0;
   }
 
-  btnStart.disabled = false;
-  btnPause.disabled = true;
-  btnStop.disabled  = true;
-
+  btnStart.disabled = true;
+  btnPause.disabled = false;
+  btnStop.disabled  = false;
 
   while (currentIndex < currentExercise.script.length) {
     if (isPaused) {
@@ -194,16 +191,21 @@ currentLine.textContent = "Prêt…";
       return;
     }
 
-    const item = currentExercise.script[currentIndex];
-    await speakItem(item);
+    await speakItem(currentExercise.script[currentIndex]);
     currentIndex++;
   }
 
+  // fin
   isPlaying = false;
+  pausedAt = 0;
+
   btnStart.disabled = false;
   btnPause.disabled = true;
+  btnStop.disabled  = true;
+
+  currentLine.textContent = "Échauffement terminé.";
 }
-currentLine.textContent = "Échauffement terminé.";
+
 
   // -----------------------
   // Pause / Stop
