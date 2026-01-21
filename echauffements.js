@@ -129,17 +129,26 @@ currentLine.textContent = "Prêt…";
 
     // ----- PAUSE -----
     if (item.pause) {
-      currentLine.textContent = `⏸ Pause (${item.pause}s)`;
-      currentLine.style.opacity = "0.6";
+  let remaining = item.pause;
+  currentLine.textContent = `⏸ Pause ${remaining}s`;
+  currentLine.style.opacity = "0.6";
 
-      setTimeout(() => {
-        currentLine.textContent = "";
-        currentLine.style.opacity = "1";
-        resolve();
-      }, item.pause * 1000);
-
-      return;
+  const interval = setInterval(() => {
+    remaining--;
+    if (remaining > 0) {
+      currentLine.textContent = `⏸ Pause ${remaining}s`;
     }
+  }, 1000);
+
+  setTimeout(() => {
+    clearInterval(interval);
+    currentLine.style.opacity = "1";
+    resolve();
+  }, item.pause * 1000);
+
+  return;
+}
+
 
     // ----- TEXTE -----
     currentLine.textContent = item.text;
