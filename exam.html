@@ -3,348 +3,92 @@
 <head>
 <meta charset="UTF-8">
 <title>Simulateur Passage de Grade</title>
-<style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  margin: 0;
-  padding: 20px;
-}
-h1, h2 {
-  text-align: center;
-}
-.card {
-  background: #fff;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.row label {
-  flex: 1;
-}
-.row select, .row input {
-  flex: 2;
-  padding: 5px;
-}
-button {
-  padding: 10px 15px;
-  font-size: 16px;
-  cursor: pointer;
-}
-.controls {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-#display {
-  text-align: center;
-  font-size: 28px;
-}
-#timer {
-  font-size: 48px;
-  margin-top: 10px;
-}
-#log {
-  font-size: 14px;
-  background: #eee;
-  padding: 10px;
-  max-height: 200px;
-  overflow-y: auto;
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Simulateur Passage de Grade</h1>
+<div class="main-wrapper">
 
-<div class="card">
-  <h2>Paramètres généraux</h2>
-  <div class="row">
-  <label>Genre</label>
-  <select id="candidateTitle">
-    <option value="Monsieur">Monsieur</option>
-    <option value="Madame">Madame</option>
-  </select>
-</div>
+  <div class="card-kawaii">
+    <div class="module-title">Simulateur Passage de Grade</div>
 
-<div class="row">
-  <label>Nom du candidat</label>
-  <input id="candidate" placeholder="Nom du candidat">
-</div>
+    <div class="sub-section">
+      <h3>Paramètres généraux</h3>
+      <div class="controls-row">
+        <label>Genre</label>
+        <select id="candidateTitle">
+          <option value="Monsieur">Monsieur</option>
+          <option value="Madame">Madame</option>
+        </select>
+      </div>
+      <div class="controls-row">
+        <label>Nom du candidat</label>
+        <input id="candidate" class="input-wide" placeholder="Nom du candidat">
+      </div>
+    </div>
 
-</div>
+    <div class="sub-section">
+      <h3>Ordre et durée des UV</h3>
+      <div id="uvConfig"></div>
+    </div>
 
-<div class="card">
-  <h2>Ordre et durée des UV</h2>
-  <div id="uvConfig"></div>
-</div>
+    <div class="sub-section">
+      <h3>Paramètres UV2</h3>
+      <div class="controls-row">
+        <label>Intervalle UV2 (s)</label>
+        <input id="uv2-interval" type="number" min="1" max="20" value="5" class="input-small">
+      </div>
+      <div class="controls-row">
+        <label>Bip UV2</label>
+        <span id="uv2-beep-icon" class="beep-icon off">🔇</span>
+      </div>
+    </div>
 
-<div class="card">
-  <h2>Paramètres UV5 / UV6</h2>
-  <div class="row">
-    <label>Nombre de techniques</label>
-    <input type="number" id="techCount" min="1" max="20" value="8">
+    <div class="sub-section">
+      <h3>Paramètres UV5 / UV6</h3>
+      <div class="controls-row">
+        <label>Nombre de techniques UV5</label>
+        <input type="number" id="uv5-count" min="1" max="20" value="8" class="input-small">
+      </div>
+      <div class="controls-row">
+        <label>Intervalle UV5 (s)</label>
+        <input type="number" id="uv5-read-interval" min="5" max="30" value="15" class="input-small">
+      </div>
+
+      <div class="controls-row">
+        <label>Nombre de techniques UV6</label>
+        <input type="number" id="uv6-count" min="1" max="20" value="8" class="input-small">
+      </div>
+      <div class="controls-row">
+        <label>Intervalle UV6 (s)</label>
+        <input type="number" id="uv6-read-interval" min="5" max="30" value="15" class="input-small">
+      </div>
+    </div>
+
+    <div class="button-row">
+      <button class="btn-kawaii start" onclick="startExam()">▶️ Lancer</button>
+      <button class="btn-kawaii pause" onclick="togglePause()">⏸</button>
+      <button class="btn-kawaii stop btn-stop" onclick="stopExam()">⏹</button>
+    </div>
+
+    <div class="result-display" id="visual">
+      <div id="text">Prêt</div>
+      <div id="countdown">00:00</div>
+      <div id="currentText"></div>
+    </div>
+
+    <div class="sub-section">
+      <h3>Récap / Log</h3>
+      <div id="log"></div>
+    </div>
+
   </div>
-  <div class="row">
-    <label>Temps entre techniques (secondes)</label>
-    <input type="range" id="techDelay" min="5" max="30" value="15">
-    <span id="techDelayVal">15 s</span>
-  </div>
 </div>
-<div class="row">
-  <label>Intervalle UV2 (s)</label>
-  <input id="uv2-interval" type="number" min="1" max="20" value="5">
-</div>
-
-<div class="row">
-  <label>Bip UV2</label>
-  <button id="uv2-beep-toggle">Bip : ON</button>
-</div>
-
-
-<div class="card controls">
-  <button onclick="startExam()">▶️ Lancer</button>
-  <button onclick="togglePause()">⏸ Pause / Reprendre</button>
-  <button onclick="stopExam()">⏹ Stop</button>
-</div>
-
-<div class="card" id="display">
-  <div id="currentUV">Prêt</div>
-  <div id="timer">00:00</div>
-  <div id="currentText"></div>
-</div>
-
-<div class="card">
-  <h2>Récap / Log</h2>
-  <div id="log"></div>
-</div>
-
-<script>
-/* ===================== CONFIG ===================== */
-const UVS = [
-  { id: "UV1", name: "Kihon" },
-  { id: "UV2", name: "Ippon Kumite" },
-  { id: "UV3", name: "Kata" },
-  { id: "UV4", name: "Épreuves techniques" },
-  { id: "UV5", name: "Assauts imposés" },
-  { id: "UV6", name: "Randori" }
-];
-
-const UV1_DURATION_MIN = 5; // fixe
-
-/* ===================== VARIABLES ===================== */
-let sequence = [];
-let index = 0;
-let remaining = 0;
-let timerInterval = null;
-let paused = false;
-let stopped = false;
-let recap = [];
-
-/* ===================== VOIX ===================== */
-function speak(text) {
-  return new Promise(res => {
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "fr-FR";
-    u.onend = res;
-    speechSynthesis.speak(u);
-  });
-}
-
-function format(sec) {
-  return String(Math.floor(sec / 60)).padStart(2, "0") + ":" +
-         String(sec % 60).padStart(2, "0");
-}
-
-function updateTimerDisplay(sec){
-  document.getElementById("timer").textContent = format(sec);
-}
-
-async function announceCandidate(){
-  const title = document.getElementById("candidateTitle").value || "Monsieur";
-  const name = document.getElementById("candidate").value || "candidat";
-  await speak(`${title} ${name}, avancez-vous.`);
-}
-
-/* ===================== EXAMEN ===================== */
-async function startExam() {
-  stopped = false;
-  paused = false;
-  recap = [];
-  index = 0;
-
-  sequence = [];
-  const used = new Set();
-
-  for (let i = 0; i < 6; i++) {
-    const uv = document.getElementById("uvSelect" + i).value;
-    if (used.has(uv)) {
-      alert("Chaque UV doit être unique.");
-      return;
-    }
-    used.add(uv);
-
-    const time = (uv === "UV1") ? UV1_DURATION_MIN : parseInt(document.getElementById("uvTime" + i).value);
-    sequence.push({ uv, time });
-  }
-
-  document.getElementById("log").innerHTML = "";
-  await speak(`Passage de grade du candidat ${document.getElementById("candidate").value || "candidat"}. Avancez-vous.`);
-  nextUV();
-}
-
-async function nextUV() {
-  if (stopped || index >= sequence.length) {
-    return endExam();
-  }
-
-  const { uv, time } = sequence[index];
-  const uvName = UVS.find(u => u.id === uv).name;
-
-  document.getElementById("currentUV").textContent = `${uv} - ${uvName}`;
-  document.getElementById("currentText").textContent = "";
-
-  recap.push(`${uv} (${time} min)`);
-
-  await announceCandidate();
-  await speak(`Unité de valeur ${uvName}`);
-
-  // démarre timer global
-  if (uv === "UV1") {
-    startTimer(UV1_DURATION_MIN * 60, async () => {
-      await speak("Fin de l’unité de valeur kihon");
-      await speak("Vous pouvez regagner votre place");
-      index++;
-      nextUV();
-    });
-    runUV1Exam(); // seulement actions internes UV1
-    return;
-  }
-
-  if (uv === "UV2") {
-    const intervalSec = parseInt(document.getElementById("uv2-interval").value) || 5;
-    const duration = 10 * intervalSec; // 10 techniques
-    startTimer(duration, async () => {
-      await speak("Fin de l’unité de valeur Ippon Kumite");
-      await speak("Vous pouvez regagner votre place");
-      UV2.stop();
-      index++;
-      nextUV();
-    });
-    UV2.start(intervalSec); // déclenche lecture UV2
-    return;
-  }
-
-  if (uv === "UV3") {
-    startTimer(time * 60, async () => {
-      await speak("Fin de l’unité de valeur kata");
-      await speak("Vous pouvez regagner votre place");
-      index++;
-      nextUV();
-    });
-    runUV3(time);
-    return;
-  }
-
-  if (uv === "UV4") {
-    startTimer(time * 60, async () => {
-      await speak("Fin de l’unité de valeur épreuves techniques");
-      await speak("Vous pouvez regagner votre place");
-      index++;
-      nextUV();
-    });
-    runUV4(time);
-    return;
-  }
-
-  if (uv === "UV5") {
-    const count = parseInt(document.getElementById("uv5-count").value) || 5;
-    const intervalSec = parseInt(document.getElementById("uv5-read-interval").value) || 15;
-    const duration = count * intervalSec;
-
-    startTimer(duration, async () => {
-      await speak("Fin de l’unité de valeur assauts imposés");
-      await speak("Vous pouvez regagner votre place");
-      UV56.stopUV5();
-      index++;
-      nextUV();
-    });
-
-    UV56.startUV5(intervalSec, count);
-    return;
-  }
-
-  if (uv === "UV6") {
-    const count = parseInt(document.getElementById("uv6-count").value) || 5;
-    const intervalSec = parseInt(document.getElementById("uv6-read-interval").value) || 15;
-    const duration = count * intervalSec;
-
-    startTimer(duration, async () => {
-      await speak("Fin de l’unité de valeur randori");
-      await speak("Vous pouvez regagner votre place");
-      UV56.stopUV6();
-      index++;
-      nextUV();
-    });
-
-    UV56.startUV6(intervalSec, count);
-    return;
-  }
-}
-
-/* ===================== TIMER GLOBAL ===================== */
-function startTimer(durationSec, onEnd) {
-  clearInterval(timerInterval);
-  remaining = durationSec;
-  updateTimerDisplay(remaining);
-
-  timerInterval = setInterval(() => {
-    if (paused || stopped) return;
-    remaining--;
-    updateTimerDisplay(remaining);
-
-    if (remaining <= 0) {
-      clearInterval(timerInterval);
-      onEnd();
-    }
-  }, 1000);
-}
-
-/* ===================== PAUSE / STOP ===================== */
-function togglePause() {
-  paused = !paused;
-}
-
-function stopExam() {
-  stopped = true;
-  clearInterval(timerInterval);
-  speechSynthesis.cancel();
-  UV2.stop();
-  UV56.stopUV5();
-  UV56.stopUV6();
-  document.getElementById("currentUV").textContent = "Arrêté";
-  document.getElementById("timer").textContent = "00:00";
-}
-
-async function endExam() {
-  await speak("Fin de l'examen. Vous pouvez regagner votre place.");
-  document.getElementById("currentUV").textContent = "Terminé";
-  document.getElementById("currentText").textContent = "";
-
-  document.getElementById("log").innerHTML = "<strong>Récap :</strong><br>" + recap.join("<br>");
-}
-</script>
 
 <script src="uv1-exam.js"></script>
 <script src="uv2-exam.js"></script>
 <script src="uv56-exam.js"></script>
+<script src="simulateur-global.js"></script>
 
 </body>
 </html>
