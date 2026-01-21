@@ -1,54 +1,69 @@
-/* ======================================================
-   UV2 – IPPON KUMITE (MODULE POUR SIMULATEUR GLOBAL)
-   ------------------------------------------------------
-   - Pas de JSON
-   - Utilise le tableau existant dans ton JS
-   - Appelé depuis runUV("UV2")
-   ====================================================== */
+/********************************************************************
+ * UV2 – Ippon Kumite (MODULE POUR SIMULATEUR GLOBAL)
+ ********************************************************************/
 
 /* ===================== ÉLÉMENTS PARTAGÉS ===================== */
 const uv2Text = document.getElementById("currentText");
 const uv2Timer = document.getElementById("timer");
 
 /* ===================== DONNÉES ===================== */
-/* Remplace ce tableau par ton tableau existant UV2 */
-const UV2_EX = [
-  "Oi zuki jodan",
-  "Gyaku zuki chudan",
-  "Mae geri",
-  "Kizami zuki",
-  "Ushiro geri",
-  "Age uke / Gyaku zuki",
-  "Gedan barai / Oi zuki"
+const IPPON = [
+  { romaji: "Oi Tsuki Jodan", jp: "オイヅキ ジョウダン" },
+  { romaji: "Oi Tsuki Chudan", jp: "オイヅキ チュウダン" },
+  { romaji: "Mae Geri Chudan", jp: "マエゲリ チュウダン" },
+  { romaji: "Mawashi Geri Chudan", jp: "マワシゲリ チュウダン" },
+  { romaji: "Yoko Geri Chudan", jp: "ヨコゲリ チュウダン" },
+
+  { romaji: "Oi Tsuki Jodan", jp: "オイヅキ ジョウダン" },
+  { romaji: "Oi Tsuki Chudan", jp: "オイヅキ チュウダン" },
+  { romaji: "Mae Geri Chudan", jp: "マエゲリ チュウダン" },
+  { romaji: "Mawashi Geri Chudan", jp: "マワシゲリ チュウダン" },
+  { romaji: "Yoko Geri Chudan", jp: "ヨコゲリ チュウダン" }
 ];
+
+/* ===================== VARIABLES ===================== */
+let sequence = [...IPPON];
+let beepEnabled = true;
 
 /* ===================== OUTILS ===================== */
 const wait = ms => new Promise(r => setTimeout(r, ms));
 
+function playBeep() {
+  new Audio("beep.mp3").play().catch(e => console.log("Beep failed, maybe no file?"));
+}
+
+function speakJP(text) {
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "ja-JP";
+  speechSynthesis.speak(u);
+}
+
 function shuffle(arr) {
-  return [...arr].sort(() => Math.random() - 0.5);
+  return [...arr].sort(() => 0.5 - Math.random());
 }
 
 /* ===================== CONSTRUCTION EXAMEN ===================== */
 function buildUV2Exam() {
-  // Ici tu peux choisir :
-  // - ordre fixe : return UV2_EX;
-  // - ordre aléatoire : return shuffle(UV2_EX);
-  return shuffle(UV2_EX);
+  // On garde le même comportement que ton bouton "generate"
+  // (ordre aléatoire)
+  sequence = shuffle(IPPON);
+  return sequence;
 }
 
 /* ===================== MOTEUR UV2 ===================== */
-async function runUV2Sequence(sequence) {
-  await speak("Ippon kumité.");
-  await wait(800);
+async function runUV2Sequence(intervalSeconds = 5) {
+  if (beepEnabled) playBeep();
 
-  for (const tech of sequence) {
+  const seq = buildUV2Exam();
+
+  for (let i = 0; i < seq.length; i++) {
     if (stopped) return;
 
-    uv2Text.textContent = tech;
-    await speak(tech);
+    uv2Text.textContent = seq[i].jp;
+    speakJP(seq[i].jp);
 
-    let t = 10; // secondes par attaque
+    // Timer interne par attaque
+    let t = intervalSeconds;
     uv2Timer.textContent = format(t);
 
     while (t > 0) {
@@ -62,6 +77,8 @@ async function runUV2Sequence(sequence) {
       }
     }
   }
+
+  if (beepEnabled) playBeep();
 }
 
 /* ===================== POINT D’ENTRÉE ===================== */
@@ -70,8 +87,8 @@ async function runUV2Exam() {
   await speak("Unité de valeur deux. Ippon kumité.");
   await wait(800);
 
-  const seq = buildUV2Exam();
-  await runUV2Sequence(seq);
+  // 5s par attaque par défaut (comme ton slider)
+  await runUV2Sequence(5);
 }
 
 /* Exposition globale */
