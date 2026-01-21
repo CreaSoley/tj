@@ -23,13 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnPause = document.getElementById("pauseBtn");
   const btnStop  = document.getElementById("stopBtn");
 
-
-  btnPause.id = "pauseBtn";
-  btnPause.className = "btn-kawaii";
-  btnPause.textContent = "Pause";
-  btnPause.disabled = true;
-  document.querySelector(".button-row").insertBefore(btnPause, btnStop);
-
   const WORDS_PER_MINUTE = 130; // débit lent et dramatique
 
   // -----------------------
