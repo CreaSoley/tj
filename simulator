@@ -1,0 +1,150 @@
+const candidateName = document.getElementById("candidateName");
+const uvOrder = document.getElementById("uvOrder");
+const uvDuration = document.getElementById("uvDuration");
+
+const startBtn = document.getElementById("startBtn");
+const pauseBtn = document.getElementById("pauseBtn");
+const stopBtn = document.getElementById("stopBtn");
+
+const uvName = document.getElementById("uvName");
+const countdown = document.getElementById("countdown");
+
+let uvList = [];
+let currentUvIndex = 0;
+let timer = null;
+let remainingSeconds = 0;
+let paused = false;
+let stopped = false;
+
+function speak(text, lang="fr-FR", rate=1){
+  return new Promise(res=>{
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = lang;
+    u.rate = rate;
+    u.onend = res;
+    speechSynthesis.speak(u);
+  });
+}
+
+function fmtTime(s){
+  const m = String(Math.floor(s/60)).padStart(2,"0");
+  const sec = String(s%60).padStart(2,"0");
+  return `${m}:${sec}`;
+}
+
+function buildUvSequence(){
+  const selected = [...uvOrder.selectedOptions].map(o=>o.value);
+  return selected;
+}
+
+async function runUv(uv){
+  // Annonce de début UV
+  await speak(`Unité de valeur : ${uv}`, "fr-FR", 1);
+  await speak("Avancez-vous !", "fr-FR", 1);
+
+  // Déroulement selon UV
+  if(uv === "UV1"){
+    await speak("Unité de valeur : kihon", "fr-FR", 1);
+    // Ici tu peux appeler ton script UV1 existant
+  }
+
+  if(uv === "UV2"){
+    await speak("Unité de valeur : Ippon kumite", "fr-FR", 1);
+  }
+
+  if(uv === "UV3"){
+    await speak("Unité de valeur : Kata", "fr-FR", 1);
+    await wait(180000);
+    await speak("Deuxième partie : Bunkaï", "fr-FR", 1);
+  }
+
+  if(uv === "UV4"){
+    await speak("Unité de valeur : épreuves techniques", "fr-FR", 1);
+  }
+
+  if(uv === "UV5"){
+    await speak("Unité de valeur : assauts imposés", "fr-FR", 1);
+  }
+
+  if(uv === "UV6"){
+    await speak("Unité de valeur : randori", "fr-FR", 1);
+  }
+
+  // Fin UV
+  await speak(`Fin de l'unité de valeur ${uv.toLowerCase()}`, "fr-FR", 1);
+  await speak("Vous pouvez regagner votre place", "fr-FR", 1);
+}
+
+function startCountdown(seconds){
+  remainingSeconds = seconds;
+  countdown.textContent = fmtTime(remainingSeconds);
+
+  timer = setInterval(async ()=>{
+    if(paused || stopped) return;
+
+    remainingSeconds--;
+    countdown.textContent = fmtTime(remainingSeconds);
+
+    if(remainingSeconds <= 0){
+      clearInterval(timer);
+      currentUvIndex++;
+      runNextUv();
+    }
+  }, 1000);
+}
+
+async function runNextUv(){
+  if(stopped) return;
+
+  if(currentUvIndex >= uvList.length){
+    await speak("Fin de l'examen", "fr-FR", 1);
+    uvName.textContent = "Terminé";
+    countdown.textContent = "00:00";
+    return;
+  }
+
+  const uv = uvList[currentUvIndex];
+  uvName.textContent = uv;
+
+  // durée en secondes
+  const seconds = parseInt(uvDuration.value) * 60;
+  startCountdown(seconds);
+
+  // Démarrer le déroulé vocal en parallèle
+  runUv(uv);
+}
+
+startBtn.addEventListener("click", async ()=>{
+  if(!candidateName.value){
+    alert("Veuillez saisir le nom du candidat.");
+    return;
+  }
+  if(uvOrder.selectedOptions.length !== 6){
+    alert("Veuillez sélectionner les 6 UV dans l'ordre souhaité.");
+    return;
+  }
+
+  stopped = false;
+  paused = false;
+  currentUvIndex = 0;
+  uvList = buildUvSequence();
+
+  await speak(`Passage de grade du candidat ${candidateName.value}`, "fr-FR", 1);
+  await speak("Avancez-vous !", "fr-FR", 1);
+
+  runNextUv();
+});
+
+pauseBtn.addEventListener("click", ()=>{
+  paused = !paused;
+  pauseBtn.textContent = paused ? "▶️ Reprendre" : "⏸ Pause";
+});
+
+stopBtn.addEventListener("click", ()=>{
+  stopped = true;
+  paused = false;
+  clearInterval(timer);
+  speechSynthesis.cancel();
+  uvName.textContent = "Arrêté";
+  countdown.textContent = "00:00";
+});
