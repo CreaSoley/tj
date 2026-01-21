@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
  let lastInstruction = "";
   let pauseInterval = null;
   let isPlaying = false;
+  let pauseRemaining = 0;
+
 
 
 
@@ -129,14 +131,12 @@ currentLine.textContent = "Prêt…";
   // -----------------------
   // Lecture vocale
   // -----------------------
- function speakItem(item) {
+function speakItem(item) {
   return new Promise((resolve) => {
 
     // ===== PAUSE AVEC MAINTIEN DE CONSIGNE =====
     if (item.pause) {
-      let remaining = item.pause;
-
-      console.log("PAUSE — consigne maintenue :", lastInstruction);
+      let remaining = pauseRemaining > 0 ? pauseRemaining : item.pause;
 
       currentLine.textContent = lastInstruction;
 
@@ -150,9 +150,12 @@ currentLine.textContent = "Prêt…";
         countdownSpan.textContent = `⏱ ${remaining}s`;
         remaining--;
 
+        pauseRemaining = remaining; // <-- garde le reste si pause
+
         if (remaining < 0) {
           clearInterval(pauseInterval);
           pauseInterval = null;
+          pauseRemaining = 0;
           resolve();
         }
       }, 1000);
@@ -162,23 +165,11 @@ currentLine.textContent = "Prêt…";
 
     // ===== TEXTE =====
     lastInstruction = item.text;
-    console.log("NOUVELLE CONSIGNE :", lastInstruction);
-
     currentLine.textContent = item.text;
 
     const utt = new SpeechSynthesisUtterance(item.text);
 
-    if (item.mode === "grave") {
-      utt.rate = 0.7;
-      utt.pitch = 0.6;
-    } else if (item.mode === "rapide") {
-      utt.rate = 1.05;
-      utt.pitch = 1.0;
-    } else {
-      utt.rate = 0.9;
-      utt.pitch = 0.85;
-    }
-
+    // ...
     utt.onend = () => {
       resolve();
     };
@@ -197,17 +188,14 @@ async function play() {
   speechSynthesis.cancel();
 
   if (pausedAt > 0) {
-    // reprise
     startTime = Date.now() - pausedAt;
   } else {
-    // nouvelle lecture
-    currentIndex = 0;
     startTime = Date.now();
   }
 
   btnStart.disabled = true;
   btnPause.disabled = false;
-  btnStop.disabled  = false;
+  btnStop.disabled = false;
 
   while (currentIndex < currentExercise.script.length) {
     if (isPaused) {
@@ -219,16 +207,16 @@ async function play() {
     currentIndex++;
   }
 
-  // fin
   isPlaying = false;
   pausedAt = 0;
+  pauseRemaining = 0;
 
   btnStart.disabled = false;
   btnPause.disabled = true;
-  btnStop.disabled  = true;
+  btnStop.disabled = true;
 
   currentLine.textContent = "Échauffement terminé.";
-}   // ← ici on ferme correctement play()
+}
 
   // -----------------------
   // Pause / Stop
@@ -245,6 +233,7 @@ btnPause.addEventListener("click", () => {
   pausedAt = Date.now() - startTime;
 
   speechSynthesis.cancel();
+
   if (pauseInterval) {
     clearInterval(pauseInterval);
     pauseInterval = null;
@@ -252,8 +241,10 @@ btnPause.addEventListener("click", () => {
 
   btnStart.disabled = false;
   btnPause.disabled = true;
+
   currentLine.textContent = "⏸ En pause";
 });
+
 
 btnStop.addEventListener("click", () => {
   speechSynthesis.cancel();
