@@ -1,100 +1,49 @@
-/********************************************************************
- * UV2 – Ippon Kumite (EXAM VERSION)
- ********************************************************************/
-(() => {
+const IPPON = [
+  { romaji: "Oi Tsuki Jodan", jp: "オイヅキ ジョウダン" },
+  { romaji: "Oi Tsuki Chudan", jp: "オイヅキ チュウダン" },
+  { romaji: "Mae Geri Chudan", jp: "マエゲリ チュウダン" },
+  { romaji: "Mawashi Geri Chudan", jp: "マワシゲリ チュウダン" },
+  { romaji: "Yoko Geri Chudan", jp: "ヨコゲリ チュウダン" }
+];
 
-    /********************************************************************
-     * DONNÉES
-     ********************************************************************/
-    const IPPON = [
-        { romaji: "Oi Tsuki Jodan", jp: "オイヅキ ジョウダン" },
-        { romaji: "Oi Tsuki Chudan", jp: "オイヅキ チュウダン" },
-        { romaji: "Mae Geri Chudan", jp: "マエゲリ チュウダン" },
-        { romaji: "Mawashi Geri Chudan", jp: "マワシゲリ チュウダン" },
-        { romaji: "Yoko Geri Chudan", jp: "ヨコゲリ チュウダン" },
-        { romaji: "Oi Tsuki Jodan", jp: "オイヅキ ジョウダン" },
-        { romaji: "Oi Tsuki Chudan", jp: "オイヅキ チュウダン" },
-        { romaji: "Mae Geri Chudan", jp: "マエゲリ チュウダン" },
-        { romaji: "Mawashi Geri Chudan", jp: "マワシゲリ チュウダン" },
-        { romaji: "Yoko Geri Chudan", jp: "ヨコゲリ チュウダン" }
-    ];
+function speakJP(text) {
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "ja-JP";
+  speechSynthesis.speak(u);
+}
 
-    /********************************************************************
-     * ÉLÉMENTS DOM
-     ********************************************************************/
-    const intervalInput = document.getElementById("uv2-interval");
-    const beepToggle = document.getElementById("uv2-beep-toggle");
-    const uv2Display = document.getElementById("currentText");
+function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
-    /********************************************************************
-     * VARIABLES
-     ********************************************************************/
-    let sequence = [...IPPON];
-    let timer = null;
-    let beepEnabled = true;
+let uv2Running = false;
+let uv2Index = 0;
+let uv2Interval = 5000;
 
-    /********************************************************************
-     * OUTILS
-     ********************************************************************/
-    function playBeep() {
-        new Audio("beep.mp3").play().catch(() => {});
-    }
+async function uv2RunSequence(side){
+  const list = [...IPPON];
+  for(let i=0;i<5;i++){
+    if(!uv2Running) return;
+    speakJP(list[i].jp);
+    uv2Index++;
+    await wait(uv2Interval);
+  }
+}
 
-    function speakJP(text) {
-        const u = new SpeechSynthesisUtterance(text);
-        u.lang = "ja-JP";
-        speechSynthesis.speak(u);
-    }
+window.UV2 = {
+  start: async function(intervalSec){
+    uv2Running = true;
+    uv2Interval = intervalSec * 1000;
+    uv2Index = 0;
 
-    /********************************************************************
-     * BIP ON/OFF
-     ********************************************************************/
-    beepToggle?.addEventListener("click", () => {
-        beepEnabled = !beepEnabled;
-        beepToggle.textContent = beepEnabled ? "Bip : ON" : "Bip : OFF";
-        if (!beepEnabled) speechSynthesis.cancel();
-    });
+    await speakJP("HIDARI KAMAE");
+    await uv2RunSequence("HIDARI");
 
-    /********************************************************************
-     * LECTURE UV2 (appel depuis le simulateur)
-     ********************************************************************/
-    window.runUV2 = async function () {
+    if(!uv2Running) return;
 
-        if (timer) return; // déjà en cours
-
-        // reset affichage
-        uv2Display.textContent = "";
-
-        let i = 0;
-        const interval = (parseInt(intervalInput?.value || 5) || 5) * 1000;
-
-        if (beepEnabled) playBeep();
-
-        timer = setInterval(() => {
-
-            if (i >= sequence.length) {
-                clearInterval(timer);
-                timer = null;
-                if (beepEnabled) playBeep();
-                return;
-            }
-
-            const tech = sequence[i];
-            uv2Display.textContent = tech.jp;
-            speakJP(tech.jp);
-
-            i++;
-
-        }, interval);
-    };
-
-    /********************************************************************
-     * STOP UV2
-     ********************************************************************/
-    window.stopUV2 = function () {
-        if (timer) clearInterval(timer);
-        timer = null;
-        speechSynthesis.cancel();
-    };
-
-})();
+    await speakJP("MIGI KAMAE");
+    await uv2RunSequence("MIGI");
+  },
+  stop: function(){
+    uv2Running = false;
+    speechSynthesis.cancel();
+  }
+};
