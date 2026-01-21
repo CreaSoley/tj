@@ -134,16 +134,16 @@ currentLine.textContent = "Prêt…";
 if (item.pause) {
   let remaining = item.pause;
 
-  // on garde la dernière consigne affichée
-  currentLine.textContent = lastInstruction;
-  currentLine.style.opacity = "1";
+  // 🔒 on FORCE le maintien de la consigne
+  if (lastInstruction) {
+    currentLine.innerHTML = `<div>${lastInstruction}</div>`;
+  }
 
-  // petit indicateur de décompte
-  const countdownSpan = document.createElement("span");
-  countdownSpan.style.display = "block";
-  countdownSpan.style.fontSize = "1.2rem";
+  const countdownSpan = document.createElement("div");
+  countdownSpan.style.fontSize = "1.4rem";
   countdownSpan.style.opacity = "0.7";
   countdownSpan.style.marginTop = "8px";
+
   currentLine.appendChild(countdownSpan);
 
   pauseInterval = setInterval(() => {
