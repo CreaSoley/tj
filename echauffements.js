@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let pausedAt = 0;
   let isPaused = false;
   let timer = null;
+  let lastInstruction = "";
+  let pauseInterval = null;
+
 
   const select = document.getElementById("selectEchauff");
   const presentation = document.getElementById("presentation");
@@ -127,32 +130,42 @@ currentLine.textContent = "Prêt…";
   function speakItem(item) {
   return new Promise((resolve) => {
 
-    // ----- PAUSE -----
-    if (item.pause) {
+   // ----- PAUSE AVEC MAINTIEN DE CONSIGNE -----
+if (item.pause) {
   let remaining = item.pause;
-  currentLine.textContent = `⏸ Pause ${remaining}s`;
-  currentLine.style.opacity = "0.6";
 
-  const interval = setInterval(() => {
+  // on garde la dernière consigne affichée
+  currentLine.textContent = lastInstruction;
+  currentLine.style.opacity = "1";
+
+  // petit indicateur de décompte
+  const countdownSpan = document.createElement("span");
+  countdownSpan.style.display = "block";
+  countdownSpan.style.fontSize = "1.2rem";
+  countdownSpan.style.opacity = "0.7";
+  countdownSpan.style.marginTop = "8px";
+  currentLine.appendChild(countdownSpan);
+
+  pauseInterval = setInterval(() => {
+    countdownSpan.textContent = `⏱ ${remaining}s`;
     remaining--;
-    if (remaining > 0) {
-      currentLine.textContent = `⏸ Pause ${remaining}s`;
+
+    if (remaining < 0) {
+      clearInterval(pauseInterval);
+      pauseInterval = null;
+      resolve();
     }
   }, 1000);
-
-  setTimeout(() => {
-    clearInterval(interval);
-    currentLine.style.opacity = "1";
-    resolve();
-  }, item.pause * 1000);
 
   return;
 }
 
-
     // ----- TEXTE -----
-    currentLine.textContent = item.text;
-    currentLine.style.opacity = "1";
+   // mémorise la dernière consigne
+lastInstruction = item.text;
+
+// affichage principal
+currentLine.textContent = item.text;
 
     const utt = new SpeechSynthesisUtterance(item.text);
 
@@ -228,6 +241,11 @@ currentLine.textContent = "Prêt…";
  btnPause.addEventListener("click", () => {
   if (!isPlaying) return;
 
+   if (pauseInterval) {
+  clearInterval(pauseInterval);
+  pauseInterval = null;
+}
+
   isPaused = true;
   pausedAt = Date.now() - startTime;
   speechSynthesis.cancel();
@@ -242,6 +260,11 @@ currentLine.textContent = "Prêt…";
 
   btnStop.addEventListener("click", () => {
   speechSynthesis.cancel();
+
+    if (pauseInterval) {
+  clearInterval(pauseInterval);
+  pauseInterval = null;
+}
 
   isPlaying = false;
   isPaused = false;
