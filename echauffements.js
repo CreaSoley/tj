@@ -133,6 +133,10 @@ currentLine.textContent = "Prêt…";
    // ----- PAUSE AVEC MAINTIEN DE CONSIGNE -----
 if (item.pause) {
   let remaining = item.pause;
+if (item.pause) {
+  let remaining = item.pause;
+
+  console.log("PAUSE — consigne maintenue :", lastInstruction);
 
   // 🔒 on FORCE le maintien de la consigne
   if (lastInstruction) {
