@@ -169,7 +169,17 @@ function speakItem(item) {
 
     const utt = new SpeechSynthesisUtterance(item.text);
 
-    // ...
+    if (item.mode === "grave") {
+      utt.rate = 0.7;
+      utt.pitch = 0.6;
+    } else if (item.mode === "rapide") {
+      utt.rate = 1.05;
+      utt.pitch = 1.0;
+    } else {
+      utt.rate = 0.9;
+      utt.pitch = 0.85;
+    }
+
     utt.onend = () => {
       resolve();
     };
