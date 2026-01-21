@@ -216,36 +216,39 @@ currentLine.textContent = "Prêt…";
 });
 
 
-  btnPause.addEventListener("click", () => {
+ btnPause.addEventListener("click", () => {
   if (!isPlaying) return;
 
   isPaused = true;
-  isPlaying = false;
   pausedAt = Date.now() - startTime;
-
   speechSynthesis.cancel();
 
   btnStart.disabled = false;
   btnPause.disabled = true;
+  btnStop.disabled  = false;
+
+  currentLine.textContent = "⏸ En pause";
 });
 
 
   btnStop.addEventListener("click", () => {
   speechSynthesis.cancel();
 
-  isPaused = false;
   isPlaying = false;
+  isPaused = false;
   currentIndex = 0;
-  startTime = null;
   pausedAt = 0;
+  startTime = null;
 
   progressFill.style.width = "0%";
   timeLeft.textContent = formatTime(currentExercise.duree_totale_sec);
+  currentLine.textContent = "Arrêt.";
 
   btnStart.disabled = false;
   btnPause.disabled = true;
   btnStop.disabled  = true;
 });
+
 currentLine.textContent = "Arrêt.";
 
   // -----------------------
