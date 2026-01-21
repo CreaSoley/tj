@@ -2,6 +2,10 @@
 @font-face { 
   font-family: "Spicy"; 
   src: url("Spicy Sale.ttf"); 
+  .fredoka {
+  font-family: "Fredoka", Arial, sans-serif;
+}
+
 }
 
 :root{
