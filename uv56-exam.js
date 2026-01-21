@@ -1,11 +1,6 @@
 /*******************************************************
- * encart56.js
- * Gestion UV5 & UV6 :
- * - Filtres A/B/Toutes
- * - Doublons
- * - Génération aléatoire
- * - Lecture FR (ding + beep)
- * - Timer bip indépendant (ON/OFF)
+ * uv56-exam.js
+ * Gestion UV5 & UV6 (lecture FR + tirage aléatoire)
  *******************************************************/
 
 function $(id){ return document.getElementById(id); }
@@ -44,9 +39,6 @@ const CAT_B = [
     "Coup de poing direct","Mawashi tsuki gauche","Mawashi tsuki droit"
 ];
 
-/* -------------------------------------------------
-   OUTILS
--------------------------------------------------- */
 function getBase(cat){
     switch(cat){
         case "A": return CAT_A.slice();
@@ -73,18 +65,16 @@ function pick(list,count,allowDup){
 }
 
 /* -------------------------------------------------
-   MODULE GÉNÉRALISÉ UV5/UV6
+   MODULE UV5/UV6
 -------------------------------------------------- */
 
 function RandoriModule(cfg){
-    let reading = false;
-    let beeping = false;
-    let readTimer = null;
-    let beepTimer = null;
-    let selection = [];
+    // Protection si le HTML n'existe pas (évite l'erreur addEventListener)
+    if(!document.getElementById(cfg.filter)) return;
 
-    const ding = new Audio("ding.mp3");
-    const beep = new Audio("beep.mp3");
+    let reading = false;
+    let readTimer = null;
+    let selection = [];
 
     /* --- Générer une liste --- */
     function generate(){
@@ -107,26 +97,19 @@ function RandoriModule(cfg){
 
         reading = true;
         const intervalMs = (parseInt($(cfg.readInterval).value)||15)*1000;
-
         let i=0;
 
         function step(){
             if(!reading) return;
 
             if(i>=selection.length){
-                try{ beep.play(); }catch(e){}
                 reading=false;
                 return;
             }
 
-            try{ ding.currentTime=0; ding.play(); }catch(e){}
-
-            setTimeout(()=>{
-                if(!reading) return;
-                speakFR(selection[i]);
-                i++;
-                readTimer = setTimeout(step, intervalMs);
-            },400);
+            speakFR(selection[i]);
+            i++;
+            readTimer = setTimeout(step, intervalMs);
         }
 
         readTimer = setTimeout(step, 5000);
@@ -139,126 +122,42 @@ function RandoriModule(cfg){
         speechSynthesis.cancel();
     }
 
-    /* --- Beeper indépendant --- */
-    function startBeep(){
-        if(beeping) return;
-
-        beeping = true;
-        $(cfg.beepIcon).textContent = "🔊";
-
-        function ping(){
-            if(!beeping) return;
-
-            try{
-                const snd = new Audio("bip.mp3");
-                snd.play();
-            }catch(e){}
-
-            const t = (parseInt($(cfg.beepInterval).value)||10)*1000;
-            beepTimer = setTimeout(ping, t);
-        }
-        ping();
-    }
-
-    function stopBeep(){
-        beeping=false;
-        $(cfg.beepIcon).textContent = "🔇";
-        if(beepTimer){ clearTimeout(beepTimer); beepTimer=null; }
-    }
-
-    /* --- Sliders affichage valeurs --- */
-    function wireSliders(){
-        $(cfg.readInterval).addEventListener("input", ()=>{
-            $(cfg.readDisplay).textContent = $(cfg.readInterval).value+"s";
-        });
-        $(cfg.beepInterval).addEventListener("input", ()=>{
-            $(cfg.beepDisplay).textContent = $(cfg.beepInterval).value+"s";
-        });
-    }
-
     /* --- Wiring boutons --- */
     function wireButtons(){
         $(cfg.generate).addEventListener("click", generate);
         $(cfg.readBtn).addEventListener("click", read);
         $(cfg.stopBtn).addEventListener("click", stop);
-        $(cfg.beepStart).addEventListener("click", startBeep);
-        $(cfg.beepStop).addEventListener("click", stopBeep);
     }
 
     /* --- Init --- */
     function init(){
-        wireSliders();
         wireButtons();
         generate();
     }
 
     init();
+
+    // Expose stop for simulateur global
+    return {
+        stop
+    };
 }
 
-
 /* -------------------------------------------------
-   INITIALISATION UV5 & UV6
+   INIT UV5 & UV6
 -------------------------------------------------- */
-document.addEventListener("DOMContentLoaded", ()=>{
 
-    RandoriModule({
-        // UV5
+let UV56 = {
+  uv5: null,
+  uv6: null,
+  stopUV5: function(){ if(this.uv5) this.uv5.stop(); },
+  stopUV6: function(){ if(this.uv6) this.uv6.stop(); },
+  startUV5: function(intervalSec, count){
+    // on force le compteur et intervalle dans le module
+    if(!document.getElementById("uv5-count")) return;
+    document.getElementById("uv5-count").value = count;
+    document.getElementById("uv5-read-interval").value = intervalSec;
+    this.uv5 = RandoriModule({
         filter: "uv5-filter",
         duplicates: "uv5-duplicates",
-        count: "uv5-count",
-        result: "uv5-result",
-
-        readInterval: "uv5-read-interval",
-        readDisplay: "uv5-read-interval-display",
-        readBtn: "uv5-read",
-        stopBtn: "uv5-stop",
-
-        generate: "uv5-generate",
-
-        beepInterval: "uv5-beep-interval",
-        beepDisplay: "uv5-beep-display",
-        beepStart: "uv5-beep-start",
-        beepStop: "uv5-beep-stop",
-        beepIcon: "uv5-beep-icon"
-    });
-
-    RandoriModule({
-        // UV6
-        filter: "uv6-filter",
-        duplicates: "uv6-duplicates",
-        count: "uv6-count",
-        result: "uv6-result",
-
-        readInterval: "uv6-read-interval",
-        readDisplay: "uv6-read-interval-display",
-        readBtn: "uv6-read",
-        stopBtn: "uv6-stop",
-
-        generate: "uv6-generate",
-
-        beepInterval: "uv6-beep-interval",
-        beepDisplay: "uv6-beep-display",
-        beepStart: "uv6-beep-start",
-        beepStop: "uv6-beep-stop",
-        beepIcon: "uv6-beep-icon"
-    });
-});
-// -------------------------------------------------
-// API publique (pour le simulateur global)
-// -------------------------------------------------
-window.Encart56 = {
-  startUV5: function() {
-    document.getElementById("uv5-generate").click();
-    document.getElementById("uv5-read").click();
-  },
-  startUV6: function() {
-    document.getElementById("uv6-generate").click();
-    document.getElementById("uv6-read").click();
-  },
-  stopUV5: function() {
-    document.getElementById("uv5-stop").click();
-  },
-  stopUV6: function() {
-    document.getElementById("uv6-stop").click();
-  }
-};
+        count: "uv
