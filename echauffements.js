@@ -190,7 +190,7 @@ currentLine.textContent = item.text;
     };
 
     speechSynthesis.speak(utt);
-  });
+  };
 }
 
  async function play() {
