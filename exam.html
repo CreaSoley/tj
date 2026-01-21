@@ -2,67 +2,255 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Simulateur Passage de Grade</title>
-<link rel="stylesheet" href="style.css">
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 20px;
+}
+h1, h2 {
+  text-align: center;
+}
+.card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.row label {
+  flex: 1;
+}
+.row select, .row input {
+  flex: 2;
+  padding: 5px;
+}
+button {
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+#display {
+  text-align: center;
+  font-size: 28px;
+}
+#timer {
+  font-size: 48px;
+  margin-top: 10px;
+}
+#log {
+  font-size: 14px;
+  background: #eee;
+  padding: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+</style>
 </head>
 <body>
 
-<main class="main-wrapper">
+<h1>Simulateur Passage de Grade</h1>
 
-  <!-- ===== PARAMÈTRES ===== -->
-  <section class="card-kawaii">
-    <h2 class="module-title">🎓 Passage de grade - Simulateur</h2>
+<div class="card">
+  <h2>Paramètres généraux</h2>
+  <div class="row">
+    <label>Nom du candidat</label>
+    <input id="candidate" placeholder="Nom du candidat">
+  </div>
+</div>
 
-    <div class="sub-section">
-      <h3>⚙️ Paramètres</h3>
+<div class="card">
+  <h2>Ordre et durée des UV</h2>
+  <div id="uvConfig"></div>
+</div>
 
-      <div class="controls-row">
-        <label>Nom du candidat :</label>
-        <input id="candidateName" class="input-wide" type="text" placeholder="Ex: Dupont">
-      </div>
+<div class="card">
+  <h2>Paramètres UV5 / UV6</h2>
+  <div class="row">
+    <label>Nombre de techniques</label>
+    <input type="number" id="techCount" min="1" max="20" value="8">
+  </div>
+  <div class="row">
+    <label>Temps entre techniques (secondes)</label>
+    <input type="range" id="techDelay" min="5" max="30" value="15">
+    <span id="techDelayVal">15 s</span>
+  </div>
+</div>
 
-      <div class="controls-row">
-        <label>Ordre des UV :</label>
-        <select id="uvOrder" class="input-wide" multiple size="6">
-          <option value="UV1">UV1 - Kihon</option>
-          <option value="UV2">UV2 - Ippon Kumite</option>
-          <option value="UV3">UV3 - Kata</option>
-          <option value="UV4">UV4 - Epreuves techniques</option>
-          <option value="UV5">UV5 - Assauts imposés</option>
-          <option value="UV6">UV6 - Randori</option>
-        </select>
-      </div>
+<div class="card controls">
+  <button onclick="startExam()">▶️ Lancer</button>
+  <button onclick="togglePause()">⏸ Pause / Reprendre</button>
+  <button onclick="stopExam()">⏹ Stop</button>
+</div>
 
-      <div class="controls-row">
-        <label>Durée UV (3 à 10 min) :</label>
-        <input id="uvDuration" type="number" min="3" max="10" value="5" class="input-small">
-        <span>minutes</span>
-      </div>
-    </div>
+<div class="card" id="display">
+  <div id="currentUV">Prêt</div>
+  <div id="timer">00:00</div>
+  <div id="currentText"></div>
+</div>
 
-    <!-- ===== COMMANDES ===== -->
-    <div class="sub-section">
-      <h3>🎮 Commandes</h3>
-      <div class="button-row">
-        <button id="startBtn" class="btn-kawaii start">▶️ Lancer</button>
-        <button id="pauseBtn" class="btn-kawaii pause">⏸ Pause</button>
-        <button id="stopBtn" class="btn-kawaii stop">⏹ Stop</button>
-      </div>
-    </div>
-  </section>
+<div class="card">
+  <h2>Récap / Log</h2>
+  <div id="log"></div>
+</div>
 
-  <!-- ===== AFFICHAGE CENTRAL ===== -->
-  <section class="card-kawaii">
-    <h2 class="module-title">🕒 UV en cours</h2>
-    <div id="displayZone" class="result-display">
-      <div id="uvName">Prêt</div>
-      <div id="countdown">00:00</div>
-    </div>
-  </section>
+<script>
+const UVS = [
+  { id: "UV1", name: "Kihon" },
+  { id: "UV2", name: "Ippon Kumite" },
+  { id: "UV3", name: "Kata" },
+  { id: "UV4", name: "Épreuves techniques" },
+  { id: "UV5", name: "Assauts imposés" },
+  { id: "UV6", name: "Randori" }
+];
 
-</main>
+const uvConfigDiv = document.getElementById("uvConfig");
+UVS.forEach((_, i) => {
+  const row = document.createElement("div");
+  row.className = "row";
+  row.innerHTML = `
+    <label>Ordre ${i+1}</label>
+    <select id="uvSelect${i}">
+      ${UVS.map(u => `<option value="${u.id}">${u.id} - ${u.name}</option>`).join("")}
+    </select>
+    <input type="number" id="uvTime${i}" min="1" max="15" value="5"> min
+  `;
+  uvConfigDiv.appendChild(row);
+});
 
-<script src="simulator.js"></script>
+document.getElementById("techDelay").oninput = e =>
+  document.getElementById("techDelayVal").textContent = e.target.value + " s";
+
+let sequence = [];
+let index = 0;
+let remaining = 0;
+let timerInterval = null;
+let paused = false;
+let stopped = false;
+let recap = [];
+
+function speak(text) {
+  return new Promise(res => {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "fr-FR";
+    u.onend = res;
+    speechSynthesis.speak(u);
+  });
+}
+
+function format(sec) {
+  return String(Math.floor(sec/60)).padStart(2,"0") + ":" +
+         String(sec%60).padStart(2,"0");
+}
+
+async function startExam() {
+  stopped = false;
+  paused = false;
+  recap = [];
+  index = 0;
+
+  const name = document.getElementById("candidate").value || "candidat";
+  sequence = [];
+
+  const used = new Set();
+  for (let i=0;i<6;i++) {
+    const uv = document.getElementById("uvSelect"+i).value;
+    if (used.has(uv)) {
+      alert("Chaque UV doit être unique.");
+      return;
+    }
+    used.add(uv);
+    const time = parseInt(document.getElementById("uvTime"+i).value);
+    sequence.push({ uv, time });
+  }
+
+  document.getElementById("log").innerHTML = "";
+  await speak(`Passage de grade du candidat ${name}. Avancez-vous.`);
+  nextUV();
+}
+
+function nextUV() {
+  if (stopped || index >= sequence.length) {
+    endExam();
+    return;
+  }
+
+  const { uv, time } = sequence[index];
+  const uvName = UVS.find(u => u.id === uv).name;
+  document.getElementById("currentUV").textContent = `${uv} - ${uvName}`;
+  document.getElementById("currentText").textContent = "";
+  remaining = time * 60;
+  recap.push(`${uv} (${time} min)`);
+
+  speak(`Unité de valeur ${uvName}`);
+  startTimer(() => runUV(uv));
+}
+
+function startTimer(onStart) {
+  clearInterval(timerInterval);
+  document.getElementById("timer").textContent = format(remaining);
+  onStart();
+  timerInterval = setInterval(() => {
+    if (paused || stopped) return;
+    remaining--;
+    document.getElementById("timer").textContent = format(remaining);
+    if (remaining <= 0) {
+      clearInterval(timerInterval);
+      index++;
+      nextUV();
+    }
+  }, 1000);
+}
+
+async function runUV(uv) {
+  if (uv === "UV5" || uv === "UV6") {
+    const count = parseInt(document.getElementById("techCount").value);
+    const delay = parseInt(document.getElementById("techDelay").value);
+    const used = new Set();
+    for (let i=0;i<count && !stopped;i++) {
+      const tech = `Technique ${i+1}`;
+      used.add(tech);
+      document.getElementById("currentText").textContent = tech;
+      await speak(tech);
+      await new Promise(r => setTimeout(r, delay*1000));
+    }
+  }
+}
+
+function togglePause() {
+  paused = !paused;
+}
+
+function stopExam() {
+  stopped = true;
+  clearInterval(timerInterval);
+  speechSynthesis.cancel();
+  document.getElementById("currentUV").textContent = "Arrêté";
+  document.getElementById("timer").textContent = "00:00";
+}
+
+async function endExam() {
+  await speak("Fin de l'examen. Vous pouvez regagner votre place.");
+  document.getElementById("currentUV").textContent = "Terminé";
+  document.getElementById("currentText").textContent = "";
+
+  const log = document.getElementById("log");
+  log.innerHTML = "<strong>Récap :</strong><br>" + recap.join("<br>");
+}
+</script>
+
 </body>
 </html>
