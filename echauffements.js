@@ -142,30 +142,41 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function play() {
-    if (!currentExercise) return;
+  if (!currentExercise || isPlaying) return;
 
-    if (isPaused) {
-      isPaused = false;
-      startTime = Date.now() - pausedAt;
-    } else {
-      startTime = Date.now();
-    }
+  // sécurité : stoppe toute synthèse en cours
+  speechSynthesis.cancel();
 
-    btnStart.disabled = true;
-    btnPause.disabled = false;
-    btnStop.disabled = false;
+  isPlaying = true;
 
-    while (currentIndex < currentExercise.script.length) {
-      if (isPaused) return;
-
-      const item = currentExercise.script[currentIndex];
-      await speakItem(item);
-      currentIndex++;
-    }
-
-    btnStart.disabled = false;
-    btnPause.disabled = true;
+  if (isPaused) {
+    isPaused = false;
+    startTime = Date.now() - pausedAt;
+  } else {
+    startTime = Date.now();
+    currentIndex = 0;
   }
+
+  btnStart.disabled = true;
+  btnPause.disabled = false;
+  btnStop.disabled = false;
+
+  while (currentIndex < currentExercise.script.length) {
+    if (isPaused) {
+      isPlaying = false;
+      return;
+    }
+
+    const item = currentExercise.script[currentIndex];
+    await speakItem(item);
+    currentIndex++;
+  }
+
+  isPlaying = false;
+  btnStart.disabled = false;
+  btnPause.disabled = true;
+}
+
 
   // -----------------------
   // Pause / Stop
@@ -181,15 +192,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   btnStop.addEventListener("click", () => {
-    isPaused = false;
-    currentIndex = 0;
-    pausedAt = 0;
-    startTime = null;
-    speechSynthesis.cancel();
-    btnStart.disabled = false;
-    btnPause.disabled = true;
-    btnStop.disabled = true;
-  });
+  isPaused = false;
+  isPlaying = false;
+  currentIndex = 0;
+  pausedAt = 0;
+  startTime = null;
+
+  speechSynthesis.cancel();
+
+  btnStart.disabled = false;
+  btnPause.disabled = true;
+  btnStop.disabled = true;
+});
+
 
   // -----------------------
   // Progression
