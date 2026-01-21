@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulateur Passage de Grade</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="main-wrapper">
+
+  <!-- ===== PARAMÈTRES ===== -->
+  <section class="card-kawaii">
+    <h2 class="module-title">🎓 Passage de grade - Simulateur</h2>
+
+    <div class="sub-section">
+      <h3>⚙️ Paramètres</h3>
+
+      <div class="controls-row">
+        <label>Nom du candidat :</label>
+        <input id="candidateName" class="input-wide" type="text" placeholder="Ex: Dupont">
+      </div>
+
+      <div class="controls-row">
+        <label>Ordre des UV :</label>
+        <select id="uvOrder" class="input-wide" multiple size="6">
+          <option value="UV1">UV1 - Kihon</option>
+          <option value="UV2">UV2 - Ippon Kumite</option>
+          <option value="UV3">UV3 - Kata</option>
+          <option value="UV4">UV4 - Epreuves techniques</option>
+          <option value="UV5">UV5 - Assauts imposés</option>
+          <option value="UV6">UV6 - Randori</option>
+        </select>
+      </div>
+
+      <div class="controls-row">
+        <label>Durée UV (3 à 10 min) :</label>
+        <input id="uvDuration" type="number" min="3" max="10" value="5" class="input-small">
+        <span>minutes</span>
+      </div>
+    </div>
+
+    <!-- ===== COMMANDES ===== -->
+    <div class="sub-section">
+      <h3>🎮 Commandes</h3>
+      <div class="button-row">
+        <button id="startBtn" class="btn-kawaii start">▶️ Lancer</button>
+        <button id="pauseBtn" class="btn-kawaii pause">⏸ Pause</button>
+        <button id="stopBtn" class="btn-kawaii stop">⏹ Stop</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AFFICHAGE CENTRAL ===== -->
+  <section class="card-kawaii">
+    <h2 class="module-title">🕒 UV en cours</h2>
+    <div id="displayZone" class="result-display">
+      <div id="uvName">Prêt</div>
+      <div id="countdown">00:00</div>
+    </div>
+  </section>
+
+</main>
+
+<script src="simulator.js"></script>
+</body>
+</html>
