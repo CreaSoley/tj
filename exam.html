@@ -219,6 +219,10 @@ async function nextUV() {
   runUV(uv, time);
 }
 
+let timerInterval = null;
+let remaining = 0;
+let currentUV = null;
+
 function startTimer(durationSec, onEnd) {
   clearInterval(timerInterval);
   remaining = durationSec;
@@ -237,6 +241,10 @@ function startTimer(durationSec, onEnd) {
   }, 1000);
 }
 
+function updateTimerDisplay(sec){
+  document.getElementById("timer").textContent = format(sec);
+}
+
 async function runUV(uv, timeMin) {
   if (uv === "UV1") return runUV1();
   if (uv === "UV2") return runUV2();
@@ -247,14 +255,16 @@ async function runUV(uv, timeMin) {
 }
 
 // ---------- UV1 ----------
-async function runUV1() {
-  startTimer(UV1_DURATION_MIN * 60, async () => {
+async function runUV1Exam(){
+  // durée fixe
+  const durationMin = 5; // exemple
+  startTimer(durationMin * 60, async () => {
     await speak("Fin de l’unité de valeur kihon");
     await speak("Vous pouvez regagner votre place");
-    index++;
     nextUV();
   });
 }
+
 
 // ---------- UV2 ----------
 async function runUV2() {
