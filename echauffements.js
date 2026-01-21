@@ -198,10 +198,10 @@ async function play() {
   speechSynthesis.cancel();
 
   if (pausedAt > 0) {
-    startTime = Date.now() - pausedAt;
-  } else {
-    startTime = Date.now();
-  }
+  startTime = Date.now() - pausedAt;
+} else {
+  startTime = Date.now();
+}
 
   btnStart.disabled = true;
   btnPause.disabled = false;
