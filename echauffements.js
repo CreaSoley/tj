@@ -7,8 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
   let pausedAt = 0;
   let isPaused = false;
   let timer = null;
-  let lastInstruction = "";
+ let lastInstruction = "";
   let pauseInterval = null;
+  let isPlaying = false;
+
 
 
   const select = document.getElementById("selectEchauff");
