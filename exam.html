@@ -216,19 +216,32 @@ function startTimer(onStart) {
 }
 
 async function runUV(uv) {
+
+  if (uv === "UV1") {
+    await runUV1Exam();
+    return;
+  }
+
+  if (uv === "UV2") {
+    await runUV2Exam();
+    return;
+  }
+
+  if (uv === "UV3") {
+    await runUV3();
+    return;
+  }
+
+  if (uv === "UV4") {
+    await runUV4();
+    return;
+  }
+
   if (uv === "UV5" || uv === "UV6") {
-    const count = parseInt(document.getElementById("techCount").value);
-    const delay = parseInt(document.getElementById("techDelay").value);
-    const used = new Set();
-    for (let i=0;i<count && !stopped;i++) {
-      const tech = `Technique ${i+1}`;
-      used.add(tech);
-      document.getElementById("currentText").textContent = tech;
-      await speak(tech);
-      await new Promise(r => setTimeout(r, delay*1000));
-    }
+    // ton code existant
   }
 }
+
 
 function togglePause() {
   paused = !paused;
