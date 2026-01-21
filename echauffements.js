@@ -188,18 +188,21 @@ currentLine.textContent = "Prêt…";
 }
 
 
- async function play() {
+async function play() {
   if (!currentExercise || isPlaying) return;
 
-  speechSynthesis.cancel();
   isPlaying = true;
   isPaused = false;
 
+  speechSynthesis.cancel();
+
   if (pausedAt > 0) {
+    // reprise
     startTime = Date.now() - pausedAt;
   } else {
-    startTime = Date.now();
+    // nouvelle lecture
     currentIndex = 0;
+    startTime = Date.now();
   }
 
   btnStart.disabled = true;
@@ -218,40 +221,38 @@ currentLine.textContent = "Prêt…";
 
   // fin
   isPlaying = false;
-  pausedAt = 0;
+pausedAt = 0;
 
-  btnStart.disabled = false;
-  btnPause.disabled = true;
-  btnStop.disabled  = true;
+btnStart.disabled = false;
+btnPause.disabled = true;
+btnStop.disabled  = true;
 
-  currentLine.textContent = "Échauffement terminé.";
-}
-
+currentLine.textContent = "Échauffement terminé.";
 
   // -----------------------
   // Pause / Stop
   // -----------------------
- btnStart.addEventListener("click", () => {
+btnStart.addEventListener("click", () => {
   if (isPlaying) return;
   play();
 });
 
 
- btnPause.addEventListener("click", () => {
+btnPause.addEventListener("click", () => {
   if (!isPlaying) return;
-
-   if (pauseInterval) {
-  clearInterval(pauseInterval);
-  pauseInterval = null;
-}
 
   isPaused = true;
   pausedAt = Date.now() - startTime;
-  speechSynthesis.cancel();
 
-  btnStart.disabled = false;
+  // stoppe la voix ET le décompte
+  speechSynthesis.cancel();
+  if (pauseInterval) {
+    clearInterval(pauseInterval);
+    pauseInterval = null;
+  }
+
+  btnStart.disabled = false;   // permet REPRISE
   btnPause.disabled = true;
-  btnStop.disabled  = false;
 
   currentLine.textContent = "⏸ En pause";
 });
