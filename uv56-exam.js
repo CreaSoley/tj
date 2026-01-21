@@ -160,4 +160,57 @@ let UV56 = {
     this.uv5 = RandoriModule({
         filter: "uv5-filter",
         duplicates: "uv5-duplicates",
-        count: "uv
+        count: "uv5-count",
+        result: "uv5-result",
+        readInterval: "uv5-read-interval",
+        readBtn: "uv5-read",
+        stopBtn: "uv5-stop",
+        generate: "uv5-generate"
+    });
+    this.uv5.stop(); // on stop pour éviter lecture automatique
+    this.uv5Reading = true;
+    document.getElementById("uv5-read").click();
+  },
+  startUV6: function(intervalSec, count){
+    if(!document.getElementById("uv6-count")) return;
+    document.getElementById("uv6-count").value = count;
+    document.getElementById("uv6-read-interval").value = intervalSec;
+    this.uv6 = RandoriModule({
+        filter: "uv6-filter",
+        duplicates: "uv6-duplicates",
+        count: "uv6-count",
+        result: "uv6-result",
+        readInterval: "uv6-read-interval",
+        readBtn: "uv6-read",
+        stopBtn: "uv6-stop",
+        generate: "uv6-generate"
+    });
+    this.uv6.stop();
+    document.getElementById("uv6-read").click();
+  }
+};
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    // on initialise mais sans erreur si pas de HTML
+    UV56.uv5 = RandoriModule({
+        filter: "uv5-filter",
+        duplicates: "uv5-duplicates",
+        count: "uv5-count",
+        result: "uv5-result",
+        readInterval: "uv5-read-interval",
+        readBtn: "uv5-read",
+        stopBtn: "uv5-stop",
+        generate: "uv5-generate"
+    });
+
+    UV56.uv6 = RandoriModule({
+        filter: "uv6-filter",
+        duplicates: "uv6-duplicates",
+        count: "uv6-count",
+        result: "uv6-result",
+        readInterval: "uv6-read-interval",
+        readBtn: "uv6-read",
+        stopBtn: "uv6-stop",
+        generate: "uv6-generate"
+    });
+});
