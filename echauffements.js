@@ -82,12 +82,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // accordéon script
     scriptAccordion.innerHTML = "";
-    ex.script.forEach(item => {
-      const line = document.createElement("div");
-      line.style.marginBottom = "8px";
-      line.textContent = item.text ? item.text : `Pause : ${item.pause}s`;
-      scriptAccordion.appendChild(line);
-    });
+
+ex.script.forEach(item => {
+  const line = document.createElement("div");
+  line.style.marginBottom = "6px";
+  line.style.fontSize = "0.9rem";
+  line.style.opacity = "0.85";
+
+  if (item.text) {
+    line.textContent = "🗣 " + item.text;
+  } else if (item.pause) {
+    line.textContent = "⏸ Pause " + item.pause + "s";
+    line.style.fontStyle = "italic";
+    line.style.opacity = "0.6";
+  }
+
+  scriptAccordion.appendChild(line);
+});
+
 
     // calcul automatique du temps total
     currentExercise.duree_totale_sec = calculateDuration(currentExercise.script);
@@ -181,7 +193,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // -----------------------
   // Pause / Stop
   // -----------------------
-  btnStart.addEventListener("click", () => play());
+ btnStart.addEventListener("click", () => {
+  if (isPlaying) return;
+  play();
+});
+
 
   btnPause.addEventListener("click", () => {
     isPaused = true;
