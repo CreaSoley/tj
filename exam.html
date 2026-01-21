@@ -160,6 +160,8 @@ let timerInterval = null;
 let paused = false;
 let stopped = false;
 let recap = [];
+let uv3Timeout = null;  // <-- IMPORTANT
+let uv4Timeout = null;  // <-- IMPORTANT
 
 function speak(text) {
   return new Promise(res => {
@@ -170,11 +172,15 @@ function speak(text) {
   });
 }
 
+function sleep(ms) {
+  return new Promise(r => setTimeout(r, ms));
+}
+
 function format(sec) {
   return String(Math.floor(sec/60)).padStart(2,"0") + ":" +
          String(sec%60).padStart(2,"0");
 }
-  
+
 async function announceCandidate() {
   const title = document.getElementById("candidateTitle").value || "Monsieur";
   const name = document.getElementById("candidate").value || "candidat";
@@ -187,9 +193,7 @@ async function startExam() {
   recap = [];
   index = 0;
 
-  const name = document.getElementById("candidate").value || "candidat";
   sequence = [];
-
   const used = new Set();
   for (let i=0;i<6;i++) {
     const uv = document.getElementById("uvSelect"+i).value;
@@ -203,7 +207,10 @@ async function startExam() {
   }
 
   document.getElementById("log").innerHTML = "";
-  await speak(`Passage de grade du candidat ${name}. Avancez-vous.`);
+
+  // Annonce du candidat (UNE seule fois)
+  await announceCandidate();
+
   nextUV();
 }
 
@@ -215,13 +222,14 @@ function nextUV() {
 
   const { uv, time } = sequence[index];
   const uvName = UVS.find(u => u.id === uv).name;
+
   document.getElementById("currentUV").textContent = `${uv} - ${uvName}`;
   document.getElementById("currentText").textContent = "";
   remaining = time * 60;
   recap.push(`${uv} (${time} min)`);
 
- await announceCandidate();
-await speak(`Unité de valeur ${uvName}`);
+  // annonce UV
+  speak(`Unité de valeur ${uvName}`);
 
   startTimer(() => runUV(uv));
 }
@@ -230,12 +238,26 @@ function startTimer(onStart) {
   clearInterval(timerInterval);
   document.getElementById("timer").textContent = format(remaining);
   onStart();
-  timerInterval = setInterval(() => {
+
+  timerInterval = setInterval(async () => {
     if (paused || stopped) return;
+
     remaining--;
     document.getElementById("timer").textContent = format(remaining);
+
     if (remaining <= 0) {
       clearInterval(timerInterval);
+
+      const currentUV = sequence[index].uv;
+      if (currentUV === "UV3") {
+        await speak("Fin de l’unité de valeur kata");
+        await speak("Vous pouvez regagner votre place");
+      }
+      if (currentUV === "UV4") {
+        await speak("Fin de l’unité de valeur épreuves techniques");
+        await speak("Vous pouvez regagner votre place");
+      }
+
       index++;
       nextUV();
     }
@@ -243,32 +265,53 @@ function startTimer(onStart) {
 }
 
 async function runUV(uv) {
-
   if (uv === "UV1") {
     await runUV1Exam();
     return;
   }
-
   if (uv === "UV2") {
     await runUV2Exam();
     return;
   }
-
   if (uv === "UV3") {
     await runUV3();
     return;
   }
-
   if (uv === "UV4") {
     await runUV4();
     return;
   }
-
   if (uv === "UV5" || uv === "UV6") {
     // ton code existant
   }
 }
 
+// ---------- UV3 : KATA ----------
+async function runUV3() {
+  // clean previous timeout
+  if (uv3Timeout) clearTimeout(uv3Timeout);
+
+  await speak("Unité de valeur : Kata");
+  await sleep(1000);
+  await speak("Première partie : Kata");
+  await speak("Annoncez le kata que vous allez réaliser");
+
+  uv3Timeout = setTimeout(() => {
+    if (stopped || paused) return;
+    speak("Deuxième partie : Bunkaï");
+    speak("Présentez les séquences et exécutez vos bunkaï");
+  }, 180000);
+}
+
+// ---------- UV4 : EPREUVES TECHNIQUES ----------
+async function runUV4() {
+  // clean previous timeout
+  if (uv4Timeout) clearTimeout(uv4Timeout);
+
+  await speak("Unité de valeur : épreuves techniques");
+  await speak("Exécutez 3 applications sur saisie à droite ou à gauche");
+  await speak("Annoncez la technique de base choisie");
+}
 
 function togglePause() {
   paused = !paused;
@@ -277,6 +320,8 @@ function togglePause() {
 function stopExam() {
   stopped = true;
   clearInterval(timerInterval);
+  if (uv3Timeout) clearTimeout(uv3Timeout);
+  if (uv4Timeout) clearTimeout(uv4Timeout);
   speechSynthesis.cancel();
   document.getElementById("currentUV").textContent = "Arrêté";
   document.getElementById("timer").textContent = "00:00";
@@ -291,8 +336,10 @@ async function endExam() {
   log.innerHTML = "<strong>Récap :</strong><br>" + recap.join("<br>");
 }
 </script>
+
 <script src="uv1-exam.js"></script>
 <script src="uv2-exam.js"></script>
+
 
 
 </body>
