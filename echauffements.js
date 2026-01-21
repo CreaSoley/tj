@@ -23,6 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnPause = document.getElementById("pauseBtn");
   const btnStop  = document.getElementById("stopBtn");
 
+// état initial
+btnStart.disabled = false;
+btnPause.disabled = true;
+btnStop.disabled  = true;
+
   const WORDS_PER_MINUTE = 130; // débit lent et dramatique
 
   // -----------------------
