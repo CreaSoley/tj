@@ -127,53 +127,45 @@ currentLine.textContent = "Prêt…";
   // -----------------------
   // Lecture vocale
   // -----------------------
-  function speakItem(item) {
+ function speakItem(item) {
   return new Promise((resolve) => {
 
-   // ----- PAUSE AVEC MAINTIEN DE CONSIGNE -----
-if (item.pause) {
-  let remaining = item.pause;
-if (item.pause) {
-  let remaining = item.pause;
+    // ===== PAUSE AVEC MAINTIEN DE CONSIGNE =====
+    if (item.pause) {
+      let remaining = item.pause;
 
-  console.log("PAUSE — consigne maintenue :", lastInstruction);
+      console.log("PAUSE — consigne maintenue :", lastInstruction);
 
-  // 🔒 on FORCE le maintien de la consigne
-  if (lastInstruction) {
-    currentLine.innerHTML = `<div>${lastInstruction}</div>`;
-  }
+      currentLine.textContent = lastInstruction;
 
-  const countdownSpan = document.createElement("div");
-  countdownSpan.style.fontSize = "1.4rem";
-  countdownSpan.style.opacity = "0.7";
-  countdownSpan.style.marginTop = "8px";
+      const countdownSpan = document.createElement("div");
+      countdownSpan.style.fontSize = "1.4rem";
+      countdownSpan.style.opacity = "0.7";
+      countdownSpan.style.marginTop = "8px";
+      currentLine.appendChild(countdownSpan);
 
-  currentLine.appendChild(countdownSpan);
+      pauseInterval = setInterval(() => {
+        countdownSpan.textContent = `⏱ ${remaining}s`;
+        remaining--;
 
-  pauseInterval = setInterval(() => {
-    countdownSpan.textContent = `⏱ ${remaining}s`;
-    remaining--;
+        if (remaining < 0) {
+          clearInterval(pauseInterval);
+          pauseInterval = null;
+          resolve();
+        }
+      }, 1000);
 
-    if (remaining < 0) {
-      clearInterval(pauseInterval);
-      pauseInterval = null;
-      resolve();
+      return;
     }
-  }, 1000);
 
-  return;
-}
+    // ===== TEXTE =====
+    lastInstruction = item.text;
+    console.log("NOUVELLE CONSIGNE :", lastInstruction);
 
-    // ----- TEXTE -----
-   // mémorise la dernière consigne
-lastInstruction = item.text;
-
-// affichage principal
-currentLine.textContent = item.text;
+    currentLine.textContent = item.text;
 
     const utt = new SpeechSynthesisUtterance(item.text);
 
-    // Voix dramatique
     if (item.mode === "grave") {
       utt.rate = 0.7;
       utt.pitch = 0.6;
@@ -190,8 +182,9 @@ currentLine.textContent = item.text;
     };
 
     speechSynthesis.speak(utt);
-  };
+  });
 }
+
 
  async function play() {
   if (!currentExercise || isPlaying) return;
