@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const presentation = document.getElementById("presentation");
   const scriptPreview = document.getElementById("scriptPreview");
   const scriptAccordion = document.getElementById("scriptAccordion");
+  const currentLine = document.getElementById("currentLine");
+
 
   const progressFill = document.getElementById("progressFill");
   const timeLeft = document.getElementById("countdown");
@@ -103,6 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
   btnPause.disabled = true;
   btnStop.disabled  = true;
 }
+currentLine.textContent = "Prêt…";
 
   // -----------------------
   // Calcul durée totale
@@ -124,29 +127,47 @@ document.addEventListener("DOMContentLoaded", () => {
   // Lecture vocale
   // -----------------------
   function speakItem(item) {
-    return new Promise((resolve) => {
-      if (item.pause) {
-        setTimeout(resolve, item.pause * 1000);
-        return;
-      }
+  return new Promise((resolve) => {
 
-      const utt = new SpeechSynthesisUtterance(item.text);
+    // ----- PAUSE -----
+    if (item.pause) {
+      currentLine.textContent = `⏸ Pause (${item.pause}s)`;
+      currentLine.style.opacity = "0.6";
 
-      if (item.mode === "grave") {
-        utt.rate = 0.7;
-        utt.pitch = 0.6;
-      } else if (item.mode === "rapide") {
-        utt.rate = 1.05;
-        utt.pitch = 1.0;
-      } else {
-        utt.rate = 0.9;
-        utt.pitch = 0.85;
-      }
+      setTimeout(() => {
+        currentLine.textContent = "";
+        currentLine.style.opacity = "1";
+        resolve();
+      }, item.pause * 1000);
 
-      utt.onend = () => resolve();
-      speechSynthesis.speak(utt);
-    });
-  }
+      return;
+    }
+
+    // ----- TEXTE -----
+    currentLine.textContent = item.text;
+    currentLine.style.opacity = "1";
+
+    const utt = new SpeechSynthesisUtterance(item.text);
+
+    // Voix dramatique
+    if (item.mode === "grave") {
+      utt.rate = 0.7;
+      utt.pitch = 0.6;
+    } else if (item.mode === "rapide") {
+      utt.rate = 1.05;
+      utt.pitch = 1.0;
+    } else {
+      utt.rate = 0.9;
+      utt.pitch = 0.85;
+    }
+
+    utt.onend = () => {
+      resolve();
+    };
+
+    speechSynthesis.speak(utt);
+  });
+}
 
   async function play() {
   if (!currentExercise || isPlaying) return;
@@ -184,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
   btnStart.disabled = false;
   btnPause.disabled = true;
 }
-
+currentLine.textContent = "Échauffement terminé.";
 
   // -----------------------
   // Pause / Stop
@@ -225,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
   btnPause.disabled = true;
   btnStop.disabled  = true;
 });
-
+currentLine.textContent = "Arrêt.";
 
   // -----------------------
   // Progression
