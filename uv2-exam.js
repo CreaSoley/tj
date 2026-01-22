@@ -1,60 +1,50 @@
-/* =========================================================
-   UV2 – IPPON KUMITE
-========================================================= */
-const IPPON = [
-  { romaji: "Oi Tsuki Jodan", jp: "オイヅキ ジョウダン" },
-  { romaji: "Oi Tsuki Chudan", jp: "オイヅキ チュウダン" },
-  { romaji: "Mae Geri Chudan", jp: "マエゲリ チュウダン" },
-  { romaji: "Mawashi Geri Chudan", jp: "マワシゲリ チュウダン" },
-  { romaji: "Yoko Geri Chudan", jp: "ヨコゲリ チュウダン" }
-];
+const UV2 = (() => {
 
-function uv2_wait(ms) {
-  return new Promise(r => setTimeout(r, ms));
-}
+  const IPPON = [
+    { romaji: "Oi Tsuki Jodan", jp: "オイヅキ ジョウダン" },
+    { romaji: "Oi Tsuki Chudan", jp: "オイヅキ チュウダン" },
+    { romaji: "Mae Geri Chudan", jp: "マエゲリ チュウダン" },
+    { romaji: "Mawashi Geri Chudan", jp: "マワシゲリ チュウダン" },
+    { romaji: "Yoko Geri Chudan", jp: "ヨコゲリ チュウダン" }
+  ];
 
-function speakJP(text) {
-  return new Promise(res => {
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "ja-JP";
-    u.onend = res;
-    speechSynthesis.speak(u);
-  });
-}
+  let running = false;
+  let stopCallback = null;
 
-let uv2Running = false;
+  async function wait(ms){ return new Promise(r => setTimeout(r, ms)); }
 
-async function uv2RunSequence() {
-  for (let i = 0; i < 5; i++) {
-    if (!uv2Running) return;
-    await speakJP(IPPON[i].jp);
-    await uv2_wait(window.uv2Interval * 1000);
-  }
-}
+  async function start(intervalSec, speakJP){
+    running = true;
 
-window.UV2 = {
-  uv2Interval: 5,
-
-  start: async function (intervalSec) {
-    uv2Running = true;
-    window.uv2Interval = intervalSec;
-
-    // annonces demandées
     await speakJP("HIDARI KAMAE");
-    await uv2_wait(3000); // 3 secondes de latence
-    await uv2RunSequence();
+    await wait(3000); // 3s de latence
+    await speakJP("Les deux candidats sont en garde. Les attaques ainsi que le niveau sont annoncés.");
+    await speakJP("A chaque fois, les attaques et les contre-attaques devront être différentes. Le test sera composé de deux séries des 5 attaques suivantes, exécutées d’abord à droite puis à gauche.");
+    await wait(1000);
 
-    if (!uv2Running) return;
+    for (let i = 0; i < IPPON.length; i++) {
+      if (!running) return;
+      await speakJP(IPPON[i].jp);
+      await wait(intervalSec * 1000);
+    }
+
+    if (!running) return;
 
     await speakJP("MIGI KAMAE");
-    await uv2_wait(3000);
-    await uv2RunSequence();
-  },
+    await wait(3000);
 
-  stop: function () {
-    uv2Running = false;
-    speechSynthesis.cancel();
+    for (let i = 0; i < IPPON.length; i++) {
+      if (!running) return;
+      await speakJP(IPPON[i].jp);
+      await wait(intervalSec * 1000);
+    }
+
+    if (stopCallback) stopCallback();
   }
-};
 
+  function stop(){
+    running = false;
+  }
 
+  return { start, stop, setStopCallback: cb => stopCallback = cb };
+})();
