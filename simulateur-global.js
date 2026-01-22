@@ -11,7 +11,7 @@
 ========================= */
 
 const UVS = {
-  UV1: { name: "Kihon", fixedTime: 10 },
+  UV1: { name: "Kihon", fixedTime: 1 },
   UV2: { name: "Ippon Kumite" },
   UV3: { name: "Kata" },
   UV4: { name: "Épreuves techniques" },
