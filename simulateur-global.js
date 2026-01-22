@@ -143,19 +143,17 @@ async function runUV1(){
 }
 
 /* ---------- UV2 ---------- */
-async function runUV2(){
+async function runUV2() {
   const intervalSec = parseInt(document.getElementById("uv2-interval").value) || 5;
-  const duration = 10 * intervalSec;
 
-  startTimer(duration, async () => {
-    await speak("Fin de l’unité de valeur Ippon Kumite");
-    await speak("Vous pouvez regagner votre place");
-    UV2.stop();
-    index++;
-    nextUV();
-  });
+  await UV2.start(intervalSec);
 
-  UV2.start(intervalSec);
+  // FIN UV2
+  await speak("Fin de l’unité de valeur Ippon Kumite");
+  await speak("Vous pouvez regagner votre place");
+
+  index++;
+  nextUV();
 }
 
 /* ---------- UV3 ---------- */
