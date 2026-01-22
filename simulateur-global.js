@@ -1,8 +1,3 @@
-/* ==========================
-   simulateur-global.js
-   Version minimum viable
-   ========================== */
-
 const UVS = [
   { id: "UV1", name: "Kihon" },
   { id: "UV2", name: "Ippon Kumite" },
@@ -15,7 +10,7 @@ const UVS = [
 let paused = false;
 let stopped = false;
 let uvIndex = 0;
-let sequence = [];
+let order = ["UV1","UV2","UV3","UV4","UV5","UV6"];
 let timerInterval = null;
 let remaining = 0;
 
@@ -37,6 +32,28 @@ function format(sec) {
 
 function updateTimerDisplay(sec) {
   document.getElementById("countdown").textContent = format(sec);
+}
+
+async function runCountdown(seconds) {
+  return new Promise(resolve => {
+    let remaining = seconds;
+    updateTimerDisplay(remaining);
+
+    const interval = setInterval(() => {
+      if (stopped) {
+        clearInterval(interval);
+        return resolve();
+      }
+      if (!paused) {
+        remaining--;
+        updateTimerDisplay(remaining);
+      }
+      if (remaining <= 0) {
+        clearInterval(interval);
+        resolve();
+      }
+    }, 1000);
+  });
 }
 
 function startTimer(durationSec, onEnd) {
@@ -84,7 +101,7 @@ async function pauseBetweenUV() {
 async function runUV1() {
   document.getElementById("text").textContent = "UV1 – Kihon";
   await speak("UV1 : Kihon");
-  await window.runUV1Exam(); // UV1 doit être dans uv1-exam.js
+  await window.runUV1Exam();
   nextUV();
 }
 
@@ -96,9 +113,8 @@ async function runUV2() {
   await speak("A chaque fois, les attaques et les contre-attaques devront être différentes.");
   await speak("Le test sera composé de deux séries des 5 attaques suivantes, exécutées d’abord à droite puis à gauche.");
 
-  const interval = Number(document.getElementById("uv2-interval").value) || 5;
+  const interval = Number(document.getElementById("uv2-interval")?.value) || 5;
 
-  // Callback when UV2 finished
   UV2.setStopCallback(() => {
     nextUV();
   });
@@ -112,39 +128,19 @@ async function runUV2() {
 
 async function runUV3() {
   document.getElementById("text").textContent = "UV3 – Kata";
-
-  const kataMin = Number(document.getElementById("uv3-kata").value) || 2;
-  const bunkaiMin = Number(document.getElementById("uv3-bunkai").value) || 2;
-
-  await speak("Unité de valeur : kata");
-  await speak("Annoncez le kata que vous avez choisi.");
-
-  startTimer(kataMin * 60, async () => {
-    await speak("Présentez les bunkaïs choisis et les séquences du kata de référence.");
-
-    startTimer(bunkaiMin * 60, async () => {
-      nextUV();
-    });
-  });
+  await window.runUV3Exam(() => nextUV());
 }
 
 async function runUV4() {
   document.getElementById("text").textContent = "UV4 – Épreuves techniques";
-
-  await speak("Unité de valeur : épreuves techniques");
-  await speak("Exécutez 3 applications sur saisie à droite ou à gauche");
-  await speak("Annoncez la technique de base choisie");
-
-  const duration = Number(document.getElementById("uv4-duration").value) || 180;
-
-  startTimer(duration, () => nextUV());
+  await window.runUV4Exam(() => nextUV());
 }
 
 async function runUV5() {
   document.getElementById("text").textContent = "UV5 – Assauts imposés";
 
-  const count = Number(document.getElementById("uv5-count").value) || 5;
-  const interval = Number(document.getElementById("uv5-interval").value) || 15;
+  const count = Number(document.getElementById("uv5-count")?.value) || 5;
+  const interval = Number(document.getElementById("uv5-interval")?.value) || 15;
 
   UV56.startUV5(interval, count, (txt) => speak(txt));
   startTimer(count * interval, () => {
@@ -156,8 +152,8 @@ async function runUV5() {
 async function runUV6() {
   document.getElementById("text").textContent = "UV6 – Randori";
 
-  const count = Number(document.getElementById("uv6-count").value) || 5;
-  const interval = Number(document.getElementById("uv6-interval").value) || 15;
+  const count = Number(document.getElementById("uv6-count")?.value) || 5;
+  const interval = Number(document.getElementById("uv6-interval")?.value) || 15;
 
   UV56.startUV6(interval, count, (txt) => speak(txt));
   startTimer(count * interval, () => {
@@ -169,8 +165,6 @@ async function runUV6() {
 /* ==========================
    NEXT UV SEQUENCE
    ========================== */
-
-let order = ["UV1","UV2","UV3","UV4","UV5","UV6"];
 
 function nextUV() {
   if (stopped) return;
@@ -200,7 +194,7 @@ document.getElementById("startBtn").addEventListener("click", () => {
   stopped = false;
   paused = false;
   uvIndex = 0;
-  order = ["UV1","UV2","UV3","UV4","UV5","UV6"]; // mode examen fixe
+  order = ["UV1","UV2","UV3","UV4","UV5","UV6"];
   nextUV();
 });
 
