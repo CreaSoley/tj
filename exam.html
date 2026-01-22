@@ -1,11 +1,39 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-subtitle="🌸 Passage de Grade 🌸">
 <head>
 <meta charset="UTF-8">
-<title>Simulateur Passage de Grade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Examen – Passage de Grade</title>
+
+<link rel="stylesheet" href="banner.css">
 <link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+
+<style>
+.grid{
+  display:grid !important;
+  grid-template-columns:1fr !important;
+}
+</style>
 </head>
-<body>
+
+<body data-subtitle="🌸 Examen Officiel 🌸">
+
+<div id="bannerContainer"></div>
+<script>
+fetch("banner.html")
+  .then(r => r.text())
+  .then(html => {
+    document.getElementById("bannerContainer").innerHTML = html;
+    const subtitle = document.body.dataset.subtitle;
+    if(subtitle){
+      const el = document.getElementById("uv-title");
+      if(el) el.textContent = subtitle;
+    }
+  });
+</script>
+
 
 <div class="main-wrapper">
 
