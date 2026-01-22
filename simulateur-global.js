@@ -95,7 +95,7 @@ async function announceStart() {
 async function runUV1() {
   document.getElementById("text").textContent = "UV1 – Kihon";
 
-  await speak("Unité de valeur : Kihon");
+  await speak("Unité de valeur une: Kihon");
   await speak("Veuillez exécuter les enchaînements demandés");
 
   await window.runUV1Exam();
@@ -109,7 +109,7 @@ async function runUV1() {
 async function runUV2() {
   document.getElementById("text").textContent = "UV2 – Ippon Kumite";
 
-  await speak("Unité de valeur : Ippon Kumite");
+  await speak("Unité de valeur deux : Ippon Kumite");
   await speak("Les deux candidats sont en garde. Les attaques ainsi que le niveau sont annoncés.");
   await speak("À chaque fois, les attaques et les contre-attaques devront être différentes.");
   await speak("Le test sera composé de deux séries des 5 attaques suivantes, exécutées d’abord à droite puis à gauche.");
@@ -139,12 +139,13 @@ uv2IntervalEl.addEventListener("input", () => {
 async function runUV3() {
   document.getElementById("text").textContent = "UV3 – Kata";
 
-  await speak("Unité de valeur : Kata");
-  await speak("Veuillez exécuter le kata et le bunkai");
+  await speak("Unité de valeur trois : Kata");
+  await speak("Annoncez le kata que vous avez choisi.");
+  await speak("Vous pouvez commencer.");
 
   await window.runUV3Exam(async () => {
     if (stopped) return;
-    await speak("Fin de l’unité de valeur Kata");
+  
     await speak("Vous pouvez regagner votre place");
     nextUV();
   });
