@@ -1,43 +1,26 @@
-/* ======================================================
-   SIMULATEUR GLOBAL – CHEF D’ORCHESTRE
-   ------------------------------------------------------
-   - Gère : modes, ordre des UV, timers, pause, stop
-   - Aucun UV ne gère de timer global
-   - Les UV signalent la fin via callback
-   ====================================================== */
+/* =========================================================
+   SIMULATEUR GLOBAL – VERSION FINALE STABLE
+   Compatible avec :
+   - uv2-exam.js
+   - uv3-exam.js
+   - uv4-exam.js
+   - uv56-exam.js (INCHANGÉ)
+   ========================================================= */
 
 /* ===================== ÉTAT GLOBAL ===================== */
 let paused = false;
 let stopped = false;
-let currentUVIndex = 0;
-let uvOrder = [];
+let timerInterval = null;
+let remaining = 0;
 
-let currentTimeout = null;
-
-/* ===================== DOM ===================== */
+/* ===================== UI ===================== */
 const textEl = document.getElementById("text");
 const countdownEl = document.getElementById("countdown");
-const logEl = document.getElementById("log");
-const modeBtn = document.getElementById("modeBtn");
-const presetSelect = document.getElementById("presetSelect");
-const pauseInput = document.getElementById("pauseDuration");
 
-/* ===================== MODE ===================== */
-let mode = "exam"; // exam | training
-
-modeBtn.addEventListener("click", () => {
-  mode = mode === "exam" ? "training" : "exam";
-  modeBtn.textContent = mode === "exam"
-    ? "Mode Examen"
-    : "Mode Entraînement";
-  modeBtn.classList.toggle("training", mode === "training");
-});
-
-/* ===================== UTILITAIRES ===================== */
-function speak(txt) {
+/* ===================== VOIX ===================== */
+function speak(text) {
   return new Promise(resolve => {
-    if (!txt) return resolve();
-    const u = new SpeechSynthesisUtterance(txt);
+    const u = new SpeechSynthesisUtterance(text);
     u.lang = "fr-FR";
     u.rate = 0.97;
     u.onend = resolve;
@@ -45,148 +28,197 @@ function speak(txt) {
   });
 }
 
+/* ===================== TIMER ===================== */
 function format(sec) {
   const m = Math.floor(sec / 60).toString().padStart(2, "0");
   const s = (sec % 60).toString().padStart(2, "0");
   return `${m}:${s}`;
 }
 
-function wait(ms) {
-  return new Promise(r => setTimeout(r, ms));
-}
+function startCountdown(seconds, onEnd) {
+  clearInterval(timerInterval);
+  remaining = seconds;
+  countdownEl.textContent = format(remaining);
 
-/* ===================== TIMER GLOBAL ===================== */
-async function runCountdown(seconds) {
-  let t = seconds;
-  countdownEl.textContent = format(t);
-
-  while (t > 0) {
-    if (stopped) return;
-    if (!paused) {
-      await wait(1000);
-      t--;
-      countdownEl.textContent = format(t);
-    } else {
-      await wait(300);
+  timerInterval = setInterval(() => {
+    if (paused || stopped) return;
+    remaining--;
+    countdownEl.textContent = format(remaining);
+    if (remaining <= 0) {
+      clearInterval(timerInterval);
+      onEnd && onEnd();
     }
-  }
+  }, 1000);
 }
 
-/* ===================== ORDRE DES UV ===================== */
-function computeUVOrder() {
-  const preset = presetSelect.value;
+/* ===================== CONTROLES ===================== */
+window.togglePause = () => paused = !paused;
 
-  if (mode === "exam") {
-    return ["UV1", "UV2", "UV3", "UV4", "UV5", "UV6"];
+window.stopExam = () => {
+  stopped = true;
+  paused = false;
+  clearInterval(timerInterval);
+  speechSynthesis.cancel();
+  if (window.UV2) UV2.stop();
+  if (window.UV56) {
+    UV56.stopUV5();
+    UV56.stopUV6();
   }
+  textEl.textContent = "Arrêté";
+  countdownEl.textContent = "00:00";
+};
 
-  if (preset === "adapt") {
-    return ["UV1", "UV4", "UV2", "UV5", "UV1", "UV6"];
-  }
-
-  if (preset === "custom") {
-    // pour l’instant : fallback simple
-    return ["UV2", "UV3", "UV4"];
-  }
-
-  return ["UV1", "UV2", "UV3", "UV4", "UV5", "UV6"];
+/* ===================== PAUSE ENTRE UV ===================== */
+async function pauseBetweenUV() {
+  const pauseMin = Number(document.getElementById("pauseDuration").value) || 0;
+  if (pauseMin <= 0) return;
+  textEl.textContent = "Pause";
+  await speak("Pause");
+  return new Promise(r => setTimeout(r, pauseMin * 60000));
 }
 
-/* ===================== FIN D’UV ===================== */
-async function onUVFinished() {
-  if (stopped) return;
+/* =========================================================
+   ======================= UV2 =============================
+   ========================================================= */
+async function runUV2() {
+  textEl.textContent = "UV2 – Ippon Kumite";
 
-  await speak("Fin de l’unité de valeur.");
-  await speak("Vous pouvez regagner votre place.");
+  await speak("Unité de valeur deux. Ippon kumite.");
+  await speak("Les deux candidats sont en garde. Les attaques ainsi que le niveau sont annoncés.");
+  await speak("A chaque fois, les attaques et les contre-attaques devront être différentes.");
+  await speak("Le test est composé de deux séries de cinq attaques, exécutées d’abord à droite puis à gauche.");
 
-  const pauseMin = Number(pauseInput.value || 0);
-  if (pauseMin > 0) {
-    await speak("Pause.");
-    await runCountdown(pauseMin * 60);
-  }
+  const interval = Number(document.getElementById("uv2-interval")?.value) || 5;
+  const duration = interval * 10;
 
-  currentUVIndex++;
-  runNextUV();
-}
+  startCountdown(duration, async () => {
+    await speak("Fin de l’unité de valeur Ippon kumite");
+    await speak("Vous pouvez regagner votre place");
+    nextUV();
+  });
 
-/* ===================== DISPATCH UV ===================== */
-function runNextUV() {
-  if (stopped) return;
-
-  if (currentUVIndex >= uvOrder.length) {
-    textEl.textContent = "Examen terminé";
-    speak("Examen terminé. Félicitations.");
-    return;
-  }
-
-  const uv = uvOrder[currentUVIndex];
-  textEl.textContent = uv;
-  logEl.textContent = `En cours : ${uv}`;
-
-  switch (uv) {
-    case "UV1":
-      runUV1Exam().then(onUVFinished);
-      break;
-
-    case "UV2":
-      speak("Unité de valeur deux. Ippon kumité.");
-      UV2.setStopCallback(onUVFinished);
-      UV2.start(4, speakJP);
-      break;
-
-    case "UV3":
-      runUV3Exam(onUVFinished);
-      break;
-
-    case "UV4":
-      runUV4Exam(onUVFinished);
-      break;
-
-    case "UV5":
-      UV56.startUV5(4, 6);
-      currentTimeout = setTimeout(onUVFinished, 4 * 6 * 1000 + 1000);
-      break;
-
-    case "UV6":
-      UV56.startUV6(4, 8);
-      currentTimeout = setTimeout(onUVFinished, 4 * 8 * 1000 + 1000);
-      break;
-
-    default:
-      onUVFinished();
-  }
-}
-
-/* ===================== VOIX JP (UV2) ===================== */
-function speakJP(txt) {
-  return new Promise(resolve => {
+  UV2.start(interval, txt => {
     const u = new SpeechSynthesisUtterance(txt);
     u.lang = "ja-JP";
-    u.rate = 0.95;
-    u.onend = resolve;
     speechSynthesis.speak(u);
   });
 }
 
-/* ===================== CONTRÔLES ===================== */
-document.getElementById("startBtn").addEventListener("click", () => {
+/* =========================================================
+   ======================= UV3 =============================
+   ========================================================= */
+async function runUV3() {
+  textEl.textContent = "UV3 – Kata";
+
+  const kataMin = Number(document.getElementById("uv3-kata")?.value) || 2;
+  const bunkaiMin = Number(document.getElementById("uv3-bunkai")?.value) || 2;
+
+  await speak("Unité de valeur trois. Kata.");
+  await speak("Annoncez le kata que vous avez choisi.");
+
+  startCountdown(kataMin * 60, async () => {
+    await speak("Présentez les bunkaïs choisis et les séquences du kata de référence.");
+
+    startCountdown(bunkaiMin * 60, async () => {
+      await speak("Fin de l’unité de valeur kata");
+      await speak("Vous pouvez regagner votre place");
+      nextUV();
+    });
+  });
+}
+
+/* =========================================================
+   ======================= UV4 =============================
+   ========================================================= */
+async function runUV4() {
+  textEl.textContent = "UV4 – Épreuves techniques";
+
+  await speak("Unité de valeur quatre. Épreuves techniques.");
+  await speak("Exécutez trois applications sur saisie à droite ou à gauche.");
+  await speak("Annoncez la technique de base choisie.");
+
+  const duration = Number(document.getElementById("uv4-duration")?.value) || 180;
+
+  startCountdown(duration, async () => {
+    await speak("Fin de l’unité de valeur épreuves techniques");
+    await speak("Vous pouvez regagner votre place");
+    nextUV();
+  });
+}
+
+/* =========================================================
+   ======================= UV5 =============================
+   ========================================================= */
+async function runUV5() {
+  textEl.textContent = "UV5 – Assauts imposés";
+
+  const count = Number(document.getElementById("uv5-count")?.value) || 5;
+  const interval = Number(document.getElementById("uv5-interval")?.value) || 15;
+  const duration = count * interval;
+
+  await speak("Unité de valeur cinq. Assauts imposés.");
+
+  UV56.startUV5(interval, count, speak);
+
+  startCountdown(duration, async () => {
+    UV56.stopUV5();
+    await speak("Fin de l’unité de valeur assauts imposés");
+    await speak("Vous pouvez regagner votre place");
+    nextUV();
+  });
+}
+
+/* =========================================================
+   ======================= UV6 =============================
+   ========================================================= */
+async function runUV6() {
+  textEl.textContent = "UV6 – Randori";
+
+  const count = Number(document.getElementById("uv6-count")?.value) || 5;
+  const interval = Number(document.getElementById("uv6-interval")?.value) || 15;
+  const duration = count * interval;
+
+  await speak("Unité de valeur six. Randori.");
+
+  UV56.startUV6(interval, count, speak);
+
+  startCountdown(duration, async () => {
+    UV56.stopUV6();
+    await speak("Fin de l’unité de valeur randori");
+    await speak("Vous pouvez regagner votre place");
+    nextUV();
+  });
+}
+
+/* =========================================================
+   ================== ORCHESTRATION ========================
+   ========================================================= */
+const ORDER = ["UV2", "UV3", "UV4", "UV5", "UV6"];
+let uvIndex = 0;
+
+async function nextUV() {
+  if (stopped || uvIndex >= ORDER.length) {
+    await speak("Fin de l'examen. Vous pouvez regagner votre place.");
+    textEl.textContent = "Terminé";
+    return;
+  }
+
+  await pauseBetweenUV();
+
+  const uv = ORDER[uvIndex++];
+  if (uv === "UV2") runUV2();
+  if (uv === "UV3") runUV3();
+  if (uv === "UV4") runUV4();
+  if (uv === "UV5") runUV5();
+  if (uv === "UV6") runUV6();
+}
+
+/* ===================== LANCEMENT ===================== */
+window.startExam = async () => {
   stopped = false;
   paused = false;
-  currentUVIndex = 0;
-  uvOrder = computeUVOrder();
-  logEl.textContent = "Ordre : " + uvOrder.join(" → ");
-  runNextUV();
-});
-
-document.getElementById("pauseBtn").addEventListener("click", () => {
-  paused = !paused;
-  logEl.textContent = paused ? "Pause" : "Reprise";
-});
-
-document.getElementById("stopBtn").addEventListener("click", () => {
-  stopped = true;
-  paused = false;
-  speechSynthesis.cancel();
-  if (currentTimeout) clearTimeout(currentTimeout);
-  logEl.textContent = "Arrêté";
-});
+  uvIndex = 0;
+  textEl.textContent = "Début examen";
+  await speak("Début de l'examen.");
+  nextUV();
+};
