@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr" data-subtitle="🌸 Passage de Grade 🌸">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Examen – Passage de Grade</title>
+<title>Simulateur Passage de Grade</title>
 
 <link rel="stylesheet" href="banner.css">
 <link rel="stylesheet" href="style.css">
@@ -11,40 +11,32 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
 
 <style>
-.grid{
-  display:grid !important;
-  grid-template-columns:1fr !important;
-}
+/* override simple pour ton module */
+.grid { display:grid !important; grid-template-columns:1fr !important; gap:20px !important; width:100%; }
 </style>
 </head>
 
-<body data-subtitle="🌸 Examen Officiel 🌸">
+<body data-subtitle="🌸 Simulateur Passage de Grade 🌸">
 
 <div id="bannerContainer"></div>
-<script>
-fetch("banner.html")
-  .then(r => r.text())
-  .then(html => {
-    document.getElementById("bannerContainer").innerHTML = html;
-    const subtitle = document.body.dataset.subtitle;
-    if(subtitle){
-      const el = document.getElementById("uv-title");
-      if(el) el.textContent = subtitle;
-    }
-  });
-</script>
-
 
 <div class="main-wrapper">
-
   <div class="card-kawaii">
     <div class="module-title">Simulateur Passage de Grade</div>
 
     <div class="sub-section">
-      <h3>Paramètres généraux</h3>
+      <h3>Mode</h3>
+      <div class="controls-row">
+        <button id="modeBtn" class="btn-kawaii secondary">Mode Examen</button>
+        <span class="muted">→ cliquez pour changer</span>
+      </div>
+    </div>
+
+    <div class="sub-section">
+      <h3>Paramètres candidats</h3>
       <div class="controls-row">
         <label>Genre</label>
-        <select id="candidateTitle">
+        <select id="candidateTitle" class="input-small">
           <option value="Monsieur">Monsieur</option>
           <option value="Madame">Madame</option>
         </select>
@@ -55,78 +47,24 @@ fetch("banner.html")
       </div>
     </div>
 
-<div class="card-kawaii">
-  <h3>Mode</h3>
-  <button id="modeBtn" class="btn-kawaii secondary">
-    Mode : Examen
-  </button>
-</div>
-
-   <div class="card-kawaii">
-  <h3>Ordre des UV</h3>
-
-  <select id="examMode">
-  <option value="officiel">Examen officiel</option>
-  <option value="adapte">Passage adapté</option>
-  <option value="custom">Ordre personnalisé</option>
-</select>
-
-<div id="customOrder">
-  <div class="controls-row">
-    <label>Ordre 1</label>
-    <select id="uvSelect0">
-      <option value="UV1">UV1</option>
-      <option value="UV2">UV2</option>
-      <option value="UV3">UV3</option>
-      <option value="UV4">UV4</option>
-      <option value="UV5">UV5</option>
-      <option value="UV6">UV6</option>
-    </select>
-  </div>
-  <!-- jusqu'à uvSelect5 -->
-</div>
-
-
-    <div class="card">
-  <h2>Pause entre UV</h2>
-  <div class="row">
-    <label>Durée de la pause (minutes)</label>
-  <input id="pauseDuration" type="number" min="0" max="5" value="0">
-    <span id="pauseVal">0 min</span>
-  </div>
-</div>
-
-    
     <div class="sub-section">
-      <h3>Paramètres UV2</h3>
+      <h3>Ordre et durée des UV</h3>
       <div class="controls-row">
-        <label>Intervalle UV2 (s)</label>
-        <input id="uv2-interval" type="number" min="1" max="20" value="5" class="input-small">
+        <label>Préconfigurations</label>
+        <select id="presetOrder" class="input-wide">
+          <option value="custom">Personnalisé</option>
+          <option value="exam">Examen (1-2-3-4-5-6)</option>
+          <option value="adapt">Adapté (1-4-2-5-1-6)</option>
+        </select>
       </div>
-      <div class="controls-row">
-        <label>Bip UV2</label>
-        <span id="uv2-beep-icon" class="beep-icon off">🔇</span>
-      </div>
+      <div id="uvConfig"></div>
     </div>
 
     <div class="sub-section">
-      <h3>Paramètres UV5 / UV6</h3>
+      <h3>Pause entre UV</h3>
       <div class="controls-row">
-        <label>Nombre de techniques UV5</label>
-        <input type="number" id="uv5-count" min="1" max="20" value="8" class="input-small">
-      </div>
-      <div class="controls-row">
-        <label>Intervalle UV5 (s)</label>
-        <input type="number" id="uv5-read-interval" min="5" max="30" value="15" class="input-small">
-      </div>
-
-      <div class="controls-row">
-        <label>Nombre de techniques UV6</label>
-        <input type="number" id="uv6-count" min="1" max="20" value="8" class="input-small">
-      </div>
-      <div class="controls-row">
-        <label>Intervalle UV6 (s)</label>
-        <input type="number" id="uv6-read-interval" min="5" max="30" value="15" class="input-small">
+        <label>Durée (min)</label>
+        <input id="pauseDuration" class="input-small" type="number" min="0" max="5" value="0">
       </div>
     </div>
 
@@ -136,7 +74,7 @@ fetch("banner.html")
       <button class="btn-kawaii stop btn-stop" onclick="stopExam()">⏹</button>
     </div>
 
-    <div class="result-display" id="visual">
+    <div class="result-display">
       <div id="text">Prêt</div>
       <div id="countdown">00:00</div>
       <div id="currentText"></div>
@@ -149,17 +87,20 @@ fetch("banner.html")
 
   </div>
 </div>
+
 <script>
-document.getElementById("examMode").addEventListener("change", e=>{
-  const custom = document.getElementById("customOrder");
-  custom.style.display = e.target.value==="custom" ? "block" : "none";
-});
+fetch("banner.html")
+  .then(r => r.text())
+  .then(html => {
+    document.getElementById("bannerContainer").innerHTML = html;
+    const subtitle = document.body.dataset.subtitle;
+    if(subtitle) document.getElementById("uv-title").textContent = subtitle;
+  });
 </script>
 
-<script src="uv1-exam.js"></script>
+<script src="simulateur-global.js"></script>
 <script src="uv2-exam.js"></script>
 <script src="uv56-exam.js"></script>
-<script src="simulateur-global.js"></script>
 
 </body>
 </html>
