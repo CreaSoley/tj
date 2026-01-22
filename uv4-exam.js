@@ -5,7 +5,6 @@
    - Utilise speak() et runCountdown() du simulateur global
    - Fin signalée via callback
    ====================================================== */
-
 function getMinutes(id, fallback) {
   const el = document.getElementById(id);
   if (!el) return fallback;
@@ -14,31 +13,24 @@ function getMinutes(id, fallback) {
 }
 
 async function runUV4Exam(onFinish) {
-  // Durée (minutes)
   const durationMin = getMinutes("uv4Duration", 5);
   const durationSec = durationMin * 60;
 
   const display = document.getElementById("currentText");
   display.textContent = "UV4 – Épreuves techniques";
 
-  /* ===================== ANNONCES OFFICIELLES ===================== */
   await speak("Unité de valeur quatre. Épreuves techniques.");
   await speak("Exécutez trois applications sur saisie à droite ou à gauche.");
   await speak("Annoncez la technique de base choisie.");
   await speak("Vous pouvez commencer.");
 
-  /* ===================== PHASE UNIQUE ===================== */
   await runCountdown(durationSec);
 
   if (typeof stopped !== "undefined" && stopped) return;
 
-  /* ===================== FIN ===================== */
   await speak("Fin de l’unité de valeur épreuves techniques.");
 
-  if (typeof onFinish === "function") {
-    onFinish();
-  }
+  if (typeof onFinish === "function") onFinish();
 }
 
-/* ===================== EXPORT GLOBAL ===================== */
 window.runUV4Exam = runUV4Exam;
