@@ -16,6 +16,14 @@ let timerInterval = null;
 let paused = false;
 let stopped = false;
 let recap = [];
+let examMode = "exam"; // "exam" | "training"
+
+const UV_PRESETS = {
+  standard: ["UV1","UV2","UV3","UV4","UV5","UV6"],
+  adapte:   ["UV1","UV4","UV2","UV5","UV3","UV6"]
+};
+
+let uvOrder = [...UV_PRESETS.standard];
 
 function speak(text) {
   return new Promise(res => {
@@ -40,23 +48,42 @@ async function announceCandidate(){
   const name = document.getElementById("candidate").value || "candidat";
   await speak(`${title} ${name}, avancez-vous.`);
 }
+document.getElementById("modeBtn").onclick = () => {
+  examMode = examMode === "exam" ? "training" : "exam";
+  document.getElementById("modeBtn").textContent =
+    examMode === "exam" ? "Mode : Examen" : "Mode : Entraînement";
+};
+document.getElementById("presetSelect").onchange = (e) => {
+  uvOrder = [...UV_PRESETS[e.target.value]];
+  buildUVConfig();
+};
+
+buildUVConfig();
 
 function buildUVConfig(){
   const uvConfigDiv = document.getElementById("uvConfig");
   uvConfigDiv.innerHTML = "";
-  UVS.forEach((_, i) => {
+
+  uvOrder.forEach((uv, i) => {
+    const uvObj = UVS.find(u => u.id === uv);
+
     const row = document.createElement("div");
     row.className = "controls-row";
+
+    // Durée seulement si UV modifiable
+    let timeInput = "";
+    if (!["UV1","UV2","UV5","UV6"].includes(uv)) {
+      timeInput = `<input type="number" id="uvTime${i}" min="1" max="15" value="5" class="input-small"> min`;
+    }
+
     row.innerHTML = `
-      <label>Ordre ${i+1}</label>
-      <select id="uvSelect${i}">
-        ${UVS.map(u => `<option value="${u.id}">${u.id} - ${u.name}</option>`).join("")}
-      </select>
-      <input type="number" id="uvTime${i}" min="1" max="15" value="5" class="input-small"> min
+      <strong>${i+1}. ${uvObj.id} – ${uvObj.name}</strong>
+      ${timeInput}
     `;
     uvConfigDiv.appendChild(row);
   });
 }
+
 
 buildUVConfig();
 
@@ -66,14 +93,16 @@ async function startExam() {
   recap = [];
   index = 0;
 
-  sequence = [];
-  const used = new Set();
-  for (let i = 0; i < 6; i++) {
-    const uv = document.getElementById("uvSelect" + i).value;
-    if (used.has(uv)) {
-      alert("Chaque UV doit être unique.");
-      return;
-    }
+ sequence = uvOrder.map((uv, i) => {
+  let time = UV1_DURATION_MIN;
+
+  if (uv === "UV3" || uv === "UV4") {
+    time = parseInt(document.getElementById("uvTime" + i).value);
+  }
+
+  return { uv, time };
+});
+
     used.add(uv);
 
     const time = (uv === "UV1") ? UV1_DURATION_MIN : parseInt(document.getElementById("uvTime" + i).value);
