@@ -1,23 +1,44 @@
-function uv4_wait(ms) {
-  return new Promise(r => setTimeout(r, ms));
+/* ======================================================
+   UV4 – ÉPREUVES TECHNIQUES (MODULE EXAMEN)
+   ------------------------------------------------------
+   - Pas de timer interne
+   - Utilise speak() et runCountdown() du simulateur global
+   - Fin signalée via callback
+   ====================================================== */
+
+function getMinutes(id, fallback) {
+  const el = document.getElementById(id);
+  if (!el) return fallback;
+  const v = Number(el.value);
+  return isNaN(v) || v <= 0 ? fallback : v;
 }
 
-window.UV4 = {
-  async start(durationMin) {
-    await speak("Unité de valeur : épreuves techniques");
-    await speak("Exécutez 3 applications sur saisie à droite ou à gauche");
-    await speak("Annoncez la technique de base choisie");
+async function runUV4Exam(onFinish) {
+  // Durée (minutes)
+  const durationMin = getMinutes("uv4Duration", 5);
+  const durationSec = durationMin * 60;
 
-    await new Promise(res => {
-      const duration = durationMin * 60;
-      let remaining = duration;
-      const interval = setInterval(() => {
-        remaining--;
-        if (remaining <= 0) {
-          clearInterval(interval);
-          res();
-        }
-      }, 1000);
-    });
+  const display = document.getElementById("currentText");
+  display.textContent = "UV4 – Épreuves techniques";
+
+  /* ===================== ANNONCES OFFICIELLES ===================== */
+  await speak("Unité de valeur quatre. Épreuves techniques.");
+  await speak("Exécutez trois applications sur saisie à droite ou à gauche.");
+  await speak("Annoncez la technique de base choisie.");
+  await speak("Vous pouvez commencer.");
+
+  /* ===================== PHASE UNIQUE ===================== */
+  await runCountdown(durationSec);
+
+  if (typeof stopped !== "undefined" && stopped) return;
+
+  /* ===================== FIN ===================== */
+  await speak("Fin de l’unité de valeur épreuves techniques.");
+
+  if (typeof onFinish === "function") {
+    onFinish();
   }
-};
+}
+
+/* ===================== EXPORT GLOBAL ===================== */
+window.runUV4Exam = runUV4Exam;
