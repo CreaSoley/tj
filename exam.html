@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Simulateur Passage de Grade</title>
+<title>Simulateur UV – Examen</title>
 
 <link rel="stylesheet" href="banner.css">
 <link rel="stylesheet" href="style.css">
@@ -11,80 +11,63 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
 
 <style>
-/* override simple pour ton module */
-.grid { display:grid !important; grid-template-columns:1fr !important; gap:20px !important; width:100%; }
+/* Force 1 seule colonne */
+.grid { display: grid !important; grid-template-columns: 1fr !important; gap: 20px !important; width: 100%; }
 </style>
 </head>
 
-<body data-subtitle="🌸 Simulateur Passage de Grade 🌸">
+<body data-subtitle="🌸 Simulateur UV 🌸">
 
 <div id="bannerContainer"></div>
 
 <div class="main-wrapper">
   <div class="card-kawaii">
-    <div class="module-title">Simulateur Passage de Grade</div>
+    <div class="module-title">Simulateur Global</div>
 
     <div class="sub-section">
-      <h3>Mode</h3>
       <div class="controls-row">
-        <button id="modeBtn" class="btn-kawaii secondary">Mode Examen</button>
-        <span class="muted">→ cliquez pour changer</span>
-      </div>
-    </div>
-
-    <div class="sub-section">
-      <h3>Paramètres candidats</h3>
-      <div class="controls-row">
-        <label>Genre</label>
+        <label>Nom</label>
+        <input id="candidate" class="input-small" placeholder="Nom">
         <select id="candidateTitle" class="input-small">
           <option value="Monsieur">Monsieur</option>
           <option value="Madame">Madame</option>
         </select>
       </div>
-      <div class="controls-row">
-        <label>Nom du candidat</label>
-        <input id="candidate" class="input-wide" placeholder="Nom du candidat">
-      </div>
-    </div>
 
-    <div class="sub-section">
-      <h3>Ordre et durée des UV</h3>
       <div class="controls-row">
-        <label>Préconfigurations</label>
-        <select id="presetOrder" class="input-wide">
-          <option value="custom">Personnalisé</option>
+        <label>Mode</label>
+        <button id="modeBtn" class="btn-kawaii">Mode Examen</button>
+      </div>
+
+      <div class="controls-row">
+        <label>Pause entre UV</label>
+        <input id="pauseDuration" type="number" class="input-small" min="0" max="5" value="0"> min
+      </div>
+
+      <div class="controls-row">
+        <label>Ordre UV</label>
+        <select id="presetSelect" class="input-small">
           <option value="exam">Examen (1-2-3-4-5-6)</option>
           <option value="adapt">Adapté (1-4-2-5-1-6)</option>
+          <option value="custom">Personnalisé</option>
         </select>
       </div>
-      <div id="uvConfig"></div>
-    </div>
 
-    <div class="sub-section">
-      <h3>Pause entre UV</h3>
-      <div class="controls-row">
-        <label>Durée (min)</label>
-        <input id="pauseDuration" class="input-small" type="number" min="0" max="5" value="0">
+      <div id="uvConfig" class="content"></div>
+
+      <div class="button-row">
+        <button id="startBtn" class="btn-kawaii start">Lancer</button>
+        <button id="pauseBtn" class="btn-kawaii pause">Pause</button>
+        <button id="stopBtn" class="btn-kawaii stop btn-stop">Stop</button>
       </div>
     </div>
 
-    <div class="button-row">
-      <button class="btn-kawaii start" onclick="startExam()">▶️ Lancer</button>
-      <button class="btn-kawaii pause" onclick="togglePause()">⏸</button>
-      <button class="btn-kawaii stop btn-stop" onclick="stopExam()">⏹</button>
-    </div>
-
-    <div class="result-display">
-      <div id="text">Prêt</div>
-      <div id="countdown">00:00</div>
-      <div id="currentText"></div>
-    </div>
-
     <div class="sub-section">
-      <h3>Récap / Log</h3>
-      <div id="log"></div>
+      <div id="text" class="result-display">Prêt</div>
+      <div id="countdown" class="result-display">00:00</div>
+      <div id="currentText" class="result-display"></div>
+      <div id="log" class="result-display"></div>
     </div>
-
   </div>
 </div>
 
@@ -98,9 +81,9 @@ fetch("banner.html")
   });
 </script>
 
-<script src="simulateur-global.js"></script>
 <script src="uv2-exam.js"></script>
 <script src="uv56-exam.js"></script>
+<script src="simulateur-global.js"></script>
 
 </body>
 </html>
