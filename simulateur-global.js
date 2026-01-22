@@ -90,6 +90,13 @@ async function nextUV() {
     endExam();
     return;
   }
+const pauseMin = parseInt(document.getElementById("pauseDuration").value) || 0;
+
+if (pauseMin > 0) {
+  document.getElementById("currentUV").textContent = "Pause";
+  await speak("Pause");
+  await new Promise(r => setTimeout(r, pauseMin * 60000));
+}
 
   const { uv, time } = sequence[index];
   const uvName = UVS.find(u => u.id === uv).name;
