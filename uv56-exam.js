@@ -60,7 +60,6 @@ const UV56 = (() => {
   function stopUV5(){
     if(uv5Timer) clearTimeout(uv5Timer);
     uv5Timer = null;
-    speechSynthesis.cancel();
   }
 
   function startUV6(intervalSec, count){
@@ -85,7 +84,6 @@ const UV56 = (() => {
   function stopUV6(){
     if(uv6Timer) clearTimeout(uv6Timer);
     uv6Timer = null;
-    speechSynthesis.cancel();
   }
 
   return {
