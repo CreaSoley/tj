@@ -37,7 +37,7 @@ async function loadUV1Data() {
 }
 
 /* ===================== OUTILS ===================== */
-const wait = ms => new Promise(r => setTimeout(r, ms));
+const waitMs = ms => new Promise(r => setTimeout(r, ms));
 
 function pickRandom(cat, n = 1) {
   const label = CATEGORY_MAP[cat];
@@ -132,11 +132,11 @@ async function runUV1Sequence(sequence) {
     while (t > 0) {
       if (stopped) return;
       if (!paused) {
-        await wait(1000);
+        await waitMs(1000);
         t--;
         uv1Timer.textContent = format(t);
       } else {
-        await wait(300);
+        await waitMs(300);
       }
     }
   }
@@ -148,7 +148,7 @@ async function runUV1Exam() {
 
   uv1Text.textContent = "UV1 – Kihon";
   await speak("Unité de valeur un. Kihon.");
-  await wait(1000);
+  await waitMs(1000);
 
   const seq = buildUV1Exam();
   await runUV1Sequence(seq);
