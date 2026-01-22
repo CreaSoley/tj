@@ -1,293 +1,192 @@
-/* -------------------------
-   SIMULATEUR GLOBAL
-------------------------- */
+/* ======================================================
+   SIMULATEUR GLOBAL – CHEF D’ORCHESTRE
+   ------------------------------------------------------
+   - Gère : modes, ordre des UV, timers, pause, stop
+   - Aucun UV ne gère de timer global
+   - Les UV signalent la fin via callback
+   ====================================================== */
 
-const UVS = [
-  { id: "UV1", name: "Kihon" },
-  { id: "UV2", name: "Ippon Kumite" },
-  { id: "UV3", name: "Kata" },
-  { id: "UV4", name: "Épreuves techniques" },
-  { id: "UV5", name: "Assauts imposés" },
-  { id: "UV6", name: "Randori" }
-];
-
-const UV1_DURATION_MIN = 10;
-
-let sequence = [];
-let index = 0;
-let remaining = 0;
-let timerInterval = null;
+/* ===================== ÉTAT GLOBAL ===================== */
 let paused = false;
 let stopped = false;
-let recap = [];
+let currentUVIndex = 0;
+let uvOrder = [];
 
-/* -------------------------
-   UTILITAIRES
-------------------------- */
+let currentTimeout = null;
 
-function speak(text) {
-  return new Promise(res => {
-    const u = new SpeechSynthesisUtterance(text);
+/* ===================== DOM ===================== */
+const textEl = document.getElementById("text");
+const countdownEl = document.getElementById("countdown");
+const logEl = document.getElementById("log");
+const modeBtn = document.getElementById("modeBtn");
+const presetSelect = document.getElementById("presetSelect");
+const pauseInput = document.getElementById("pauseDuration");
+
+/* ===================== MODE ===================== */
+let mode = "exam"; // exam | training
+
+modeBtn.addEventListener("click", () => {
+  mode = mode === "exam" ? "training" : "exam";
+  modeBtn.textContent = mode === "exam"
+    ? "Mode Examen"
+    : "Mode Entraînement";
+  modeBtn.classList.toggle("training", mode === "training");
+});
+
+/* ===================== UTILITAIRES ===================== */
+function speak(txt) {
+  return new Promise(resolve => {
+    if (!txt) return resolve();
+    const u = new SpeechSynthesisUtterance(txt);
     u.lang = "fr-FR";
-    u.onend = res;
+    u.rate = 0.97;
+    u.onend = resolve;
     speechSynthesis.speak(u);
   });
 }
 
 function format(sec) {
-  return String(Math.floor(sec / 60)).padStart(2, "0") + ":" +
-         String(sec % 60).padStart(2, "0");
+  const m = Math.floor(sec / 60).toString().padStart(2, "0");
+  const s = (sec % 60).toString().padStart(2, "0");
+  return `${m}:${s}`;
 }
 
-function updateTimerDisplay(sec){
-  document.getElementById("countdown").textContent = format(sec);
+function wait(ms) {
+  return new Promise(r => setTimeout(r, ms));
 }
 
-async function announceCandidate(){
-  const title = document.getElementById("candidateTitle").value || "Monsieur";
-  const name = document.getElementById("candidate").value || "candidat";
-  await speak(`${title} ${name}, avancez-vous.`);
-}
+/* ===================== TIMER GLOBAL ===================== */
+async function runCountdown(seconds) {
+  let t = seconds;
+  countdownEl.textContent = format(t);
 
-/* -------------------------
-   CONFIG UV
-------------------------- */
-
-function buildUVConfig(){
-  const uvConfigDiv = document.getElementById("uvConfig");
-  uvConfigDiv.innerHTML = "";
-
-  UVS.forEach((_, i) => {
-    const row = document.createElement("div");
-    row.className = "controls-row";
-
-    row.innerHTML = `
-      <label>Ordre ${i+1}</label>
-      <select id="uvSelect${i}">
-        ${UVS.map(u => `<option value="${u.id}">${u.id} - ${u.name}</option>`).join("")}
-      </select>
-
-      <input type="number" id="uvTime${i}" min="1" max="15" value="5" class="input-small"> min
-    `;
-
-    uvConfigDiv.appendChild(row);
-  });
-}
-
-buildUVConfig();
-
-/* -------------------------
-   LANCEMENT EXAMEN
-------------------------- */
-
-async function startExam() {
-  stopped = false;
-  paused = false;
-  recap = [];
-  index = 0;
-
-  sequence = [];
-  const used = new Set();
-
-  for (let i = 0; i < 6; i++) {
-    const uv = document.getElementById("uvSelect" + i).value;
-    if (used.has(uv)) {
-      alert("Chaque UV doit être unique.");
-      return;
+  while (t > 0) {
+    if (stopped) return;
+    if (!paused) {
+      await wait(1000);
+      t--;
+      countdownEl.textContent = format(t);
+    } else {
+      await wait(300);
     }
-    used.add(uv);
+  }
+}
 
-    const time = (uv === "UV1") ? UV1_DURATION_MIN : parseInt(document.getElementById("uvTime" + i).value);
-    sequence.push({ uv, time });
+/* ===================== ORDRE DES UV ===================== */
+function computeUVOrder() {
+  const preset = presetSelect.value;
+
+  if (mode === "exam") {
+    return ["UV1", "UV2", "UV3", "UV4", "UV5", "UV6"];
   }
 
-  document.getElementById("log").innerHTML = "";
-  await speak(`Passage de grade du candidat ${document.getElementById("candidate").value || "candidat"}. Avancez-vous.`);
-  nextUV();
+  if (preset === "adapt") {
+    return ["UV1", "UV4", "UV2", "UV5", "UV1", "UV6"];
+  }
+
+  if (preset === "custom") {
+    // pour l’instant : fallback simple
+    return ["UV2", "UV3", "UV4"];
+  }
+
+  return ["UV1", "UV2", "UV3", "UV4", "UV5", "UV6"];
 }
 
-async function nextUV() {
-  if (stopped || index >= sequence.length) {
-    endExam();
+/* ===================== FIN D’UV ===================== */
+async function onUVFinished() {
+  if (stopped) return;
+
+  await speak("Fin de l’unité de valeur.");
+  await speak("Vous pouvez regagner votre place.");
+
+  const pauseMin = Number(pauseInput.value || 0);
+  if (pauseMin > 0) {
+    await speak("Pause.");
+    await runCountdown(pauseMin * 60);
+  }
+
+  currentUVIndex++;
+  runNextUV();
+}
+
+/* ===================== DISPATCH UV ===================== */
+function runNextUV() {
+  if (stopped) return;
+
+  if (currentUVIndex >= uvOrder.length) {
+    textEl.textContent = "Examen terminé";
+    speak("Examen terminé. Félicitations.");
     return;
   }
 
-  const pauseMin = parseInt(document.getElementById("pauseDuration").value) || 0;
-  if (pauseMin > 0) {
-    document.getElementById("currentUV").textContent = "Pause";
-    await speak("Pause");
-    await new Promise(r => setTimeout(r, pauseMin * 60000));
+  const uv = uvOrder[currentUVIndex];
+  textEl.textContent = uv;
+  logEl.textContent = `En cours : ${uv}`;
+
+  switch (uv) {
+    case "UV1":
+      runUV1Exam().then(onUVFinished);
+      break;
+
+    case "UV2":
+      speak("Unité de valeur deux. Ippon kumité.");
+      UV2.setStopCallback(onUVFinished);
+      UV2.start(4, speakJP);
+      break;
+
+    case "UV3":
+      runUV3Exam(onUVFinished);
+      break;
+
+    case "UV4":
+      runUV4Exam(onUVFinished);
+      break;
+
+    case "UV5":
+      UV56.startUV5(4, 6);
+      currentTimeout = setTimeout(onUVFinished, 4 * 6 * 1000 + 1000);
+      break;
+
+    case "UV6":
+      UV56.startUV6(4, 8);
+      currentTimeout = setTimeout(onUVFinished, 4 * 8 * 1000 + 1000);
+      break;
+
+    default:
+      onUVFinished();
   }
-
-  const { uv, time } = sequence[index];
-  const uvName = UVS.find(u => u.id === uv).name;
-
-  document.getElementById("text").textContent = `${uv} - ${uvName}`;
-  document.getElementById("currentText").textContent = "";
-
-  recap.push(`${uv} (${time} min)`);
-
-  await announceCandidate();
-  await speak(`Unité de valeur ${uvName}`);
-
-  runUV(uv, time);
 }
 
-/* -------------------------
-   TIMER
-------------------------- */
-
-function startTimer(durationSec, onEnd) {
-  clearInterval(timerInterval);
-  remaining = durationSec;
-  updateTimerDisplay(remaining);
-
-  timerInterval = setInterval(() => {
-    if (paused || stopped) return;
-
-    remaining--;
-    updateTimerDisplay(remaining);
-
-    if (remaining <= 0) {
-      clearInterval(timerInterval);
-      onEnd();
-    }
-  }, 1000);
-}
-
-/* -------------------------
-   UV RUN
-------------------------- */
-
-async function runUV(uv, timeMin) {
-  if (uv === "UV1") return runUV1();
-  if (uv === "UV2") return runUV2();
-  if (uv === "UV3") return runUV3(timeMin);
-  if (uv === "UV4") return runUV4(timeMin);
-  if (uv === "UV5") return runUV5();
-  if (uv === "UV6") return runUV6();
-}
-
-/* ---------- UV1 ---------- */
-
-async function runUV1(){
-  startTimer(UV1_DURATION_MIN * 60, async () => {
-    await speak("Fin de l’unité de valeur kihon");
-    await speak("Vous pouvez regagner votre place");
-    index++;
-    nextUV();
+/* ===================== VOIX JP (UV2) ===================== */
+function speakJP(txt) {
+  return new Promise(resolve => {
+    const u = new SpeechSynthesisUtterance(txt);
+    u.lang = "ja-JP";
+    u.rate = 0.95;
+    u.onend = resolve;
+    speechSynthesis.speak(u);
   });
 }
 
-/* ---------- UV2 ---------- */
+/* ===================== CONTRÔLES ===================== */
+document.getElementById("startBtn").addEventListener("click", () => {
+  stopped = false;
+  paused = false;
+  currentUVIndex = 0;
+  uvOrder = computeUVOrder();
+  logEl.textContent = "Ordre : " + uvOrder.join(" → ");
+  runNextUV();
+});
 
-async function runUV2() {
-  const intervalSec = parseInt(document.getElementById("uv2-interval").value) || 5;
-
-  await UV2.start(intervalSec);
-
-  await speak("Fin de l’unité de valeur Ippon Kumite");
-  await speak("Vous pouvez regagner votre place");
-
-  index++;
-  nextUV();
-}
-
-/* ---------- UV3 ---------- */
-
-async function runUV3(timeMin) {
-  const kataMin = parseInt(document.getElementById("uv3-kata-time").value) || timeMin;
-  const bunkaiMin = parseInt(document.getElementById("uv3-bunkai-time").value) || 5;
-
-  // KATA
-  startTimer(kataMin * 60, async () => {
-    await speak("Présentez les bunkaïs choisis et les séquences du kata de référence");
-
-    // BUNKAI
-    startTimer(bunkaiMin * 60, async () => {
-      await speak("Fin de l’unité de valeur kata");
-      await speak("Vous pouvez regagner votre place");
-      index++;
-      nextUV();
-    });
-  });
-}
-
-/* ---------- UV4 ---------- */
-
-async function runUV4(timeMin) {
-  await speak("Unité de valeur : épreuves techniques");
-  await speak("Exécutez 3 applications sur saisie à droite ou à gauche");
-  await speak("Annoncez la technique de base choisie");
-
-  startTimer(timeMin * 60, async () => {
-    await speak("Fin de l’unité de valeur épreuves techniques");
-    await speak("Vous pouvez regagner votre place");
-    index++;
-    nextUV();
-  });
-}
-
-/* ---------- UV5 ---------- */
-
-async function runUV5() {
-  const count = parseInt(document.getElementById("uv5-count").value) || 5;
-  const intervalSec = parseInt(document.getElementById("uv5-read-interval").value) || 15;
-  const duration = count * intervalSec;
-
-  startTimer(duration, async () => {
-    await speak("Fin de l’unité de valeur assauts imposés");
-    await speak("Vous pouvez regagner votre place");
-    UV56.stopUV5();
-    index++;
-    nextUV();
-  });
-
-  UV56.startUV5(intervalSec, count);
-}
-
-/* ---------- UV6 ---------- */
-
-async function runUV6() {
-  const count = parseInt(document.getElementById("uv6-count").value) || 5;
-  const intervalSec = parseInt(document.getElementById("uv6-read-interval").value) || 15;
-  const duration = count * intervalSec;
-
-  startTimer(duration, async () => {
-    await speak("Fin de l’unité de valeur randori");
-    await speak("Vous pouvez regagner votre place");
-    UV56.stopUV6();
-    index++;
-    nextUV();
-  });
-
-  UV56.startUV6(intervalSec, count);
-}
-
-/* -------------------------
-   PAUSE / STOP
-------------------------- */
-
-function togglePause() {
+document.getElementById("pauseBtn").addEventListener("click", () => {
   paused = !paused;
-}
+  logEl.textContent = paused ? "Pause" : "Reprise";
+});
 
-function stopExam() {
+document.getElementById("stopBtn").addEventListener("click", () => {
   stopped = true;
-  clearInterval(timerInterval);
+  paused = false;
   speechSynthesis.cancel();
-  UV2.stop();
-  UV56.stopUV5();
-  UV56.stopUV6();
-  document.getElementById("text").textContent = "Arrêté";
-  document.getElementById("countdown").textContent = "00:00";
-}
-
-async function endExam() {
-  await speak("Fin de l'examen. Vous pouvez regagner votre place.");
-  document.getElementById("text").textContent = "Terminé";
-  document.getElementById("currentText").textContent = "";
-
-  const log = document.getElementById("log");
-  log.innerHTML = "<strong>Récap :</strong><br>" + recap.join("<br>");
-}
+  if (currentTimeout) clearTimeout(currentTimeout);
+  logEl.textContent = "Arrêté";
+});
