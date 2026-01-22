@@ -59,10 +59,6 @@ function updateTimer(sec){
   if(el) el.textContent = formatTime(sec);
 }
 
-function wait(ms){
-  return new Promise(r=>setTimeout(r,ms));
-}
-
 /* =========================
    CONSTRUCTION SÉQUENCE
 ========================= */
