@@ -28,12 +28,9 @@ const UV2 = (() => {
     running = true;
 
     // Annonces FR en français (pas en japonais)
-    await speak("HIDARI KAMAE");
+   await speakJP("ヒダリ カマエ");
     await wait(3000);
-    await speak("Les deux candidats sont en garde. Les attaques ainsi que le niveau sont annoncés.");
-    await speak("À chaque fois, les attaques et les contre-attaques devront être différentes.");
-    await speak("Le test sera composé de deux séries des 5 attaques suivantes, exécutées d’abord à droite puis à gauche.");
-    await wait(1000);
+    
 
     // ⚠️ Intervalle (en secondes)
     const interval = Number(intervalSec) || 5;
@@ -47,7 +44,7 @@ const UV2 = (() => {
 
     if (!running || stopped) return;
 
-    await speak("MIGI KAMAE");
+    await speakJP("ミギ カマエ");
     await wait(3000);
 
     // Série gauche
