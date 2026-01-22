@@ -1,17 +1,9 @@
 /* ======================================================
    UV1 – EXAMEN (MODULE POUR SIMULATEUR GLOBAL)
    ------------------------------------------------------
-   - Aucune UI propre
-   - Appelé depuis runUV("UV1")
-   - Dépend du simulateur global pour :
-     speak(), format(), paused, stopped
-   ====================================================== */
-
-/* ===================== ÉLÉMENTS PARTAGÉS ===================== */
 const uv1Text = document.getElementById("currentText");
 const uv1Timer = document.getElementById("timer");
 
-/* ===================== DONNÉES ===================== */
 let UV1_DATA = {};
 
 const CATEGORY_MAP = {
@@ -29,14 +21,12 @@ function normalizeCat(cat) {
   return cat;
 }
 
-/* ===================== CHARGEMENT JSON ===================== */
 async function loadUV1Data() {
   if (Object.keys(UV1_DATA).length) return;
   const res = await fetch("enchainements.json");
   UV1_DATA = await res.json();
 }
 
-/* ===================== OUTILS ===================== */
 const waitMs = ms => new Promise(r => setTimeout(r, ms));
 
 function pickRandom(cat, n = 1) {
@@ -47,11 +37,9 @@ function pickRandom(cat, n = 1) {
   return n === 1 ? shuffled[0] : shuffled.slice(0, n);
 }
 
-/* ===================== CONSTRUCTION EXAMEN ===================== */
 function buildUV1Exam() {
   const seq = [];
 
-  // Partie 1 — 3 pas (3 x 45s)
   const p1 = pickRandom("3pas", 3);
   p1.forEach((ex, i) => seq.push({
     cat: "3pas",
@@ -61,7 +49,6 @@ function buildUV1Exam() {
     announce: i === 0 ? "Première partie. Enchaînements sur trois pas." : null
   }));
 
-  // Partie 2 — Sur place (gauche / droite)
   const p2 = pickRandom("surplace", 1);
   seq.push({
     cat: "surplace",
@@ -79,7 +66,6 @@ function buildUV1Exam() {
     time: 30
   });
 
-  // Partie 3 — Multidirectionnel
   const p3 = pickRandom("multi", 1);
   seq.push({
     cat: "multi",
@@ -97,7 +83,6 @@ function buildUV1Exam() {
     time: 45
   });
 
-  // Partie 4 — Cibles (5 x 30s)
   const p4 = pickRandom("cibles", 5);
   p4.forEach((ex, i) => seq.push({
     cat: "cibles",
@@ -110,7 +95,6 @@ function buildUV1Exam() {
   return seq;
 }
 
-/* ===================== MOTEUR UV1 ===================== */
 async function runUV1Sequence(sequence) {
   for (const ex of sequence) {
     if (stopped) return;
@@ -142,7 +126,6 @@ async function runUV1Sequence(sequence) {
   }
 }
 
-/* ===================== POINT D’ENTRÉE ===================== */
 async function runUV1Exam() {
   await loadUV1Data();
 
@@ -153,6 +136,8 @@ async function runUV1Exam() {
   const seq = buildUV1Exam();
   await runUV1Sequence(seq);
 }
+
+window.runUV1Exam = runUV1Exam;
 
 // Rendu global
 window.runUV1Exam = runUV1Exam;
