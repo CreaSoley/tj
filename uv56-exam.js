@@ -11,19 +11,12 @@ const UV56 = (() => {
   ];
 
   const CAT_A = [
-    "Saisie de poignet direct","Saisie de poignet opposé","Saisie de poignet haut",
+    "Saisie de poignet direct","Saisie de poignet opposé","Saisie de poignet opposé","Saisie de poignet haut",
     "Saisie des deux poignets bas","Saisie des deux poignets haut","Saisie d'un poignet à deux mains",
     "Étranglement de face à une main","Étranglement de face à deux mains",
     "Saisie de revers + mawashi tsuki","Saisie de cheveux",
     "Saisie manche haute","Saisie manche basse"
   ];
-
-  function speakFR(txt){
-    const u = new SpeechSynthesisUtterance(txt);
-    u.lang = "fr-FR";
-    u.rate = 0.97;
-    speechSynthesis.speak(u);
-  }
 
   function pick(list,count){
     const copy=list.slice();
@@ -38,22 +31,17 @@ const UV56 = (() => {
   let uv5Timer = null;
   let uv6Timer = null;
 
-  function startUV5(intervalSec, count){
+  function startUV5(intervalSec, count, speakFR){
     stopUV5();
-
     const list = pick(CAT_A, count);
-
     let i = 0;
+
     function loop(){
-      if(i >= list.length){
-        speakFR("Fin de l’UV5");
-        return;
-      }
+      if(i >= list.length) return;
       speakFR(list[i]);
       i++;
       uv5Timer = setTimeout(loop, intervalSec*1000);
     }
-
     loop();
   }
 
@@ -62,22 +50,17 @@ const UV56 = (() => {
     uv5Timer = null;
   }
 
-  function startUV6(intervalSec, count){
+  function startUV6(intervalSec, count, speakFR){
     stopUV6();
-
     const list = pick(LIST_ALL, count);
-
     let i = 0;
+
     function loop(){
-      if(i >= list.length){
-        speakFR("Fin de l’UV6");
-        return;
-      }
+      if(i >= list.length) return;
       speakFR(list[i]);
       i++;
       uv6Timer = setTimeout(loop, intervalSec*1000);
     }
-
     loop();
   }
 
@@ -86,10 +69,5 @@ const UV56 = (() => {
     uv6Timer = null;
   }
 
-  return {
-    startUV5,
-    stopUV5,
-    startUV6,
-    stopUV6
-  };
+  return { startUV5, stopUV5, startUV6, stopUV6 };
 })();
