@@ -7,7 +7,7 @@ const UVS = [
   { id: "UV6", name: "Randori" }
 ];
 
-const UV1_DURATION_MIN = 5;
+const UV1_DURATION_MIN = 10;
 
 let sequence = [];
 let index = 0;
