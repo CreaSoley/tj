@@ -1,6 +1,8 @@
 /* =========================================================
    SIMULATEUR GLOBAL – VERSION FINALE STABLE
+   + UV1 intégré
    Compatible avec :
+   - uv1-exam.js (renommage waitMs)
    - uv2-exam.js
    - uv3-exam.js
    - uv4-exam.js
@@ -75,6 +77,25 @@ async function pauseBetweenUV() {
   textEl.textContent = "Pause";
   await speak("Pause");
   return new Promise(r => setTimeout(r, pauseMin * 60000));
+}
+
+/* =========================================================
+   ======================= UV1 =============================
+   ========================================================= */
+async function runUV1() {
+  textEl.textContent = "UV1 – Kihon";
+
+  await speak("Unité de valeur un. Kihon.");
+  await waitMs(1000); // NOTE : waitMs défini dans uv1-exam.js
+
+  await loadUV1Data(); // défini dans uv1-exam.js
+
+  const seq = buildUV1Exam(); // défini dans uv1-exam.js
+  await runUV1Sequence(seq); // défini dans uv1-exam.js
+
+  await speak("Fin de l’unité de valeur Kihon");
+  await speak("Vous pouvez regagner votre place");
+  nextUV();
 }
 
 /* =========================================================
@@ -193,7 +214,7 @@ async function runUV6() {
 /* =========================================================
    ================== ORCHESTRATION ========================
    ========================================================= */
-const ORDER = ["UV2", "UV3", "UV4", "UV5", "UV6"];
+const ORDER = ["UV1","UV2","UV3","UV4","UV5","UV6"];
 let uvIndex = 0;
 
 async function nextUV() {
@@ -206,6 +227,7 @@ async function nextUV() {
   await pauseBetweenUV();
 
   const uv = ORDER[uvIndex++];
+  if (uv === "UV1") runUV1();
   if (uv === "UV2") runUV2();
   if (uv === "UV3") runUV3();
   if (uv === "UV4") runUV4();
