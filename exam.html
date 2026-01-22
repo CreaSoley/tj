@@ -59,7 +59,6 @@
       <input id="bunkaiDuration" type="number" min="1" max="10" value="5">
       <input id="uv4Duration" type="number" min="1" max="10" value="5">
 
-
       <div class="button-row">
         <button id="startBtn" class="btn-kawaii start">Lancer</button>
         <button id="pauseBtn" class="btn-kawaii pause">Pause</button>
@@ -70,6 +69,7 @@
     <div class="sub-section">
       <div id="text" class="result-display">Prêt</div>
       <div id="countdown" class="result-display">00:00</div>
+      <div id="timer" class="result-display"></div>
       <div id="currentText" class="result-display"></div>
       <div id="log" class="result-display"></div>
     </div>
@@ -86,7 +86,10 @@ fetch("banner.html")
   });
 </script>
 
+<script src="uv1-exam.js"></script>
 <script src="uv2-exam.js"></script>
+<script src="uv3-exam.js"></script>
+<script src="uv4-exam.js"></script>
 <script src="uv56-exam.js"></script>
 <script src="simulateur-global.js"></script>
 
