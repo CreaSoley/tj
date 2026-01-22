@@ -114,7 +114,13 @@ async function runUV2() {
   await speak("À chaque fois, les attaques et les contre-attaques devront être différentes.");
   await speak("Le test sera composé de deux séries des 5 attaques suivantes, exécutées d’abord à droite puis à gauche.");
 
-  const interval = Number(document.getElementById("uv2-interval")?.value) || 5;
+  const uv2IntervalEl = document.getElementById("uv2-interval");
+   const uv2IntervalDisplay = document.getElementById("uv2-interval-display");
+
+uv2IntervalEl.addEventListener("input", () => {
+  uv2IntervalDisplay.textContent = `${uv2IntervalEl.value} sec`;
+});
+
 
   UV2.setStopCallback(async () => {
     if (stopped) return;
