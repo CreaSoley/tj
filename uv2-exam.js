@@ -11,38 +11,56 @@ const UV2 = (() => {
   let running = false;
   let stopCallback = null;
 
-  async function wait(ms){ return new Promise(r => setTimeout(r, ms)); }
+  // ✅ WAIT respectant pause + stop
+  async function wait(ms) {
+    const start = Date.now();
+    while (Date.now() - start < ms) {
+      if (!running || stopped) return;
+      if (!paused) {
+        await new Promise(r => setTimeout(r, 100));
+      } else {
+        await new Promise(r => setTimeout(r, 200));
+      }
+    }
+  }
 
-  async function start(intervalSec, speakJP){
+  async function start(intervalSec, speakJP) {
     running = true;
 
-    await speakJP("HIDARI KAMAE");
-    await wait(3000); // 3s de latence
-    await speakJP("Les deux candidats sont en garde. Les attaques ainsi que le niveau sont annoncés.");
-    await speakJP("A chaque fois, les attaques et les contre-attaques devront être différentes. Le test sera composé de deux séries des 5 attaques suivantes, exécutées d’abord à droite puis à gauche.");
+    // Annonces FR en français (pas en japonais)
+    await speak("HIDARI KAMAE");
+    await wait(3000);
+    await speak("Les deux candidats sont en garde. Les attaques ainsi que le niveau sont annoncés.");
+    await speak("À chaque fois, les attaques et les contre-attaques devront être différentes.");
+    await speak("Le test sera composé de deux séries des 5 attaques suivantes, exécutées d’abord à droite puis à gauche.");
     await wait(1000);
 
+    // ⚠️ Intervalle (en secondes)
+    const interval = Number(intervalSec) || 5;
+
+    // Série droite
     for (let i = 0; i < IPPON.length; i++) {
-      if (!running) return;
+      if (!running || stopped) return;
       await speakJP(IPPON[i].jp);
-      await wait(intervalSec * 1000);
+      await wait(interval * 1000);
     }
 
-    if (!running) return;
+    if (!running || stopped) return;
 
-    await speakJP("MIGI KAMAE");
+    await speak("MIGI KAMAE");
     await wait(3000);
 
+    // Série gauche
     for (let i = 0; i < IPPON.length; i++) {
-      if (!running) return;
+      if (!running || stopped) return;
       await speakJP(IPPON[i].jp);
-      await wait(intervalSec * 1000);
+      await wait(interval * 1000);
     }
 
     if (stopCallback) stopCallback();
   }
 
-  function stop(){
+  function stop() {
     running = false;
   }
 
