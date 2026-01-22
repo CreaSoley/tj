@@ -1,6 +1,4 @@
-/* ======================================================
-   UV1 – EXAMEN (MODULE POUR SIMULATEUR GLOBAL)
-   ------------------------------------------------------
+
 const uv1Text = document.getElementById("currentText");
 const uv1Timer = document.getElementById("timer");
 
