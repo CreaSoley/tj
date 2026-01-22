@@ -65,20 +65,27 @@ fetch("banner.html")
    <div class="card-kawaii">
   <h3>Ordre des UV</h3>
 
-  <select id="presetSelect" class="input-wide">
-    <option value="">— Ordre personnalisé —</option>
-    <option value="standard">Ordre officiel (1→6)</option>
-    <option value="adapte">Ordre adapté</option>
-  </select>
+  <select id="examMode">
+  <option value="officiel">Examen officiel</option>
+  <option value="adapte">Passage adapté</option>
+  <option value="custom">Ordre personnalisé</option>
+</select>
 
-  <ul id="uvOrderList" class="content"></ul>
+<div id="customOrder">
+  <div class="controls-row">
+    <label>Ordre 1</label>
+    <select id="uvSelect0">
+      <option value="UV1">UV1</option>
+      <option value="UV2">UV2</option>
+      <option value="UV3">UV3</option>
+      <option value="UV4">UV4</option>
+      <option value="UV5">UV5</option>
+      <option value="UV6">UV6</option>
+    </select>
+  </div>
+  <!-- jusqu'à uvSelect5 -->
 </div>
- 
-    
-    <div class="sub-section">
-      <h3>Ordre et durée des UV</h3>
-      <div id="uvConfig"></div>
-    </div>
+
 
     <div class="card">
   <h2>Pause entre UV</h2>
@@ -142,6 +149,12 @@ fetch("banner.html")
 
   </div>
 </div>
+<script>
+document.getElementById("examMode").addEventListener("change", e=>{
+  const custom = document.getElementById("customOrder");
+  custom.style.display = e.target.value==="custom" ? "block" : "none";
+});
+</script>
 
 <script src="uv1-exam.js"></script>
 <script src="uv2-exam.js"></script>
