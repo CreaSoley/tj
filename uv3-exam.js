@@ -23,10 +23,6 @@ async function runUV3Exam(onFinish) {
   const display = document.getElementById("currentText");
   display.textContent = "UV3 – Kata";
 
-  await speak("Unité de valeur trois. Kata.");
-  await speak("Annoncez le kata que vous avez choisi.");
-  await speak("Vous pouvez commencer.");
-
   await runCountdown(kataSec);
 
   if (typeof stopped !== "undefined" && stopped) return;
