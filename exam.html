@@ -55,6 +55,26 @@ fetch("banner.html")
       </div>
     </div>
 
+<div class="card-kawaii">
+  <h3>Mode</h3>
+  <button id="modeBtn" class="btn-kawaii secondary">
+    Mode : Examen
+  </button>
+</div>
+
+   <div class="card-kawaii">
+  <h3>Ordre des UV</h3>
+
+  <select id="presetSelect" class="input-wide">
+    <option value="">— Ordre personnalisé —</option>
+    <option value="standard">Ordre officiel (1→6)</option>
+    <option value="adapte">Ordre adapté</option>
+  </select>
+
+  <ul id="uvOrderList" class="content"></ul>
+</div>
+ 
+    
     <div class="sub-section">
       <h3>Ordre et durée des UV</h3>
       <div id="uvConfig"></div>
