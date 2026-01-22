@@ -1,3 +1,10 @@
+/* =========================================================
+   UV2 – IPPON KUMITE
+========================================================= */
+
+(function(){
+
+/* ---------- DONNÉES UV2 ---------- */
 const IPPON = [
   { romaji: "Oi Tsuki Jodan", jp: "オイヅキ ジョウダン" },
   { romaji: "Oi Tsuki Chudan", jp: "オイヅキ チュウダン" },
@@ -6,43 +13,53 @@ const IPPON = [
   { romaji: "Yoko Geri Chudan", jp: "ヨコゲリ チュウダン" }
 ];
 
-function speakJP(text) {
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = "ja-JP";
-  speechSynthesis.speak(u);
+let running = false;
+
+/* ---------- UTILS LOCALES ---------- */
+function speakJP(text){
+  return new Promise(res => {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "ja-JP";
+    u.onend = res;
+    speechSynthesis.speak(u);
+  });
 }
 
-function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
+function delay(ms){
+  return new Promise(r => setTimeout(r, ms));
+}
 
-let uv2Running = false;
-let uv2Index = 0;
-let uv2Interval = 5000;
-
-async function uv2RunSequence(){
-  for (let i = 0; i < IPPON.length; i++) {
-    if (!uv2Running) return;
-    speakJP(IPPON[i].jp);
-    await wait(uv2Interval);
+/* ---------- LOGIQUE ---------- */
+async function runSide(label, interval){
+  await speakJP(label);
+  for (const tech of IPPON) {
+    if (!running) return;
+    await speakJP(tech.jp);
+    await delay(interval);
   }
 }
 
+/* ---------- API PUBLIQUE ---------- */
 window.UV2 = {
-  start: function(intervalSec){
-    return new Promise(async resolve => {
-      uv2Running = true;
-      uv2Interval = intervalSec * 1000;
 
-      speakJP("HIDARI KAMAE");
-      await uv2RunSequence();
+  start: async function(intervalSec){
+    running = true;
+    const interval = intervalSec * 1000;
 
-      speakJP("MIGI KAMAE");
-      await uv2RunSequence();
+    await runSide("HIDARI KAMAE", interval);
+    if (!running) return;
 
-      resolve(); // 🔑 TRÈS IMPORTANT
-    });
+    await runSide("MIGI KAMAE", interval);
   },
-  stop(){
-    uv2Running = false;
+
+  stop: function(){
+    running = false;
     speechSynthesis.cancel();
+  },
+
+  getDuration: function(intervalSec){
+    return IPPON.length * 2 * intervalSec;
   }
 };
+
+})();
