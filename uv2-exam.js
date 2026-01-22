@@ -27,21 +27,21 @@ async function uv2RunSequence(){
 }
 
 window.UV2 = {
-  start: async function(intervalSec){
-    uv2Running = true;
-    uv2Interval = intervalSec * 1000;
+  start: function(intervalSec){
+    return new Promise(async resolve => {
+      uv2Running = true;
+      uv2Interval = intervalSec * 1000;
 
-    await speakJP("HIDARI KAMAE");
-    await wait(1000);
-    await uv2RunSequence();
+      speakJP("HIDARI KAMAE");
+      await uv2RunSequence();
 
-    if(!uv2Running) return;
+      speakJP("MIGI KAMAE");
+      await uv2RunSequence();
 
-    await speakJP("MIGI KAMAE");
-    await wait(1000);
-    await uv2RunSequence();
+      resolve(); // 🔑 TRÈS IMPORTANT
+    });
   },
-  stop: function(){
+  stop(){
     uv2Running = false;
     speechSynthesis.cancel();
   }
