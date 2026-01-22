@@ -1,251 +1,316 @@
-/*******************************************************
- * SIMULATEUR GLOBAL – EXAMEN / ENTRAÎNEMENT
- * - Modes : officiel / adapté / personnalisé
- * - Pause entre UV
- * - Timers propres (1 seul timer global)
- * - UV2 / UV5 / UV6 pilotés par leurs modules
- *******************************************************/
+const UVS = [
+  { id: "UV1", name: "Kihon" },
+  { id: "UV2", name: "Ippon Kumite" },
+  { id: "UV3", name: "Kata" },
+  { id: "UV4", name: "Épreuves techniques" },
+  { id: "UV5", name: "Assauts imposés" },
+  { id: "UV6", name: "Randori" }
+];
 
-/* =========================
-   CONFIGURATION UV
-========================= */
-
-const UVS = {
-  UV1: { name: "Kihon", fixedTime: 1 },
-  UV2: { name: "Ippon Kumite" },
-  UV3: { name: "Kata" },
-  UV4: { name: "Épreuves techniques" },
-  UV5: { name: "Assauts imposés" },
-  UV6: { name: "Randori" }
-};
-
-const UV_PRESETS = {
-  officiel: ["UV1","UV2","UV3","UV4","UV5","UV6"],
-  adapte:   ["UV1","UV4","UV2","UV5","UV1","UV6"]
-};
-
-/* =========================
-   ÉTAT GLOBAL
-========================= */
+const UV1_DURATION_MIN = 10;
 
 let sequence = [];
-let currentIndex = 0;
-let timer = null;
+let index = 0;
 let remaining = 0;
+let timerInterval = null;
 let paused = false;
 let stopped = false;
 let recap = [];
 
-/* =========================
-   OUTILS
-========================= */
-
-function speakFR(text){
-  return new Promise(res=>{
+function speak(text, lang = "fr-FR") {
+  return new Promise(res => {
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = "fr-FR";
+    u.lang = lang;
     u.onend = res;
     speechSynthesis.speak(u);
   });
 }
 
-function formatTime(sec){
-  return String(Math.floor(sec/60)).padStart(2,"0")+":"+
-         String(sec%60).padStart(2,"0");
+function format(sec) {
+  return String(Math.floor(sec / 60)).padStart(2, "0") + ":" +
+         String(sec % 60).padStart(2, "0");
 }
 
-function updateTimer(sec){
-  const el = document.getElementById("countdown");
-  if(el) el.textContent = formatTime(sec);
+function updateTimerDisplay(sec){
+  document.getElementById("countdown").textContent = format(sec);
 }
 
-/* =========================
-   CONSTRUCTION SÉQUENCE
-========================= */
-
-function getUVTime(uv){
-  if (UVS[uv].fixedTime) return UVS[uv].fixedTime * 60;
-
-  if (uv === "UV2") {
-    const interval = parseInt(document.getElementById("uv2-interval").value)||5;
-    return interval * 10; // 5 techniques x 2 gardes
-  }
-
-  if (uv === "UV5") {
-    const c = parseInt(document.getElementById("uv5-count").value)||5;
-    const i = parseInt(document.getElementById("uv5-read-interval").value)||15;
-    return c * i;
-  }
-
-  if (uv === "UV6") {
-    const c = parseInt(document.getElementById("uv6-count").value)||5;
-    const i = parseInt(document.getElementById("uv6-read-interval").value)||15;
-    return c * i;
-  }
-
-  return (parseInt(document.getElementById("uvTime-"+uv)?.value)||5)*60;
-}
-
-function buildSequence(){
-  const mode = document.getElementById("examMode").value;
-
-  if(mode === "custom"){
-    const seq = [];
-    for(let i=0;i<6;i++){
-      const uv = document.getElementById("uvSelect"+i).value;
-      seq.push({ uv, duration: getUVTime(uv) });
-    }
-    return seq;
-  }
-
-  return UV_PRESETS[mode].map(uv=>({
-    uv,
-    duration: getUVTime(uv)
-  }));
-}
-
-/* =========================
-   EXAMEN
-========================= */
-
-async function announceCandidate(){
+function announceCandidate(){
   const title = document.getElementById("candidateTitle").value || "Monsieur";
-  const name  = document.getElementById("candidate").value || "candidat";
-  await speakFR(`${title} ${name}, avancez-vous`);
+  const name = document.getElementById("candidate").value || "candidat";
+  return speak(`${title} ${name}, avancez-vous.`);
 }
 
-async function startExam(){
+function buildCustomOrder() {
+  const uvConfigDiv = document.getElementById("customOrder");
+  uvConfigDiv.innerHTML = "";
+  for (let i = 0; i < 6; i++) {
+    const row = document.createElement("div");
+    row.className = "controls-row";
+    row.innerHTML = `
+      <label>Ordre ${i+1}</label>
+      <select id="uvSelect${i}">
+        ${UVS.map(u => `<option value="${u.id}">${u.id} - ${u.name}</option>`).join("")}
+      </select>
+    `;
+    uvConfigDiv.appendChild(row);
+  }
+}
+
+buildCustomOrder();
+
+function updateModeUI() {
+  const mode = document.getElementById("examMode").value;
+  const modeBtn = document.getElementById("modeBtn");
+  const custom = document.getElementById("customOrder");
+
+  if (mode === "officiel") {
+    modeBtn.textContent = "Mode examen";
+    modeBtn.classList.add("mode-exam");
+    modeBtn.classList.remove("mode-adapte");
+    modeBtn.classList.remove("mode-custom");
+    custom.style.display = "none";
+  }
+  if (mode === "adapte") {
+    modeBtn.textContent = "Mode entraînement";
+    modeBtn.classList.add("mode-adapte");
+    modeBtn.classList.remove("mode-exam");
+    modeBtn.classList.remove("mode-custom");
+    custom.style.display = "none";
+  }
+  if (mode === "custom") {
+    modeBtn.textContent = "Mode personnalisé";
+    modeBtn.classList.add("mode-custom");
+    modeBtn.classList.remove("mode-exam");
+    modeBtn.classList.remove("mode-adapte");
+    custom.style.display = "block";
+  }
+}
+
+document.getElementById("examMode").addEventListener("change", updateModeUI);
+updateModeUI(); // initial
+
+async function startExam() {
   stopped = false;
   paused = false;
   recap = [];
-  currentIndex = 0;
+  index = 0;
 
-  sequence = buildSequence();
+  sequence = [];
+  const mode = document.getElementById("examMode").value;
 
-  await speakFR("Début du passage de grade");
+  if (mode === "officiel") {
+    sequence = [
+      { uv: "UV1", time: UV1_DURATION_MIN },
+      { uv: "UV2", time: 5 },
+      { uv: "UV3", time: 5 },
+      { uv: "UV4", time: 5 },
+      { uv: "UV5", time: 5 },
+      { uv: "UV6", time: 5 }
+    ];
+  }
+
+  if (mode === "adapte") {
+    sequence = [
+      { uv: "UV1", time: UV1_DURATION_MIN },
+      { uv: "UV4", time: 5 },
+      { uv: "UV2", time: 5 },
+      { uv: "UV5", time: 5 },
+      { uv: "UV1", time: UV1_DURATION_MIN },
+      { uv: "UV6", time: 5 }
+    ];
+  }
+
+  if (mode === "custom") {
+    const used = new Set();
+    for (let i = 0; i < 6; i++) {
+      const uv = document.getElementById("uvSelect" + i).value;
+      if (used.has(uv)) {
+        alert("Chaque UV doit être unique.");
+        return;
+      }
+      used.add(uv);
+      const time = (uv === "UV1") ? UV1_DURATION_MIN : 5;
+      sequence.push({ uv, time });
+    }
+  }
+
+  document.getElementById("log").innerHTML = "";
+  await speak(`Passage de grade du candidat ${document.getElementById("candidate").value || "candidat"}. Avancez-vous.`);
   nextUV();
 }
 
-async function nextUV(){
-  if(stopped || currentIndex >= sequence.length){
-    return endExam();
+async function nextUV() {
+  if (stopped || index >= sequence.length) {
+    endExam();
+    return;
   }
 
-  const pauseMin = parseInt(document.getElementById("pauseDuration").value)||0;
-  if(pauseMin>0){
-    document.getElementById("text").textContent = "Pause";
-    await speakFR("Pause");
-    await wait(pauseMin*60000);
+  const pauseMin = parseInt(document.getElementById("pauseDuration").value) || 0;
+  if (pauseMin > 0) {
+    document.getElementById("currentUV").textContent = "Pause";
+    await speak("Pause");
+    await new Promise(r => setTimeout(r, pauseMin * 60000));
   }
 
-  const { uv, duration } = sequence[currentIndex];
-  const name = UVS[uv].name;
+  const { uv, time } = sequence[index];
+  const uvName = UVS.find(u => u.id === uv).name;
 
-  document.getElementById("text").textContent = `${uv} – ${name}`;
-  recap.push(`${uv} – ${name}`);
+  document.getElementById("text").textContent = `${uv} - ${uvName}`;
+  document.getElementById("currentText").textContent = "";
+
+  recap.push(`${uv} (${time} min)`);
 
   await announceCandidate();
-  await speakFR(`Unité de valeur ${name}`);
+  // Ici on ne dit plus "Unité de valeur" pour UV2
+  if (uv !== "UV2") await speak(`Unité de valeur ${uvName}`);
 
-  runUV(uv, duration);
+  runUV(uv, time);
 }
 
-/* =========================
-   TIMER UNIQUE
-========================= */
+function startTimer(durationSec, onEnd) {
+  clearInterval(timerInterval);
+  remaining = durationSec;
+  updateTimerDisplay(remaining);
 
-function startTimer(seconds, onEnd){
-  clearInterval(timer);
-  remaining = seconds;
-  updateTimer(remaining);
+  timerInterval = setInterval(() => {
+    if (paused || stopped) return;
 
-  timer = setInterval(()=>{
-    if(paused || stopped) return;
     remaining--;
-    updateTimer(remaining);
-    if(remaining<=0){
-      clearInterval(timer);
+    updateTimerDisplay(remaining);
+
+    if (remaining <= 0) {
+      clearInterval(timerInterval);
       onEnd();
     }
-  },1000);
+  }, 1000);
 }
 
-/* =========================
-   DISPATCH UV
-========================= */
-
-function runUV(uv, duration){
-  if(uv==="UV1") return runUV1(duration);
-  if(uv==="UV2") return runUV2();
-  if(uv==="UV3") return runTimedUV("kata", duration);
-  if(uv==="UV4") return runTimedUV("épreuves techniques", duration);
-  if(uv==="UV5") return runUV5(duration);
-  if(uv==="UV6") return runUV6(duration);
+async function runUV(uv, timeMin) {
+  if (uv === "UV1") return runUV1(timeMin);
+  if (uv === "UV2") return runUV2();
+  if (uv === "UV3") return runUV3();
+  if (uv === "UV4") return runUV4();
+  if (uv === "UV5") return runUV5();
+  if (uv === "UV6") return runUV6();
 }
 
-/* =========================
-   UV
-========================= */
-
-function runUV1(duration){
-  startTimer(duration, async ()=>{
-    await speakFR("Fin de l’unité de valeur Kihon");
-    currentIndex++; nextUV();
+/* ---------- UV1 ---------- */
+async function runUV1(timeMin){
+  startTimer(timeMin * 60, async () => {
+    await speak("Fin de l’unité de valeur kihon");
+    await speak("Vous pouvez regagner votre place");
+    index++;
+    nextUV();
   });
 }
 
-async function runUV2(){
-  const interval = parseInt(document.getElementById("uv2-interval").value)||5;
-  await UV2.start(interval);
-  await speakFR("Fin de l’unité de valeur Ippon Kumite");
-  currentIndex++; nextUV();
+/* ---------- UV2 ---------- */
+async function runUV2() {
+  const intervalSec = parseInt(document.getElementById("uv2-interval").value) || 5;
+
+  await speak("Unité de valeur : Ippon kumite");
+  await speak("Les deux candidats sont en garde. Les attaques ainsi que le niveau sont annoncés.");
+  await speak("A chaque fois, les attaques et les contre-attaques devront être différentes. Le test sera composé de deux séries des 5 attaques suivantes, exécutées d’abord à droite puis à gauche");
+
+  await new Promise(r => setTimeout(r, 3000)); // latence 3 secondes
+
+  await UV2.start(intervalSec);
+
+  await speak("Fin de l’unité de valeur Ippon Kumite");
+  await speak("Vous pouvez regagner votre place");
+
+  index++;
+  nextUV();
 }
 
-function runTimedUV(label, duration){
-  startTimer(duration, async ()=>{
-    await speakFR(`Fin de l’unité de valeur ${label}`);
-    currentIndex++; nextUV();
+
+/* ---------- UV3 ---------- */
+async function runUV3() {
+  const kataMin = parseInt(document.getElementById("uv3-kata").value) || 5;
+  const bunkaiMin = parseInt(document.getElementById("uv3-bunkai").value) || 5;
+
+  await speak("Annoncez le kata que vous avez choisi");
+  startTimer(kataMin * 60, async () => {
+    await speak("Présentez les bunkaïs choisis et les séquences du kata de référence");
+    startTimer(bunkaiMin * 60, async () => {
+      await speak("Fin de l’unité de valeur kata");
+      await speak("Vous pouvez regagner votre place");
+      index++;
+      nextUV();
+    });
   });
 }
 
-function runUV5(duration){
-  UV56.startUV5();
-  startTimer(duration, async ()=>{
+/* ---------- UV4 ---------- */
+async function runUV4() {
+  await speak("Unité de valeur : épreuves techniques");
+  await speak("Exécutez 3 applications sur saisie à droite ou à gauche");
+  await speak("Annoncez la technique de base choisie");
+
+  const timeMin = 5;
+  startTimer(timeMin * 60, async () => {
+    await speak("Fin de l’unité de valeur épreuves techniques");
+    await speak("Vous pouvez regagner votre place");
+    index++;
+    nextUV();
+  });
+}
+
+/* ---------- UV5 ---------- */
+async function runUV5() {
+  const count = parseInt(document.getElementById("uv5-count").value) || 5;
+  const intervalSec = parseInt(document.getElementById("uv5-read-interval").value) || 15;
+  const duration = count * intervalSec;
+
+  startTimer(duration, async () => {
+    await speak("Fin de l’unité de valeur assauts imposés");
+    await speak("Vous pouvez regagner votre place");
     UV56.stopUV5();
-    await speakFR("Fin de l’unité de valeur assauts imposés");
-    currentIndex++; nextUV();
+    index++;
+    nextUV();
   });
+
+  UV56.startUV5(intervalSec, count);
 }
 
-function runUV6(duration){
-  UV56.startUV6();
-  startTimer(duration, async ()=>{
+/* ---------- UV6 ---------- */
+async function runUV6() {
+  const count = parseInt(document.getElementById("uv6-count").value) || 5;
+  const intervalSec = parseInt(document.getElementById("uv6-read-interval").value) || 15;
+  const duration = count * intervalSec;
+
+  startTimer(duration, async () => {
+    await speak("Fin de l’unité de valeur randori");
+    await speak("Vous pouvez regagner votre place");
     UV56.stopUV6();
-    await speakFR("Fin de l’unité de valeur randori");
-    currentIndex++; nextUV();
+    index++;
+    nextUV();
   });
+
+  UV56.startUV6(intervalSec, count);
 }
 
-/* =========================
-   CONTRÔLES
-========================= */
-
-function togglePause(){
+function togglePause() {
   paused = !paused;
 }
 
-function stopExam(){
+function stopExam() {
   stopped = true;
-  clearInterval(timer);
+  clearInterval(timerInterval);
   speechSynthesis.cancel();
-  UV2?.stop();
-  UV56?.stopUV5();
-  UV56?.stopUV6();
+  UV2.stop();
+  UV56.stopUV5();
+  UV56.stopUV6();
+  document.getElementById("text").textContent = "Arrêté";
+  document.getElementById("countdown").textContent = "00:00";
 }
 
-async function endExam(){
-  await speakFR("Fin de l'examen. Vous pouvez regagner votre place.");
+async function endExam() {
+  await speak("Fin de l'examen. Vous pouvez regagner votre place.");
   document.getElementById("text").textContent = "Terminé";
-  document.getElementById("log").innerHTML =
-    "<strong>Récap :</strong><br>"+recap.join("<br>");
+  document.getElementById("currentText").textContent = "";
+
+  const log = document.getElementById("log");
+  log.innerHTML = "<strong>Récap :</strong><br>" + recap.join("<br>");
 }
