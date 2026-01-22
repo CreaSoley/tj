@@ -18,12 +18,10 @@ let uv2Running = false;
 let uv2Index = 0;
 let uv2Interval = 5000;
 
-async function uv2RunSequence(side){
-  const list = [...IPPON];
-  for(let i=0;i<5;i++){
-    if(!uv2Running) return;
-    speakJP(list[i].jp);
-    uv2Index++;
+async function uv2RunSequence(){
+  for (let i = 0; i < IPPON.length; i++) {
+    if (!uv2Running) return;
+    speakJP(IPPON[i].jp);
     await wait(uv2Interval);
   }
 }
@@ -32,15 +30,16 @@ window.UV2 = {
   start: async function(intervalSec){
     uv2Running = true;
     uv2Interval = intervalSec * 1000;
-    uv2Index = 0;
 
     await speakJP("HIDARI KAMAE");
-    await uv2RunSequence("HIDARI");
+    await wait(1000);
+    await uv2RunSequence();
 
     if(!uv2Running) return;
 
     await speakJP("MIGI KAMAE");
-    await uv2RunSequence("MIGI");
+    await wait(1000);
+    await uv2RunSequence();
   },
   stop: function(){
     uv2Running = false;
