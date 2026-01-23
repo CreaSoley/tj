@@ -137,6 +137,7 @@ UV2.start(interval, (text) => {
   u.lang = "ja-JP";
   speechSynthesis.speak(u);
 });
+   }
 
 async function runUV3() {
   document.getElementById("text").textContent = "UV3 – Kata";
