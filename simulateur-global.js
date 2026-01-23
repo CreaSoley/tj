@@ -157,7 +157,7 @@ async function runUV4() {
 
   await window.runUV4Exam(async () => {
     if (stopped) return;
-    await speak("Fin de l’unité de valeur Épreuves techniques");
+  
     await speak("Vous pouvez regagner votre place");
     nextUV();
   });
