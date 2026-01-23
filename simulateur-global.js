@@ -128,9 +128,12 @@ UV2.start(interval, (text) => {
   return new Promise(resolve => {
     const u = new SpeechSynthesisUtterance(text);
     u.lang = "ja-JP";
+    u.rate = 0.95;
     u.onend = resolve;
     speechSynthesis.speak(u);
   });
+});
+
 });
 
    }
