@@ -11,12 +11,14 @@ const UV2 = (() => {
   let running = false;
   let stopCallback = null;
 
-  // ✅ WAIT respectant pause + stop
+  // ✅ WAIT sécurisé (pause + stop sans crash)
   async function wait(ms) {
     const start = Date.now();
     while (Date.now() - start < ms) {
-      if (!running || stopped) return;
-      if (!paused) {
+
+      if (!running || (typeof stopped !== "undefined" && stopped)) return;
+
+      if (typeof paused === "undefined" || !paused) {
         await new Promise(r => setTimeout(r, 100));
       } else {
         await new Promise(r => setTimeout(r, 200));
@@ -24,42 +26,42 @@ const UV2 = (() => {
     }
   }
 
-  async function start(intervalSec, speakJP) {
+  async function start(intervalSec = 5) {
     running = true;
 
-    // Annonces FR en français (pas en japonais)
-   await speakJP("ヒダリ カマエ");
+    // Kamae droite
+    await speakJP("ヒダリ カマエ");
     await wait(3000);
-    
 
-    // ⚠️ Intervalle (en secondes)
     const interval = Number(intervalSec) || 5;
 
-    // Série droite
+    // Série 1
     for (let i = 0; i < IPPON.length; i++) {
-      if (!running || stopped) return;
+      if (!running || (typeof stopped !== "undefined" && stopped)) return;
       await speakJP(IPPON[i].jp);
       await wait(interval * 1000);
     }
-
-    if (!running || stopped) return;
 
     await speakJP("ミギ カマエ");
     await wait(3000);
 
-    // Série gauche
+    // Série 2
     for (let i = 0; i < IPPON.length; i++) {
-      if (!running || stopped) return;
+      if (!running || (typeof stopped !== "undefined" && stopped)) return;
       await speakJP(IPPON[i].jp);
       await wait(interval * 1000);
     }
 
-    if (stopCallback) stopCallback();
+    if (typeof stopCallback === "function") stopCallback();
   }
 
   function stop() {
     running = false;
   }
 
-  return { start, stop, setStopCallback: cb => stopCallback = cb };
+  return {
+    start,
+    stop,
+    setStopCallback: cb => stopCallback = cb
+  };
 })();
