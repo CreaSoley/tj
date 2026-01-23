@@ -12,18 +12,14 @@ const UV2 = (() => {
   let stopCallback = null;
 
   // ✅ WAIT sécurisé (pause + stop sans crash)
-  async function wait(ms) {
-    const start = Date.now();
-    while (Date.now() - start < ms) {
+ async function wait(ms) {
+  const start = Date.now();
+  while (Date.now() - start < ms) {
+    if (!running) return;
+    await new Promise(r => setTimeout(r, 100));
+  }
+}
 
-      if (!running || (typeof stopped !== "undefined" && stopped)) return;
-
-      if (typeof paused === "undefined" || !paused) {
-        await new Promise(r => setTimeout(r, 100));
-      } else {
-        await new Promise(r => setTimeout(r, 200));
-      }
-    }
   }
 
   async function start(intervalSec = 5) {
