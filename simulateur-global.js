@@ -191,7 +191,7 @@ async function runUV6() {
   const count = Number(document.getElementById("uv6-count")?.value) || 5;
   const interval = Number(document.getElementById("uv6-interval")?.value) || 15;
 
-  await speak("Unité de valeur : Randori");
+  await speak("Unité de valeur six : Randori");
   await speak(`Vous allez exécuter ${count} enchaînement technique de défense en réponse aux attaques annoncées`);
   await speak(`Le temps entre chaque annonce est de ${interval} secondes.`);
   await speak("Commencez.");
