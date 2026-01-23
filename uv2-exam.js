@@ -1,27 +1,15 @@
 const UV2 = (() => {
 
-  /* =========================
-     DONNÉES
-     ========================= */
-
   const IPPON = [
-    { jp: "オイヅキ ジョウダン" },
-    { jp: "オイヅキ チュウダン" },
-    { jp: "マエゲリ チュウダン" },
-    { jp: "マワシゲリ チュウダン" },
-    { jp: "ヨコゲリ チュウダン" }
+    { romaji: "Oi Tsuki Jodan", jp: "オイヅキ ジョウダン" },
+    { romaji: "Oi Tsuki Chudan", jp: "オイヅキ チュウダン" },
+    { romaji: "Mae Geri Chudan", jp: "マエゲリ チュウダン" },
+    { romaji: "Mawashi Geri Chudan", jp: "マワシゲリ チュウダン" },
+    { romaji: "Yoko Geri Chudan", jp: "ヨコゲリ チュウダン" }
   ];
 
   let running = false;
   let stopCallback = null;
-
-  /* =========================
-     OUTILS INTERNES
-     ========================= */
-
-  function speakJP(text, speaker) {
-    return speaker(text);
-  }
 
   async function wait(ms) {
     const start = Date.now();
@@ -31,59 +19,67 @@ const UV2 = (() => {
     }
   }
 
-  /* =========================
-     LOGIQUE PRINCIPALE
-     ========================= */
+  function updateText(text) {
+    const el = document.getElementById("text");
+    if (el) el.textContent = text;
+  }
 
-  async function start(intervalSec = 5, speaker) {
-    if (typeof speaker !== "function") {
-      console.error("UV2.start : speaker manquant");
-      return;
-    }
+  async function speakJP(text) {
+    return new Promise(resolve => {
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = "ja-JP";
+      u.rate = 0.95;
+      u.onend = resolve;
+      speechSynthesis.speak(u);
+    });
+  }
 
+  async function start(intervalSec = 5) {
     running = true;
+
+    updateText("UV2 – Ippon Kumite");
+
+    // Kamae gauche
+    updateText("UV2 – Ippon Kumite\n→ HIDARI KAMAE");
+    await speakJP("ヒダリ カマエ");
+    await wait(3000);
+
     const interval = Number(intervalSec) || 5;
 
-    // 🔵 KAMAE GAUCHE
-    await speakJP("ヒダリ カマエ", speaker);
-    await wait(3000);
+    // Série 1
+    for (let i = 0; i < IPPON.length; i++) {
+      if (!running || (typeof stopped !== "undefined" && stopped)) return;
 
-    // 🔵 SÉRIE 1
-    for (const atk of IPPON) {
-      if (!running) return;
-      await speakJP(atk.jp, speaker);
+      updateText(`UV2 – Ippon Kumite\n→ ${IPPON[i].romaji}`);
+      await speakJP(IPPON[i].jp);
       await wait(interval * 1000);
     }
 
-    // 🔵 KAMAE DROIT
-    await speakJP("ミギ カマエ", speaker);
+    // Kamae droite
+    updateText("UV2 – Ippon Kumite\n→ MIGI KAMAE");
+    await speakJP("ミギ カマエ");
     await wait(3000);
 
-    // 🔵 SÉRIE 2
-    for (const atk of IPPON) {
-      if (!running) return;
-      await speakJP(atk.jp, speaker);
+    // Série 2
+    for (let i = 0; i < IPPON.length; i++) {
+      if (!running || (typeof stopped !== "undefined" && stopped)) return;
+
+      updateText(`UV2 – Ippon Kumite\n→ ${IPPON[i].romaji}`);
+      await speakJP(IPPON[i].jp);
       await wait(interval * 1000);
     }
 
-    running = false;
-
-    if (typeof stopCallback === "function") {
-      stopCallback();
-    }
+    if (typeof stopCallback === "function") stopCallback();
   }
 
   function stop() {
     running = false;
   }
 
-  function setStopCallback(cb) {
-    stopCallback = cb;
-  }
-
   return {
     start,
     stop,
-    setStopCallback
+    setStopCallback: cb => stopCallback = cb
   };
+
 })();
