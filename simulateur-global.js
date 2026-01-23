@@ -129,12 +129,14 @@ uv2IntervalEl.addEventListener("input", () => {
     nextUV();
   });
 
-  UV2.start(interval, (text) => {
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "ja-JP";
-    speechSynthesis.speak(u);
-  });
-}
+const intervalInput = document.getElementById("uv2-interval");
+const interval = intervalInput ? Number(intervalInput.value) : 5;
+
+UV2.start(interval, (text) => {
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "ja-JP";
+  speechSynthesis.speak(u);
+});
 
 async function runUV3() {
   document.getElementById("text").textContent = "UV3 – Kata";
