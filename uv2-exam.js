@@ -81,5 +81,6 @@ const UV2 = (() => {
     stop,
     setStopCallback: cb => stopCallback = cb
   };
+document.getElementById("currentText").textContent = "";
 
 })();
