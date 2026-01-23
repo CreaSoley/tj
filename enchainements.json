@@ -122,8 +122,12 @@
       "spoken": "Maouachi guéri, de la jambe avant avec sursaut, niveau jodane ou tchoudane"
     },
     {
-      "display": "Gyaku Tsuki chudan, Kizami Tsuki niveau jodan, suivi de Gyaku Tsuki niveau chudan",
-      "spoken": "Guiakou tsouki tchoudane, kizami tsouki niveau jodane, suivi de guiakou tsouki niveau tchoudane"
+      "display": "Kizami Tsuki niveau jodan, suivi de Gyaku Tsuki niveau chudan",
+      "spoken": "Kizami tsouki niveau jodane, suivi de guiakou tsouki niveau tchoudane"
+    },
+     {
+      "display": "Gyaku Tsuki chudan",
+      "spoken": "Guiakou tsouki tchoudane"
     },
     {
       "display": "Oï Tsuki niveau jodan, retour à l’arrière",
