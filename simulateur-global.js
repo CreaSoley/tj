@@ -134,8 +134,6 @@ UV2.start(interval, (text) => {
   });
 });
 
-});
-
    }
 
 async function runUV3() {
