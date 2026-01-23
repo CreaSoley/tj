@@ -112,7 +112,7 @@ async function runUV2() {
   await speak("Unité de valeur deux : Ippon Kumite");
   await speak("Les deux candidats sont en garde. Les attaques ainsi que le niveau sont annoncés.");
   await speak("À chaque fois, les attaques et les contre-attaques devront être différentes.");
-  await speak("Le test sera composé de deux séries des 5 attaques suivantes, exécutées d’abord à droite puis à gauche.");
+  await speak("Le test sera composé de deux séries des 5 attaques suivantes : Oï tsouki jodane, Oï tsouki tchoudane,Maï guéri,Maouachi guéri et Yoko guéri  exécutées d’abord à droite puis à gauche.");
 
   UV2.setStopCallback(async () => {
     if (stopped) return;
@@ -153,8 +153,7 @@ async function runUV3() {
 async function runUV4() {
   document.getElementById("text").textContent = "UV4 – Épreuves techniques";
 
-  await speak("Unité de valeur : Épreuves techniques");
-  await speak("Veuillez exécuter les épreuves techniques demandées");
+  await speak("Unité de valeur quatre : Épreuves techniques");
 
   await window.runUV4Exam(async () => {
     if (stopped) return;
