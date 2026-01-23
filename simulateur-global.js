@@ -169,8 +169,8 @@ async function runUV5() {
   const count = Number(document.getElementById("uv5-count")?.value) || 5;
   const interval = Number(document.getElementById("uv5-interval")?.value) || 15;
 
-  await speak("Unité de valeur : Assauts imposés");
-  await speak(`Vous allez exécuter ${count} assauts imposés.`);
+  await speak("Unité de valeur cinq : Assauts imposés");
+  await speak(`Vous allez exécuter ${count} enchaînement technique de défense en réponse aux attaques annoncées.`);
   await speak(`Le temps entre chaque assaut est de ${interval} secondes.`);
   await speak("Commencez.");
 
@@ -192,8 +192,8 @@ async function runUV6() {
   const interval = Number(document.getElementById("uv6-interval")?.value) || 15;
 
   await speak("Unité de valeur : Randori");
-  await speak(`Vous allez exécuter ${count} randoris.`);
-  await speak(`Le temps entre chaque randori est de ${interval} secondes.`);
+  await speak(`Vous allez exécuter ${count} enchaînement technique de défense en réponse aux attaques annoncées`);
+  await speak(`Le temps entre chaque annonce est de ${interval} secondes.`);
   await speak("Commencez.");
 
   UV56.startUV6(interval, count, (txt) => speak(txt));
