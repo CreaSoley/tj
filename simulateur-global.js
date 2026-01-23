@@ -114,14 +114,6 @@ async function runUV2() {
   await speak("À chaque fois, les attaques et les contre-attaques devront être différentes.");
   await speak("Le test sera composé de deux séries des 5 attaques suivantes, exécutées d’abord à droite puis à gauche.");
 
-  const uv2IntervalEl = document.getElementById("uv2-interval");
-   const uv2IntervalDisplay = document.getElementById("uv2-interval-display");
-
-uv2IntervalEl.addEventListener("input", () => {
-  uv2IntervalDisplay.textContent = `${uv2IntervalEl.value} sec`;
-});
-
-
   UV2.setStopCallback(async () => {
     if (stopped) return;
     await speak("Fin de l’unité de valeur Ippon Kumite");
@@ -133,10 +125,14 @@ const intervalInput = document.getElementById("uv2-interval");
 const interval = intervalInput ? Number(intervalInput.value) : 5;
 
 UV2.start(interval, (text) => {
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = "ja-JP";
-  speechSynthesis.speak(u);
+  return new Promise(resolve => {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "ja-JP";
+    u.onend = resolve;
+    speechSynthesis.speak(u);
+  });
 });
+
    }
 
 async function runUV3() {
@@ -253,4 +249,15 @@ document.getElementById("pauseBtn").addEventListener("click", () => {
 
 document.getElementById("stopBtn").addEventListener("click", () => {
   stopAll();
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const uv2IntervalEl = document.getElementById("uv2-interval");
+  const uv2IntervalDisplay = document.getElementById("uv2-interval-display");
+
+  if (uv2IntervalEl && uv2IntervalDisplay) {
+    uv2IntervalDisplay.textContent = `${uv2IntervalEl.value} sec`;
+    uv2IntervalEl.addEventListener("input", () => {
+      uv2IntervalDisplay.textContent = `${uv2IntervalEl.value} sec`;
+    });
+  }
 });
