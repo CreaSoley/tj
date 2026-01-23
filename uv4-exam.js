@@ -19,8 +19,8 @@ async function runUV4Exam(onFinish) {
   const display = document.getElementById("currentText");
   display.textContent = "UV4 – Épreuves techniques";
 
-  await speak("Unité de valeur quatre. Épreuves techniques.");
-  await speak("Exécutez trois applications sur saisie à droite ou à gauche.");
+ 
+  await speak("Vous allez exécuter trois applications sur saisie à droite ou à gauche.");
   await speak("Annoncez la technique de base choisie.");
   await speak("Vous pouvez commencer.");
 
