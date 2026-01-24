@@ -30,56 +30,72 @@ const UV56 = (() => {
 
   let uv5Timer = null;
   let uv6Timer = null;
+ 
+  // Affichage live des attaques UV5/UV6
+  function displayAttackLive(txt, index, total) {
+    const el = document.getElementById("currentText");
+    if (!el) return;
 
-  function startUV5(intervalSec, count, speakFR){
+    el.innerHTML = `
+      <div style="font-weight:700; font-size:1.3rem; margin-bottom:6px;">
+        Attaque ${index} / ${total}
+      </div>
+      <div style="font-size:1.1rem;">
+        ${txt}
+      </div>
+    `;
+  }
+
+    function startUV5(intervalSec, count, speakFR){
     stopUV5();
     const list = pick(CAT_A, count);
     let i = 0;
 
     function loop(){
       if(i >= list.length) return;
-     speakFR(list[i]);
-document.getElementById("currentText").innerHTML = `
-  <div style="font-size:1.5rem;font-weight:600;">
-    ${list[i]}
-  </div>
-`;
 
+      // 🔴 Affichage live
+      displayAttackLive(list[i], i + 1, list.length);
+
+      speakFR(list[i]);
       i++;
       uv5Timer = setTimeout(loop, intervalSec*1000);
     }
     loop();
   }
 
-  function stopUV5(){
+
+    function stopUV5(){
     if(uv5Timer) clearTimeout(uv5Timer);
     uv5Timer = null;
+    document.getElementById("currentText").innerHTML = "";
   }
 
-  function startUV6(intervalSec, count, speakFR){
+
+   function startUV6(intervalSec, count, speakFR){
     stopUV6();
     const list = pick(LIST_ALL, count);
     let i = 0;
 
     function loop(){
       if(i >= list.length) return;
-     speakFR(list[i]);
-document.getElementById("currentText").innerHTML = `
-  <div style="font-size:1.5rem;font-weight:600;">
-    ${list[i]}
-  </div>
-`;
 
+      // 🔴 Affichage live
+      displayAttackLive(list[i], i + 1, list.length);
+
+      speakFR(list[i]);
       i++;
       uv6Timer = setTimeout(loop, intervalSec*1000);
     }
     loop();
   }
 
-  function stopUV6(){
+   function stopUV6(){
     if(uv6Timer) clearTimeout(uv6Timer);
     uv6Timer = null;
+    document.getElementById("currentText").innerHTML = "";
   }
+
 
   return { startUV5, stopUV5, startUV6, stopUV6 };
 })();
