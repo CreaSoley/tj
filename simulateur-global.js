@@ -315,27 +315,6 @@ document.getElementById("startBtn").addEventListener("click", async () => {
   nextUV();
 });
 
-   
-  const mode = document.getElementById("examMode")?.value || "full";
-  const singleUV = document.getElementById("singleUV")?.value || "UV1";
-
-  await announceStart();
-
-  if (mode === "single") {
-    // 🔬 MODE UV ISOLÉ
-    if (singleUV === "UV1") return runUV1();
-    if (singleUV === "UV2") return runUV2();
-    if (singleUV === "UV3") return runUV3();
-    if (singleUV === "UV4") return runUV4();
-    if (singleUV === "UV5") return runUV5();
-    if (singleUV === "UV6") return runUV6();
-  }
-
-  // 🎓 MODE EXAMEN COMPLET
-  nextUV();
-});
-
-
 document.getElementById("pauseBtn").addEventListener("click", () => {
   paused = !paused;
 });
