@@ -270,7 +270,6 @@ function nextUV() {
   if (uv === "UV5") runUV5();
   if (uv === "UV6") runUV6();
 }
-document.getElementById("uv-order-indicator").textContent = `→ ${uv}`;
 
 function collapseConfigUI() {
   const cfg = document.getElementById("step-config");
