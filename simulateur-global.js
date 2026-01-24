@@ -152,6 +152,7 @@ UV2.start(interval, (data) => {
 
 
 });
+document.getElementById("currentText").innerHTML = "";
 
    }
 
