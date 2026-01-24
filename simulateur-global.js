@@ -327,7 +327,7 @@ document.getElementById("startBtn").addEventListener("click", async () => {
 
   collapseConfigUI();
 
-  examMode = document.getElementById("examMode")?.value || "full";
+examMode = document.getElementById("examPreset")?.value || "full";
   const singleUV = document.getElementById("singleUV")?.value || "UV1";
 
   await announceStart();
@@ -343,7 +343,10 @@ if (examMode === "single") {
   if (singleUV === "UV4") return runUV4();
   if (singleUV === "UV5") return runUV5();
   if (singleUV === "UV6") return runUV6();
+
+  return; // sécurité
 }
+
 
 
   // 🎓 MODE EXAMEN COMPLET
