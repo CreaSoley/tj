@@ -254,7 +254,7 @@ async function runUV6() {
 
 function nextUV() {
   if (stopped) return;
-  if (examMode === "single") return; // ⛔ BLOQUE LA SEQUENCE
+  if (examMode === "single") return;
 
   if (uvIndex >= order.length) {
     speak("Fin de l'examen. Vous pouvez regagner votre place.");
@@ -263,6 +263,8 @@ function nextUV() {
   }
 
   const uv = order[uvIndex++];
+  document.getElementById("uv-order-indicator").textContent = `→ ${uv}`;
+
   if (uv === "UV1") runUV1();
   if (uv === "UV2") runUV2();
   if (uv === "UV3") runUV3();
