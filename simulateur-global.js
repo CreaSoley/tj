@@ -115,7 +115,8 @@ async function runUV1() {
   await speak("Fin de l’unité de valeur Kihon");
   await speak("Vous pouvez regagner votre place");
 
-  nextUV();
+ if (examMode === "full") nextUV();
+
 }
 
 async function runUV2() {
@@ -133,7 +134,8 @@ async function runUV2() {
 
   await speak("Fin de l’unité de valeur Ippon Kumite");
   await speak("Vous pouvez regagner votre place");
-  nextUV();
+  if (examMode === "full") nextUV();
+
 });
 
 
@@ -181,7 +183,8 @@ async function runUV3() {
     if (stopped) return;
   
     await speak("Vous pouvez regagner votre place");
-    nextUV();
+  if (examMode === "full") nextUV();
+
   });
 }
 
@@ -194,7 +197,8 @@ async function runUV4() {
     if (stopped) return;
   
     await speak("Vous pouvez regagner votre place");
-    nextUV();
+   if (examMode === "full") nextUV();
+;
   });
 }
 
@@ -216,7 +220,8 @@ async function runUV5() {
     UV56.stopUV5();
     await speak("Fin de l’unité de valeur Assauts imposés");
     await speak("Vous pouvez regagner votre place");
-    nextUV();
+   if (examMode === "full") nextUV();
+
   }, count * interval * 1000);
 }
 
@@ -238,7 +243,8 @@ async function runUV6() {
     UV56.stopUV6();
     await speak("Fin de l’unité de valeur Randori");
     await speak("Vous pouvez regagner votre place");
-    nextUV();
+   if (examMode === "full") nextUV();
+
   }, count * interval * 1000);
 }
 
@@ -314,15 +320,18 @@ document.getElementById("startBtn").addEventListener("click", async () => {
   await announceStart();
 
   // 🔬 MODE UV ISOLÉ
-  if (examMode === "single") {
-    if (singleUV === "UV1") return runUV1();
-    if (singleUV === "UV2") return runUV2();
-    if (singleUV === "UV3") return runUV3();
-    if (singleUV === "UV4") return runUV4();
-    if (singleUV === "UV5") return runUV5();
-    if (singleUV === "UV6") return runUV6();
-    return;
-  }
+if (examMode === "single") {
+  order = [singleUV];
+  uvIndex = 0;
+
+  if (singleUV === "UV1") return runUV1();
+  if (singleUV === "UV2") return runUV2();
+  if (singleUV === "UV3") return runUV3();
+  if (singleUV === "UV4") return runUV4();
+  if (singleUV === "UV5") return runUV5();
+  if (singleUV === "UV6") return runUV6();
+}
+
 
   // 🎓 MODE EXAMEN COMPLET
   order = buildUVOrder(); // on prépare l’ordre AVANT
