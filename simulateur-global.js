@@ -8,6 +8,8 @@ let uvIndex = 0;
 
 let order = ["UV1","UV2","UV3","UV4","UV5","UV6"];
 let timerInterval = null;
+let examMode = "full"; // "full" ou "single"
+
 
 function collapseConfigUI() {
   const cfg = document.getElementById("step-config");
@@ -246,6 +248,7 @@ async function runUV6() {
 
 function nextUV() {
   if (stopped) return;
+  if (examMode === "single") return; // ⛔ BLOQUE LA SEQUENCE
 
   if (uvIndex >= order.length) {
     speak("Fin de l'examen. Vous pouvez regagner votre place.");
@@ -261,6 +264,7 @@ function nextUV() {
   if (uv === "UV5") runUV5();
   if (uv === "UV6") runUV6();
 }
+
 function collapseConfigUI() {
   const cfg = document.getElementById("step-config");
   const exam = document.getElementById("step-exam");
@@ -304,12 +308,13 @@ document.getElementById("startBtn").addEventListener("click", async () => {
 
   collapseConfigUI();
 
-  const mode = document.getElementById("examMode")?.value || "full";
+  examMode = document.getElementById("examMode")?.value || "full";
   const singleUV = document.getElementById("singleUV")?.value || "UV1";
 
   await announceStart();
 
-  if (mode === "single") {
+  // 🔬 MODE UV ISOLÉ
+  if (examMode === "single") {
     if (singleUV === "UV1") return runUV1();
     if (singleUV === "UV2") return runUV2();
     if (singleUV === "UV3") return runUV3();
@@ -319,9 +324,11 @@ document.getElementById("startBtn").addEventListener("click", async () => {
     return;
   }
 
-  order = buildUVOrder();
+  // 🎓 MODE EXAMEN COMPLET
+  order = buildUVOrder(); // on prépare l’ordre AVANT
   nextUV();
 });
+
 
 document.getElementById("pauseBtn").addEventListener("click", () => {
   paused = !paused;
