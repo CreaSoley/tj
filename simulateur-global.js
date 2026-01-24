@@ -329,33 +329,32 @@ document.getElementById("startBtn").addEventListener("click", async () => {
 
   collapseConfigUI();
 
-examMode = document.getElementById("examPreset")?.value || "full";
+  examMode = document.getElementById("examPreset")?.value || "full-standard";
   const singleUV = document.getElementById("singleUV")?.value || "UV1";
 
   await announceStart();
 
   // 🔬 MODE UV ISOLÉ
-if (examMode === "single") {
-  order = [singleUV];
-  uvIndex = 0;
+  if (examMode === "single") {
+    order = [singleUV];
+    uvIndex = 0;
 
-  if (singleUV === "UV1") return runUV1();
-  if (singleUV === "UV2") return runUV2();
-  if (singleUV === "UV3") return runUV3();
-  if (singleUV === "UV4") return runUV4();
-  if (singleUV === "UV5") return runUV5();
-  if (singleUV === "UV6") return runUV6();
+    if (singleUV === "UV1") return runUV1();
+    if (singleUV === "UV2") return runUV2();
+    if (singleUV === "UV3") return runUV3();
+    if (singleUV === "UV4") return runUV4();
+    if (singleUV === "UV5") return runUV5();
+    if (singleUV === "UV6") return runUV6();
 
-  return; // sécurité
-}
-
-
+    return;
+  }
 
   // 🎓 MODE EXAMEN COMPLET
   order = buildUVOrder();
-uvIndex = 0;
+  uvIndex = 0;
   nextUV();
 });
+
 
 
 document.getElementById("pauseBtn").addEventListener("click", () => {
