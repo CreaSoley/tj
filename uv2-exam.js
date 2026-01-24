@@ -25,22 +25,38 @@ const UV2 = (() => {
     announce = announceFn;
 
     // Garde gauche
-    announce("ヒダリ カマエ");
+    announce({
+  romaji: "Hidari kamae",
+  jp: "ヒダリ カマエ"
+});
+
     await wait(3000);
 
     for (const atk of IPPON) {
       if (!running || window.stopped) return;
-      announce(atk.label);
+      announce({
+  romaji: atk.romaji,
+  jp: atk.jp
+});
+
       await wait(intervalSec * 1000);
     }
 
     // Garde droite
-    announce("ミギ カマエ");
+    announce({
+  romaji: "Migi kamae",
+  jp: "ミギ カマエ"
+});
+
     await wait(3000);
 
     for (const atk of IPPON) {
       if (!running || window.stopped) return;
-      announce(atk.label);
+    announce({
+  romaji: atk.romaji,
+  jp: atk.jp
+});
+
       await wait(intervalSec * 1000);
     }
 
