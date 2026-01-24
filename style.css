@@ -479,3 +479,29 @@ html, body{
   filter: grayscale(1);
   box-shadow: none;
 }
+.step {
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.step-header {
+  background: linear-gradient(135deg, #ffd6e8, #ffeef6);
+  padding: 14px 18px;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.step-content {
+  padding: 16px;
+}
+
+.step-collapsed .step-content {
+  display: none;
+}
+
+.step-active {
+  border: 2px solid #ff9ecb;
+}
