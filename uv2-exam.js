@@ -1,12 +1,12 @@
 const UV2 = (() => {
 
-  const IPPON = [
-    { label: "オイヅキ ジョウダン" },
-    { label: "オイヅキ チュウダン" },
-    { label: "マエゲリ チュウダン" },
-    { label: "マワシゲリ チュウダン" },
-    { label: "ヨコゲリ チュウダン" }
-  ];
+ const IPPON = [
+  { romaji: "Oi tsuki jodan", jp: "オイヅキ ジョウダン" },
+  { romaji: "Oi tsuki chudan", jp: "オイヅキ チュウダン" },
+  { romaji: "Mae geri chudan", jp: "マエゲリ チュウダン" },
+  { romaji: "Mawashi geri chudan", jp: "マワシゲリ チュウダン" },
+  { romaji: "Yoko geri chudan", jp: "ヨコゲリ チュウダン" }
+];
 
   let running = false;
   let stopCallback = null;
