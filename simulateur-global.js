@@ -251,6 +251,37 @@ function nextUV() {
   if (uv === "UV5") runUV5();
   if (uv === "UV6") runUV6();
 }
+function collapseConfigUI() {
+  const cfg = document.getElementById("step-config");
+  const exam = document.getElementById("step-exam");
+
+  if (cfg && exam) {
+    cfg.classList.add("step-collapsed");
+    exam.classList.remove("step-collapsed");
+  }
+}
+
+function buildUVOrder() {
+  const preset = document.getElementById("presetSelect")?.value || "exam";
+
+  if (preset === "exam") {
+    return ["UV1","UV2","UV3","UV4","UV5","UV6"];
+  }
+
+  if (preset === "adapt") {
+    return ["UV1","UV4","UV2","UV5","UV1","UV6"];
+  }
+
+  if (preset === "custom") {
+    const raw = document.getElementById("customUVOrder")?.value || "";
+    return raw
+      .split(",")
+      .map(v => v.trim())
+      .filter(v => v.match(/^UV[1-6]$/));
+  }
+
+  return ["UV1","UV2","UV3","UV4","UV5","UV6"];
+}
 
 /* =========================
    BOUTONS
@@ -261,9 +292,27 @@ document.getElementById("startBtn").addEventListener("click", async () => {
   paused = false;
   uvIndex = 0;
 
-document.getElementById("startBtn").addEventListener("click", () => {
-  document.getElementById("step-config").classList.add("step-collapsed");
-  document.getElementById("step-exam").classList.remove("step-collapsed");
+  collapseConfigUI();
+
+  const mode = document.getElementById("examMode")?.value || "full";
+  const singleUV = document.getElementById("singleUV")?.value || "UV1";
+
+  await announceStart();
+
+  if (mode === "single") {
+    // 🔬 UV ISOLÉE
+    if (singleUV === "UV1") return runUV1();
+    if (singleUV === "UV2") return runUV2();
+    if (singleUV === "UV3") return runUV3();
+    if (singleUV === "UV4") return runUV4();
+    if (singleUV === "UV5") return runUV5();
+    if (singleUV === "UV6") return runUV6();
+    return;
+  }
+
+  // 🎓 EXAMEN COMPLET
+  order = buildUVOrder();
+  nextUV();
 });
 
    
