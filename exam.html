@@ -31,12 +31,13 @@
   <div class="step-content">
     <div class="sub-section">
       <div class="controls-row">
-        <label>Nom</label>
-        <input id="candidate" class="input-small" placeholder="Nom">
-        <select id="candidateTitle" class="input-small">
+      
+        <select id="candidateTitle" class="input-big">
           <option value="Monsieur">Monsieur</option>
           <option value="Madame">Madame</option>
         </select>
+          <label>Nom</label>
+        <input id="candidate" class="input-small" placeholder="Nom">
       </div>
 
      <div class="controls-row">
@@ -46,6 +47,18 @@
     <option value="full-adapted">Examen complet – Ordre adapté</option>
     <option value="single">UV isolé</option>
   </select>
+</div>
+<div class="sub-section">
+  <div class="module-title">Ordre des UV</div>
+
+  <ul id="uvOrderList" class="uv-order-list">
+    <li data-uv="UV1">UV1 – Kihon <button class="up">⬆</button><button class="down">⬇</button></li>
+    <li data-uv="UV2">UV2 – Ippon Kumite <button class="up">⬆</button><button class="down">⬇</button></li>
+    <li data-uv="UV3">UV3 – Kata <button class="up">⬆</button><button class="down">⬇</button></li>
+    <li data-uv="UV4">UV4 – Épreuves techniques <button class="up">⬆</button><button class="down">⬇</button></li>
+    <li data-uv="UV5">UV5 – Assauts imposés <button class="up">⬆</button><button class="down">⬇</button></li>
+    <li data-uv="UV6">UV6 – Randori <button class="up">⬆</button><button class="down">⬇</button></li>
+  </ul>
 </div>
 
       <div class="controls-row">
