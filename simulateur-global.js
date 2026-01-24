@@ -261,6 +261,12 @@ document.getElementById("startBtn").addEventListener("click", async () => {
   paused = false;
   uvIndex = 0;
 
+document.getElementById("startBtn").addEventListener("click", () => {
+  document.getElementById("step-config").classList.add("step-collapsed");
+  document.getElementById("step-exam").classList.remove("step-collapsed");
+});
+
+   
   const mode = document.getElementById("examMode")?.value || "full";
   const singleUV = document.getElementById("singleUV")?.value || "UV1";
 
