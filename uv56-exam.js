@@ -38,7 +38,13 @@ const UV56 = (() => {
 
     function loop(){
       if(i >= list.length) return;
-      speakFR(list[i]);
+     speakFR(list[i]);
+document.getElementById("currentText").innerHTML = `
+  <div style="font-size:1.5rem;font-weight:600;">
+    ${list[i]}
+  </div>
+`;
+
       i++;
       uv5Timer = setTimeout(loop, intervalSec*1000);
     }
@@ -57,7 +63,13 @@ const UV56 = (() => {
 
     function loop(){
       if(i >= list.length) return;
-      speakFR(list[i]);
+     speakFR(list[i]);
+document.getElementById("currentText").innerHTML = `
+  <div style="font-size:1.5rem;font-weight:600;">
+    ${list[i]}
+  </div>
+`;
+
       i++;
       uv6Timer = setTimeout(loop, intervalSec*1000);
     }
