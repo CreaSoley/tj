@@ -302,6 +302,29 @@ function buildUVOrder() {
 
   return ["UV1","UV2","UV3","UV4","UV5","UV6"];
 }
+/* =========================
+  ORDRE UV
+   ========================= */
+function buildUVOrder() {
+  return Array.from(document.querySelectorAll("#uvOrderList li"))
+    .map(li => li.dataset.uv);
+}
+
+document.addEventListener("click", e => {
+  if (!e.target.matches(".up, .down")) return;
+
+  const li = e.target.closest("li");
+  const list = li.parentElement;
+
+  if (e.target.classList.contains("up") && li.previousElementSibling) {
+    list.insertBefore(li, li.previousElementSibling);
+  }
+
+  if (e.target.classList.contains("down") && li.nextElementSibling) {
+    list.insertBefore(li.nextElementSibling, li);
+  }
+});
+
 
 /* =========================
    BOUTONS
@@ -334,7 +357,8 @@ if (examMode === "single") {
 
 
   // 🎓 MODE EXAMEN COMPLET
-  order = buildUVOrder(); // on prépare l’ordre AVANT
+  order = buildUVOrder();
+uvIndex = 0;
   nextUV();
 });
 
