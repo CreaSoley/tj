@@ -150,8 +150,6 @@ UV2.start(interval, (data) => {
   speechSynthesis.speak(u);
 });
 
-
-});
 document.getElementById("currentText").innerHTML = "";
 
    }
