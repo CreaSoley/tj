@@ -125,13 +125,14 @@ const intervalInput = document.getElementById("uv2-interval");
 const interval = intervalInput ? Number(intervalInput.value) : 5;
 
 UV2.start(interval, (text) => {
-  return new Promise(resolve => {
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "ja-JP";
-    u.rate = 0.95;
-    u.onend = resolve;
-    speechSynthesis.speak(u);
-  });
+  document.getElementById("currentText").textContent = text;
+
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "ja-JP";
+  u.rate = 0.95;
+  speechSynthesis.speak(u);
+});
+
 });
 
    }
