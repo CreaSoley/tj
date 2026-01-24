@@ -39,24 +39,21 @@
         </select>
       </div>
 
-      <div class="controls-row">
-        <label>Mode</label>
-        <button id="modeBtn" class="btn-kawaii">Mode Examen</button>
-      </div>
+     <div class="controls-row">
+  <label>Type d’examen</label>
+  <select id="examPreset" class="input-small">
+    <option value="full-standard">Examen complet – Ordre officiel (1→6)</option>
+    <option value="full-adapted">Examen complet – Ordre adapté</option>
+    <option value="single">UV isolé</option>
+  </select>
+</div>
 
       <div class="controls-row">
         <label>Pause entre UV</label>
         <input id="pauseDuration" type="number" class="input-small" min="0" max="5" value="0"> min
       </div>
 
-      <div class="controls-row">
-        <label>Ordre UV</label>
-        <select id="presetSelect" class="input-small">
-          <option value="exam">Examen (1-2-3-4-5-6)</option>
-          <option value="adapt">Adapté (1-4-2-5-1-6)</option>
-          <option value="custom">Personnalisé</option>
-        </select>
-      </div>
+
 
       <div id="uvConfig" class="content"></div>
 
@@ -80,14 +77,6 @@
 <div class="controls-row">
   <label>UV4 - Durée (minutes)</label>
   <input id="uv4Duration" type="number" min="1" max="10" value="5">
-</div>
-
-      <div class="controls-row">
-  <label>Mode</label>
-  <select id="examMode" class="input-small">
-    <option value="full">Examen complet</option>
-    <option value="single">UV isolé</option>
-  </select>
 </div>
 
 <div class="controls-row">
