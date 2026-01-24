@@ -281,27 +281,6 @@ function collapseConfigUI() {
   }
 }
 
-function buildUVOrder() {
-  const preset = document.getElementById("presetSelect")?.value || "exam";
-
-  if (preset === "exam") {
-    return ["UV1","UV2","UV3","UV4","UV5","UV6"];
-  }
-
-  if (preset === "adapt") {
-    return ["UV1","UV4","UV2","UV5","UV1","UV6"];
-  }
-
-  if (preset === "custom") {
-    const raw = document.getElementById("customUVOrder")?.value || "";
-    return raw
-      .split(",")
-      .map(v => v.trim())
-      .filter(v => v.match(/^UV[1-6]$/));
-  }
-
-  return ["UV1","UV2","UV3","UV4","UV5","UV6"];
-}
 /* =========================
   ORDRE UV
    ========================= */
