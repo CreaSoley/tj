@@ -505,3 +505,6 @@ html, body{
 .step-active {
   border: 2px solid #ff9ecb;
 }
+.step-content {
+  padding: 18px;
+}
