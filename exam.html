@@ -23,7 +23,12 @@
 <div class="main-wrapper">
   <div class="card-kawaii">
     <div class="module-title">Simulateur Global</div>
+<div class="step step-active" id="step-config">
+  <div class="step-header">
+    🌸 Étape 1 – Préparation de l’examen
+  </div>
 
+  <div class="step-content">
     <div class="sub-section">
       <div class="controls-row">
         <label>Nom</label>
@@ -114,7 +119,8 @@
   <label>UV6 – Intervalle</label>
   <input id="uv6-interval" type="number" class="input-small" min="5" max="60" value="15"> sec
 </div>
-
+ </div>
+</div>
 
       <div class="button-row">
         <button id="startBtn" class="btn-kawaii start">Lancer</button>
@@ -123,15 +129,21 @@
       </div>
     </div>
 
-    <div class="sub-section">
-      <div id="text" class="result-display">Prêt</div>
-      <div id="countdown" class="result-display">00:00</div>
-      <div id="timer" class="result-display"></div>
-      <div id="currentText" class="result-display"></div>
-      <div id="log" class="result-display"></div>
-    </div>
+ <div class="step step-collapsed" id="step-exam">
+  <div class="step-header">
+    🥋 Étape 2 – Examen en cours
+    <span id="uv-order-indicator"></span>
+  </div>
+
+  <div class="step-content">
+    <div id="text" class="result-display">Prêt</div>
+    <div id="countdown" class="result-display">00:00</div>
+    <div id="timer" class="result-display"></div>
+    <div id="currentText" class="result-display"></div>
+    <div id="log" class="result-display"></div>
   </div>
 </div>
+
 
 <script>
 fetch("banner.html")
