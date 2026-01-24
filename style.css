@@ -134,7 +134,7 @@ a{
   text-align: center;
   font-weight: bold;
   font-size: 1.2rem;
-  color: #c9184a;
+  color: #034b5c;
   margin: 10px 0;
   display: flex;
   flex-direction: column;
@@ -507,4 +507,32 @@ html, body{
 }
 .step-content {
   padding: 18px;
+}
+input, select {
+  color: #c90038; /* plus doux que le rouge vif */
+}
+
+.input-small, .input-big {
+  background: #fff;
+}
+.button-row {
+  gap: 12px;
+  padding-top: 10px;
+}
+
+.btn-kawaii {
+  border-radius: 999px;
+}
+.step-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.badge {
+  background: var(--accent);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
 }
