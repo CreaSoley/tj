@@ -114,12 +114,16 @@ async function runUV2() {
   await speak("À chaque fois, les attaques et les contre-attaques devront être différentes.");
   await speak("Le test sera composé de deux séries des 5 attaques suivantes : Oï tsouki jodane, Oï tsouki tchoudane,Maï guéri,Maouachi guéri et Yoko guéri  exécutées d’abord à droite puis à gauche.");
 
-  UV2.setStopCallback(async () => {
-    if (stopped) return;
-    await speak("Fin de l’unité de valeur Ippon Kumite");
-    await speak("Vous pouvez regagner votre place");
-    nextUV();
-  });
+ UV2.setStopCallback(async () => {
+  if (stopped) return;
+
+  document.getElementById("currentText").innerHTML = "";
+
+  await speak("Fin de l’unité de valeur Ippon Kumite");
+  await speak("Vous pouvez regagner votre place");
+  nextUV();
+});
+
 
 const intervalInput = document.getElementById("uv2-interval");
 const interval = intervalInput ? Number(intervalInput.value) : 5;
@@ -150,7 +154,7 @@ UV2.start(interval, (data) => {
   speechSynthesis.speak(u);
 });
 
-document.getElementById("currentText").innerHTML = "";
+
 
    }
 
