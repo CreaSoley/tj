@@ -270,6 +270,7 @@ function nextUV() {
   if (uv === "UV5") runUV5();
   if (uv === "UV6") runUV6();
 }
+document.getElementById("uv-order-indicator").textContent = `→ ${uv}`;
 
 function collapseConfigUI() {
   const cfg = document.getElementById("step-config");
@@ -391,4 +392,28 @@ document.addEventListener("DOMContentLoaded", () => {
       uv2IntervalDisplay.textContent = `${uv2IntervalEl.value} sec`;
     });
   }
+});
+/* =========================
+  RESET BOUTON
+   ========================= */
+document.getElementById("resetBtn").addEventListener("click", () => {
+  stopAll();
+
+  // Retour étape 1
+  document.getElementById("step-config").classList.remove("step-collapsed");
+  document.getElementById("step-exam").classList.add("step-collapsed");
+
+  // Reset des champs
+  document.getElementById("candidate").value = "";
+  document.getElementById("candidateTitle").value = "Monsieur";
+  document.getElementById("pauseDuration").value = 0;
+  document.getElementById("uv2-interval").value = 5;
+  document.getElementById("kataDuration").value = 5;
+  document.getElementById("bunkaiDuration").value = 5;
+  document.getElementById("uv4Duration").value = 5;
+  document.getElementById("uv5-count").value = 5;
+  document.getElementById("uv5-interval").value = 15;
+  document.getElementById("uv6-count").value = 5;
+  document.getElementById("uv6-interval").value = 15;
+  document.getElementById("singleUV").value = "UV1";
 });
