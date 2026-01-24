@@ -9,6 +9,16 @@ let uvIndex = 0;
 let order = ["UV1","UV2","UV3","UV4","UV5","UV6"];
 let timerInterval = null;
 
+function collapseConfigUI() {
+  const cfg = document.getElementById("step-config");
+  const exam = document.getElementById("step-exam");
+
+  if (cfg && exam) {
+    cfg.classList.add("step-collapsed");
+    exam.classList.remove("step-collapsed");
+  }
+}
+
 /* =========================
    UTILITAIRES
    ========================= */
@@ -300,7 +310,6 @@ document.getElementById("startBtn").addEventListener("click", async () => {
   await announceStart();
 
   if (mode === "single") {
-    // 🔬 UV ISOLÉE
     if (singleUV === "UV1") return runUV1();
     if (singleUV === "UV2") return runUV2();
     if (singleUV === "UV3") return runUV3();
@@ -310,7 +319,6 @@ document.getElementById("startBtn").addEventListener("click", async () => {
     return;
   }
 
-  // 🎓 EXAMEN COMPLET
   order = buildUVOrder();
   nextUV();
 });
