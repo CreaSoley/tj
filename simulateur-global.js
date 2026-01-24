@@ -324,7 +324,18 @@ document.addEventListener("click", e => {
     list.insertBefore(li.nextElementSibling, li);
   }
 });
+/* =========================
+  API UV5 et UV6
+   ========================= */
+function displayAttack(text, index, total) {
+  const el = document.getElementById("currentText");
+  if (!el) return;
 
+  el.innerHTML = `
+    <div class="attack-title">Attaque ${index} / ${total}</div>
+    <div class="attack-text">${text}</div>
+  `;
+}
 
 /* =========================
    BOUTONS
