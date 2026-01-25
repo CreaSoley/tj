@@ -189,31 +189,6 @@ a{
   box-shadow: 0 4px 0px #c9184a;
 }
 
-.btn-small {
-  padding: 6px 10px;
-  font-size: 0.8rem;
-}
-@media (max-width: 600px) {
-
-  /* Ligne principale inchangée */
-  .button-row:first-of-type {
-    flex-wrap: nowrap;
-  }
-
-  /* Autres boutons : 2 par ligne */
-  .button-row:nth-of-type(2) {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .button-row:nth-of-type(2) .btn-kawaii {
-    flex: 0 0 48%;
-    font-size: 1.05rem;
-    padding: 12px;
-  }
-}
-
 /* ---------- Icône Beep ---------- */
 .beep-icon {
   font-size: 1.3rem;
@@ -357,55 +332,6 @@ html, body{
 #visual.bg-hara * {
   color: #ffffff !important;
 }
-/* ============================
-   BOUTONS – MOBILE FIX FINAL
-   ============================ */
-@media (max-width: 600px) {
-
-  /* Police plus petite UNIQUEMENT pour les boutons */
-  .btn-kawaii {
-    font-size: 0.75rem;     /* 🔽 réduit */
-    line-height: 1.1;
-    padding: 8px 10px;
-  }
-
-  /* Ligne Lancer / Pause / Stop */
-  .button-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  /* ===== LANCER : gros bouton ===== */
-  .btn-kawaii.start {
-    flex: 1 1 auto;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    padding: 10px 14px;
-  }
-
-  /* ===== PAUSE & STOP : boutons ronds ===== */
-  .btn-kawaii.pause,
-  .btn-kawaii.stop {
-    flex: 0 0 44px;      /* taille fixe */
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    border-radius: 50%;
-    font-size: 0.7rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* ===== STOP : forcer le rouge ===== */
-  .btn-kawaii.stop,
-  .btn-kawaii.btn-stop {
-    background: #ff4d6d !important;
-    box-shadow: 0 4px 0px #c9184a !important;
-  }
-}
-
 
 /* ===== ZONE D'AFFICHAGE - TOUTES SEANCES ===== */
 .result-display {
@@ -422,25 +348,7 @@ html, body{
   font-weight: 800;
   margin-top: 8px;
 }
-/* ===============================
-   TAILLE UNIFIÉE BOUTONS MOBILE
-   =============================== */
-@media (max-width: 600px) {
 
-  /* Tous les boutons sauf Lancer */
-  .btn-kawaii:not(.start) {
-    font-size: 0.75rem;
-    line-height: 1.1;
-    padding: 8px 10px;
-  }
-
-  /* Boutons secondaires (critères, reset, présentation, examen…) */
-  .btn-kawaii.secondary,
-  .btn-kawaii.reset,
-  .btn-kawaii.criteria {
-    font-size: 0.75rem;
-  }
-}
 /* ===============================
    MODAL CRITÈRES
    =============================== */
@@ -540,49 +448,86 @@ input, select {
   font-weight: 700;
 }
 /* ===============================
-   FIX BOUTONS MOBILE – PROPRE
+   BOUTONS – VERSION PROPRE & FINALE
    =============================== */
+
+/* ---------- Base boutons ---------- */
+.btn-kawaii {
+  font-family: "Spicy", sans-serif;
+  color: white;
+  border: none;
+  cursor: pointer;
+
+  height: 44px;
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 999px;
+  font-size: 0.85rem;
+
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+/* ---------- Couleurs ---------- */
+.btn-kawaii.start {
+  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+}
+
+.btn-kawaii.pause {
+  background: #ff5fc1;
+}
+
+.btn-kawaii.stop {
+  background: #ff4d6d;
+}
+
+.btn-kawaii.reset {
+  background: #000;
+}
+
+/* ---------- Bouton actif (grisé) ---------- */
+.btn-kawaii.disabled,
+.btn-kawaii:disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  filter: grayscale(1);
+}
+
+/* ---------- Desktop ---------- */
+.button-row {
+  display: flex;
+  gap: 12px;
+}
+
+.button-row .btn-kawaii {
+  flex: 1;
+}
+
+/* ---------- Mobile ---------- */
 @media (max-width: 600px) {
 
-  .button-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 12px;
+  /* Ligne Lancer */
+  .button-row.primary {
+    display: flex;
   }
 
-  /* Tous les boutons même taille */
-  .btn-kawaii {
+  .button-row.primary .btn-kawaii.start {
+    width: 100%;
+  }
+
+  /* Ligne Pause / Stop / Reset */
+  .button-row:not(.primary) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .button-row:not(.primary) .btn-kawaii {
     width: 100%;
     height: 44px;
-    padding: 0;
-    font-size: 0.8rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 999px;
+    font-size: 0.75rem;
   }
-
-  /* Ligne spéciale Lancer (pleine largeur) */
-  .button-row.primary {
-    grid-template-columns: 1fr;
-  }
-
-  .card-kawaii {
-    padding-bottom: 26px; /* respiration */
-  }
-}
-/* 🔥 DEBUG AFFICHAGE */
-#text,
-#currentText,
-#timer,
-#countdown,
-#log {
-  color: red !important;
-  background: yellow !important;
-  font-size: 24px !important;
-  min-height: 40px !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-  display: block !important;
 }
