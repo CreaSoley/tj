@@ -40,7 +40,10 @@ function format(sec) {
   const s = (sec % 60).toString().padStart(2, "0");
   return `${m}:${s}`;
 }
-
+function setCurrentText(txt = "") {
+  const el = document.getElementById("currentText");
+  if (el) el.textContent = txt;
+}
 function updateTimerDisplay(sec) {
   document.getElementById("countdown").textContent = format(sec);
 }
