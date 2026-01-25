@@ -430,14 +430,3 @@ document.getElementById("resetBtn").addEventListener("click", () => {
   document.getElementById("uv6-interval").value = 15;
   document.getElementById("singleUV").value = "UV1";
 });
-window.addEventListener("load", () => {
-  const t = document.getElementById("text");
-  const c = document.getElementById("currentText");
-  const ti = document.getElementById("timer");
-
-  console.log("TEST DOM:", t, c, ti);
-
-  if (t) t.textContent = "TEST TEXTE VISIBLE";
-  if (c) c.textContent = "SI TU VOIS CE TEXTE, LE DOM EST OK";
-  if (ti) ti.textContent = "01:23";
-});
