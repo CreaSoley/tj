@@ -121,7 +121,7 @@ if (examMode !== "single") nextUV();
 
 }
 
-async function runUV1() {
+async function runUV2() {
   document.getElementById("text").textContent = "UV2 – Ippon kumite";
   document.getElementById("currentText").textContent =
     "Exécutez une seule défense et/ou contre attaque en réponse à l'assaut d'Uke";
@@ -176,8 +176,8 @@ UV2.start(interval, (data) => {
 
    }
 
-async function runUV1() {
-  document.getElementById("text").textContent = "UV1 – Kihon";
+async function runUV3() {
+  document.getElementById("text").textContent = "UV3 – Kata";
   document.getElementById("currentText").textContent =
     "Exécution un kata et les bunkaï associés";
 
@@ -195,7 +195,9 @@ async function runUV1() {
 }
 
 async function runUV4() {
-  document.getElementById("text").textContent = "UV4 – Épreuves techniques";
+  document.getElementById("text").textContent = "UV4 – Epreuves techniques";
+  document.getElementById("currentText").textContent =
+    "Technique de base et applications";
 
   await speak("Unité de valeur quatre : Épreuves techniques");
 
