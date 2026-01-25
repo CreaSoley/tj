@@ -115,7 +115,7 @@ async function runUV1() {
   await speak("Fin de l’unité de valeur Kihon");
   await speak("Vous pouvez regagner votre place");
 
- if (examMode === "full") nextUV();
+if (examMode !== "single") nextUV();
 
 }
 
@@ -134,7 +134,7 @@ async function runUV2() {
 
   await speak("Fin de l’unité de valeur Ippon Kumite");
   await speak("Vous pouvez regagner votre place");
-  if (examMode === "full") nextUV();
+if (examMode !== "single") nextUV();
 
 });
 
@@ -183,7 +183,7 @@ async function runUV3() {
     if (stopped) return;
   
     await speak("Vous pouvez regagner votre place");
-  if (examMode === "full") nextUV();
+  if (examMode !== "single") nextUV();
 
   });
 }
@@ -197,7 +197,8 @@ async function runUV4() {
     if (stopped) return;
   
     await speak("Vous pouvez regagner votre place");
-   if (examMode === "full") nextUV();
+  if (examMode !== "single") nextUV();
+
 ;
   });
 }
@@ -220,7 +221,8 @@ async function runUV5() {
     UV56.stopUV5();
     await speak("Fin de l’unité de valeur Assauts imposés");
     await speak("Vous pouvez regagner votre place");
-   if (examMode === "full") nextUV();
+ if (examMode !== "single") nextUV();
+
 
   }, count * interval * 1000);
 }
@@ -243,7 +245,7 @@ async function runUV6() {
     UV56.stopUV6();
     await speak("Fin de l’unité de valeur Randori");
     await speak("Vous pouvez regagner votre place");
-   if (examMode === "full") nextUV();
+   if (examMode !== "single") nextUV();
 
   }, count * interval * 1000);
 }
