@@ -11,8 +11,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
 
 <style>
-/* Force 1 seule colonne */
-.grid { display: grid !important; grid-template-columns: 1fr !important; gap: 20px !important; width: 100%; }
+.grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+  width: 100%;
+}
 </style>
 </head>
 
@@ -22,152 +26,46 @@
 
 <div class="main-wrapper">
   <div class="card-kawaii">
+
     <div class="module-title">Simulateur Global</div>
-<div class="step step-active" id="step-config">
-  <div class="step-header">
-    🌸 Étape 1 – Préparation de l’examen
-  </div>
 
-  <div class="step-content">
-    <div class="sub-section">
-      <div class="controls-row">
-      
-        <select id="candidateTitle" class="input-big">
-          <option value="Monsieur">Monsieur</option>
-          <option value="Madame">Madame</option>
-        </select>
-          <label>Nom</label>
-        <input id="candidate" class="input-small" placeholder="Nom">
-      </div>
+    <!-- =========================
+         ÉTAPE 1 – CONFIGURATION
+         ========================= -->
+    <div class="step step-active" id="step-config">
+      <div class="step-header">🌸 Étape 1 – Préparation de l’examen</div>
 
-     <div class="controls-row">
-  <label>Type d’examen</label>
-  <select id="examPreset" class="input-big">
-    <option value="full-standard">Examen complet – Ordre officiel (1→6)</option>
-    <option value="full-adapted">Examen complet – Ordre adapté</option>
-    <option value="single">UV isolé</option>
-  </select>
-</div>
-<div class="sub-section">
-  <div class="module-title">Ordre des UV</div>
+      <div class="step-content">
 
-  <ul id="uvOrderList" class="uv-order-list">
-    <li data-uv="UV1">UV1 – Kihon <button class="up">⬆</button><button class="down">⬇</button></li>
-    <li data-uv="UV2">UV2 – Ippon Kumite <button class="up">⬆</button><button class="down">⬇</button></li>
-    <li data-uv="UV3">UV3 – Kata <button class="up">⬆</button><button class="down">⬇</button></li>
-    <li data-uv="UV4">UV4 – Épreuves techniques <button class="up">⬆</button><button class="down">⬇</button></li>
-    <li data-uv="UV5">UV5 – Assauts imposés <button class="up">⬆</button><button class="down">⬇</button></li>
-    <li data-uv="UV6">UV6 – Randori <button class="up">⬆</button><button class="down">⬇</button></li>
-  </ul>
-</div>
+        <!-- Identité -->
+        <div class="sub-section">
+          <h3 class="section-title">• Identité du candidat</h3>
 
-      <div class="controls-row">
-        <label>Pause entre UV</label>
-        <input id="pauseDuration" type="number" class="input-small" min="0" max="5" value="0"> min
-      </div>
+          <div class="controls-row">
+            <label>Genre</label>
+            <select id="candidateTitle" class="input-small">
+              <option value="Monsieur">Monsieur</option>
+              <option value="Madame">Madame</option>
+            </select>
 
+            <label>Nom</label>
+            <input id="candidate" class="input-wide" placeholder="Prénom et nom">
+          </div>
+        </div>
 
+        <!-- Mode -->
+        <div class="sub-section">
+          <h3 class="section-title">• Mode</h3>
 
-      <div id="uvConfig" class="content"></div>
+          <div class="controls-row">
+            <select id="examPreset" class="input-wide">
+              <option value="full-standard">Examen (ordre officiel)</option>
+              <option value="full-adapted">Examen adapté</option>
+              <option value="single">UV isolé</option>
+            </select>
+          </div>
+        </div>
 
-     <div class="controls-row">
-  <label>Intervalle UV2</label>
-  <input id="uv2-interval" type="number" class="input-small" min="1" max="30" value="5"> sec
-  <span id="uv2-interval-display" class="muted">5 sec</span>
-</div>
-
-
-      <div class="controls-row">
-  <label>Kata (minutes)</label>
-  <input id="kataDuration" type="number" min="1" max="10" value="5">
-</div>
-
-<div class="controls-row">
-  <label>Bunkai (minutes)</label>
-  <input id="bunkaiDuration" type="number" min="1" max="10" value="5">
-</div>
-
-<div class="controls-row">
-  <label>UV4 - Durée (minutes)</label>
-  <input id="uv4Duration" type="number" min="1" max="10" value="5">
-</div>
-
-<div class="controls-row">
-  <label>UV</label>
-  <select id="singleUV" class="input-small">
-    <option value="UV1">UV1 – Kihon</option>
-    <option value="UV2">UV2 – Ippon Kumite</option>
-    <option value="UV3">UV3 – Kata</option>
-    <option value="UV4">UV4 – Épreuves techniques</option>
-    <option value="UV5">UV5 – Assauts imposés</option>
-    <option value="UV6">UV6 – Randori</option>
-  </select>
-</div>
-<div class="controls-row">
-  <label>UV5 – Nombre d’attaques</label>
-  <input id="uv5-count" type="number" class="input-small" min="1" max="20" value="5">
-</div>
-
-<div class="controls-row">
-  <label>UV5 – Intervalle</label>
-  <input id="uv5-interval" type="number" class="input-small" min="5" max="60" value="15"> sec
-</div>
-<div class="controls-row">
-  <label>UV6 – Nombre d’attaques</label>
-  <input id="uv6-count" type="number" class="input-small" min="1" max="30" value="5">
-</div>
-
-<div class="controls-row">
-  <label>UV6 – Intervalle</label>
-  <input id="uv6-interval" type="number" class="input-small" min="5" max="60" value="15"> sec
-</div>
- </div>
-</div>
-
-<div class="button-row primary">
-   <button id="startBtn" class="btn-kawaii start">Lancer</button>
-</div>
-<div class="button-row">
- <button id="pauseBtn" class="btn-kawaii pause">Pause</button>
-  <button id="stopBtn" class="btn-kawaii stop btn-stop">Stop</button>
-  <button id="resetBtn" class="btn-kawaii reset">Reset</button>
-
-    </div>
-
-<div class="step" id="step-exam">
-  <div class="step-header">
-    🥋 Étape 2 – Examen en cours
-    <span id="uv-order-indicator"></span>
-    <span class="badge">En cours</span>
-  </div>
-
-  <div class="step-content">
-    <div id="text" class="result-display">Prêt</div>
-    <div id="countdown" class="result-display">00:00</div>
-    <div id="timer" class="result-display"></div>
-    <div id="currentText" class="result-display"></div>
-    <div id="log" class="result-display"></div>
-  </div>
-</div>
-
-<script>
-fetch("banner.html")
-  .then(r => r.text())
-  .then(html => {
-    document.getElementById("bannerContainer").innerHTML = html;
-    const subtitle = document.body.dataset.subtitle;
-    if(subtitle) document.getElementById("uv-title").textContent = subtitle;
-  });
-</script>
-
-
-
-<script src="uv1-exam.js"></script>
-<script src="uv2-exam.js"></script>
-<script src="uv3-exam.js"></script>
-<script src="uv4-exam.js"></script>
-<script src="uv56-exam.js"></script>
-<script src="simulateur-global.js"></script>
-
-</body>
-</html>
+        <!-- Ordre des UV -->
+        <div class="sub-section">
+          <h3 class="section-title">• Ord
