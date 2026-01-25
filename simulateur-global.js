@@ -176,10 +176,12 @@ UV2.start(interval, (data) => {
 
    }
 
-async function runUV3() {
-  document.getElementById("text").textContent = "UV3 – Kata";
+async function runUV1() {
+  document.getElementById("text").textContent = "UV1 – Kihon";
+  document.getElementById("currentText").textContent =
+    "Exécution un kata et les bunkaï associés";
 
-  await speak("Unité de valeur trois : Kata");
+  await speak("Unité de valeur trois: Kata");
   await speak("Annoncez le kata que vous avez choisi.");
   await speak("Vous pouvez commencer.");
 
