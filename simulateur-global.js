@@ -213,6 +213,8 @@ async function runUV4() {
 
 async function runUV5() {
   document.getElementById("text").textContent = "UV5 – Assauts imposés";
+  document.getElementById("currentText").textContent =
+    "Proposez un enchaînement technique défensif";
 
   const count = Number(document.getElementById("uv5-count")?.value) || 5;
   const interval = Number(document.getElementById("uv5-interval")?.value) || 15;
@@ -237,6 +239,8 @@ async function runUV5() {
 
 async function runUV6() {
   document.getElementById("text").textContent = "UV6 – Randori";
+  document.getElementById("currentText").textContent =
+    "Proposez un enchaînement technique défensif";
 
   const count = Number(document.getElementById("uv6-count")?.value) || 5;
   const interval = Number(document.getElementById("uv6-interval")?.value) || 15;
