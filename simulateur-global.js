@@ -69,7 +69,23 @@ async function runCountdown(seconds) {
     }, 1000);
   });
 }
+/* 👇 AJOUT ICI */
+function startGlobalTimer(duration) {
+  clearInterval(timerInterval);
 
+  let remaining = duration;
+  const el = document.getElementById("timer");
+  if (!el) return;
+
+  el.textContent = format(remaining);
+
+  timerInterval = setInterval(() => {
+    if (stopped || paused) return;
+    remaining--;
+    el.textContent = format(remaining);
+    if (remaining <= 0) clearInterval(timerInterval);
+  }, 1000);
+}
 function stopAll() {
   stopped = true;
   paused = false;
@@ -184,6 +200,11 @@ async function runUV3() {
   document.getElementById("currentText").textContent =
     "Exécution un kata et les bunkaï associés";
 
+   const kata = Number(document.getElementById("kataDuration")?.value) || 5;
+const bunkai = Number(document.getElementById("bunkaiDuration")?.value) || 5;
+
+startGlobalTimer((kata + bunkai) * 60);
+
   await speak("Unité de valeur trois: Kata");
   await speak("Annoncez le kata que vous avez choisi.");
   await speak("Vous pouvez commencer.");
@@ -201,6 +222,9 @@ async function runUV4() {
   document.getElementById("text").textContent = "UV4 – Epreuves techniques";
   document.getElementById("currentText").textContent =
     "Technique de base et applications";
+
+   const uv4 = Number(document.getElementById("uv4Duration")?.value) || 5;
+startGlobalTimer(uv4 * 60);
 
   await speak("Unité de valeur quatre : Épreuves techniques");
 
@@ -288,16 +312,6 @@ function nextUV() {
   if (uv === "UV4") runUV4();
   if (uv === "UV5") runUV5();
   if (uv === "UV6") runUV6();
-}
-
-function collapseConfigUI() {
-  const cfg = document.getElementById("step-config");
-  const exam = document.getElementById("step-exam");
-
-  if (cfg && exam) {
-    cfg.classList.add("step-collapsed");
-    exam.classList.remove("step-collapsed");
-  }
 }
 
 /* =========================
