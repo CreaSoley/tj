@@ -531,3 +531,10 @@ input, select {
     font-size: 0.75rem;
   }
 }
+.section-title,
+.uv-title {
+  font-family: Arial, sans-serif;
+  color: #c9184a;
+  font-weight: bold;
+  text-align: center;
+}
