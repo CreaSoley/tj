@@ -106,6 +106,8 @@ async function announceStart() {
 
 async function runUV1() {
   document.getElementById("text").textContent = "UV1 – Kihon";
+  document.getElementById("currentText").textContent =
+    "Exécutez les enchaînements demandés";
 
   await speak("Unité de valeur une: Kihon");
   await speak("Veuillez exécuter les enchaînements demandés");
@@ -119,8 +121,10 @@ if (examMode !== "single") nextUV();
 
 }
 
-async function runUV2() {
-  document.getElementById("text").textContent = "UV2 – Ippon Kumite";
+async function runUV1() {
+  document.getElementById("text").textContent = "UV2 – Ippon kumite";
+  document.getElementById("currentText").textContent =
+    "Exécutez une seule défense et/ou contre attaque en réponse à l'assaut d'Uke";
 
   await speak("Unité de valeur deux : Ippon Kumite");
   await speak("Les deux candidats sont en garde. Les attaques ainsi que le niveau sont annoncés.");
