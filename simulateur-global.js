@@ -24,6 +24,31 @@ function updateVisual(uv, label, nextUV = null) {
     visual.style.outline = "3px dashed #ff1493";
   }
 }
+function setDisplay({
+  title = "",
+  main = "",
+  sub = "",
+  clearCurrent = false
+} = {}) {
+  const textEl = document.getElementById("text");
+  const currentEl = document.getElementById("currentText");
+
+  if (title && textEl) {
+    textEl.textContent = title;
+  }
+
+  if (currentEl) {
+    if (clearCurrent) currentEl.innerHTML = "";
+
+    if (main) {
+      currentEl.innerHTML = `<div class="main-text">${main}</div>`;
+    }
+
+    if (sub) {
+      currentEl.innerHTML += `<div class="sub-text">${sub}</div>`;
+    }
+  }
+}
 
 /* ---------- VOIX ---------- */
 function speak(text, lang = "fr-FR", rate = 0.97) {
@@ -74,6 +99,13 @@ const UV_RUNNERS = {
 
   async UV1(nextUV) {
     updateVisual("UV1", "Kihon", nextUV);
+     setDisplay({
+  title: "UV1 – Kihon",
+  main: "Kihon fondamentaux",
+  sub: "Exécution libre des enchaînements demandés",
+  clearCurrent: true
+});
+
     await speak("Unité de valeur une : Kihon");
     await speak("Veuillez exécuter les enchaînements demandés");
     await window.runUV1Exam();
@@ -95,6 +127,12 @@ const UV_RUNNERS = {
 
     const interval = Number(document.getElementById("uv2-interval")?.value || 5);
 
+     setDisplay({
+  main: "Attaque annoncée",
+  sub: "Préparez-vous",
+  clearCurrent: true
+});
+
     UV2.start(interval, (data) => {
       const display = document.getElementById("currentText");
 
@@ -111,6 +149,17 @@ const UV_RUNNERS = {
 
   async UV3(nextUV) {
     updateVisual("UV3", "Kata", nextUV);
+     setDisplay({
+  title: "UV3 – Kata",
+  main: "Kata libre",
+  sub: "Annoncez le kata choisi",
+  clearCurrent: true
+});
+setDisplay({
+  main: "Kata terminé",
+  sub: "Retour à la position initiale"
+});
+
     await speak("Unité de valeur trois : Kata");
     await speak("Annoncez le kata que vous avez choisi");
     await window.runUV3Exam();
@@ -119,6 +168,17 @@ const UV_RUNNERS = {
 
   async UV4(nextUV) {
     updateVisual("UV4", "Épreuves techniques", nextUV);
+     setDisplay({
+  title: "UV4 – Épreuves techniques",
+  main: "Techniques imposées",
+  sub: "Exécution selon les consignes du jury",
+  clearCurrent: true
+});
+setDisplay({
+  main: "Épreuves terminées",
+  sub: "Attendez les consignes"
+});
+
     await speak("Unité de valeur quatre : Épreuves techniques");
     await window.runUV4Exam();
     await speak("Fin de l’unité de valeur Épreuves techniques");
@@ -132,6 +192,12 @@ const UV_RUNNERS = {
 
     await speak("Unité de valeur cinq : Assauts imposés");
     await speak("Commencez");
+
+     setDisplay({
+  main: "Attaque en cours",
+  sub: "Répondez à l'annonce",
+  clearCurrent: true
+});
 
     UV56.startUV5(interval, count, txt => speak(txt));
 
@@ -151,6 +217,12 @@ const UV_RUNNERS = {
 
     await speak("Unité de valeur six : Randori");
     await speak("Commencez");
+
+     setDisplay({
+  main: "Attaque en cours",
+  sub: "Répondez à l'annonce",
+  clearCurrent: true
+});
 
     UV56.startUV6(interval, count, txt => speak(txt));
 
