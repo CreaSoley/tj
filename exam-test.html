@@ -1,3 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulateur UV – Examen</title>
+
+<link rel="stylesheet" href="banner.css">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+
+<style>
+.grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 20px !important;
+  width: 100%;
+}
+</style>
+</head>
+
+<body data-subtitle="🌸 Simulateur UV 🌸">
+
+<div id="bannerContainer"></div>
+
+<div class="main-wrapper">
+  <div class="card-kawaii">
+
+    <!-- =========================
+         ÉTAPE 1 – CONFIGURATION
+         ========================= -->
 <div class="card step-card">
 
   <h2 class="section-title">Étape 1</h2>
@@ -46,3 +78,69 @@
   </details>
 
 </div>
+
+
+
+    <!-- =========================
+         ÉTAPE 2 – EXAMEN
+         ========================= -->
+    <div class="step step-collapsed" id="step-exam">
+      <div class="step-header">
+        🥋 Étape 2 – Examen en cours
+        <span id="uv-order-indicator"></span>
+        <span class="badge">En cours</span>
+      </div>
+
+      <div class="step-content">
+        <div id="text" class="result-display">Prêt</div>
+        <div id="countdown" class="result-display">00:00</div>
+        <div id="timer" class="result-display"></div>
+        <div id="currentText" class="result-display current-text"></div>
+        <div id="log" class="result-display"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- 🎮 CONTRÔLES GLOBAUX -->
+<div class="controls-global">
+
+  <div class="button-row primary">
+    <button id="startBtn" class="btn-kawaii start">
+      ▶ Lancer
+    </button>
+  </div>
+
+  <div class="button-row">
+    <button id="pauseBtn" class="btn-kawaii pause">
+      ⏸ Pause
+    </button>
+    <button id="stopBtn" class="btn-kawaii stop btn-stop">
+      ⛔ Stop
+    </button>
+    <button id="resetBtn" class="btn-kawaii reset">
+      🔄 Reset
+    </button>
+  </div>
+
+</div>
+
+<script>
+fetch("banner.html")
+  .then(r => r.text())
+  .then(html => {
+    document.getElementById("bannerContainer").innerHTML = html;
+    const subtitle = document.body.dataset.subtitle;
+    if (subtitle) document.getElementById("uv-title").textContent = subtitle;
+  });
+</script>
+
+<script src="uv1-exam.js"></script>
+<script src="uv2-exam.js"></script>
+<script src="uv3-exam.js"></script>
+<script src="uv4-exam.js"></script>
+<script src="uv56-exam.js"></script>
+<script src="simulateur-global.js"></script>
+
+</body>
+</html>
