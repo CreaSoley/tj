@@ -30,7 +30,7 @@
     <!-- =========================
          ÉTAPE 1 – CONFIGURATION
          ========================= -->
-<div class="card step-card">
+<div class="card step-card step" id="step-config">
 
   <div class="step-header kawaii-label">
   📝 Étape 1 – Préparation
@@ -40,16 +40,14 @@
 
   <!-- Identité -->
   <h3 class="sub-title">Identité du candidat</h3>
-  <div class="form-group">
-    <input type="text" placeholder="Nom">
-    <input type="text" placeholder="Prénom">
-    <select>
-  <option>Civilité</option>
-  <option>Monsieur</option>
-  <option>Madame</option>
-</select>
+ <div class="form-group">
+  <input id="candidate" type="text" placeholder="Nom et prénom">
+  <select id="candidateTitle">
+    <option value="Monsieur">Monsieur</option>
+    <option value="Madame">Madame</option>
+  </select>
+</div>
 
-  </div>
 
 <!-- =========================
    Mode de passage
