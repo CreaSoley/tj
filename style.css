@@ -539,17 +539,19 @@ input, select {
   text-align: center;
 }
 .controls-global {
-  margin-top: 20px;
-  padding-top: 15px;
-  border-top: 2px dashed var(--pink-2);
+  position: sticky;
+  bottom: 0;
+  background: var(--pink-soft);
+  padding: 10px;
+  box-shadow: 0 -6px 16px rgba(0,0,0,0.2);
+  z-index: 100;
 }
-.controls-global {
-    position: sticky;
-    bottom: 0;
-    background: #fff;
-    padding-bottom: 10px;
-    z-index: 10;
-  }
+
+.controls-global .btn-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
 
 /* =========================
    STYLE MANGA / STICKER
