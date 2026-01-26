@@ -10,6 +10,12 @@ const CATEGORY_MAP = {
   "multi": "Multidirectionnel",
   "cibles": "Cibles"
 };
+const BG_MAP = {
+  "3pas": "bg-3pas",
+  "surplace": "bg-surplace",
+  "multi": "bg-multi",
+  "cibles": "bg-cibles"
+};
 
 function normalizeCat(cat) {
   if (cat === "Sur trois pas") return "3pas";
@@ -18,6 +24,16 @@ function normalizeCat(cat) {
   if (cat === "Cibles") return "cibles";
   return cat;
 }
+function setUV1Background(cat) {
+  const body = document.body;
+
+  // Supprime tous les backgrounds UV1 existants
+  Object.values(BG_MAP).forEach(bg => body.classList.remove(bg));
+
+  const bgClass = BG_MAP[cat];
+  if (bgClass) body.classList.add(bgClass);
+}
+
 
 async function loadUV1Data() {
   if (Object.keys(UV1_DATA).length) return;
