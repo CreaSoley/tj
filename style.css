@@ -538,6 +538,19 @@ input, select {
   font-weight: bold;
   text-align: center;
 }
+.controls-global {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 2px dashed var(--pink-2);
+}
+.controls-global {
+    position: sticky;
+    bottom: 0;
+    background: #fff;
+    padding-bottom: 10px;
+    z-index: 10;
+  }
+
 /* =========================
    STYLE MANGA / STICKER
    ========================= */
