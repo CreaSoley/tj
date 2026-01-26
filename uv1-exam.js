@@ -116,7 +116,10 @@ async function runUV1Sequence(sequence) {
   for (const ex of sequence) {
     if (stopped) return;
 
+    setUV1Background(ex.cat); // ✅ ICI
+
     if (ex.announce) await speak(ex.announce);
+
 
     uv1Text.textContent = ex.display;
 
