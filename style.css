@@ -672,3 +672,66 @@ zone.classList.toggle("dark-text", cat === "multi");
 #currentText.dark-text {
   color: #333;
 }
+.step-header {
+  text-shadow: none !important;
+  font-family: "Fredoka", Arial, sans-serif;
+  letter-spacing: 0.5px;
+}
+.uv-order-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.uv-item {
+  background: #fff;
+  border: 2px solid var(--pink-2);
+  border-radius: 14px;
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+}
+
+.uv-title {
+  font-weight: 700;
+  color: var(--hot-pink);
+  margin-bottom: 6px;
+}
+
+.uv-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--hot-pink);
+}
+.sub-section > .module-title,
+.sub-section > h3 {
+  text-align: center;
+}
+
+.sub-section .form-group,
+.sub-section .controls-row {
+  justify-content: flex-start;
+}
+.config-uv input[type="number"] {
+  width: 64px;
+  text-align: center;
+}
+
+.config-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
