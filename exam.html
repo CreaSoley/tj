@@ -27,8 +27,6 @@
 <div class="main-wrapper">
   <div class="card-kawaii">
 
-    <div class="module-title">Simulateur Global</div>
-
     <!-- =========================
          ÉTAPE 1 – CONFIGURATION
          ========================= -->
@@ -139,58 +137,64 @@
         </div>
 
         <!-- Configuration UV -->
-        <div class="sub-section">
-          <h3 class="section-title center">• Configuration des unités de valeur</h3>
+       <details class="uv-config-accordion">
+  <summary>⚙️ Configuration des unités de valeur</summary>
 
-          <div class="grid">
+  <div class="config-uv">
 
-            <div>
-              <h4 class="uv-title">UV2</h4>
-              <label>Intervalle (sec)</label>
-              <input id="uv2-interval" type="number" class="input-small" value="5">
-            </div>
-
-            <div>
-              <h4 class="uv-title">UV3</h4>
-              <label>Kata (min)</label>
-              <input id="kataDuration" type="number" value="5">
-              <label>Bunkaï (min)</label>
-              <input id="bunkaiDuration" type="number" value="5">
-            </div>
-
-            <div>
-              <h4 class="uv-title">UV4</h4>
-              <label>Durée (min)</label>
-              <input id="uv4Duration" type="number" value="5">
-            </div>
-
-            <div>
-              <h4 class="uv-title">UV5</h4>
-              <label>Nb assauts</label>
-              <input id="uv5-count" type="number" value="5">
-              <label>Intervalle (sec)</label>
-              <input id="uv5-interval" type="number" value="15">
-            </div>
-
-            <div>
-              <h4 class="uv-title">UV6</h4>
-              <label>Nb assauts</label>
-              <input id="uv6-count" type="number" value="5">
-              <label>Intervalle (sec)</label>
-              <input id="uv6-interval" type="number" value="15">
-            </div>
-
-            <div>
-              <h4 class="uv-title">Pause</h4>
-              <label>Entre UV (min)</label>
-              <input id="pauseDuration" type="number" value="0">
-            </div>
-
-          </div>
-        </div>
-
+    <!-- UV2 -->
+    <div class="config-block">
+      <div class="config-title">UV2 – Ippon Kumite</div>
+      <div class="config-row">
+        <label>Intervalle</label>
+        <input id="uv2-interval" type="number" min="1" max="30" value="5">
+        <span>sec</span>
       </div>
     </div>
+
+    <!-- UV3 -->
+    <!-- (bloc UV3 vu plus haut) -->
+
+    <!-- UV4 -->
+    <div class="config-block">
+      <div class="config-title">UV4 – Épreuves techniques</div>
+      <div class="config-row">
+        <label>Durée</label>
+        <input id="uv4Duration" type="number" min="1" max="10" value="5">
+        <span>min</span>
+      </div>
+    </div>
+
+    <!-- UV5 / UV6 -->
+    <div class="config-block">
+      <div class="config-title">UV5 – Assauts imposés</div>
+      <div class="config-row">
+        <label>Nb</label>
+        <input id="uv5-count" type="number" min="1" max="20" value="5">
+      </div>
+      <div class="config-row">
+        <label>Intervalle</label>
+        <input id="uv5-interval" type="number" min="5" max="60" value="15">
+        <span>sec</span>
+      </div>
+    </div>
+
+    <div class="config-block">
+      <div class="config-title">UV6 – Randori</div>
+      <div class="config-row">
+        <label>Nb</label>
+        <input id="uv6-count" type="number" min="1" max="30" value="5">
+      </div>
+      <div class="config-row">
+        <label>Intervalle</label>
+        <input id="uv6-interval" type="number" min="5" max="60" value="15">
+        <span>sec</span>
+      </div>
+    </div>
+
+  </div>
+</details>
+
 
     <!-- =========================
          ÉTAPE 2 – EXAMEN
