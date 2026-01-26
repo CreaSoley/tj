@@ -63,17 +63,133 @@
 
   <!-- Accordéon config -->
   <details class="accordion">
-    <summary>⚙️ Configuration des unités de valeur</summary>
-    <div class="accordion-content">
-      <!-- tes inputs UV ici -->
+      <!-- UV isolée -->
+        <div class="sub-section">
+          <h3 class="section-title">• Choix de l’UV</h3>
+          <select id="singleUV" class="input-wide">
+            <option value="UV1">UV1 – Kihon</option>
+            <option value="UV2">UV2 – Ippon Kumite</option>
+            <option value="UV3">UV3 – Kata</option>
+            <option value="UV4">UV4 – Épreuves techniques</option>
+            <option value="UV5">UV5 – Assauts imposés</option>
+            <option value="UV6">UV6 – Randori</option>
+          </select>
+        </div>
+
+        <!-- Configuration UV -->
+       <details class="uv-config-accordion">
+  <summary>⚙️ Configuration des unités de valeur</summary>
+
+  <div class="config-uv">
+
+    <!-- UV2 -->
+    <div class="config-block">
+      <div class="config-title">UV2 – Ippon Kumite</div>
+      <div class="config-row">
+        <label>Intervalle</label>
+        <input id="uv2-interval" type="number" min="1" max="30" value="5">
+        <span>sec</span>
+      </div>
     </div>
-  </details>
+
+    <!-- UV3 -->
+    <!-- (bloc UV3 vu plus haut) -->
+
+    <!-- UV4 -->
+    <div class="config-block">
+      <div class="config-title">UV4 – Épreuves techniques</div>
+      <div class="config-row">
+        <label>Durée</label>
+        <input id="uv4Duration" type="number" min="1" max="10" value="5">
+        <span>min</span>
+      </div>
+    </div>
+
+    <!-- UV5 / UV6 -->
+    <div class="config-block">
+      <div class="config-title">UV5 – Assauts imposés</div>
+      <div class="config-row">
+        <label>Nb</label>
+        <input id="uv5-count" type="number" min="1" max="20" value="5">
+      </div>
+      <div class="config-row">
+        <label>Intervalle</label>
+        <input id="uv5-interval" type="number" min="5" max="60" value="15">
+        <span>sec</span>
+      </div>
+    </div>
+
+    <div class="config-block">
+      <div class="config-title">UV6 – Randori</div>
+      <div class="config-row">
+        <label>Nb</label>
+        <input id="uv6-count" type="number" min="1" max="30" value="5">
+      </div>
+      <div class="config-row">
+        <label>Intervalle</label>
+        <input id="uv6-interval" type="number" min="5" max="60" value="15">
+        <span>sec</span>
+      </div>
+    </div>
+
+  </div>
+</details>
+
 
   <!-- Accordéon ordre -->
   <details class="accordion">
     <summary>📋 Ordre des UV</summary>
     <div class="accordion-content">
-      <!-- UV1 / UV2 / UV3 -->
+    <ul id="uvOrderList" class="uv-order-list">
+            <li class="uv-item" data-uv="UV1">
+  <div class="uv-title">UV1 – Kihon</div>
+  <div class="uv-controls">
+    <button class="up">⬆</button>
+    <button class="down">⬇</button>
+  </div>
+</li>
+
+         <li class="uv-item" data-uv="UV2">
+  <div class="uv-title">UV2 – Ippon Kumite</div>
+  <div class="uv-controls">
+    <button class="up">⬆</button>
+    <button class="down">⬇</button>
+  </div>
+</li>
+
+          <li class="uv-item" data-uv="UV3">
+  <div class="uv-title">UV3 – Kata</div>
+  <div class="uv-controls">
+    <button class="up">⬆</button>
+    <button class="down">⬇</button>
+  </div>
+</li>
+
+           <li class="uv-item" data-uv="UV4">
+  <div class="uv-title">UV4 – Epreuves techniques</div>
+  <div class="uv-controls">
+    <button class="up">⬆</button>
+    <button class="down">⬇</button>
+  </div>
+</li>
+
+          <li class="uv-item" data-uv="UV5">
+  <div class="uv-title">UV5 – Assauts imposés</div>
+  <div class="uv-controls">
+    <button class="up">⬆</button>
+    <button class="down">⬇</button>
+  </div>
+</li>
+
+         <li class="uv-item" data-uv="UV6">
+  <div class="uv-title">UV6 – Randori</div>
+  <div class="uv-controls">
+    <button class="up">⬆</button>
+    <button class="down">⬇</button>
+  </div>
+</li>
+
+          </ul>
     </div>
   </details>
 
