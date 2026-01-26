@@ -305,8 +305,8 @@ function nextUV() {
   if (examMode === "single") return;
 
   if (uvIndex >= order.length) {
-    speak("Fin de l'examen. Vous pouvez regagner votre place.");
-    document.getElementById("text").textContent = "Terminé";
+    speak("Fin de l'examen");
+    document.getElementById("text").textContent = "Examen terminé";
     return;
   }
 
