@@ -730,21 +730,21 @@ async function run() {
 
   if (!examMode) {
     trainingRecapData = [{
-  title: "Entraînement libre",
-  time: workedSeconds,
-  items: sequence.map(e => ({
-    catLabel: CATEGORY_MAP[normalizeCat(e.cat)],
-    display: e.display
-  }))
-}];
-
+      title: "Entraînement libre",
+      time: workedSeconds,
+      items: sequence.map(e => ({
+        catLabel: CATEGORY_MAP[normalizeCat(e.cat)],
+        display: e.display
+      }))
+    }];
   }
 
   showRecap();
+
+  disableWakeLock();   // <-- ici
+
   return;
 }
-  const ex = sequence[index];
-disableWakeLock();
 
   /* ===== AFFICHAGE ===== */
   text.textContent = ex.display;
@@ -1008,11 +1008,14 @@ stopBtn.onclick = () => {
   clearInterval(timer);
   speechSynthesis.cancel();
 
+  disableWakeLock();   // <-- ici
+
   text.textContent = "Séance arrêtée";
   countdown.textContent = "";
 
   setActive(stopBtn);
 };
+
 mode.dispatchEvent(new Event("change"));
 /* ===================== MODALE CRITERES ===================== */
 function openCriteria() {
@@ -1027,6 +1030,8 @@ resetBtn.onclick = () => {
   clearInterval(timer);
   speechSynthesis.cancel();
 
+  disableWakeLock();   // <-- ici
+
   index = 0;
   sequence = [];
 
@@ -1037,6 +1042,7 @@ resetBtn.onclick = () => {
 
   setActive(null);
 };
+
   const EXERCISE_TEXTS = {
   "1": "Exercice 1 : travail sur un ensemble de techniques choisies aléatoirement.",
   "2": "Exercice 2 : travail aléatoire sur trois techniques : trois pas, sur place et multidirectionnel.",
