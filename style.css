@@ -739,3 +739,29 @@ zone.classList.toggle("dark-text", cat === "multi");
   align-items: center;
   gap: 10px;
 }
+.uv-config-accordion summary {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1rem;
+  background: var(--pink-2);
+  border-radius: 12px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.uv-config-accordion[open] summary {
+  margin-bottom: 12px;
+}
+
+.config-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.config-row label {
+  min-width: 70px;
+  font-weight: 600;
+  color: #c90038;
+}
