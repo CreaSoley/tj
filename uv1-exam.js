@@ -25,17 +25,24 @@ function normalizeCat(cat) {
   return cat;
 }
 function setUV1Background(cat) {
-  const body = document.body;
+  const zone = document.getElementById("currentText");
+  if (!zone) return;
 
-  // Supprime tous les backgrounds UV1 existants
-  Object.values(BG_MAP).forEach(bg => body.classList.remove(bg));
+  Object.values(BG_MAP).forEach(bg =>
+    zone.classList.remove(bg)
+  );
 
   const bgClass = BG_MAP[cat];
-  if (bgClass) body.classList.add(bgClass);
+  if (bgClass) zone.classList.add(bgClass);
 }
+
 function resetBackground() {
-  document.body.className = "";
-  document.body.classList.add("bg-default");
+  const zone = document.getElementById("currentText");
+  if (!zone) return;
+
+  Object.values(BG_MAP).forEach(bg =>
+    zone.classList.remove(bg)
+  );
 }
 
 async function loadUV1Data() {
