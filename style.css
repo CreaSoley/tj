@@ -881,3 +881,17 @@ input, select {
 .step.step-collapsed {
   display: none;
 }
+.config-block {
+  margin-bottom: 12px;
+}
+
+.config-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.config-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
