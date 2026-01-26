@@ -765,3 +765,92 @@ zone.classList.toggle("dark-text", cat === "multi");
   font-weight: 600;
   color: #c90038;
 }
+/* Cartes */
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 14px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Titres */
+.section-title {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+}
+
+.sub-title {
+  text-align: center;
+  font-size: 1rem;
+  margin: 12px 0 6px;
+}
+
+/* Formulaires */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+input, select {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+/* Radios */
+.radio-group {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* Boutons */
+.btn-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn {
+  border: none;
+  border-radius: 14px;
+  padding: 10px;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn.primary {
+  background: #ff9eb5;
+  font-weight: bold;
+}
+
+/* Accordéons */
+.accordion {
+  margin-top: 10px;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.accordion summary {
+  padding: 10px;
+  background: #f3f3f3;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.accordion-content {
+  padding: 10px;
+}
+:root {
+  --pink-main: #ff9eb5;
+  --pink-soft: #ffd6e1;
+  --lavender: #e6d9ff;
+  --peach: #ffe0c7;
+  --blue-soft: #d9f1ff;
+
+  --text-dark: #333;
+  --card-bg: #ffffff;
+}
