@@ -637,37 +637,25 @@ input, select {
    BACKGROUNDS UV1
    ===================== */
 
-body.bg-3pas {
-  background: radial-gradient(circle, rgba(242,230,235,1) 0%, rgba(148,187,233,1) 100%);
+#currentText.bg-3pas {
+  background: radial-gradient(circle, #f2e6eb 0%, #94bbe9 100%);
 }
 
-body.bg-surplace {
-  background: linear-gradient(
-    90deg,
-    rgba(232,213,245,1) 0%,
-    rgba(245,213,213,1) 50%,
-    rgba(247,215,171,1) 100%
-  );
+#currentText.bg-surplace {
+  background: linear-gradient(90deg, #e8d5f5 0%, #f5d5d5 50%, #f7d7ab 100%);
 }
 
-body.bg-multi {
-  background: linear-gradient(
-    90deg,
-    rgba(227,227,230,1) 0%,
-    rgba(134,187,196,1) 100%
-  );
+#currentText.bg-multi {
+  background: linear-gradient(90deg, #e3e3e6 0%, #86bbc4 100%);
 }
 
-body.bg-cibles {
+#currentText.bg-cibles {
   background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
 }
-body {
-  transition: background 0.8s ease-in-out;
+#currentText {
+  transition: background 0.6s ease;
 }
-body.bg-default {
-  background: linear-gradient(
-    135deg,
-    #fff1f8 0%,
-    #e6f0ff 100%
-  );
+zone.classList.toggle("dark-text", cat === "multi");
+#currentText.dark-text {
+  color: #333;
 }
