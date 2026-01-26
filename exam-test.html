@@ -51,7 +51,9 @@
 
   </div>
 
-  <!-- Mode -->
+<!-- =========================
+   Mode de passage
+   ========================= -->
 <h3 class="sub-title">
   Mode de passage
   <span class="info-bubble" title="
@@ -61,11 +63,28 @@
 ">ⓘ</span>
 </h3>
 
-  <div class="radio-group">
-    <label><input type="radio" name="mode"> Examen</label>
-    <label><input type="radio" name="mode"> Entraînement</label>
-     <label><input type="radio" name="mode"> uv isolée</label>
-  </div>
+<div class="radio-group">
+  <label><input type="radio" name="mode" value="full-standard" checked> Examen</label>
+  <label><input type="radio" name="mode" value="full-adapted"> Entraînement</label>
+  <label><input type="radio" name="mode" value="single"> UV isolée</label>
+</div>
+
+<!-- 👇 SELECT CACHÉ OBLIGATOIRE POUR TON JS -->
+<select id="examPreset" style="display:none;">
+  <option value="full-standard" selected>Examen</option>
+  <option value="full-adapted">Entraînement</option>
+  <option value="single">UV isolée</option>
+</select>
+
+<script>
+  // Synchronisation radios -> examPreset (sans toucher au JS)
+  document.querySelectorAll('input[name="mode"]').forEach(r => {
+    r.addEventListener('change', () => {
+      document.getElementById('examPreset').value = r.value;
+    });
+  });
+</script>
+
 
 
   <!-- Accordéon config -->
