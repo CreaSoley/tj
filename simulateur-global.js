@@ -98,8 +98,10 @@ function stopAll() {
     UV56.stopUV6();
   }
 
-  document.getElementById("text").textContent = "Arrêté";
+   document.getElementById("text").textContent = "Arrêté";
   document.getElementById("countdown").textContent = "00:00";
+
+  disableWakeLock(); // 👈 ICI
 }
 
 /* =========================
@@ -359,9 +361,12 @@ function displayAttack(text, index, total) {
    ========================= */
 
 document.getElementById("startBtn").addEventListener("click", async () => {
+  await enableWakeLock(); // 👈 ICI EXACTEMENT
+
   stopped = false;
   paused = false;
   uvIndex = 0;
+
 
   collapseConfigUI();
 
@@ -412,10 +417,37 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 /* =========================
+   WAKE LOCK – ÉCRAN ACTIF
+   ========================= */
+
+let wakeLock = null;
+
+async function enableWakeLock() {
+  try {
+    if ('wakeLock' in navigator) {
+      wakeLock = await navigator.wakeLock.request('screen');
+      console.log("🔓 Wake Lock activé");
+    }
+  } catch (err) {
+    console.warn("Wake Lock refusé :", err);
+  }
+}
+
+async function disableWakeLock() {
+  if (wakeLock) {
+    await wakeLock.release();
+    wakeLock = null;
+    console.log("🔒 Wake Lock désactivé");
+  }
+}
+
+/* =========================
   RESET BOUTON
    ========================= */
 document.getElementById("resetBtn").addEventListener("click", () => {
+  disableWakeLock(); // 👈 ICI
   stopAll();
+
 
   // Retour étape 1
   document.getElementById("step-config").classList.remove("step-collapsed");
