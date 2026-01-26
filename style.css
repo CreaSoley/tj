@@ -878,3 +878,6 @@ input, select {
   box-shadow: 4px 4px 0 #000;
   margin-bottom: 12px;
 }
+.step.step-collapsed {
+  display: none;
+}
