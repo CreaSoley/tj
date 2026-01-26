@@ -33,7 +33,10 @@ function setUV1Background(cat) {
   const bgClass = BG_MAP[cat];
   if (bgClass) body.classList.add(bgClass);
 }
-
+function resetBackground() {
+  document.body.className = "";
+  document.body.classList.add("bg-default");
+}
 
 async function loadUV1Data() {
   if (Object.keys(UV1_DATA).length) return;
