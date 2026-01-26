@@ -103,26 +103,27 @@
   <!-- Bouton Commencer -->
   <button id="start-btn" onclick="location.href='index.html'">Commencer l'entrainement</button>
 
-  <script>
-    // Enregistrement du service worker
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('sw.js')
-          .then(reg => console.log('Service Worker enregistré', reg))
-          .catch(err => console.error('Erreur SW:', err));
-      });
-    }
-
-    // Gestion du bouton installer PWA
-    let deferredPrompt;
-    const installBtn = document.getElementById('install-btn');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault(); // empêche la prompt automatique
-      deferredPrompt = e;
-      installBtn.style.display = 'inline-block';
+<script>
+  // Enregistrement du service worker
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('Service Worker enregistré', reg))
+        .catch(err => console.error('Erreur SW:', err));
     });
+  }
 
+  // Gestion du bouton installer PWA
+  let deferredPrompt;
+  const installBtn = document.getElementById('install-btn');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) installBtn.style.display = 'inline-block';
+  });
+
+  if (installBtn) {
     installBtn.addEventListener('click', async () => {
       if (!deferredPrompt) return;
       deferredPrompt.prompt();
@@ -131,7 +132,9 @@
       deferredPrompt = null;
       installBtn.style.display = 'none';
     });
-  </script>
+  }
+</script>
+
 
 </body>
 </html>
