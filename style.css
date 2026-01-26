@@ -538,3 +538,98 @@ input, select {
   font-weight: bold;
   text-align: center;
 }
+/* =========================
+   STYLE MANGA / STICKER
+   ========================= */
+
+/* Polices */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Fond “papier manga” */
+body {
+  background: radial-gradient(circle at top left, #fff7f8 0%, #ffe9f4 40%, #ffe6c9 100%);
+}
+
+/* Titres + style BD */
+.module-title,
+.step-header {
+  font-family: 'Bangers', sans-serif;
+  letter-spacing: 1px;
+  text-shadow: 3px 3px 0px rgba(0,0,0,0.35);
+  color: #ff1a8c;
+}
+
+/* Bulles BD */
+.step {
+  border: 3px solid #000;
+  background: #fff;
+  box-shadow: 10px 10px 0px rgba(0,0,0,0.25);
+  border-radius: 24px;
+}
+
+/* Contenu */
+.step-content {
+  background: linear-gradient(180deg, #fff 0%, #fdf5ff 100%);
+  border-radius: 20px;
+  padding: 18px;
+  border: 2px dashed #ff1a8c;
+}
+
+/* Inputs style “manga” */
+input, select {
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 12px;
+  border: 3px solid #000;
+  border-radius: 12px;
+  padding: 10px;
+  background: #fff;
+}
+
+/* Boutons style sticker */
+.btn-kawaii {
+  font-family: 'Bangers', sans-serif;
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0px rgba(0,0,0,0.35);
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ff1a8c 0%, #ff7ad6 100%);
+}
+
+/* Hover */
+.btn-kawaii:hover {
+  transform: translateY(-2px);
+}
+
+/* Résultats */
+.result-display {
+  font-family: 'Press Start 2P', sans-serif;
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0px rgba(0,0,0,0.35);
+  border-radius: 18px;
+  background: #fff;
+  color: #111;
+}
+
+/* Badge */
+.badge {
+  font-family: 'Bangers', sans-serif;
+  background: #000;
+  color: #fff;
+  border: 3px solid #fff;
+}
+
+/* UV list */
+#uvOrderList li {
+  border: 3px solid #000;
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+/* Flèches */
+.up, .down {
+  border: 3px solid #000;
+  background: #ff7ad6;
+  border-radius: 12px;
+  padding: 4px 8px;
+}
