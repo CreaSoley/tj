@@ -856,3 +856,14 @@ input, select {
   --text-dark: #333;
   --card-bg: #ffffff;
 }
+.kawaii-label {
+  background: #ff9eb5;
+  color: #000;
+  border: 3px solid #000;
+  border-radius: 14px;
+  padding: 8px 12px;
+  text-align: center;
+  font-weight: 700;
+  box-shadow: 4px 4px 0 #000;
+  margin-bottom: 12px;
+}
