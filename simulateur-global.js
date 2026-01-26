@@ -124,6 +124,10 @@ async function announceStart() {
    ========================= */
 
 async function runUV1() {
+
+  // 🎬 Fond neutre au démarrage de l’UV
+  resetBackground();
+
   document.getElementById("text").textContent = "UV1 – Kihon";
   document.getElementById("currentText").textContent =
     "Exécutez les enchaînements demandés";
@@ -131,13 +135,16 @@ async function runUV1() {
   await speak("Unité de valeur une: Kihon");
   await speak("Veuillez exécuter les enchaînements demandés");
 
+  // 👉 Pendant runUV1Exam(), les backgrounds changent automatiquement
   await window.runUV1Exam();
+
+  // 🏁 Fin UV1 → retour fond neutre
+  resetBackground();
 
   await speak("Fin de l’unité de valeur Kihon");
   await speak("Vous pouvez regagner votre place");
 
-if (examMode !== "single") nextUV();
-
+  if (examMode !== "single") nextUV();
 }
 
 async function runUV2() {
