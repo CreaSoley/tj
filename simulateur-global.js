@@ -86,6 +86,18 @@ function startGlobalTimer(duration) {
     if (remaining <= 0) clearInterval(timerInterval);
   }, 1000);
 }
+async function pauseBetweenUV() {
+  const pauseInput = document.getElementById("pauseDuration");
+  const pauseSec = pauseInput ? Number(pauseInput.value) : 0;
+
+  if (pauseSec <= 0 || stopped) return;
+
+  document.getElementById("currentText").textContent =
+    `Pause – ${pauseSec} secondes`;
+
+  await runCountdown(pauseSec);
+}
+
 function stopAll() {
   stopped = true;
   paused = false;
@@ -146,6 +158,7 @@ async function runUV1() {
   await speak("Fin de l’unité de valeur Kihon");
   await speak("Vous pouvez regagner votre place");
 
+   await pauseBetweenUV();   // 👈 AJOUT ICI
   if (examMode !== "single") nextUV();
 }
 
@@ -166,6 +179,8 @@ async function runUV2() {
 
   await speak("Fin de l’unité de valeur Ippon Kumite");
   await speak("Vous pouvez regagner votre place");
+
+  await pauseBetweenUV();   // 👈 AJOUT ICI
 if (examMode !== "single") nextUV();
 
 });
@@ -220,6 +235,7 @@ startGlobalTimer((kata + bunkai) * 60);
     if (stopped) return;
   
     await speak("Vous pouvez regagner votre place");
+     await pauseBetweenUV();   // 👈 AJOUT ICI
   if (examMode !== "single") nextUV();
 
   });
@@ -239,6 +255,7 @@ startGlobalTimer(uv4 * 60);
     if (stopped) return;
   
     await speak("Vous pouvez regagner votre place");
+     await pauseBetweenUV();   // 👈 AJOUT ICI
   if (examMode !== "single") nextUV();
 
 ;
@@ -265,6 +282,7 @@ async function runUV5() {
     UV56.stopUV5();
     await speak("Fin de l’unité de valeur Assauts imposés");
     await speak("Vous pouvez regagner votre place");
+     await pauseBetweenUV();   // 👈 AJOUT ICI
  if (examMode !== "single") nextUV();
 
 
@@ -291,6 +309,7 @@ async function runUV6() {
     UV56.stopUV6();
     await speak("Fin de l’unité de valeur Randori");
     await speak("Vous pouvez regagner votre place");
+     await pauseBetweenUV();   // 👈 AJOUT ICI
    if (examMode !== "single") nextUV();
 
   }, count * interval * 1000);
