@@ -9,6 +9,8 @@ let uvIndex = 0;
 let order = ["UV1","UV2","UV3","UV4","UV5","UV6"];
 let timerInterval = null;
 let examMode = "full"; // "full" ou "single"
+let examStarted = false;
+
 
 
 function collapseConfigUI() {
@@ -103,6 +105,8 @@ function stopAll() {
   paused = false;
   clearInterval(timerInterval);
   speechSynthesis.cancel();
+   examStarted = false;
+
 
   if (window.UV2) UV2.stop();
   if (window.UV56) {
@@ -380,13 +384,24 @@ function displayAttack(text, index, total) {
    ========================= */
 
 document.getElementById("startBtn").addEventListener("click", async () => {
-  await enableWakeLock(); // 👈 ICI EXACTEMENT
+  // 👉 si déjà lancé et juste en pause → reprise
+  if (examStarted && paused) {
+    paused = false;
+    speechSynthesis.resume();
+    return;
+  }
 
+  // 👉 si déjà lancé et pas en pause → on ignore
+  if (examStarted) return;
+
+  // 👉 vrai démarrage
+  examStarted = true;
   stopped = false;
   paused = false;
   uvIndex = 0;
-
-
+   
+  await enableWakeLock(); // ✅ ICI EXACTEMENT
+   
   collapseConfigUI();
 
   examMode = document.getElementById("examPreset")?.value || "full-standard";
@@ -394,7 +409,6 @@ document.getElementById("startBtn").addEventListener("click", async () => {
 
   await announceStart();
 
-  // 🔬 MODE UV ISOLÉ
   if (examMode === "single") {
     order = [singleUV];
     uvIndex = 0;
@@ -405,21 +419,27 @@ document.getElementById("startBtn").addEventListener("click", async () => {
     if (singleUV === "UV4") return runUV4();
     if (singleUV === "UV5") return runUV5();
     if (singleUV === "UV6") return runUV6();
-
     return;
   }
 
-  // 🎓 MODE EXAMEN COMPLET
   order = buildUVOrder();
   uvIndex = 0;
   nextUV();
 });
 
-
-
 document.getElementById("pauseBtn").addEventListener("click", () => {
+  if (!examStarted || stopped) return;
+
   paused = !paused;
+
+  if (paused) {
+    speechSynthesis.pause();
+    document.getElementById("text").textContent = "⏸ Pause";
+  } else {
+    speechSynthesis.resume();
+  }
 });
+
 
 document.getElementById("stopBtn").addEventListener("click", () => {
   stopAll();
@@ -464,9 +484,11 @@ async function disableWakeLock() {
   RESET BOUTON
    ========================= */
 document.getElementById("resetBtn").addEventListener("click", () => {
-  disableWakeLock(); // 👈 ICI
-  stopAll();
+  examStarted = false;
 
+  stopAll();          // nettoie timers + voix
+  disableWakeLock();  // 🔒 libère l’écran
+});
 
   // Retour étape 1
   document.getElementById("step-config").classList.remove("step-collapsed");
