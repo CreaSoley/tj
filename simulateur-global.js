@@ -488,13 +488,12 @@ document.getElementById("resetBtn").addEventListener("click", () => {
 
   stopAll();          // nettoie timers + voix
   disableWakeLock();  // 🔒 libère l’écran
-});
 
-  // Retour étape 1
+  // 🔁 Retour étape 1
   document.getElementById("step-config").classList.remove("step-collapsed");
   document.getElementById("step-exam").classList.add("step-collapsed");
 
-  // Reset des champs
+  // ♻️ Reset des champs
   document.getElementById("candidate").value = "";
   document.getElementById("candidateTitle").value = "Monsieur";
   document.getElementById("pauseDuration").value = 0;
@@ -508,3 +507,4 @@ document.getElementById("resetBtn").addEventListener("click", () => {
   document.getElementById("uv6-interval").value = 15;
   document.getElementById("singleUV").value = "UV1";
 });
+
