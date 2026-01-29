@@ -36,6 +36,11 @@ fetch("banner.html")
     if(subtitle) document.getElementById("uv-title").textContent = subtitle;
   });
 </script>
+<script>
+  // 🔕 Wake Lock désactivé uniquement pour uv1.html
+  window.enableWakeLock = async () => {};
+  window.disableWakeLock = () => {};
+</script>
 
 
 <main class="main-wrapper">
@@ -167,7 +172,8 @@ fetch("banner.html")
 <!-- ============================= -->
 
 <!-- ⚠️ seulement scripts utiles -->
-<script src="wakelock.js"></script>
+<!-- <script src="wakelock.js"></script> -->
+
   <script>
 /* ===== DATA ===== */
 let DATA = {};
