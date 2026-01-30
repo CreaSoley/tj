@@ -11,6 +11,30 @@ let timerInterval = null;
 let examMode = "full"; // "full" ou "single"
 let examStarted = false;
 
+const PRESET_ORDRE_ADAPTE = {
+  name: "Ordre adapté",
+  order: ["UV1", "UV4", "UV2", "UV5", "UV3", "UV6"],
+  pause: 15,
+
+  uv3: {
+    kata: 5,
+    bunkai: 2
+  },
+
+  uv4: {
+    duration: 2
+  },
+
+  uv5: {
+    count: 10,
+    interval: 15
+  },
+
+  uv6: {
+    count: 10,
+    interval: 15
+  }
+};
 
 
 function collapseConfigUI() {
@@ -89,14 +113,18 @@ function startGlobalTimer(duration) {
   }, 1000);
 }
 async function pauseBetweenUV() {
-  const pauseInput = document.getElementById("pauseDuration");
-  const pauseSec = pauseInput ? Number(pauseInput.value) : 0;
+  let pauseSec = 0;
+
+  if (examMode === "ordre-adapte") {
+    pauseSec = PRESET_ORDRE_ADAPTE.pause;
+  } else {
+    const pauseInput = document.getElementById("pauseDuration");
+    pauseSec = pauseInput ? Number(pauseInput.value) : 0;
+  }
 
   if (pauseSec <= 0 || stopped) return;
 
-  document.getElementById("currentText").textContent =
-    `Pause – ${pauseSec} secondes`;
-
+  setCurrentText(`Pause – ${pauseSec} secondes`);
   await runCountdown(pauseSec);
 }
 
@@ -226,10 +254,18 @@ async function runUV3() {
   document.getElementById("currentText").textContent =
     "Exécution un kata et les bunkaï associés";
 
-   const kata = Number(document.getElementById("kataDuration")?.value) || 5;
-const bunkai = Number(document.getElementById("bunkaiDuration")?.value) || 5;
+   let kata, bunkai;
+
+if (examMode === "ordre-adapte") {
+  kata = PRESET_ORDRE_ADAPTE.uv3.kata;
+  bunkai = PRESET_ORDRE_ADAPTE.uv3.bunkai;
+} else {
+  kata = Number(document.getElementById("kataDuration")?.value) || 5;
+  bunkai = Number(document.getElementById("bunkaiDuration")?.value) || 5;
+}
 
 startGlobalTimer((kata + bunkai) * 60);
+
 
   await speak("Unité de valeur trois: Kata");
   await speak("Annoncez le kata que vous avez choisi.");
@@ -250,8 +286,16 @@ async function runUV4() {
   document.getElementById("currentText").textContent =
     "Technique de base et applications";
 
-   const uv4 = Number(document.getElementById("uv4Duration")?.value) || 5;
-startGlobalTimer(uv4 * 60);
+   let uv4Duration;
+
+if (examMode === "ordre-adapte") {
+  uv4Duration = PRESET_ORDRE_ADAPTE.uv4.duration;
+} else {
+  uv4Duration = Number(document.getElementById("uv4Duration")?.value) || 5;
+}
+
+startGlobalTimer(uv4Duration * 60);
+
 
   await speak("Unité de valeur quatre : Épreuves techniques");
 
@@ -271,8 +315,14 @@ async function runUV5() {
   document.getElementById("currentText").textContent =
     "Proposez un enchaînement technique défensif";
 
-  const count = Number(document.getElementById("uv5-count")?.value) || 5;
-  const interval = Number(document.getElementById("uv5-interval")?.value) || 15;
+  let count, interval;
+
+if (examMode === "ordre-adapte") {
+  ({ count, interval } = PRESET_ORDRE_ADAPTE.uv5);
+} else {
+  count = Number(document.getElementById("uv5-count")?.value) || 5;
+  interval = Number(document.getElementById("uv5-interval")?.value) || 15;
+}
 
   await speak("Unité de valeur cinq : Assauts imposés");
   await speak(`Vous allez exécuter ${count} enchaînement technique de défense en réponse aux attaques annoncées.`);
@@ -298,8 +348,14 @@ async function runUV6() {
   document.getElementById("currentText").textContent =
     "Proposez un enchaînement technique défensif";
 
-  const count = Number(document.getElementById("uv6-count")?.value) || 5;
-  const interval = Number(document.getElementById("uv6-interval")?.value) || 15;
+  let count, interval;
+
+if (examMode === "ordre-adapte") {
+  ({ count, interval } = PRESET_ORDRE_ADAPTE.uv6);
+} else {
+  count = Number(document.getElementById("uv6-count")?.value) || 5;
+  interval = Number(document.getElementById("uv6-interval")?.value) || 15;
+}
 
   await speak("Unité de valeur six : Randori");
   await speak(`Vous allez exécuter ${count} enchaînement technique de défense en réponse aux attaques annoncées`);
@@ -405,6 +461,13 @@ document.getElementById("startBtn").addEventListener("click", async () => {
   collapseConfigUI();
 
   examMode = document.getElementById("examPreset")?.value || "full-standard";
+   if (examMode === "ordre-adapte") {
+  order = PRESET_ORDRE_ADAPTE.order;
+  uvIndex = 0;
+
+  await speak("Simulation de passage de grade, ordre adapté");
+}
+
   const singleUV = document.getElementById("singleUV")?.value || "UV1";
 
   await announceStart();
