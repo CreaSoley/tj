@@ -485,9 +485,16 @@ document.getElementById("startBtn").addEventListener("click", async () => {
     return;
   }
 
+  if (examMode !== "ordre-adapte") {
   order = buildUVOrder();
-  uvIndex = 0;
-  nextUV();
+}
+
+uvIndex = 0;
+console.log("MODE:", examMode);
+console.log("ORDRE UTILISÉ:", order);
+
+nextUV();
+
 });
 
 document.getElementById("pauseBtn").addEventListener("click", () => {
