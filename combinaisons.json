@@ -1,0 +1,102 @@
+[
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ゲダン バライ ギャク ツキ チュウダン",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Gedan Barai Gyaku Tsuki Chudan",
+    "fr": "Avancer d’un pas – Défense basse suivie d’un coup de poing inverse au niveau moyen"
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ソト ウケ ギャク ツキ チュウダン",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Soto Uke Gyaku Tsuki Chudan",
+    "fr": "Avancer d’un pas – Défense extérieure suivie d’un coup de poing inverse au niveau moyen"
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ウチ ウケ ウラケン ウチ",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Uchi Uke Uraken Uchi",
+    "fr": "Avancer d’un pas – Défense intérieure suivie d’un coup de poing en revers"
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ジョウダン アゲ ウケ ギャク ツキ ジョウダン",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Jodan Age Uke Gyaku Tsuki Jodan",
+    "fr": "Avancer d’un pas – Défense haute suivie d’un coup de poing inverse au visage"
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ゲダン バライ オイ ツキ チュウダン",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Gedan Barai Oi Tsuki Chudan",
+    "fr": "Avancer d’un pas – Défense basse suivie d’un coup de poing en poursuite au niveau moyen"
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ソト ウケ オイ ツキ ジョウダン",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Soto Uke Oi Tsuki Jodan",
+    "fr": "Avancer d’un pas – Défense extérieure suivie d’un coup de poing en poursuite au visage"
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ウチ ウケ ギャク テイショ ウチ",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Uchi Uke Gyaku Teisho Uchi",
+    "fr": "Avancer d’un pas – Défense intérieure suivie d’un coup de paume inversé"
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ウチ ウケ ギャク ヌキテ",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Uchi Uke Gyaku Nukite",
+    "fr": "Avancer d’un pas – Défense intérieure suivie d’une attaque en pique de main inversée"
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ソト ウケ ギャク ヌキテ",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Soto Uke Gyaku Nukite",
+    "fr": "Avancer d’un pas – Défense extérieure suivie d’une attaque en pique de main inversée"
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ゲダン バライ マエ ゲリ",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Gedan Barai Mae Geri",
+    "fr": "Avancer d’un pas – Défense basse suivie d’un coup de pied frontal"
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ソト ウケ マエ ゲリ",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Soto Uke Mae Geri",
+    "fr": "Avancer d’un pas – Défense extérieure suivie d’un coup de pied frontal"
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ウチ ウケ マエ ゲリ",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Uchi Uke Mae Geri",
+    "fr": "Avancer d’un pas – Défense intérieure suivie d’un coup de pied frontal"
+  },
+  {
+    "jp_katakana": "コクツ ダチ ソト ウケ ゼンコツ ダチ ギャク ツキ",
+    "jp_romaji": "Kokutsu Dachi Soto Uke Zenkutsu Dachi Gyaku Tsuki",
+    "fr": "Défense extérieure en position arrière suivie d’un passage en position avant avec un coup de poing inversé"
+  },
+  {
+    "jp_katakana": "コクツ ダチ ウチ ウケ ゼンコツ ダチ ウラケン ウチ",
+    "jp_romaji": "Kokutsu Dachi Uchi Uke Zenkutsu Dachi Uraken Uchi",
+    "fr": "Défense intérieure en position arrière suivie d’un passage en position avant avec un coup de poing en revers"
+  },
+  {
+    "jp_katakana": "コクツ ダチ シュト ウケ ゼンコツ ダチ ギャク テイショ ウチ",
+    "jp_romaji": "Kokutsu Dachi Shuto Uke Zenkutsu Dachi Gyaku Teisho Uchi",
+    "fr": "Défense avec le tranchant de la main en position arrière suivie d’un passage en position avant avec un coup de paume inversé"
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ シュト ウケ ギャク ツキ チュウダン",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Shuto Uke Gyaku Tsuki Chudan",
+    "fr": "Avancer d’un pas – Défense avec le tranchant de la main suivie d’un coup de poing inverse au niveau moyen"
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ シュト ウケ ギャク テイショ ウチ",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Shuto Uke Gyaku Teisho Uchi",
+    "fr": "Avancer d’un pas – Défense avec le tranchant de la main suivie d’un coup de paume inversé"
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ウチ ウケ ウラケン ウチ ギャク ヌキテ",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Uchi Uke Uraken Uchi Gyaku Nukite",
+    "fr": "Avancer d’un pas – Défense intérieure suivie d’un coup en revers puis d’une attaque en pique de main inversée"
+  },
+  {
+    "jp_katakana": "マエ ゲリ オイ ツキ チュウダン",
+    "jp_romaji": "Mae Geri Oi Tsuki Chudan",
+    "fr": "Coup de pied frontal suivi d’un coup de poing en poursuite au niveau moyen"
+  },
+  {
+    "jp_katakana": "マエ ゲリ ギャク ツキ チュウダン",
+    "jp_romaji": "Mae Geri Gyaku Tsuki Chudan",
+    "fr": "Coup de pied frontal suivi d’un coup de poing inverse au niveau moyen"
+  }
+]
