@@ -486,7 +486,9 @@ await wait(5000);
   }
 
   /* ===== BOUCLE SUR LES KIHON ===== */
-  for (const g of list) {
+  for (let i = 0; i < list.length; i++) {
+  const g = list[i];
+
 
     // Affichage visuel
 
