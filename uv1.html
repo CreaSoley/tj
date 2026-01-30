@@ -492,10 +492,12 @@ await wait(5000);
 
     // Affichage visuel
 
-    text.innerHTML = `
+  text.innerHTML = `
+  <div class="gamme-progress">Enchaînement ${i + 1} / ${list.length}</div>
   <div class="gamme-romaji">${g.romaji}</div>
   <div class="gamme-fr">${g.fr}</div>
 `;
+
 
     /* ----- ANNONCE DU KIHON ----- */
    await speakJP(g.katakana, 0.50); // japonais
