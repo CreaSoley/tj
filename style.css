@@ -895,3 +895,8 @@ input, select {
   align-items: center;
   gap: 8px;
 }
+.gamme-progress {
+  font-size: 0.9em;
+  opacity: 0.7;
+  margin-bottom: 6px;
+}
