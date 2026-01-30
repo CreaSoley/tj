@@ -289,6 +289,7 @@ let trainingRecapData = [];
 window.onload = async () => {
   await loadData();
   await loadGammes();
+  await loadCombinaisons(); // 👈 ajout
 };
 
 /* ===================== UTILS ===================== */
@@ -702,7 +703,8 @@ clearInterval(timerF);
 async function run() {
   
   // ===== EXERCICE 4 – GAMMES =====
-  if (!examMode && sequence[0]?.exercise === "4") {
+  if (!examMode && ["4","6"].includes(sequence[0]?.exercise)) {
+
     await runGammes(sequence);
     return;
   }
@@ -917,6 +919,23 @@ startBtn.onclick = async () => {
   await runHaraLigne();
   return;
 }
+/* ===== EXERCICE 6 – COMBINAISONS ===== */
+if (m === "6") {
+
+  const speed = document.getElementById("speedMode").value;
+
+  sequence = [...COMBINAISONS]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, qty)
+    .map(c => ({
+      exercise: "6",
+      katakana: c.jp_katakana,
+      romaji: c.jp_romaji,
+      fr: c.fr,
+      speed
+    }));
+
+}
 
   // Sécurité : données chargées ?
   if (!DATA || Object.keys(DATA).length === 0) {
@@ -1069,6 +1088,7 @@ const EXPLANATIONS = {
   "3": "Exercice 3 : travail sur une catégorie choisie.",
   "4": "Exercice 4 : travail destiné à perfectionner les kihon de base. Choisissez le nombre de techniques à travailler et le rythme.",
   "5": "Exercice 5 : travail du hara. Le hara, le travail du souffle en profondeur",
+  "6": "Exercice 6 : travail sur des combinaisons d’enchaînements prédéfinis.",
   "exam": "Mode examen blanc : conditions proches de l’examen officiel."
 };
 
