@@ -445,6 +445,12 @@ function displayAttack(text, index, total) {
    ========================= */
 
 document.getElementById("startBtn").addEventListener("click", async () => {
+
+  // 🔓 Déblocage audio desktop
+  speechSynthesis.cancel();
+  speechSynthesis.speak(new SpeechSynthesisUtterance(" "));
+
+
   // 👉 si déjà lancé et juste en pause → reprise
   if (examStarted && paused) {
     paused = false;
