@@ -460,7 +460,10 @@ document.getElementById("startBtn").addEventListener("click", async () => {
    
   collapseConfigUI();
 
-  examMode = document.getElementById("examPreset")?.value || "full-standard";
+examMode =
+  document.querySelector('input[name="mode"]:checked')?.value
+  || "full-standard";
+
    if (examMode === "ordre-adapte") {
   order = PRESET_ORDRE_ADAPTE.order;
   uvIndex = 0;
