@@ -411,6 +411,7 @@ function nextUV() {
 
   const uv = order[uvIndex++];
   document.getElementById("uv-order-indicator").textContent = `→ ${uv}`;
+updateExamInfo();
 
   if (uv === "UV1") runUV1();
   if (uv === "UV2") runUV2();
@@ -486,7 +487,7 @@ document.getElementById("startBtn").addEventListener("click", async () => {
    
   collapseConfigUI();
 
-  function updateExamInfo() {
+function updateExamInfo() {
   const el = document.getElementById("exam-info");
   if (!el) return;
 
@@ -496,17 +497,27 @@ document.getElementById("startBtn").addEventListener("click", async () => {
     examMode === "single" ? "UV isolée" :
     "Examen";
 
-  const orderLabel = Array.isArray(order)
-    ? order.join(" → ")
+  const currentUV = order[uvIndex - 1];
+
+  const orderHtml = Array.isArray(order)
+    ? `
+      <div><strong>Ordre :</strong></div>
+      <div class="exam-order">
+        ${order.map(uv => `
+          <span class="${uv === currentUV ? "active" : ""}">
+            ${uv}
+          </span>
+        `).join("")}
+      </div>
+    `
     : "";
 
   el.innerHTML = `
     ${name ? `<div><strong>Candidat :</strong> ${name}</div>` : ""}
     <div><strong>${modeLabel}</strong></div>
-    ${orderLabel ? `<div><strong>Ordre :</strong> ${orderLabel}</div>` : ""}
+    ${orderHtml}
   `;
 }
-
 
 examMode =
   document.querySelector('input[name="mode"]:checked')?.value
