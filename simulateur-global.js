@@ -147,6 +147,11 @@ function stopAll() {
 
   disableWakeLock(); // 👈 ICI
 }
+function adapted(value, fallback) {
+  return examMode === "ordre-adapte" && value !== undefined
+    ? value
+    : fallback;
+}
 
 /* =========================
    Annonces officielles
@@ -254,15 +259,15 @@ async function runUV3() {
   document.getElementById("currentText").textContent =
     "Exécution un kata et les bunkaï associés";
 
-   let kata, bunkai;
+const kata = adapted(
+  PRESET_ORDRE_ADAPTE.uv3?.kata,
+  Number(document.getElementById("kataDuration")?.value) || 5
+);
 
-if (examMode === "ordre-adapte") {
-  kata = PRESET_ORDRE_ADAPTE.uv3.kata;
-  bunkai = PRESET_ORDRE_ADAPTE.uv3.bunkai;
-} else {
-  kata = Number(document.getElementById("kataDuration")?.value) || 5;
-  bunkai = Number(document.getElementById("bunkaiDuration")?.value) || 5;
-}
+const bunkai = adapted(
+  PRESET_ORDRE_ADAPTE.uv3?.bunkai,
+  Number(document.getElementById("bunkaiDuration")?.value) || 5
+);
 
 startGlobalTimer((kata + bunkai) * 60);
 
@@ -286,13 +291,10 @@ async function runUV4() {
   document.getElementById("currentText").textContent =
     "Technique de base et applications";
 
-   let uv4Duration;
-
-if (examMode === "ordre-adapte") {
-  uv4Duration = PRESET_ORDRE_ADAPTE.uv4.duration;
-} else {
-  uv4Duration = Number(document.getElementById("uv4Duration")?.value) || 5;
-}
+const uv4Duration = adapted(
+  PRESET_ORDRE_ADAPTE.uv4?.duration,
+  Number(document.getElementById("uv4Duration")?.value) || 5
+);
 
 startGlobalTimer(uv4Duration * 60);
 
@@ -315,14 +317,16 @@ async function runUV5() {
   document.getElementById("currentText").textContent =
     "Proposez un enchaînement technique défensif";
 
-  let count, interval;
+ const count = adapted(
+  PRESET_ORDRE_ADAPTE.uv5?.count,
+  Number(document.getElementById("uv5-count")?.value) || 5
+);
 
-if (examMode === "ordre-adapte") {
-  ({ count, interval } = PRESET_ORDRE_ADAPTE.uv5);
-} else {
-  count = Number(document.getElementById("uv5-count")?.value) || 5;
-  interval = Number(document.getElementById("uv5-interval")?.value) || 15;
-}
+const interval = adapted(
+  PRESET_ORDRE_ADAPTE.uv5?.interval,
+  Number(document.getElementById("uv5-interval")?.value) || 15
+);
+
 
   await speak("Unité de valeur cinq : Assauts imposés");
   await speak(`Vous allez exécuter ${count} enchaînement technique de défense en réponse aux attaques annoncées.`);
@@ -348,14 +352,15 @@ async function runUV6() {
   document.getElementById("currentText").textContent =
     "Proposez un enchaînement technique défensif";
 
-  let count, interval;
+const count = adapted(
+  PRESET_ORDRE_ADAPTE.uv6?.count,
+  Number(document.getElementById("uv6-count")?.value) || 5
+);
 
-if (examMode === "ordre-adapte") {
-  ({ count, interval } = PRESET_ORDRE_ADAPTE.uv6);
-} else {
-  count = Number(document.getElementById("uv6-count")?.value) || 5;
-  interval = Number(document.getElementById("uv6-interval")?.value) || 15;
-}
+const interval = adapted(
+  PRESET_ORDRE_ADAPTE.uv6?.interval,
+  Number(document.getElementById("uv6-interval")?.value) || 15
+);
 
   await speak("Unité de valeur six : Randori");
   await speak(`Vous allez exécuter ${count} enchaînement technique de défense en réponse aux attaques annoncées`);
