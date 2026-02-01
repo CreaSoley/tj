@@ -900,3 +900,22 @@ input, select {
   opacity: 0.7;
   margin-bottom: 6px;
 }
+.exam-order {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.exam-order span {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #e0e0e0;
+  font-size: 0.9rem;
+}
+
+.exam-order span.active {
+  background: #2b7cff;
+  color: white;
+  font-weight: 600;
+}
