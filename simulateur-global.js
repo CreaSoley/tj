@@ -152,6 +152,21 @@ function adapted(value, fallback) {
     ? value
     : fallback;
 }
+function updateExamInfo() {
+  const el = document.getElementById("exam-info");
+  if (!el) return;
+
+  const name = document.getElementById("candidate")?.value?.trim();
+  const modeLabel =
+    examMode === "ordre-adapte" ? "Mode adapté" :
+    examMode === "single" ? "UV isolée" :
+    "Examen";
+
+  el.innerHTML = `
+    ${name ? `<div><strong>Candidat :</strong> ${name}</div>` : ""}
+    <div><strong>${modeLabel}</strong></div>
+  `;
+}
 
 /* =========================
    Annonces officielles
@@ -470,6 +485,28 @@ document.getElementById("startBtn").addEventListener("click", async () => {
   await enableWakeLock(); // ✅ ICI EXACTEMENT
    
   collapseConfigUI();
+
+  function updateExamInfo() {
+  const el = document.getElementById("exam-info");
+  if (!el) return;
+
+  const name = document.getElementById("candidate")?.value?.trim();
+  const modeLabel =
+    examMode === "ordre-adapte" ? "Mode adapté" :
+    examMode === "single" ? "UV isolée" :
+    "Examen";
+
+  const orderLabel = Array.isArray(order)
+    ? order.join(" → ")
+    : "";
+
+  el.innerHTML = `
+    ${name ? `<div><strong>Candidat :</strong> ${name}</div>` : ""}
+    <div><strong>${modeLabel}</strong></div>
+    ${orderLabel ? `<div><strong>Ordre :</strong> ${orderLabel}</div>` : ""}
+  `;
+}
+
 
 examMode =
   document.querySelector('input[name="mode"]:checked')?.value
