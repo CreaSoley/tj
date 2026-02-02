@@ -59,13 +59,18 @@
   </div>
 
   <!-- Injection banner.html -->
-  <script>
-    fetch("banner.html")
-      .then(r => r.text())
-      .then(html => {
-        document.getElementById("bannerContainer").innerHTML = html;
-      });
-  </script>
+ <script>
+fetch("banner.html")
+  .then(r => r.text())
+  .then(html => {
+    document.getElementById("bannerContainer").innerHTML = html;
+
+    const subtitle = document.body.dataset.subtitle;
+    const target = document.getElementById("uv-title");
+    if (subtitle && target) target.textContent = subtitle;
+  });
+</script>
+
 
   <!-- Script routines -->
   <script src="routine.js"></script>
