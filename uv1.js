@@ -214,4 +214,11 @@ async function runUV1Exam() {
   const seq = buildUV1Exam();
   if (!seq.length) {
     uv1Text.textContent = "⚠️ Aucune donnée UV1 trouvée";
-    await speakFR("Aucune donnée UV1 trouvée"
+    await speakFR("Aucune donnée UV1 trouvée");
+    return;
+  }
+
+  await runUV1Sequence(seq);
+}
+
+window.runUV1Exam = runUV1Exam;
