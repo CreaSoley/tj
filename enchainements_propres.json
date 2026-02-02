@@ -232,37 +232,37 @@
     {
       "jp_katakana": "マエ ゲリ ウシロ アシ チュウダン",
       "jp_romaji": "Mae Geri Ushiro Ashi Chudan",
-      "fr": "Travail aux cibles – Coup de pied frontal jambe arrière niveau moyen"
+      "fr": "Coup de pied frontal jambe arrière niveau moyen"
     },
     {
       "jp_katakana": "マワシ ゲリ ウシロ アシ ジョウダン チュウダン",
       "jp_romaji": "Mawashi Geri Ushiro Ashi Jodan Chudan",
-      "fr": "Travail aux cibles – Coup de pied circulaire jambe arrière niveau haut ou moyen"
+      "fr": "Coup de pied circulaire jambe arrière niveau haut ou moyen"
     },
     {
       "jp_katakana": "マエ ゲリ マエ アシ ヨリ アシ チュウダン",
       "jp_romaji": "Mae Geri Mae Ashi Yori Ashi Chudan",
-      "fr": "Travail aux cibles – Coup de pied frontal jambe avant avec sursaut niveau moyen"
+      "fr": "Coup de pied frontal jambe avant avec sursaut niveau moyen"
     },
     {
       "jp_katakana": "マワシ ゲリ マエ アシ ヨリ アシ ジョウダン チュウダン",
       "jp_romaji": "Mawashi Geri Mae Ashi Yori Ashi Jodan Chudan",
-      "fr": "Travail aux cibles – Coup de pied circulaire jambe avant avec sursaut niveau haut ou moyen"
+      "fr": "Coup de pied circulaire jambe avant avec sursaut niveau haut ou moyen"
     },
     {
       "jp_katakana": "キザミ ツキ ジョウダン ギャク ツキ チュウダン",
       "jp_romaji": "Kizami Tsuki Jodan Gyaku Tsuki Chudan",
-      "fr": "Travail aux cibles – Coup de poing direct niveau haut suivi d’un coup de poing inverse niveau moyen"
+      "fr": "Coup de poing direct niveau haut suivi d’un coup de poing inverse niveau moyen"
     },
     {
       "jp_katakana": "ギャク ツキ チュウダン",
       "jp_romaji": "Gyaku Tsuki Chudan",
-      "fr": "Travail aux cibles – Coup de poing inverse niveau moyen"
+      "fr": "Coup de poing inverse niveau moyen"
     },
     {
       "jp_katakana": "オイ ツキ ジョウダン モドリ",
-      "jp_romaji": "Oi Tsuki Jodan Modori",
-      "fr": "Travail aux cibles – Coup de poing direct niveau haut avec retour en arrière"
+      "jp_romaji": "Oi Tsuki Jodan",
+      "fr": "Coup de poing direct niveau haut avec retour en arrière"
     }
   ]
 }
