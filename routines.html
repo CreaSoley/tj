@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Routines – Régulation</title>
+
+  <!-- Styles existants -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="min-banner.css">
+</head>
+
+<body data-subtitle="🌿 Routines anti-stress 🌿">
+
+  <!-- Bannière injectée -->
+  <div id="bannerContainer"></div>
+
+  <!-- CONTENU -->
+  <div class="main-wrapper">
+    <div class="card-kawaii">
+
+      <h2 class="module-title">Choisir une routine</h2>
+
+      <!-- Sélecteur -->
+      <select id="selectRoutine" class="input-wide"></select>
+
+      <!-- Présentation -->
+      <div id="presentation" class="result-display">
+        Sélectionne une routine 🌸
+      </div>
+
+      <!-- Exercice en cours -->
+      <div id="currentLine" class="result-display">
+        Prêt
+      </div>
+
+      <!-- Temps -->
+      <div class="result-display">
+        <div id="countdown">00:00</div>
+        <div id="totalTime"></div>
+      </div>
+
+      <!-- Progression -->
+      <div class="progress">
+        <div id="progressFill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CONTRÔLES -->
+  <div class="controls-global">
+    <div class="btn-row">
+      <button id="startBtn" class="btn primary">▶️ Démarrer</button>
+      <button id="pauseBtn" class="btn">⏸ Pause</button>
+      <button id="stopBtn" class="btn">⏹ Stop</button>
+    </div>
+  </div>
+
+  <!-- Injection banner.html -->
+  <script>
+    fetch("banner.html")
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById("bannerContainer").innerHTML = html;
+      });
+  </script>
+
+  <!-- Script routines -->
+  <script src="routine.js"></script>
+
+</body>
+</html>
