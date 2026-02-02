@@ -974,15 +974,41 @@ input, select {
 
 /* Examen */
 .btn-exam {
-  width: 100%;
-  font-size: 1.3rem;
-  background: #ff3b3b;
-  box-shadow: 0 5px 0 #c62828;
+  background: linear-gradient(135deg, #ffd6e8, #ff9ecb);
+  color: #000;
+  box-shadow: 0 5px 0 #ff7ab8;
 }
+
 
 /* Desktop : aération légère */
 @media (min-width: 800px) {
   .menu-wrapper {
     min-height: auto;
+  }
+}
+/* ===== MENU INDEX : CORRECTION MOBILE ===== */
+.menu-wrapper {
+  justify-content: flex-start; /* ❌ plus de space-between */
+}
+
+/* Compactage mobile */
+@media (max-width: 700px) {
+  .menu-section {
+    margin-bottom: 14px;
+  }
+}
+/* Liens = boutons visuels, pas des hyperliens */
+.menu-wrapper a,
+.menu-grid a {
+  text-decoration: none;
+  color: inherit;
+}
+html, body {
+  height: 100%;
+}
+@media (max-width: 700px) {
+  .uv-grid .btn-kawaii {
+    padding: 12px 8px;
+    font-size: 0.85rem;
   }
 }
