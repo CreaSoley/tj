@@ -67,7 +67,7 @@ async function speakFR(text) {
 async function loadUV1Data() {
   if (Object.keys(UV1_DATA).length) return;
   try {
-    const res = await fetch("enchainements_propre.json");
+    const res = await fetch("enchainements_propres.json");
     UV1_DATA = await res.json();
   } catch (err) {
     console.error("Impossible de charger le JSON UV1 :", err);
