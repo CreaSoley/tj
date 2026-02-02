@@ -181,7 +181,6 @@ await speak("Hajimé");
       }
     }
   }
-}
 
 async function runUV1Exam() {
   await loadUV1Data();
