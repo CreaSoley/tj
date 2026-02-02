@@ -18,12 +18,11 @@
 </header>
 
 <script>
-  // Remplacement automatique du sous-titre via data-subtitle dans <body>
-  document.addEventListener("DOMContentLoaded", function() {
-    const subtitle = document.body.dataset.subtitle;
-    if(subtitle) {
-      const target = document.getElementById("uv-title");
-      if(target) target.textContent = subtitle;
-    }
-  });
+  const subtitle = document.body.dataset.subtitle;
+  const target = document.getElementById("uv-title");
+
+  if (subtitle && target) {
+    target.textContent = subtitle;
+  }
 </script>
+
