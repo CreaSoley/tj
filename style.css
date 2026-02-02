@@ -937,3 +937,52 @@ input, select {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+.menu-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: calc(100vh - 120px); /* header déjà pris en compte */
+  padding: 20px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* Sections */
+.menu-section {
+  margin-bottom: 20px;
+}
+
+/* Boutons pleine largeur */
+.btn-wide {
+  width: 100%;
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+}
+
+/* Grille UV */
+.uv-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.uv-grid .btn-kawaii {
+  font-size: 1rem;
+  line-height: 1.2;
+  padding: 16px 10px;
+}
+
+/* Examen */
+.btn-exam {
+  width: 100%;
+  font-size: 1.3rem;
+  background: #ff3b3b;
+  box-shadow: 0 5px 0 #c62828;
+}
+
+/* Desktop : aération légère */
+@media (min-width: 800px) {
+  .menu-wrapper {
+    min-height: auto;
+  }
+}
