@@ -100,53 +100,58 @@ document.addEventListener("DOMContentLoaded", () => {
   // =====================
   // Lecture vocale
   // =====================
-  function speakItem(item) {
-    return new Promise(resolve => {
+function speakItem(item) {
+  return new Promise(resolve => {
 
-      // ----- PAUSE -----
-  if (item.haptic === "respiration" && navigator.vibrate) {
-  navigator.vibrate([300, 3000, 200, 5000]);
+    // ----- HAPTIC RESPIRATION -----
+    if (item.haptic === "respiration" && navigator.vibrate) {
+      navigator.vibrate([500, 500, 500, 1500]);
+    }
+
+    // ----- PAUSE -----
+    if (item.pause) {
+      let remaining = pauseRemaining || item.pause;
+      currentLine.textContent = lastInstruction;
+
+      const countdown = document.createElement("div");
+      countdown.style.marginTop = "8px";
+      countdown.style.opacity = "0.7";
+      currentLine.appendChild(countdown);
+
+      pauseInterval = setInterval(() => {
+        countdown.textContent = `⏱ ${remaining}s`;
+        remaining--;
+        pauseRemaining = remaining;
+
+        if (remaining < 0) {
+          clearInterval(pauseInterval);
+          pauseInterval = null;
+          pauseRemaining = 0;
+          resolve();
+        }
+      }, 1000);
+
+      return;
+    }
+
+    // ----- TEXTE -----
+    lastInstruction = item.text;
+    currentLine.textContent = item.text;
+
+    // 🔔 vibration courte à chaque instruction
+    if (navigator.vibrate) {
+      navigator.vibrate(80);
+    }
+
+    const utt = new SpeechSynthesisUtterance(item.text);
+    utt.rate = 0.75;
+    utt.pitch = 0.7;
+
+    utt.onend = resolve;
+    speechSynthesis.speak(utt);
+  });
 }
 
-if (item.pause) {
-        let remaining = pauseRemaining || item.pause;
-        currentLine.textContent = lastInstruction;
-
-        const countdown = document.createElement("div");
-        countdown.style.marginTop = "8px";
-        countdown.style.opacity = "0.7";
-        currentLine.appendChild(countdown);
-
-        pauseInterval = setInterval(() => {
-          countdown.textContent = `⏱ ${remaining}s`;
-          remaining--;
-          pauseRemaining = remaining;
-
-          if (remaining < 0) {
-            clearInterval(pauseInterval);
-            pauseInterval = null;
-            pauseRemaining = 0;
-            resolve();
-          }
-        }, 1000);
-
-        return;
-      }
-
-      // ----- TEXTE -----
-      lastInstruction = item.text;
-      currentLine.textContent = item.text;
-
-      const utt = new SpeechSynthesisUtterance(item.text);
-
-      // Voix calme
-      utt.rate = 0.75;
-      utt.pitch = 0.7;
-
-      utt.onend = resolve;
-      speechSynthesis.speak(utt);
-    });
-  }
 
   // =====================
   // Play
