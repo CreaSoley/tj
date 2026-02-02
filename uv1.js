@@ -135,3 +135,85 @@ function buildUV1Exam() {
     });
     seq.push({
       cat: "multi",
+      fr: p3.fr,
+      jp_katakana: p3.jp_katakana,
+      jp_romaji: p3.jp_romaji,
+      garde: "droite",
+      time: 45
+    });
+  }
+
+  const p4 = pickRandom("cibles", 5);
+  if (p4) p4.forEach((ex, i) => seq.push({
+    cat: "cibles",
+    fr: ex.fr,
+    jp_katakana: ex.jp_katakana,
+    jp_romaji: ex.jp_romaji,
+    time: 30,
+    announce: i === 0 ? "Quatrième partie. Travail sur cibles." : null
+  }));
+
+  return seq;
+}
+
+// 🌟 Exécution séquence
+async function runUV1Sequence(sequence) {
+  for (const ex of sequence) {
+    if (stopped) return;
+
+    setUV1Background(ex.cat);
+
+    if (ex.announce) await speakFR(ex.announce);
+
+    // Affichage Romaji + Français
+    uv1Text.textContent = ex.jp_romaji || "";
+    translationText.textContent = ex.fr || "";
+
+    // Katakana 2 fois
+    if (ex.jp_katakana) await speakJP(ex.jp_katakana, 0.7, 2);
+
+    // Français 1 seule fois
+    if (ex.fr) await speakFR(ex.fr);
+
+    if (ex.garde) await speakFR("Garde à " + ex.garde);
+
+    await speakFR("Hajimé");
+
+    // Timer
+    let t = ex.time || 30;
+    uv1Timer.textContent = format(t);
+
+    while (t > 0) {
+      if (stopped) return;
+      if (!paused) {
+        await waitMs(1000);
+        t--;
+        uv1Timer.textContent = format(t);
+      } else {
+        await waitMs(300);
+      }
+    }
+  }
+}
+
+// 🌟 Lancement UV1
+async function runUV1Exam() {
+  await loadUV1Data();
+
+  uv1Text.textContent = "UV1 – Kihon";
+  translationText.textContent = "";
+  await speakFR("Unité de valeur un. Kihon.");
+  await waitMs(1000);
+
+  const seq = buildUV1Exam();
+  console.log("Séquence UV1 construite :", seq);
+  await runUV1Sequence(seq);
+
+  // Fin UV1
+  resetBackground();
+  uv1Text.textContent = "Fin UV1";
+  translationText.textContent = "";
+  await speakFR("Fin de l’unité de valeur Kihon.");
+}
+
+window.runUV1Exam = runUV1Exam;
