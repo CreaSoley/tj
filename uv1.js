@@ -132,6 +132,15 @@ jp_romaji: p3.jp_romaji,
 
   return seq;
 }
+async function speakJP(text) {
+  return new Promise(resolve => {
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "ja-JP";
+    u.rate = 0.95;
+    u.onend = resolve;
+    speechSynthesis.speak(u);
+  });
+}
 
 async function runUV1Sequence(sequence) {
   for (const ex of sequence) {
