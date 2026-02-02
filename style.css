@@ -571,7 +571,7 @@ body {
 .step-header {
   font-family: 'Bangers', sans-serif;
   letter-spacing: 1px;
-  text-shadow: 3px 3px 0px rgba(0,0,0,0.35);
+  text-shadow: none;
   color: #ff1a8c;
 }
 
