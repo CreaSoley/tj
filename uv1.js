@@ -153,11 +153,10 @@ async function runUV1Sequence(sequence) {
 
    uv1Text.textContent = ex.fr;
 
-// if (ex.jp_katakana) {
-//   await speakJP(ex.jp_katakana);
-// }
-
+    if (ex.jp_katakana && typeof speakJP === "function") {
+  await speakJP(ex.jp_katakana);
 }
+
 
 await speak(ex.fr);
 await speak(ex.fr);
