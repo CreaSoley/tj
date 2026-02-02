@@ -919,3 +919,21 @@ input, select {
   color: white;
   font-weight: 600;
 }
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.menu-grid .btn-kawaii {
+  text-decoration: none;
+  text-align: center;
+}
+@media (min-width: 700px) {
+  .menu-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
