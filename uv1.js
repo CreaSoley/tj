@@ -52,7 +52,7 @@ async function loadUV1Data() {
   if (Object.keys(UV1_DATA).length) return;
 
   try {
-    const res = await fetch("enchainements_propre.json");
+    const res = await fetch("enchainements_propres.json");
     UV1_DATA = await res.json();
   } catch (e) {
     console.warn("UV1 : impossible de charger les données", e);
