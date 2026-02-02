@@ -1,0 +1,124 @@
+{
+  "routines": [
+
+    {
+      "id": "R0",
+      "nom": "Urgence – 30 secondes",
+      "presentation": "Retour rapide au calme. À utiliser en urgence.",
+      "script": [
+        { "text": "Arrête-toi une seconde.", "mode": "grave" },
+        { "pause": 2, "haptic": "respiration" },
+        { "text": "Pieds au sol. Sens le contact.", "mode": "grave" },
+        { "pause": 4, "haptic": "respiration" },
+        { "text": "Expire lentement.", "mode": "grave" },
+        { "pause": 6, "haptic": "respiration" },
+        { "text": "Tu es ici. Maintenant.", "mode": "grave" },
+        { "pause": 6, "haptic": "respiration" },
+        { "text": "Continue.", "mode": "grave" }
+      ]
+    },
+
+    {
+      "id": "R1",
+      "nom": "Ancrage & stabilité",
+      "presentation": "Stabiliser le corps, réduire le vertige, revenir ici et maintenant.",
+      "script": [
+        { "text": "Pieds bien au sol.", "mode": "grave" },
+        { "text": "Presse légèrement les orteils… puis les talons.", "mode": "grave" },
+        { "pause": 5, "haptic": "respiration" },
+        { "text": "Micro-flexion des genoux. Le bassin devient lourd.", "mode": "grave" },
+        { "pause": 6, "haptic": "respiration" },
+        { "text": "Sens trois points d’appui sous chaque pied.", "mode": "grave" },
+        { "pause": 8, "haptic": "respiration" },
+        { "text": "Phrase intérieure. Je suis stable ici.", "mode": "grave" },
+        { "pause": 10, "haptic": "respiration" },
+        { "text": "Fin du rituel. Tu avances.", "mode": "grave" }
+      ]
+    },
+
+    {
+      "id": "R2",
+      "nom": "Gestion douleur et fatigue",
+      "presentation": "Apaiser la tension, diminuer la lutte, conserver de l’énergie.",
+      "script": [
+        { "text": "Inspire doucement.", "mode": "grave" },
+        { "pause": 3, "haptic": "respiration" },
+        { "text": "À l’expiration, relâche les épaules.", "mode": "grave" },
+        { "pause": 4, "haptic": "respiration" },
+        { "text": "Relâche la mâchoire… puis le ventre.", "mode": "grave" },
+        { "pause": 8, "haptic": "respiration" },
+        { "text": "La douleur est une information. Pas un danger.", "mode": "grave" },
+        { "pause": 8, "haptic": "respiration" },
+        { "text": "Phrase intérieure. Je fais avec ce qui est là.", "mode": "grave" },
+        { "pause": 10, "haptic": "respiration" },
+        { "text": "Tu continues, à ton rythme.", "mode": "grave" }
+      ]
+    },
+
+    {
+      "id": "R3",
+      "nom": "Calme & efficacité",
+      "presentation": "Clarifier l’intention avant une action ou une épreuve.",
+      "script": [
+        { "text": "Regard posé. Respiration calme.", "mode": "grave" },
+        { "pause": 5, "haptic": "respiration" },
+        { "text": "Laisse tomber ce qui n’est pas utile.", "mode": "grave" },
+        { "pause": 6, "haptic": "respiration" },
+        { "text": "Choisis une intention.", "mode": "grave" },
+        { "pause": 3, "haptic": "respiration" },
+        { "text": "Calme. Adapté. Efficace.", "mode": "grave" },
+        { "pause": 6, "haptic": "respiration" },
+        { "text": "Présent, même lent.", "mode": "grave" },
+        { "pause": 5, "haptic": "respiration" },
+        { "text": "Action.", "mode": "grave" }
+      ]
+    },
+
+    {
+      "id": "R5",
+      "nom": "Régulation profonde – 5 minutes",
+      "presentation": "Diminuer l’activation globale. Revenir à un état stable.",
+      "script": [
+        { "text": "Installe-toi. Le corps n’a rien à prouver.", "mode": "grave" },
+        { "pause": 10, "haptic": "respiration" },
+        { "text": "Pieds au sol. Dos soutenu.", "mode": "grave" },
+        { "pause": 15, "haptic": "respiration" },
+        { "text": "Respiration lente et régulière.", "mode": "grave" },
+        { "pause": 20, "haptic": "respiration" },
+        { "text": "À chaque expiration, le corps descend d’un cran.", "mode": "grave" },
+        { "pause": 30, "haptic": "respiration" },
+        { "text": "Observe sans corriger.", "mode": "grave" },
+        { "pause": 30, "haptic": "respiration" },
+        { "text": "Phrase intérieure. Je peux ralentir.", "mode": "grave" },
+        { "pause": 30, "haptic": "respiration" },
+        { "text": "Quand tu es prêt, reviens.", "mode": "grave" }
+      ]
+    },
+
+    {
+      "id": "R10",
+      "nom": "Récupération complète – 10 minutes",
+      "presentation": "Apaisement profond du système nerveux. À utiliser hors urgence.",
+      "script": [
+        { "text": "Installe-toi confortablement.", "mode": "grave" },
+        { "pause": 15, "haptic": "respiration" },
+        { "text": "Le sol te porte. Tu peux lâcher.", "mode": "grave" },
+        { "pause": 30, "haptic": "respiration" },
+        { "text": "Respiration lente. Longue expiration.", "mode": "grave" },
+        { "pause": 45, "haptic": "respiration" },
+        { "text": "Relâche progressivement le visage.", "mode": "grave" },
+        { "pause": 45, "haptic": "respiration" },
+        { "text": "Puis les épaules. Puis le ventre.", "mode": "grave" },
+        { "pause": 60, "haptic": "respiration" },
+        { "text": "Aucune performance attendue.", "mode": "grave" },
+        { "pause": 60, "haptic": "respiration" },
+        { "text": "Reste simplement présent.", "mode": "grave" },
+        { "pause": 90, "haptic": "respiration" },
+        { "text": "Phrase intérieure. Je suis en sécurité.", "mode": "grave" },
+        { "pause": 90, "haptic": "respiration" },
+        { "text": "Reviens lentement.", "mode": "grave" }
+      ]
+    }
+
+  ]
+}
