@@ -288,7 +288,11 @@ async function runUV3() {
 
   const totalDurationSec = (kata + bunkai) * 60;
 
-  startGlobalTimer(totalDurationSec);
+  // ⬅️ STOP timer global pour éviter superposition
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
 
   await speak("Unité de valeur trois : Kata");
   await speak("Annoncez le kata que vous avez choisi.");
@@ -297,14 +301,14 @@ async function runUV3() {
   // 🔥 Lancement examen SANS callback de fin
   window.runUV3Exam();
 
-  // ⏱️ TIMER MAÎTRE
+  // ⏱️ TIMER MAÎTRE interne à UV3
   await runCountdown(totalDurationSec);
 
   if (stopped) return;
 
   // 🏁 FIN FORCÉE UV3
   if (window.stopUV3Exam) {
-    window.stopUV3Exam(); // à prévoir si possible
+    window.stopUV3Exam();
   }
 
   await speak("Temps écoulé. Fin de l’unité de valeur Kata");
@@ -327,13 +331,19 @@ async function runUV4() {
 
   const durationSec = durationMin * 60;
 
-  startGlobalTimer(durationSec);
+  // ⬅️ STOP timer global pour éviter superposition
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+  }
 
   await speak("Unité de valeur quatre : Épreuves techniques");
   await speak("Vous pouvez commencer.");
 
-  window.runUV4Exam(); // ⛔ sans callback de fin
+  // 🔥 Lancement examen SANS callback de fin
+  window.runUV4Exam();
 
+  // ⏱️ TIMER MAÎTRE interne à UV4
   await runCountdown(durationSec);
 
   if (stopped) return;
