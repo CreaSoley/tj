@@ -238,8 +238,10 @@ if (examMode !== "single") nextUV();
 });
 
 
-const intervalInput = document.getElementById("uv2-interval");
-const interval = intervalInput ? Number(intervalInput.value) : 5;
+const interval = adapted(
+  10, // ⬅️ intervalle imposé en mode ordre-adapté
+  Number(document.getElementById("uv2-interval")?.value) || 15
+);
 
 UV2.start(interval, (data) => {
   const display = document.getElementById("currentText");
@@ -274,58 +276,79 @@ async function runUV3() {
   document.getElementById("currentText").textContent =
     "Exécution un kata et les bunkaï associés";
 
-const kata = adapted(
-  PRESET_ORDRE_ADAPTE.uv3?.kata,
-  Number(document.getElementById("kataDuration")?.value) || 5
-);
+  const kata = adapted(
+    PRESET_ORDRE_ADAPTE.uv3?.kata,
+    Number(document.getElementById("kataDuration")?.value) || 3
+  );
 
-const bunkai = adapted(
-  PRESET_ORDRE_ADAPTE.uv3?.bunkai,
-  Number(document.getElementById("bunkaiDuration")?.value) || 5
-);
+  const bunkai = adapted(
+    PRESET_ORDRE_ADAPTE.uv3?.bunkai,
+    Number(document.getElementById("bunkaiDuration")?.value) || 2
+  );
 
-startGlobalTimer((kata + bunkai) * 60);
+  const totalDurationSec = (kata + bunkai) * 60;
 
+  startGlobalTimer(totalDurationSec);
 
-  await speak("Unité de valeur trois: Kata");
+  await speak("Unité de valeur trois : Kata");
   await speak("Annoncez le kata que vous avez choisi.");
   await speak("Vous pouvez commencer.");
 
-  await window.runUV3Exam(async () => {
-    if (stopped) return;
-  
-    await speak("Vous pouvez regagner votre place");
-     await pauseBetweenUV();   // 👈 AJOUT ICI
-  if (examMode !== "single") nextUV();
+  // 🔥 Lancement examen SANS callback de fin
+  window.runUV3Exam();
 
-  });
+  // ⏱️ TIMER MAÎTRE
+  await runCountdown(totalDurationSec);
+
+  if (stopped) return;
+
+  // 🏁 FIN FORCÉE UV3
+  if (window.stopUV3Exam) {
+    window.stopUV3Exam(); // à prévoir si possible
+  }
+
+  await speak("Temps écoulé. Fin de l’unité de valeur Kata");
+  await speak("Vous pouvez regagner votre place");
+
+  await pauseBetweenUV();
+  if (examMode !== "single") nextUV();
 }
+
 
 async function runUV4() {
-  document.getElementById("text").textContent = "UV4 – Epreuves techniques";
+  document.getElementById("text").textContent = "UV4 – Épreuves techniques";
   document.getElementById("currentText").textContent =
-    "Technique de base et applications";
+    "Techniques de base et applications";
 
-const uv4Duration = adapted(
-  PRESET_ORDRE_ADAPTE.uv4?.duration,
-  Number(document.getElementById("uv4Duration")?.value) || 5
-);
+  const durationMin = adapted(
+    PRESET_ORDRE_ADAPTE.uv4?.duration,
+    Number(document.getElementById("uv4Duration")?.value) || 2
+  );
 
-startGlobalTimer(uv4Duration * 60);
+  const durationSec = durationMin * 60;
 
+  startGlobalTimer(durationSec);
 
   await speak("Unité de valeur quatre : Épreuves techniques");
+  await speak("Vous pouvez commencer.");
 
-  await window.runUV4Exam(async () => {
-    if (stopped) return;
-  
-    await speak("Vous pouvez regagner votre place");
-     await pauseBetweenUV();   // 👈 AJOUT ICI
+  window.runUV4Exam(); // ⛔ sans callback de fin
+
+  await runCountdown(durationSec);
+
+  if (stopped) return;
+
+  if (window.stopUV4Exam) {
+    window.stopUV4Exam();
+  }
+
+  await speak("Temps écoulé. Fin de l’unité de valeur quatre");
+  await speak("Vous pouvez regagner votre place");
+
+  await pauseBetweenUV();
   if (examMode !== "single") nextUV();
-
-;
-  });
 }
+
 
 async function runUV5() {
   document.getElementById("text").textContent = "UV5 – Assauts imposés";
