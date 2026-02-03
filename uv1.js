@@ -2,9 +2,9 @@
    UV1 Blindée Examen
    ========================= */
 
-const uv1Text = document.getElementById("currentText");
+const uv1Text = document.getElementById("currentText"); // zone colorée
 const uv1Timer = document.getElementById("timer");
-const translationText = document.getElementById("log"); // zone traduction
+const uv1Translation = document.getElementById("log"); // zone sous la zone
 
 let UV1_DATA = {};
 
@@ -38,6 +38,32 @@ function resetBackground() {
 }
 
 const waitMs = ms => new Promise(r => setTimeout(r, ms));
+function normalizeSegments(value) {
+  if (!value) return [];
+  if (Array.isArray(value)) return value;
+  if (typeof value === "string") {
+    return value
+      .split("\n")
+      .map(v => v.trim())
+      .filter(Boolean);
+  }
+  return [];
+}
+
+async function speakRomajiSequence(segments, rate = 0.7, pause = 400) {
+  const lines = normalizeSegments(segments);
+
+  for (const line of lines) {
+    await new Promise(resolve => {
+      const u = new SpeechSynthesisUtterance(line);
+      u.lang = "ja-JP";
+      u.rate = rate;
+      u.onend = resolve;
+      speechSynthesis.speak(u);
+    });
+    await waitMs(pause);
+  }
+}
 
 async function speakJP(text, rate = 0.7, repeat = 2) {
   for (let i = 0; i < repeat; i++) {
@@ -166,14 +192,19 @@ async function runUV1Sequence(sequence) {
     if (ex.announce) await speakFR(ex.announce);
 
     // Affichage Romaji + Français
-    uv1Text.textContent = ex.jp_romaji || "";
-    translationText.textContent = ex.fr || "";
+   uv1Text.textContent = normalizeSegments(ex.jp_romaji).join(" / ");
+   uv1Translation.textContent = ex.fr || "";
 
-    // Katakana 2 fois
-    if (ex.jp_katakana) await speakJP(ex.jp_katakana, 0.7, 2);
 
-    // Français 1 seule fois
-    if (ex.fr) await speakFR(ex.fr);
+   // 🇯🇵 Romaji segmenté (rythme humain)
+if (ex.jp_romaji) {
+  await speakRomajiSequence(ex.jp_romaji, 0.7, 400);
+}
+
+// 🇫🇷 Français UNE SEULE FOIS
+if (ex.fr) {
+  await speak(ex.fr);
+}
 
     if (ex.garde) await speakFR("Garde à " + ex.garde);
 
