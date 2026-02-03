@@ -232,7 +232,7 @@ async function runUV1Exam() {
   await loadUV1Data();
 
   uv1Text.textContent = "UV1 – Kihon";
-  translationText.textContent = "";
+  uv1Translation.textContent = "";
   await speakFR("Unité de valeur un. Kihon.");
   await waitMs(1000);
 
@@ -243,7 +243,7 @@ async function runUV1Exam() {
   // Fin UV1
   resetBackground();
   uv1Text.textContent = "Fin UV1";
-  translationText.textContent = "";
+  uv1Translation.textContent = "";
   await speakFR("Fin de l’unité de valeur Kihon.");
 }
 
