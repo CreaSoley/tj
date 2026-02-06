@@ -706,15 +706,28 @@ clearInterval(timerF);
 }
 /* ===================== RUN ===================== */
 async function run() {
-  
-  // ===== EXERCICE 4 – GAMMES =====
-  if (!examMode && ["4","6"].includes(sequence[0]?.exercise)) {
 
+  /* ===================== SÉCURITÉS GLOBALES ===================== */
+  if (!Array.isArray(sequence) || sequence.length === 0) return;
+  if (stopped) return;
+
+  /* ===================== GAMMES & COMBINAISONS ===================== */
+  if (!examMode && ["4", "6"].includes(sequence[0]?.exercise)) {
     await runGammes(sequence);
     return;
   }
 
-  /* ===== LATENCE DE DÉMARRAGE (5s) ===== */
+  /* ===================== RÉCUP EXERCICE COURANT ===================== */
+  const ex = sequence[index];
+  if (!ex) return;
+
+  /* ===================== NORMALISATION ===================== */
+  ex.cat = normalizeCat(ex.cat || "");
+  ex.display ??= ex.fr ?? "Exercice";
+  ex.spoken ??= ex.display;
+  ex.time = Number.isFinite(ex.time) ? ex.time : 30;
+
+  /* ===================== PRÉPARATION (DÉBUT) ===================== */
   if (index === 0 && !run._started) {
     run._started = true;
 
@@ -725,8 +738,15 @@ async function run() {
 
     await new Promise(resolve => {
       const prepTimer = setInterval(() => {
+        if (stopped) {
+          clearInterval(prepTimer);
+          resolve();
+          return;
+        }
+
         prep--;
         countdown.textContent = prep + "s";
+
         if (prep <= 0) {
           clearInterval(prepTimer);
           resolve();
@@ -737,107 +757,92 @@ async function run() {
 
   if (stopped) return;
 
-  /* ===== FIN ===== */
+  /* ===================== FIN DE SÉANCE ===================== */
   if (index >= sequence.length) {
 
-  await speak(examMode ? "Fin de l'examen" : "Fin de l'entraînement", 1);
+    await speak(examMode ? "Fin de l'examen" : "Fin de l'entraînement", 1);
 
-  if (!examMode) {
-    trainingRecapData = [{
-      title: "Entraînement libre",
-      time: workedSeconds,
-      items: sequence.map(e => ({
-        catLabel: CATEGORY_MAP[normalizeCat(e.cat)],
-        display: e.display
-      }))
-    }];
+    if (!examMode) {
+      trainingRecapData = [{
+        title: "Entraînement libre",
+        time: workedSeconds,
+        items: sequence.map(e => ({
+          catLabel: CATEGORY_MAP[normalizeCat(e.cat)] || "Exercice",
+          display: e.display || e.fr || "—"
+        }))
+      }];
+    }
+
+    showRecap();
+    disableWakeLock();
+    return;
   }
 
-  showRecap();
-
-  disableWakeLock();   // <-- ici
-
-  return;
-}
-
-  /* ===== AFFICHAGE ===== */
+  /* ===================== AFFICHAGE ===================== */
   text.textContent = ex.display;
 
-  /* ===== BACKGROUND ===== */
-  const normCat = normalizeCat(ex.cat);
-  if (BG_MAP[normCat]) {
-    visual.className = BG_MAP[normCat];
+  /* ===================== BACKGROUND ===================== */
+  const bg = BG_MAP[ex.cat];
+  if (bg) visual.className = bg;
+
+  /* ===================== ANNONCES ===================== */
+
+  // catégorie (entraînement libre)
+  if (!examMode && ["1", "2", "3"].includes(ex.exercise)) {
+    const label = CATEGORY_MAP[ex.cat];
+    if (label) await speak(label, 0.8);
   }
 
-  /* =======================================================
-     🔊 ANNONCES
-     ======================================================= */
-/* ===== ANNONCE CATÉGORIE (ENTRAÎNEMENT LIBRE – EX 1 & 2) ===== */
-if (!examMode && (ex.exercise === "1" || ex.exercise === "2")) {
-  const normCat = normalizeCat(ex.cat);
-  await speak(CATEGORY_MAP[normCat], 0.8);
-}
-
-  /* ===== ANNONCE PARTIE (EXAMEN SEULEMENT) ===== */
+  // annonce examen
   if (examMode && ex.announce) {
     await speak(ex.announce, 0.7);
   }
 
-  /* ===== ANNONCE CATÉGORIE (ENTRAÎNEMENT LIBRE SEULEMENT) ===== */
+  // annonce exercice
+  if (examMode) {
 
+    if (ex.examGroup) {
+      run._spokenGroups ??= new Set();
 
-if (examMode) {
+      if (!run._spokenGroups.has(ex.examGroup)) {
+        run._spokenGroups.add(ex.examGroup);
+        await speak(ex.spoken, 0.7);
+        await speak(ex.spoken, 0.7);
+      }
+    } else {
+      await speak(ex.spoken, 0.7);
+      await speak(ex.spoken, 0.7);
+    }
 
-  // Cas mutualisé (exercices 2 & 3)
-  if (ex.examGroup) {
-    run._spokenGroups ??= new Set();
-
-    if (!run._spokenGroups.has(ex.examGroup)) {
-      run._spokenGroups.add(ex.examGroup);
-      await speak(ex.spoken || ex.display, 0.7);
-      await speak(ex.spoken || ex.display, 0.7);
+  } else {
+    if (!ex._spokenOnce) {
+      ex._spokenOnce = true;
+      await speak(ex.spoken, 0.7);
+      await speak(ex.spoken, 0.7);
     }
   }
 
-  // Cas normal (parties 1 et 4)
-  else {
-    await speak(ex.spoken || ex.display, 0.7);
-    await speak(ex.spoken || ex.display, 0.7);
-  }
-
-} else {
-  // Entraînement libre (comportement inchangé)
-  if (!ex._spokenOnce) {
-    ex._spokenOnce = true;
-    await speak(ex.spoken || ex.display, 0.7);
-    await speak(ex.spoken || ex.display, 0.7);
-  }
-}
-
-
-  /* ===== GARDE ===== */
+  /* ===================== GARDE ===================== */
   if (ex.garde) {
     await speak("Garde à " + ex.garde, 1);
   }
 
-  /* ===== DÉMARRAGE ===== */
+  /* ===================== DÉMARRAGE ===================== */
   await speak("Hajimé", 1);
 
-  /* =======================================================
-     ⏱ TIMER
-     ======================================================= */
-
+  /* ===================== TIMER ===================== */
   let t = ex.time;
   countdown.textContent = fmt(t);
 
   clearInterval(timer);
+
   timer = setInterval(() => {
     if (paused || stopped) return;
 
     t--;
-     workedSeconds++;   // 👈 AJOUT ICI
+    workedSeconds++;
     countdown.textContent = fmt(t);
-    
+
     if (t <= 0) {
       clearInterval(timer);
       index++;
@@ -845,6 +850,7 @@ if (examMode) {
     }
   }, 1000);
 }
+
 /* ===================== BUILDRÉCAPGAMMES ===================== */
 function buildGammesRecap(list){
   trainingRecapData = [{
