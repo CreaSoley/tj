@@ -707,6 +707,8 @@ clearInterval(timerF);
 /* ===================== RUN ===================== */
 async function run() {
 
+  run._lastCat ??= null;
+
   /* ===================== SÉCURITÉS GLOBALES ===================== */
   if (!Array.isArray(sequence) || sequence.length === 0) return;
   if (stopped) return;
@@ -788,10 +790,19 @@ async function run() {
   /* ===================== ANNONCES ===================== */
 
   // catégorie (entraînement libre)
-  if (!examMode && ["1", "2", "3"].includes(ex.exercise)) {
+ if (!examMode && ex.exercise === "1") {
+
+  if (ex.cat !== run._lastCat) {
+    run._lastCat = ex.cat;
+
     const label = CATEGORY_MAP[ex.cat];
-    if (label) await speak(label, 0.8);
+    if (label) {
+      await speak(label, 0.85);
+      await wait(500);
+    }
   }
+}
+
 
   // annonce examen
   if (examMode && ex.announce) {
