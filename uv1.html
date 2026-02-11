@@ -212,7 +212,7 @@ async function loadData(){
 }
 loadData();
 
-  async function loadGammes(){
+async function loadGammes(){
   const res = await fetch("gammes2.json");
   const data = await res.json();
 
@@ -251,18 +251,24 @@ function getGammesByLevel(level){
 
 /* ===== LANCEMENT PAR NIVEAU ===== */
 async function startGammesByLevel(level){
+
   if (!GAMMES.length) {
     await loadGammes();
   }
 
   let selectedGammes = getGammesByLevel(level);
 
+  const qty = +countInput.value;
+
+  selectedGammes = shuffleArray(selectedGammes).slice(0, qty);
+
   if (!selectedGammes.length) {
     alert("Aucune gamme pour ce niveau");
     return;
   }
 
-  selectedGammes = shuffleArray(selectedGammes); // ← ICI
+  stopped = false;
+  paused = false;
 
   runGammes(selectedGammes);
 }
@@ -506,67 +512,89 @@ p4.forEach((ex, i) => {
 }
 /* ===================== RUNGAMMES ===================== */
 async function runGammes(list) {
-const speedMode = list[0].speed || "slow";
-const COUNT_DELAY = speedMode === "fast" ? 1000 : 2000;
-const COUNT_SECONDS = COUNT_DELAY / 1000;
 
+  stopped = false;
+  paused = false;
 
-  // Sécurité
   if (!Array.isArray(list) || !list.length) return;
 
-  /* ===== INTRO COMMUNE ===== */
-await speak("Préparez-vous", 1);
-await wait(5000);
+  const speedMode = list[0].speed || "slow";
+  const COUNT_DELAY = speedMode === "fast" ? 1000 : 2000;
+  const COUNT_SECONDS = COUNT_DELAY / 1000;
 
   let totalSeconds = 0;
 
-  /* ===== RITUEL DE DÉBUT ===== */
+  /* ===== INTRO ===== */
+  if (stopped) return;
+  await speak("Préparez-vous", 1);
+  await wait(5000);
+  if (stopped) return;
+
+  /* ===== RITUEL DÉBUT ===== */
   for (const word of ["Reï", "Yoï", "Kamaé"]) {
+    if (stopped) return;
     await speak(word, 0.65);
     await wait(1000);
     totalSeconds += 1;
   }
 
-  /* ===== BOUCLE SUR LES KIHON ===== */
+  /* ===== BOUCLE KIHON ===== */
   for (let i = 0; i < list.length; i++) {
-  const g = list[i];
 
+    if (stopped) return;
 
-    // Affichage visuel
+    const g = list[i];
 
-  text.innerHTML = `
-  <div class="gamme-progress">${i + 1} / ${list.length}</div>
-  <div class="gamme-romaji">${g.jp_romaji}</div>
-  <div class="gamme-fr">${g.fr}</div>
-`;
+    text.innerHTML = `
+      <div class="gamme-progress">${i + 1} / ${list.length}</div>
+      <div class="gamme-romaji">${g.romaji}</div>
+      <div class="gamme-fr">${g.fr}</div>
+    `;
 
+    /* ----- ANNONCE ----- */
+    if (g.katakana) await speakJP(g.katakana, 0.5);
+    if (stopped) return;
 
-    /* ----- ANNONCE DU KIHON ----- */
-  await speakJP(g.jp_katakana, 0.50); // japonais
-    await speak(g.fr, 1);           // français x1
-   
+    await speak(g.fr, 1);
+    if (stopped) return;
 
-    /* ----- COMPTAGE + MAWATE ----- */
     const countJP = ["Ichi", "Ni", "San", "Shi", "Go"];
 
-     /* ----- PASSAGE ALLER + RETOUR ----- */
-   for (let round = 0; round < 2; round++) {
+    /* ===== ALLER + RETOUR ===== */
+    for (let round = 0; round < 2; round++) {
 
   for (const n of countJP) {
-    await speak(n, 0.7);
-    await wait(COUNT_DELAY);
-    totalSeconds += COUNT_SECONDS;
-  }
 
-  await speak("Mawaté", 0.65);
-  await wait(COUNT_DELAY);
+  if (stopped) return;
+
+  await speak(n, 0.7);
+
+  startLocalCountdown(COUNT_SECONDS); // 👈 ICI
+
+  await wait(COUNT_DELAY);            // 👈 ICI
+
   totalSeconds += COUNT_SECONDS;
 }
 
+      if (stopped) return;
+
+      countdown.textContent = COUNT_SECONDS + "s";
+      startLocalCountdown(COUNT_SECONDS);
+
+     await speak("Mawaté", 0.65);
+
+startLocalCountdown(COUNT_SECONDS); // 👈 ICI
+
+await wait(COUNT_DELAY);
+
+totalSeconds += COUNT_SECONDS;
+
+    }
   }
 
-  /* ===== RITUEL DE FIN ===== */
+  /* ===== RITUEL FIN ===== */
   for (const word of ["Yamé", "Yassmé"]) {
+    if (stopped) return;
     await speak(word, 0.65);
     await wait(1000);
     totalSeconds += 1;
@@ -574,7 +602,9 @@ await wait(5000);
 
   await speak("Fin de l'entraînement", 1);
 
-  /* ===== RÉCAP GAMMES ===== */
+  countdown.textContent = "";
+
+  /* ===== RÉCAP ===== */
   trainingRecapData = [{
     title: "Entraînement libre – Gammes",
     time: totalSeconds,
@@ -586,6 +616,7 @@ await wait(5000);
 
   showRecap();
 }
+
   function startLocalCountdown(seconds) {
   let remaining = seconds;
   countdown.textContent = fmt(remaining);
