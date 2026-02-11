@@ -214,7 +214,14 @@ loadData();
 
   async function loadGammes(){
   const res = await fetch("gammes2.json");
-  GAMMES = await res.json();
+  const data = await res.json();
+
+  GAMMES = data.map(g => ({
+    katakana: g.jp_katakana,
+    romaji: g.jp_romaji,
+    fr: g.fr,
+    level: g.level
+  }));
 }
 
 /* ===================== ELEMENTS ===================== */
@@ -342,6 +349,7 @@ function speak(text, rate = 1, lang = "fr-FR") {
 
 /* ===== SPEAK JAPONAIS ===== */
 function speakJP(text, rate = 0.7) {
+  if (!text) return Promise.resolve();
   const clean = text.replace(/\s+/g, "");
   return speak(clean, rate, "ja-JP");
 }
@@ -528,13 +536,13 @@ await wait(5000);
 
   text.innerHTML = `
   <div class="gamme-progress">${i + 1} / ${list.length}</div>
-  <div class="gamme-romaji">${g.romaji}</div>
+  <div class="gamme-romaji">${g.jp_romaji}</div>
   <div class="gamme-fr">${g.fr}</div>
 `;
 
 
     /* ----- ANNONCE DU KIHON ----- */
-   await speakJP(g.katakana, 0.50); // japonais
+  await speakJP(g.jp_katakana, 0.50); // japonais
     await speak(g.fr, 1);           // français x1
    
 
