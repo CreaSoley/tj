@@ -1,0 +1,209 @@
+[
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ゲダン バライ",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Gedan Barai",
+    "fr": "Avancer dʼun pas - Défense basse par un mouvement de balayage",
+    "level": 1
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ソト ウケ",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Soto Uke",
+    "fr": "Avancer dʼun pas - Défense dans un mouvement extérieur vers l'intérieur",
+    "level": 1
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ジョウダン アゲ ウケ",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Jodan Age Uke",
+    "fr": "Avancer dʼun pas - Défense remontante de l’avant-bras",
+    "level": 1
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ オイ ツキ ジョウダン",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Oi Tsuki Jodan",
+    "fr": "Coup de poing au visage en poursuite avec un pas",
+    "level": 1
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ オイ ツキ チュウダン",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Oi Tsuki Chudan",
+    "fr": "Coup de poing niveau moyen en poursuite avec un pas",
+    "level": 1
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ マエ ゲリ チュウダン",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Mae Geri Chudan",
+    "fr": "Avancer dʼun pas - Coup de pied de face niveau moyen",
+    "level": 1
+  },
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ マワシ ゲリ",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Mawashi Geri",
+    "fr": "Avancer dʼun pas - Coup de pied circulaire",
+    "level": 1
+  },
+  {
+    "jp_katakana": "ツギ アシ キバ ダチ ヨコ ゲリ",
+    "jp_romaji": "Tsugi Ashi Kiba Dachi Yoko Geri",
+    "fr": "Pas chassé - Coup de pied latéral",
+    "level": 1
+  },
+  {
+    "jp_katakana": "ヨリ アシ キバ ダチ ヨコ エンピ",
+    "jp_romaji": "Yori Ashi Kiba Dachi Yoko Empi",
+    "fr": "Pas glissé - Coup de coude latéral",
+    "level": 2
+  },
+  {
+    "jp_katakana": "ヒキ アシ ゼンコツ ダチ ゲダン バライ",
+    "jp_romaji": "Hiki Ashi Zenkutsu Dachi Gedan Barai",
+    "fr": "Reculer dʼun pas - Défense basse par un mouvement de balayage",
+    "level": 1
+  },
+
+  {
+    "jp_katakana": "アユミ アシ ゼンコツ ダチ ウチ ウケ",
+    "jp_romaji": "Ayumi Ashi Zenkutsu Dachi Uchi Uke",
+    "fr": "Avancer dʼun pas - Défense intérieure avec l’avant-bras",
+    "level": 1
+  },
+  {
+    "jp_katakana": "ヨリ アシ ゼンコツ ダチ ギャク ツキ チュウダン",
+    "jp_romaji": "Yori Ashi Zenkutsu Dachi Gyaku Tsuki Chudan",
+    "fr": "Pas glissé - Coup de poing direct du bras arrière niveau moyen",
+    "level": 1
+  },
+  {
+    "jp_katakana": "ヨリ アシ ゼンコツ ダチ ギャク ツキ ジョウダン",
+    "jp_romaji": "Yori Ashi Zenkutsu Dachi Gyaku Tsuki Jodan",
+    "fr": "Pas glissé - Coup de poing direct du bras arrière au visage",
+    "level": 1
+  },
+  {
+    "jp_katakana": "ツギ アシ ゼンコツ ダチ ギャク ツキ チュウダン",
+    "jp_romaji": "Tsugi Ashi Zenkutsu Dachi Gyaku Tsuki Chudan",
+    "fr": "Pas chassé - Coup de poing direct du bras arrière niveau moyen",
+    "level": 1
+  },
+  {
+    "jp_katakana": "ツギ アシ ゼンコツ ダチ ギャク ツキ ジョウダン",
+    "jp_romaji": "Tsugi Ashi Zenkutsu Dachi Gyaku Tsuki Jodan",
+    "fr": "Pas chassé - Coup de poing direct du bras arrière au visage",
+    "level": 2
+  },
+  {
+    "jp_katakana": "ヨリ アシ ゼンコツ ダチ キザミ ツキ ジョウダン",
+    "jp_romaji": "Yori Ashi Zenkutsu Dachi Kizami Tsuki Jodan",
+    "fr": "Pas glissé - Coup de poing avant au visage",
+    "level": 2
+  },
+  {
+    "jp_katakana": "ヨリ アシ ゼンコツ ダチ キザミ ツキ チュウダン",
+    "jp_romaji": "Yori Ashi Zenkutsu Dachi Kizami Tsuki Chudan",
+    "fr": "Pas glissé - Coup de poing avant niveau moyen",
+    "level": 1
+  },
+  {
+    "jp_katakana": "ツギ アシ キバ ダチ ギャク ツキ チュウダン",
+    "jp_romaji": "Tsugi Ashi Kiba Dachi Gyaku Tsuki Chudan",
+    "fr": "Pas chassé - Coup de poing du bras arrière en position du cavalier",
+    "level": 1
+  },
+  {
+    "jp_katakana": "ヨリ アシ キバ ダチ ギャク ツキ チュウダン",
+    "jp_romaji": "Yori Ashi Kiba Dachi Gyaku Tsuki Chudan",
+    "fr": "Pas glissé - Coup de poing du bras arrière en position du cavalier",
+    "level": 1
+  },
+
+  {
+    "jp_katakana": "アユミ アシ ネコ アシ ダチ ナガシ ウケ",
+    "jp_romaji": "Ayumi Ashi Neko Ashi Dachi Nagashi Uke",
+    "fr": "Avancer dʼun pas - Défense en déviation fluide en position du chat",
+    "level": 3
+  },
+  {
+    "jp_katakana": "ヨリ アシ ネコ アシ ダチ オサエ ウケ",
+    "jp_romaji": "Yori Ashi Neko Ashi Dachi Osae Uke",
+    "fr": "Pas glissé - Défense par contrôle / pression en position du chat",
+    "level": 3
+  },
+  {
+    "jp_katakana": "オクリ アシ ゼンコツ ダチ オイ ツキ ジョウダン",
+    "jp_romaji": "Okuri Ashi Zenkutsu Dachi Oi Tsuki Jodan",
+    "fr": "Pas chassé long - Coup de poing en poursuite au visage",
+    "level": 1
+  },
+  {
+    "jp_katakana": "オクリ アシ ゼンコツ ダチ ゲダン バライ",
+    "jp_romaji": "Okuri Ashi Zenkutsu Dachi Gedan Barai",
+    "fr": "Pas chassé long - Défense basse par balayage",
+    "level": 1
+  },
+  {
+    "jp_katakana": "アユミ アシ フド ダチ ソト ウケ",
+    "jp_romaji": "Ayumi Ashi Fudo Dachi Soto Uke",
+    "fr": "Avancer dʼun pas - Défense extérieure en position stable",
+    "level": 2
+  },
+  {
+    "jp_katakana": "ヒキ アシ フド ダチ ウチ ウケ",
+    "jp_romaji": "Hiki Ashi Fudo Dachi Uchi Uke",
+    "fr": "Reculer dʼun pas - Défense intérieure en position stable",
+    "level": 2
+  },
+  {
+    "jp_katakana": "アユミ アシ コサ ダチ ソト ウケ",
+    "jp_romaji": "Ayumi Ashi Kosa Dachi Soto Uke",
+    "fr": "Avancer dʼun pas - Défense extérieure en position croisée",
+    "level": 3
+  },
+  {
+    "jp_katakana": "ヨリ アシ コサ ダチ ウチ ウケ",
+    "jp_romaji": "Yori Ashi Kosa Dachi Uchi Uke",
+    "fr": "Pas glissé - Défense intérieure en position croisée",
+    "level": 3
+  },
+  {
+    "jp_katakana": "オクリ アシ キバ ダチ ヨコ エンピ",
+    "jp_romaji": "Okuri Ashi Kiba Dachi Yoko Empi",
+    "fr": "Pas chassé long - Coup de coude latéral en position du cavalier",
+    "level": 2
+  },
+  {
+    "jp_katakana": "アユミ アシ ネコ アシ ダチ マエ ゲリ チュウダン",
+    "jp_romaji": "Ayumi Ashi Neko Ashi Dachi Mae Geri Chudan",
+    "fr": "Avancer dʼun pas - Coup de pied de face depuis la position du chat",
+    "level": 2
+  },
+
+  {
+    "jp_katakana": "オクリ アシ ゼンコツ ダチ マエ ゲリ チュウダン",
+    "jp_romaji": "Okuri Ashi Zenkutsu Dachi Mae Geri Chudan",
+    "fr": "Pas chassé long - Coup de pied de face niveau moyen",
+    "level": 1
+  },
+  {
+    "jp_katakana": "アユミ アシ フド ダチ ゲダン バライ",
+    "jp_romaji": "Ayumi Ashi Fudo Dachi Gedan Barai",
+    "fr": "Avancer dʼun pas - Défense basse en position stable",
+    "level": 2
+  },
+  {
+    "jp_katakana": "ヨリ アシ ゼンコツ ダチ オイ ツキ チュウダン",
+    "jp_romaji": "Yori Ashi Zenkutsu Dachi Oi Tsuki Chudan",
+    "fr": "Pas glissé - Coup de poing en poursuite niveau moyen",
+    "level": 1
+  },
+  {
+    "jp_katakana": "オクリ アシ ネコ アシ ダチ ナガシ ウケ",
+    "jp_romaji": "Okuri Ashi Neko Ashi Dachi Nagashi Uke",
+    "fr": "Pas chassé long - Défense en déviation fluide en position du chat",
+    "level": 2
+  },
+  {
+    "jp_katakana": "アユミ アシ コサ ダチ ゲダン バライ",
+    "jp_romaji": "Ayumi Ashi Kosa Dachi Gedan Barai",
+    "fr": "Avancer dʼun pas - Défense basse en position croisée",
+    "level": 3
+  }
+]
