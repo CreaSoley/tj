@@ -1139,6 +1139,30 @@ stopBtn.onclick = () => {
 
   setActive(stopBtn);
 };
+/* ===================== GESTION BOUTONS NIVEAU ===================== */
+
+const gammeLevels = document.getElementById("gammeLevels");
+const levelButtons = document.querySelectorAll(".level-btn");
+
+function toggleGammesUI(isGammes) {
+  if (isGammes) {
+    gammeLevels.classList.remove("hidden");
+  } else {
+    gammeLevels.classList.add("hidden");
+    levelButtons.forEach(btn => btn.classList.remove("active"));
+  }
+}
+
+levelButtons.forEach(button => {
+  button.addEventListener("click", () => {
+
+    levelButtons.forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+
+    const level = parseInt(button.dataset.level);
+    startGammesByLevel(level);
+  });
+});
 
 mode.dispatchEvent(new Event("change"));
 /* ===================== MODALE CRITERES ===================== */
@@ -1209,6 +1233,8 @@ mode.onchange = () => {
 
   /* ===== TEXTE COURT ===== */
   shortText.textContent = EXPLANATIONS[mode.value] || "";
+
+    toggleGammesUI(mode.value === "4");
 };
 
 mode.addEventListener("change", () => {
@@ -1217,37 +1243,6 @@ mode.addEventListener("change", () => {
   } else if (mode.value !== "exam") {
     categorie.disabled = false;
   }
-
-  /* ===================== GESTION BOUTONS NIVEAU ===================== */
-
-const gammeLevels = document.getElementById("gammeLevels");
-const levelButtons = document.querySelectorAll(".level-btn");
-
-levelButtons.forEach(button => {
-  button.addEventListener("click", () => {
-
-    // Retire état actif
-    levelButtons.forEach(btn => btn.classList.remove("active"));
-
-    // Active le bouton cliqué
-    button.classList.add("active");
-
-    const level = parseInt(button.dataset.level);
-
-    startGammesByLevel(level);
-  });
-});
-function toggleGammesUI(isGammes) {
-
-  if (isGammes) {
-    gammeLevels.classList.remove("hidden");
-  } else {
-    gammeLevels.classList.add("hidden");
-
-    // enlève état actif si on quitte Gammes
-    levelButtons.forEach(btn => btn.classList.remove("active"));
-  }
-}
 
 });
 
