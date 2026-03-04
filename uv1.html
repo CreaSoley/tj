@@ -215,18 +215,20 @@ async function loadData(){
 }
 loadData();
 
-async function loadGammes(){
+async function loadGammes() {
   const res = await fetch("gammes2.json");
   const data = await res.json();
 
   GAMMES = data.map(g => ({
-  katakana: g.katakana,
-  romaji: g.romaji,
-  fr: g.fr,
-  level: g.level
-}));
-}
+    katakana: g.jp_katakana,
+    romaji: g.jp_romaji,
+    fr: g.fr,
+    level: g.level
+  }));
 
+  // 👉 METS LE CONSOLE.LOG ICI
+  console.log("GAMMES[0] =", GAMMES[0]);
+}
 /* ===================== ELEMENTS ===================== */
 const mode = document.getElementById("mode");
 const categorie = document.getElementById("categorie");
