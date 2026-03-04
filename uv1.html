@@ -220,11 +220,11 @@ async function loadGammes(){
   const data = await res.json();
 
   GAMMES = data.map(g => ({
-    katakana: g.jp_katakana,
-    romaji: g.jp_romaji,
-    fr: g.fr,
-    level: g.level
-  }));
+  katakana: g.katakana,
+  romaji: g.romaji,
+  fr: g.fr,
+  level: g.level
+}));
 }
 
 /* ===================== ELEMENTS ===================== */
@@ -1100,16 +1100,16 @@ if (m === "4") {
 
   const speed = document.getElementById("speedMode").value;
 
-  sequence = [...GAMMES]
-    .sort(() => Math.random() - 0.5)
-    .slice(0, qty)
-    .map(g => ({
-      exercise: "4",
-      katakana: g.jp_katakana,
-      romaji: g.jp_romaji,
-      fr: g.fr,
-      speed   // ⬅️ STOCKÉ ICI
-    }));
+ sequence = [...GAMMES]
+  .sort(() => Math.random() - 0.5)
+  .slice(0, qty)
+  .map(g => ({
+    exercise: "4",
+    katakana: g.katakana,
+    romaji: g.romaji,
+    fr: g.fr,
+    speed
+  }));
 }
   
 run._started = false;
