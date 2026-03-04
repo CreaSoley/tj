@@ -340,6 +340,7 @@ let trainingRecapData = [];
 window.onload = async () => {
   await loadData();
   await loadGammes();
+  console.log(GAMMES[0]);
   await loadCombinaisons(); // 👈 ajout
 };
 
@@ -1100,16 +1101,16 @@ if (m === "4") {
 
   const speed = document.getElementById("speedMode").value;
 
- sequence = [...GAMMES]
-  .sort(() => Math.random() - 0.5)
-  .slice(0, qty)
-  .map(g => ({
-    exercise: "4",
-    katakana: g.katakana,
-    romaji: g.romaji,
-    fr: g.fr,
-    speed
-  }));
+  sequence = [...GAMMES]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, qty)
+    .map(g => ({
+      exercise: "4",
+      katakana: g.katakana,
+      romaji: g.romaji,
+      fr: g.fr,
+      speed
+    }));
 }
   
 run._started = false;
